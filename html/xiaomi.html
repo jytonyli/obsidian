@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📱 小米集团深度分析 | Tony's Investment Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #0f172a; color: #e2e8f0; font-size: 17px; line-height: 1.6; }
+        .nav { background: #111827; border-bottom: 1px solid #1e293b; padding: 20px 36px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+        .nav-brand { font-size: 24px; font-weight: 700; color: #fbbf24; }
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a { color: #94a3b8; text-decoration: none; font-size: 17px; padding: 10px 18px; border-radius: 8px; transition: all 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: #fbbf24; background: #1e293b; }
+        .container { max-width: 1800px; margin: 0 auto; padding: 36px; }
+        .status-banner { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 1px solid #334155; border-radius: 16px; padding: 24px 28px; margin-bottom: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+        .status-item { font-size: 16px; color: #94a3b8; }
+        .status-item strong { color: #e2e8f0; font-size: 17px; }
+        .card { background: #111827; border: 1px solid #1e293b; border-radius: 16px; padding: 32px; margin-bottom: 28px; }
+        .card-title { font-size: 22px; font-weight: 600; margin-bottom: 24px; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 24px; }
+        .stat-card { background: #1e293b; border-radius: 12px; padding: 24px; border-left: 4px solid #3b82f6; }
+        .stat-card.phone { border-left-color: #3b82f6; }
+        .stat-car.card { border-left-color: #f97316; }
+        .stat-card.ai { border-left-color: #8b5cf6; }
+        .stat-label { font-size: 15px; color: #94a3b8; margin-bottom: 8px; }
+        .stat-value { font-size: 36px; font-weight: 700; font-family: 'SF Mono', 'Consolas', monospace; }
+        .stat-change { font-size: 15px; margin-top: 8px; }
+        .up { color: #10b981; }
+        .down { color: #ef4444; }
+        .neutral { color: #94a3b8; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        @media (max-width: 1200px) { .two-col { grid-template-columns: 1fr; } }
+        table { width: 100%; border-collapse: collapse; font-size: 16px; }
+        th { text-align: left; padding: 14px 16px; color: #94a3b8; font-weight: 500; border-bottom: 2px solid #1e293b; font-size: 15px; }
+        td { padding: 14px 16px; border-bottom: 1px solid #1e293b; }
+        tr:hover { background: #1e293b; }
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 14px; font-weight: 500; }
+        .badge-green { background: rgba(16,185,129,0.15); color: #10b981; }
+        .badge-red { background: rgba(239,68,68,0.15); color: #ef4444; }
+        .badge-yellow { background: rgba(251,191,36,0.15); color: #fbbf24; }
+        .highlight-block { padding: 16px 20px; border-radius: 10px; margin: 16px 0; font-size: 16px; line-height: 1.7; }
+        .highlight-block.green { background: rgba(16,185,129,0.08); border-left: 4px solid #10b981; }
+        .highlight-block.red { background: rgba(239,68,68,0.08); border-left: 4px solid #ef4444; }
+        .highlight-block.yellow { background: rgba(251,191,36,0.08); border-left: 4px solid #fbbf24; }
+        .mono { font-family: 'SF Mono', 'Consolas', monospace; }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-brand">🎛️ Tony's Investment Dashboard</div>
+        <div class="nav-links">
+            <a href="index.html">📊 仪表盘</a>
+            <a href="holdings.html">💼 持仓详情</a>
+            <a href="news.html">📰 新闻周报</a>
+            <a href="calendar.html">📅 催化剂</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="status-banner">
+            <div class="status-item">📅 最后更新：<strong>2026-09-22</strong></div>
+            <div class="status-item">📱 小米集团(01810.HK) 多因子驱动深度分析</div>
+            <div class="status-item">🎯 持仓38,000股 | 成本HK$45.294 | 现价HK$27.50</div>
+        </div>
+
+        <!-- 持仓概览 -->
+        <div class="card">
+            <div class="card-title">📊 小米集团持仓概览</div>
+            <div class="stat-grid">
+                <div class="stat-card phone">
+                    <div class="stat-label">港股现价</div>
+                    <div class="stat-value mono">HK$27.50</div>
+                    <div class="stat-change up">+4.47% 今日</div>
+                </div>
+                <div class="stat-car card">
+                    <div class="stat-label">持仓盈亏</div>
+                    <div class="stat-value mono down">-39.3%</div>
+                    <div class="stat-change down">-¥573,895 浮动亏损</div>
+                </div>
+                <div class="stat-card ai">
+                    <div class="stat-label">持仓市值</div>
+                    <div class="stat-value mono">¥90.3万</div>
+                    <div class="stat-change neutral">占总资产 5.8%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">总市值</div>
+                    <div class="stat-value mono">6900亿</div>
+                    <div class="stat-change neutral">PE(TTM) ~25x</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 因子拆解 -->
+        <div class="card">
+            <div class="card-title">🧬 小米集团三因子拆解（手机基本盘+汽车期权+AI/半导体beta）</div>
+            <p style="font-size:16px;color:#94a3b8;margin-bottom:20px;">小米不是一家纯硬件公司，它的估值由三块完全不同的业务驱动，波动非常大。</p>
+            <div class="stat-grid">
+                <div class="stat-card phone" style="border-left-color:#3b82f6;">
+                    <div style="font-size:16px;color:#94a3b8;">📱 手机+IoT基本盘</div>
+                    <div class="stat-value mono" style="font-size:28px;margin:12px 0;">~40%</div>
+                    <div style="font-size:15px;color:#94a3b8;">手机出货 + AIoT设备<br>**核心驱动：全球手机周期 + 中国消费**<br>稳定现金流业务</div>
+                </div>
+                <div class="stat-car card" style="border-left-color:#f97316;">
+                    <div style="font-size:16px;color:#94a3b8;">🚗 小米汽车（期权）</div>
+                    <div class="stat-value mono" style="font-size:28px;margin:12px 0;">~40%</div>
+                    <div style="font-size:15px;color:#94a3b8;">SU7系列交付量<br>**核心驱动：汽车月交付 + 利润率**<br>是估值最大的变量</div>
+                </div>
+                <div class="stat-card ai" style="border-left-color:#8b5cf6;">
+                    <div style="font-size:16px;color:#94a3b8;">🤖 AI/半导体成长beta</div>
+                    <div class="stat-value mono" style="font-size:28px;margin:12px 0;">~20%</div>
+                    <div style="font-size:15px;color:#94a3b8;">大模型投入 + 芯片<br>**核心驱动：美联储利率 + 恒生科技指数**<br>估值波动最大</div>
+                </div>
+            </div>
+            <div class="highlight-block yellow">
+                <strong>💡 关键洞察：</strong>小米本质是"**40%手机消费股 + 40%汽车制造股 + 20%科技成长股期权**"的组合。<strong style="color:#fbbf24;">它的涨跌短期看汽车交付数据，中期看手机份额，长期看AI故事。</strong>在滞胀环境下，科技成长股估值受压，是Dalio低配方向。
+            </div>
+        </div>
+
+        <!-- 核心驱动因子 -->
+        <div class="card">
+            <div class="card-title">📈 四大核心驱动因子实时状态</div>
+            <div class="stat-grid">
+                <div class="stat-card phone">
+                    <div class="stat-label">📱 全球智能手机出货量</div>
+                    <div class="stat-value mono">~12亿台/年</div>
+                    <div class="stat-change neutral">→ 持平，成熟市场</div>
+                    <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
+                        <strong style="color:#e2e8f0;">对小米影响：</strong>基本盘业务<br>
+                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-yellow">份额稳住</span><br>
+                        <strong style="color:#e2e8f0;">逻辑：</strong>全球手机存量市场，小米份额14%排第三
+                    </div>
+                </div>
+                <div class="stat-car card">
+                    <div class="stat-label">🚗 小米汽车月交付量</div>
+                    <div class="stat-value mono">~3万台/月</div>
+                    <div class="stat-change up">↑ 爬坡中</div>
+                    <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
+                        <strong style="color:#e2e8f0;">对小米影响：</strong>估值核心变量<br>
+                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-green">超预期</span><br>
+                        <strong style="color:#e2e8f0;">关键阈值：</strong>月销破5万 = 成功，破1万都没有 = 失败
+                    </div>
+                </div>
+                <div class="stat-card ai">
+                    <div class="stat-label">📈 美国10年国债收益率</div>
+                    <div class="stat-value mono">4.35%</div>
+                    <div class="stat-change up">↑ 历史高位</div>
+                    <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
+                        <strong style="color:#e2e8f0;">对小米影响：</strong>成长股估值锚<br>
+                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-red">压制估值</span><br>
+                        <strong style="color:#e2e8f0;">逻辑：</strong>利率高→未来现金流折现低→成长股估值杀
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">📊 恒生科技指数</div>
+                    <div class="stat-value mono">5230</div>
+                    <div class="stat-change up">+2.2% 今日</div>
+                    <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
+                        <strong style="color:#e2e8f0;">对小米影响：</strong>板块beta<br>
+                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-yellow">反弹中</span><br>
+                        <strong style="color:#e2e8f0;">逻辑：</strong>小米是恒生科技权重股，板块情绪直接影响股价
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 次级驱动因子 -->
+        <div class="card">
+            <div class="card-title">🌍 次级驱动因子（影响方向+程度）</div>
+            <table>
+                <thead>
+                    <tr><th>因子</th><th>当前值</th><th>对小米影响</th><th>影响程度</th><th>逻辑链条</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>🏭 全球半导体周期</td>
+                        <td class="mono">复苏期</td>
+                        <td>🟢 利多</td>
+                        <td>★★★★☆</td>
+                        <td>半导体上行周期→手机+芯片业务都受益，库存周转加快</td>
+                    </tr>
+                    <tr>
+                        <td>🤖 AI大模型进展</td>
+                        <td class="mono">快速迭代</td>
+                        <td>🟢 利多</td>
+                        <td>★★★★☆</td>
+                        <td>AI功能落地→手机产品力提升→换机周期缩短→利好销量</td>
+                    </tr>
+                    <tr>
+                        <td>💳 中国居民消费能力</td>
+                        <td class="mono">偏弱</td>
+                        <td>🔴 利空</td>
+                        <td>★★★☆☆</td>
+                        <td>消费弱→手机/汽车购买延后→需求端承压</td>
+                    </tr>
+                    <tr>
+                        <td>⚔️ 竞争格局（苹果/华为）</td>
+                        <td class="mono">华为回归冲击高端</td>
+                        <td>🔴 利空</td>
+                        <td>★★★★☆</td>
+                        <td>华为重返高端市场→小米高端化受阻→ASP提升慢</td>
+                    </tr>
+                    <tr>
+                        <td>📈 美联储加息周期</td>
+                        <td class="mono">3.75-4.00%</td>
+                        <td>🔴 利空</td>
+                        <td>★★★★★</td>
+                        <td>高利率→成长股估值杀→小米科技beta部分承压</td>
+                    </tr>
+                    <tr>
+                        <td>🌐 中国新能源汽车竞争</td>
+                        <td class="mono">极其激烈</td>
+                        <td>🟡 混合</td>
+                        <td>★★★★☆</td>
+                        <td>特斯拉/比亚迪/蔚小理都在打价格战→小米汽车利润率压力大</td>
+                    </tr>
+                    <tr>
+                        <td>💰 小米汽车毛利率</td>
+                        <td class="mono">~20%</td>
+                        <td>🟢 利多</td>
+                        <td>★★★★★</td>
+                        <td>汽车业务盈利→从亏损变利润→估值逻辑彻底改变</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 投资逻辑与买卖条件 -->
+        <div class="two-col">
+            <div class="card">
+                <div class="card-title">✅ 为什么买小米？</div>
+                <div class="highlight-block green">
+                    <strong>核心逻辑：高赔率的"汽车+AI"双期权</strong>
+                    <ul style="margin-left:20px;margin-top:10px;line-height:2;">
+                        <li>🚗 <strong>汽车第二曲线</strong>：SU7月交付破3万，从0到1跑通了，长期天花板看100万辆/年</li>
+                        <li>📱 <strong>手机基本盘稳</strong>：全球第三，份额稳定，有稳定现金流养新业务</li>
+                        <li>🏠 <strong>AIoT生态壁垒</strong>：全球最大消费级IoT平台，粘性强</li>
+                        <li>💰 <strong>现金储备充足</strong>：账上1000亿现金，足够烧10年新业务</li>
+                        <li>🎰 <strong>期权属性</strong>：跌下来是"白捡的汽车+AI期权"，向上空间大</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">❌ 什么时候卖小米？</div>
+                <div class="highlight-block red">
+                    <strong>触发以下任一条件，减持或清仓：</strong>
+                    <ul style="margin-left:20px;margin-top:10px;line-height:2;">
+                        <li>🚗 <strong>小米汽车月交付跌破1万台连续3个月</strong> → 汽车业务失败，估值逻辑崩了</li>
+                        <li>📱 <strong>手机全球份额跌出前五</strong> → 基本盘守不住，没有现金流养新业务</li>
+                        <li>📈 <strong>美联储进入持续加息周期</strong> → 成长股估值继续杀，科技beta双杀</li>
+                        <li>⚔️ <strong>华为在50万价位直接狙击小米汽车</strong> → 竞争格局恶化，利润率崩了</li>
+                        <li>📊 <strong>股价反弹到成本价附近（HK$45）</strong> → 解套后可以考虑减仓到2-3%，释放资金</li>
+                        <li>💸 <strong>汽车业务持续亏损5年以上</strong> → 烧钱无底洞，不值得</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dalio战术定位 -->
+        <div class="card">
+            <div class="card-title">🎯 Dalio框架下的小米定位</div>
+            <table>
+                <thead>
+                    <tr><th>经济环境</th><th>小米表现</th><th>Dalio建议</th><th>当前状态</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>📈 通胀性繁荣</td>
+                        <td>★★★★☆ 好（经济好+消费好+风险偏好高）</td>
+                        <td>高配成长股</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>📉 通胀性衰退（滞胀）</td>
+                        <td>★☆☆☆☆ 差（高利率杀估值+消费弱双杀）</td>
+                        <td>严重低配</td>
+                        <td><span class="badge badge-red">⚠️ 当前5.8%仓位偏高</span></td>
+                    </tr>
+                    <tr>
+                        <td>📈 通缩性繁荣</td>
+                        <td>★★★★★ 极好（低利率+消费复苏+风险偏好）</td>
+                        <td>核心持仓</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>📉 通缩性衰退</td>
+                        <td>★★☆☆☆ 差（消费弱+风险偏好差）</td>
+                        <td>低配</td>
+                        <td>—</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="highlight-block yellow" style="margin-top:20px;">
+                <strong>💡 Dalio建议：</strong>小米是典型的<strong>通缩性繁荣资产</strong>——在低利率+经济复苏环境会涨得最好。当前Dalio判断滞胀为主，<strong style="color:#fbbf24;">5.8%仓位偏高，且浮亏39%</strong>。两个选择：① 如果不看好汽车故事，反弹到HK$30-35减仓一半，换到国债；② 如果相信汽车+AI长期故事，持有不动，等美联储转向降息周期。
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

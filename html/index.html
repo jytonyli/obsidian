@@ -1,0 +1,643 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tony's Investment Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0e17;
+            color: #e2e8f0;
+            line-height: 1.7;
+            font-size: 17px;
+        }
+        .mono {
+            font-family: 'SF Mono', 'Roboto Mono', Menlo, monospace;
+            font-variant-numeric: tabular-nums;
+        }
+        /* 导航栏 */
+        .nav {
+            background: #111827;
+            border-bottom: 1px solid #1e293b;
+            padding: 20px 36px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-brand { font-size: 24px; font-weight: 700; color: #fbbf24; }
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a { color: #94a3b8; text-decoration: none; font-size: 17px; padding: 10px 18px; border-radius: 8px; transition: all 0.2s; }
+        .nav-links a:hover, .nav-links a.active {
+            color: #fbbf24;
+            background: #1e293b;
+        }
+        .container { max-width: 1800px; margin: 0 auto; padding: 36px; }
+        /* 状态横幅 */
+        .status-banner { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 1px solid #334155; border-radius: 16px; padding: 24px 28px; margin-bottom: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+        .status-left {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .status-item { font-size: 16px; color: #94a3b8; }
+        .status-item strong { color: #e2e8f0; font-size: 17px; }
+        .update-buttons {
+            display: flex;
+            gap: 14px;
+        }
+        .btn {
+            padding: 12px 24px;
+            border-radius: 10px;
+            border: none;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: #fbbf24;
+            color: #0a0e17;
+        }
+        .btn-primary:hover {
+            background: #f59e0b;
+            transform: translateY(-1px);
+        }
+        .btn-secondary {
+            background: #1e293b;
+            color: #e2e8f0;
+            border: 1px solid #334155;
+        }
+        .btn-secondary:hover {
+            background: #334155;
+            transform: translateY(-1px);
+        }
+        /* 卡片 */
+        .card { background: #111827; border: 1px solid #1e293b; border-radius: 16px; padding: 32px; margin-bottom: 28px; }
+        .card-title { font-size: 22px; font-weight: 600; margin-bottom: 24px; }
+        /* 总资产大数字 */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            margin-bottom: 36px;
+        }
+        .hero-card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+        }
+        .hero-label {
+            font-size: 15px;
+            color: #94a3b8;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .hero-value {
+            font-size: 40px;
+            font-weight: 700;
+            color: #fbbf24;
+        }
+        .hero-value.green { color: #34d399; }
+        .hero-value.red { color: #f87171; }
+        .hero-sub {
+            font-size: 15px;
+            color: #64748b;
+            margin-top: 8px;
+        }
+        /* 表格 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 16px;
+        }
+        th {
+            text-align: left;
+            padding: 16px 18px;
+            color: #94a3b8;
+            font-weight: 500;
+            border-bottom: 2px solid #1e293b;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        td {
+            padding: 16px 18px;
+            border-bottom: 1px solid #1e293b;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tr:hover {
+            background: #1e293b;
+        }
+        .green { color: #34d399; }
+        .red { color: #f87171; }
+        .yellow { color: #fbbf24; }
+        .orange { color: #fb923c; }
+        /* 涨跌标签 */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .badge-green { background: rgba(52, 211, 153, 0.15); color: #34d399; }
+        .badge-red { background: rgba(248, 113, 113, 0.15); color: #f87171; }
+        .badge-yellow { background: rgba(251, 191, 36, 0.15); color: #fbbf24; }
+        .badge-orange { background: rgba(251, 146, 60, 0.15); color: #fb923c; }
+        .badge-red-warning { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+        /* 图表容器 */
+        .chart-container {
+            height: 380px;
+            margin: 20px 0;
+        }
+        .chart-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+        @media (max-width: 1200px) {
+            .chart-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* 双栏布局 */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+        @media (max-width: 1200px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* 高亮块 */
+        .highlight-block {
+            background: rgba(251, 191, 36, 0.08);
+            border-left: 4px solid #fbbf24;
+            padding: 18px 22px;
+            border-radius: 0 10px 10px 0;
+            margin: 16px 0;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        .highlight-block.red {
+            background: rgba(248, 113, 113, 0.08);
+            border-left-color: #f87171;
+        }
+        .highlight-block.green {
+            background: rgba(52, 211, 153, 0.08);
+            border-left-color: #34d399;
+        }
+        /* 日志表格 */
+        .log-table td {
+            font-size: 15px;
+            color: #94a3b8;
+        }
+        .log-table td:first-child {
+            color: #e2e8f0;
+            font-weight: 500;
+        }
+        /* 五股力量 */
+        .force-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid #1e293b;
+            font-size: 16px;
+        }
+        .force-item:last-child {
+            border-bottom: none;
+        }
+        .section-subtitle {
+            font-size: 17px;
+            color: #94a3b8;
+            margin: 20px 0 16px;
+            font-weight: 500;
+        }
+        .update-time-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 12px 16px;
+            background: #1e293b;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="nav">
+        <div class="nav-brand">🎛️ Tony's Investment Dashboard</div>
+        <div class="nav-links">
+            <a href="index.html" class="active">📊 仪表盘</a>
+            <a href="holdings.html">💼 持仓详情</a>
+            <a href="news.html">📰 新闻周报</a>
+            <a href="calendar.html">📅 催化剂</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- 状态横幅 -->
+        <div class="status-banner">
+            <div class="status-left">
+                <div class="status-item">📅 最后更新：<strong>2026-09-22 16:37</strong></div>
+                <div class="status-item">⏰ 预计下次更新：<strong>2026-09-23 16:37</strong>（工作日每日）</div>
+            </div>
+            <div class="update-buttons">
+                <button class="btn btn-primary" onclick="copyToClipboard('更新本日数据')">⚡ 更新本日数据</button>
+                <button class="btn btn-secondary" onclick="copyToClipboard('更新本周数据')">📊 更新本周数据</button>
+            </div>
+        </div>
+
+        <!-- 总资产大数字 -->
+        <div class="hero-grid">
+            <div class="hero-card">
+                <div class="hero-label">总资产 (CNY)</div>
+                <div class="hero-value mono">¥15,530,331</div>
+                <div class="hero-sub">现金 54.8% · 股票 45.2%</div>
+            </div>
+            <div class="hero-card">
+                <div class="hero-label">黄金总暴露</div>
+                <div class="hero-value yellow mono">13.6%</div>
+                <div class="hero-sub">紫金矿业 × 45%</div>
+            </div>
+            <div class="hero-card">
+                <div class="hero-label">股票累计盈亏</div>
+                <div class="hero-value red mono">-12.2%</div>
+                <div class="hero-sub">≈ -¥1,029,000</div>
+            </div>
+            <div class="hero-card">
+                <div class="hero-label">当前周期</div>
+                <div class="hero-value orange" style="font-size:26px;padding-top:12px;">滞胀期 (Dalio判断)</div>
+                <div class="hero-sub">战术偏离：滞胀40% / 衰退30%</div>
+            </div>
+        </div>
+
+        <!-- 持仓概览 + 配置饼图 -->
+        <div class="card">
+            <div class="card-title">💼 持仓概览</div>
+            <div class="two-col">
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>标的</th>
+                                <th>仓位</th>
+                                <th>成本</th>
+                                <th>现价</th>
+                                <th>盈亏%</th>
+                                <th>盈亏金额</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="zijin.html" style="color:#e2e8f0;text-decoration:none;border-bottom:1px dashed #fbbf24;" title="点击查看紫金矿业多因子深度分析"><strong>紫金矿业</strong> 601899</a></td>
+                                <td class="mono">30.2%</td>
+                                <td class="mono">33.618</td>
+                                <td class="mono">31.30</td>
+                                <td class="red mono">-6.9%</td>
+                                <td class="red mono">-¥347,700</td>
+                            </tr>
+                            <tr>
+                                <td><a href="geely.html" style="color:#e2e8f0;text-decoration:none;border-bottom:1px dashed #fbbf24;" title="点击查看吉利汽车多因子深度分析">吉利汽车 00175</a></td>
+                                <td class="mono">6.2%</td>
+                                <td class="mono">16.844</td>
+                                <td class="mono">15.91</td>
+                                <td class="red mono">-5.6%</td>
+                                <td class="red mono">-¥55,883</td>
+                            </tr>
+                            <tr>
+                                <td><a href="wanzou.html" style="color:#e2e8f0;text-decoration:none;border-bottom:1px dashed #fbbf24;" title="点击查看万洲国际多因子深度分析">万洲国际 00288</a></td>
+                                <td class="mono">3.0%</td>
+                                <td class="mono">7.28</td>
+                                <td class="mono">6.66</td>
+                                <td class="red mono">-8.5%</td>
+                                <td class="red mono">-¥42,939</td>
+                            </tr>
+                            <tr>
+                                <td><a href="xiaomi.html" style="color:#e2e8f0;text-decoration:none;border-bottom:1px dashed #fbbf24;" title="点击查看小米集团多因子深度分析">小米集团 01810</a></td>
+                                <td class="mono">5.8%</td>
+                                <td class="mono">45.294</td>
+                                <td class="mono">27.58</td>
+                                <td class="red mono">-39.1%</td>
+                                <td class="red mono">-¥582,678</td>
+                            </tr>
+                            <tr>
+                                <td><strong>现金/货基</strong></td>
+                                <td class="mono yellow">54.8%</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>—</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <div id="allocPie" class="chart-container"></div>
+                </div>
+            </div>
+        </div>
+        <!-- 本周变化摘要 -->
+        <div class="card">
+            <div class="card-title">📰 本周变化摘要 (9.18 - 9.21)</div>
+            <div style="font-size: 16px; line-height: 1.8;">
+                <div class="highlight-block green">
+                    📈 <strong>小米单日大涨4.47%</strong>：9月21日收27.58港元，AI/半导体板块集体爆发，恒生科技指数涨2.2%。小米汽车业务预期改善+手机出货回暖。<em>科技成长股在滞胀环境反弹，但长期承压逻辑未变。</em>
+                </div>
+                <div class="highlight-block red">
+                    🛢️ <strong>布油暴跌3.4%逼近100关口</strong>：9月21日收100.34美元/桶，中东局势缓和预期升温。从周中高点107美元回落超6%。<em>通胀压力缓解信号，但仍在100上方，需关注OPEC+减产。</em>
+                </div>
+                <div class="highlight-block">
+                    📉 <strong>金价高位震荡</strong>：9月21日收4368美元/oz（-0.4%），FOMC加息后反弹至4368，随后高位整理。美元指数稳定在100.5。<em>央行购金+地缘风险支撑，但实际利率上行压制上方空间。</em>
+                </div>
+                <div class="highlight-block green">
+                    📊 <strong>港股突破25000点</strong>：恒生指数9月21日涨1.18%至25042.71，沪深300涨0.71%至4539.57。A股港股同步反弹，半导体板块领涨。<em>风险偏好修复，但美联储10月加息概率仍在。</em>
+                </div>
+                <div class="highlight-block">
+                    🏭 <strong>紫金矿业高位整理</strong>：9月21日收31.30元（-0.35%），从9月17日低点30.90反弹后窄幅波动。LME铜维持14400高位。<em>加息压制消化中，铜金价格高位震荡。</em>
+                </div>
+            </div>
+        </div>
+
+        <!-- 核心指标快照 -->
+        <div class="card">
+            <div class="card-title">📈 核心指标快照</div>
+            <div class="update-time-row">
+                <span style="font-size:15px;color:#94a3b8;">📊 数据更新时间：<strong style="color:#e2e8f0;font-size:16px;">2026-09-22 16:37</strong></span>
+                <span style="font-size:15px;color:#94a3b8;">上次周更新：<strong style="color:#e2e8f0;font-size:16px;">2026-09-21 20:23</strong></span>
+            </div>
+            <div class="chart-row">
+                <div>
+                    <h4 class="section-subtitle">📈 资产价格</h4>
+                    <table>
+                        <thead>
+                            <tr><th>指标</th><th>当前值</th><th>上周</th><th>上月</th><th>趋势</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>沪深 300</td><td class="mono"><strong>4539.57</strong></td><td class="mono">4507</td><td class="mono">~4500</td><td class="green mono">+0.71%</td></tr>
+                            <tr><td>恒生指数</td><td class="mono"><strong>25042.71</strong></td><td class="mono">24751</td><td class="mono">~25000</td><td class="green mono">+1.18%</td></tr>
+                            <tr><td>S&P 500</td><td class="mono">7637.76</td><td class="mono">7637.76</td><td class="mono">~7600</td><td class="mono">→</td></tr>
+                            <tr><td>伦敦金</td><td class="mono yellow"><strong>4368 USD/oz</strong></td><td class="mono">4356</td><td class="mono">~4500</td><td class="red mono">-0.4%</td></tr>
+                            <tr><td>美元指数</td><td class="mono"><strong>100.5</strong></td><td class="mono">100.5</td><td class="mono">~100</td><td class="mono">→</td></tr>
+                            <tr><td>布伦特原油</td><td class="mono orange"><strong>100.34 USD</strong> ⚠️</td><td class="mono">102.5</td><td class="mono">~89.70</td><td class="red mono">-3.4%</td></tr>
+                            <tr><td>LME 铜</td><td class="mono orange"><strong>14400 USD</strong> ⚠️</td><td class="mono">14400</td><td class="mono">~14036</td><td class="mono">→</td></tr>
+                            <tr><td>USD/CNY</td><td class="mono"><strong>6.71</strong></td><td class="mono">6.71</td><td class="mono">~6.75</td><td class="mono">→</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <h4 class="section-subtitle">💰 利率与货币</h4>
+                    <table>
+                        <thead>
+                            <tr><th>指标</th><th>当前值</th><th>上周</th><th>上月</th><th>趋势</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>美国 10 年国债</td><td class="mono yellow"><strong>4.95%</strong></td><td class="mono">~4.77%</td><td class="mono">~4.60%</td><td class="red mono">↑ 逼近5%</td></tr>
+                            <tr><td>美国 10 年实际利率</td><td class="mono"><strong>2.50%</strong></td><td class="mono">2.42%</td><td class="mono">~2.30%</td><td class="red mono">↑ 98分位</td></tr>
+                            <tr><td>中国 10 年国债</td><td class="mono"><strong>1.686%</strong></td><td class="mono">1.678%</td><td class="mono">~1.75%</td><td class="mono">↓ 历史低位</td></tr>
+                            <tr><td>联邦基金利率</td><td class="mono orange"><strong>3.75%–4.00%</strong></td><td class="mono">同上</td><td class="mono">同上</td><td class="mono">→ 维持</td></tr>
+                            <tr><td>中国 LPR (1Y)</td><td class="mono">3.0%</td><td class="mono">同上</td><td class="mono">同上</td><td class="mono">→ 不变</td></tr>
+                            <tr><td>中国 CPI (8月)</td><td class="mono">0.5%</td><td class="mono">—</td><td class="mono">0.5%</td><td class="mono">→ 温和</td></tr>
+                            <tr><td>美国 CPI (8月)</td><td class="mono">3.4%</td><td class="mono">—</td><td class="mono">3.4%</td><td class="red mono">粘性</td></tr>
+                            <tr><td>美国核心 PCE</td><td class="mono yellow">3.3%</td><td class="mono">—</td><td class="mono">~3.2%</td><td class="red mono">高于目标</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 黄金重点跟踪 -->
+        <div class="card">
+            <div class="card-title">🥇 黄金重点跟踪</div>
+            <div class="two-col">
+                <div>
+                    <table>
+                        <tbody>
+                            <tr><td>伦敦金现</td><td class="mono yellow"><strong>4368 USD/oz</strong></td><td class="mono">→ 高位震荡</td></tr>
+                            <tr><td>上海金 (T+D)</td><td class="mono">~950 元/克</td><td class="mono">跟随国际</td></tr>
+                            <tr><td>美国10年实际利率</td><td class="mono red">2.50%</td><td class="mono">↑ 历史98分位</td></tr>
+                            <tr><td>央行购金 (中国8月)</td><td class="mono green">+20.2吨</td><td class="mono">✅ 连续22个月</td></tr>
+                            <tr><td>金银比</td><td class="mono">~65.4</td><td class="mono">中性区间</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <div class="highlight-block">
+                        <strong>判断</strong>：金价处于历史高位，短期受实际利率2.5%高位压制，波动加大。但央行持续购金、中东冲突、美国财政担忧提供强支撑。<br>
+                        <strong>建议</strong>：维持15%配置，回调至4200以下可加仓。Dalio 8月公开说"买黄金"。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 周期定位 + 五股力量 -->
+        <div class="two-col">
+            <div class="card">
+                <div class="card-title">🌍 当前周期定位</div>
+                <div style="font-size:16px;">
+                    <div class="highlight-block orange">
+                        <strong>Dalio判断：滞胀期</strong>
+                    </div>
+                    <div class="force-item">
+                        <span>大周期阶段</span>
+                        <span class="orange">长期债务周期后段</span>
+                    </div>
+                    <div class="force-item">
+                        <span>增长意外</span>
+                        <span class="red">低于预期</span>
+                    </div>
+                    <div class="force-item">
+                        <span>通胀意外</span>
+                        <span class="yellow">粘性+油价风险</span>
+                    </div>
+                    <div class="force-item">
+                        <span>货币可信度</span>
+                        <span class="red">⚠️ 动摇</span>
+                    </div>
+                    <div class="force-item">
+                        <span>当前象限</span>
+                        <span class="orange">通缩性繁荣→滞胀漂移</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">🌡️ 五股力量温度</div>
+                <div style="font-size:16px;">
+                    <div class="force-item">
+                        <span>💵 债务货币化</span>
+                        <span class="red">↑ 上升</span>
+                    </div>
+                    <div class="force-item">
+                        <span>🏛️ 内部秩序</span>
+                        <span class="yellow">→ 稳定</span>
+                    </div>
+                    <div class="force-item">
+                        <span>⚔️ 外部秩序</span>
+                        <span class="red">↑ 上升</span>
+                    </div>
+                    <div class="force-item">
+                        <span>🌪️ 自然冲击</span>
+                        <span class="green">→ 平稳</span>
+                    </div>
+                    <div class="force-item">
+                        <span>🔬 技术发明</span>
+                        <span class="green">↑ 上升</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 本周催化剂 -->
+        <div class="card">
+            <div class="card-title">📅 本周催化剂 (9.21 - 9.27)</div>
+            <table>
+                <thead>
+                    <tr><th>日期</th><th>事件</th><th>重要性</th><th>对持仓影响</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="mono">9月21日</td>
+                        <td>日本央行议息</td>
+                        <td><span class="badge badge-yellow">🟡 高</span></td>
+                        <td>影响日元套利交易，全球流动性</td>
+                    </tr>
+                    <tr>
+                        <td class="mono">9月24日</td>
+                        <td>美国9月PMI初值</td>
+                        <td><span class="badge badge-yellow">🟡 高</span></td>
+                        <td>影响美联储10月加息预期</td>
+                    </tr>
+                    <tr>
+                        <td class="mono">9月25日</td>
+                        <td>中国9月官方PMI</td>
+                        <td><span class="badge badge-red-warning">🔴 高</span></td>
+                        <td>吉利/万洲关注经济复苏</td>
+                    </tr>
+                    <tr>
+                        <td class="mono">9月26日</td>
+                        <td>美国Q3 GDP初值</td>
+                        <td><span class="badge badge-yellow">🟡 高</span></td>
+                        <td>影响美元和美债</td>
+                    </tr>
+                    <tr>
+                        <td class="mono">9月下旬</td>
+                        <td>小米汽车交付数据</td>
+                        <td><span class="badge badge-orange">🟡 中</span></td>
+                        <td>直接影响小米股价</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 自动更新日志 -->
+        <div class="card">
+            <div class="card-title">📅 自动更新日志</div>
+            <table class="log-table">
+                <thead>
+                    <tr><th>日期</th><th>更新类型</th><th>关键变化</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="mono">2026-09-22</td>
+                        <td>周更新+每日价格</td>
+                        <td>小米27.58(+4.47%⚠️)、万洲6.66(+0.83%)、紫金31.30(-0.35%)、金价4368、布油100.34(-3.4%⚠️)、恒指25043(+1.18%)</td>
+                    </tr>
+                    <tr>
+                        <td class="mono">2026-09-21</td>
+                        <td>每日价格更新</td>
+                        <td>紫金31.41(+1.65%)、金价4356(+0.7%)、布油102.5(-2.2%)、恒指24751(+0.6%)</td>
+                    </tr>
+                    <tr>
+                        <td class="mono">2026-09-18</td>
+                        <td>每日+每周更新</td>
+                        <td>🔴美联储加息25bp至3.75-4.00%、紫金30.90(-3.95%⚠️)、金价4327、LME铜14464⚠️</td>
+                    </tr>
+                    <tr>
+                        <td class="mono">2026-09-15</td>
+                        <td>每日价格更新</td>
+                        <td>紫金31.68、布油107⚠️、美10Y国债盘中破5%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // 资产配置饼图
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                alert("✅ 已复制到剪贴板！\n\n指令：" + text + "\n\n请切换到豆包，按 Cmd+V 粘贴并发送。");
+            });
+        }
+
+        var allocChart = echarts.init(document.getElementById('allocPie'));
+        var allocOption = {
+            tooltip: {
+                trigger: 'item',
+                formatter: '{b}: {c}% ({d}%)',
+                backgroundColor: '#1e293b',
+                borderColor: '#334155',
+                textStyle: { color: '#e2e8f0', fontSize: 15 }
+            },
+            legend: {
+                orient: 'vertical',
+                right: 10,
+                top: 'center',
+                textStyle: { color: '#94a3b8', fontSize: 15 },
+                itemWidth: 14,
+                itemHeight: 14
+            },
+            series: [{
+                type: 'pie',
+                radius: ['45%', '75%'],
+                center: ['35%', '50%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    borderRadius: 8,
+                    borderColor: '#111827',
+                    borderWidth: 2
+                },
+                label: { show: false },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: 16,
+                        fontWeight: 'bold',
+                        color: '#e2e8f0'
+                    }
+                },
+                data: [
+                    { value: 30.2, name: '紫金矿业', itemStyle: { color: '#fbbf24' } },
+                    { value: 6.2, name: '吉利汽车', itemStyle: { color: '#60a5fa' } },
+                    { value: 3.0, name: '万洲国际', itemStyle: { color: '#34d399' } },
+                    { value: 5.8, name: '小米集团', itemStyle: { color: '#f472b6' } },
+                    { value: 54.8, name: '现金/货基', itemStyle: { color: '#64748b' } }
+                ]
+            }]
+        };
+        allocChart.setOption(allocOption);
+        window.addEventListener('resize', function() {
+            allocChart.resize();
+        });
+    </script>
+</body>
+</html>

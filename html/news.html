@@ -1,0 +1,430 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新闻周报 - Tony's Investment Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0e17; color: #e2e8f0; line-height: 1.7; font-size: 17px; }
+        .mono { font-family: 'SF Mono', 'Roboto Mono', Menlo, monospace; font-variant-numeric: tabular-nums; }
+        .nav { background: #111827; border-bottom: 1px solid #1e293b; padding: 20px 36px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+        .nav-brand { font-size: 24px; font-weight: 700; color: #fbbf24; }
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a { color: #94a3b8; text-decoration: none; font-size: 17px; padding: 10px 18px; border-radius: 8px; transition: all 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: #fbbf24; background: #1e293b; }
+        .container { max-width: 1800px; margin: 0 auto; padding: 36px; }
+        .status-banner { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 1px solid #334155; border-radius: 16px; padding: 24px 28px; margin-bottom: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+        .status-item { font-size: 16px; color: #94a3b8; }
+        .status-item strong { color: #e2e8f0; font-size: 17px; }
+        .card { background: #111827; border: 1px solid #1e293b; border-radius: 16px; padding: 32px; margin-bottom: 28px; }
+        .card-title { font-size: 22px; font-weight: 600; margin-bottom: 24px; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+        @media (max-width: 1200px) { .two-col { grid-template-columns: 1fr; } }
+        table { width: 100%; border-collapse: collapse; font-size: 16px; }
+        th { text-align: left; padding: 14px 16px; color: #94a3b8; font-weight: 500; border-bottom: 2px solid #1e293b; font-size: 15px; }
+        td { padding: 14px 16px; border-bottom: 1px solid #1e293b; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover { background: #1e293b; }
+        .green { color: #34d399; } .red { color: #f87171; } .yellow { color: #fbbf24; } .orange { color: #fb923c; }
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 6px; font-size: 14px; font-weight: 600; }
+        .badge-green { background: rgba(52,211,153,.15); color: #34d399; }
+        .badge-red { background: rgba(248,113,113,.15); color: #f87171; }
+        .badge-yellow { background: rgba(251,191,36,.15); color: #fbbf24; }
+        .badge-orange { background: rgba(251,146,60,.15); color: #fb923c; }
+        .highlight-block { background: rgba(251,191,36,.08); border-left: 4px solid #fbbf24; padding: 18px 22px; border-radius: 0 10px 10px 0; margin: 16px 0; font-size: 16px; line-height: 1.8; }
+        .highlight-block.red { background: rgba(248,113,113,.08); border-left-color: #f87171; }
+        .highlight-block.green { background: rgba(52,211,153,.08); border-left-color: #34d399; }
+        .news-item { padding: 18px; background: #1e293b; border-radius: 10px; margin-bottom: 14px; }
+        .news-item-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; gap: 12px; }
+        .news-item-title { font-weight: 600; font-size: 18px; }
+        .news-item-body { font-size: 16px; color: #94a3b8; line-height: 1.8; margin-bottom: 12px; }
+        .causal-chain { background: #0f172a; border-radius: 8px; padding: 14px 16px; font-size: 15px; line-height: 1.7; }
+        .causal-chain-label { font-weight: 600; color: #fbbf24; margin-bottom: 6px; }
+        .chain-step { display: inline-block; margin: 2px 0; }
+        .chain-arrow { color: #64748b; margin: 0 6px; }
+        .stars { color: #fbbf24; letter-spacing: 2px; }
+        .stock-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #1e293b; }
+        .stock-icon { font-size: 28px; }
+        .stock-name { font-size: 20px; font-weight: 600; }
+        .stock-price { margin-left: auto; font-size: 18px; font-weight: 600; }
+        .review-table td { font-size: 15px; }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-brand">🎛️ Tony's Investment Dashboard</div>
+        <div class="nav-links">
+            <a href="index.html">📊 仪表盘</a>
+            <a href="holdings.html">💼 持仓详情</a>
+            <a href="news.html" class="active">📰 新闻周报</a>
+            <a href="calendar.html">📅 催化剂</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="status-banner">
+            <div class="status-item">📅 最后更新：<strong>2026-09-22</strong></div>
+            <div class="status-item">⏰ 预计下次更新：<strong>2026-09-28 20:23</strong>（每周日）</div>
+            <div class="status-item">📅 本周：2026.09.15 - 2026.09.21</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">📅 本周概览</div>
+            <table>
+                <thead><tr><th>标的</th><th>本周涨跌</th><th>情绪</th><th>影响度</th><th>关键事件</th></tr></thead>
+                <tbody>
+                    <tr>
+                        <td>🥇 紫金矿业 601899</td>
+                        <td class="red mono">-6.9%</td>
+                        <td><span class="badge badge-red">🔴 负面</span></td>
+                        <td class="yellow">★★★★☆</td>
+                        <td>美联储加息25bp、有色金属板块回调、LME铜高位震荡</td>
+                    </tr>
+                    <tr>
+                        <td>🚗 吉利汽车 00175</td>
+                        <td class="red mono">-5.6%</td>
+                        <td><span class="badge badge-yellow">🟡 中性偏负</span></td>
+                        <td class="yellow">★★☆☆☆</td>
+                        <td>Q2业绩消化、行业销量承压、南向资金波动</td>
+                    </tr>
+                    <tr>
+                        <td>🥩 万洲国际 00288</td>
+                        <td class="red mono">-8.5%</td>
+                        <td><span class="badge badge-red">🔴 负面</span></td>
+                        <td class="yellow">★★★☆☆</td>
+                        <td>Smithfield下调指引、9/11除息、大行下调目标价</td>
+                    </tr>
+                    <tr>
+                        <td>📱 小米集团 01810</td>
+                        <td class="green mono">+4.47% ⚠️</td>
+                        <td><span class="badge badge-green">🟢 正面</span></td>
+                        <td class="yellow">★★★★☆</td>
+                        <td>AI/半导体板块爆发、汽车交付数据改善、持续回购</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="highlight-block red" style="margin-top:20px;">
+                <strong>本周宏观主线：</strong>美联储9/16加息25bp至3.75-4.00%（2023年7月以来首次）→ 10年美债收益率升至4.95%逼近5% → 有色金属/黄金短期承压；中东局势缓和 → 布油从107跌至100.34 → 通胀压力边际缓解但仍在高位。
+            </div>
+        </div>
+
+        <!-- 紫金矿业新闻 -->
+        <div class="two-col">
+            <div class="card">
+                <div class="stock-header">
+                    <div class="stock-icon">🥇</div>
+                    <div class="stock-name">紫金矿业 601899</div>
+                    <div class="stock-price red mono">¥31.30 (-6.9%)</div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-item-header">
+                        <div class="news-item-title">📉 美联储加息25bp，金铜短期承压</div>
+                        <div>
+                            <span class="badge badge-red">🔴 负面</span>
+                            <span class="stars">★★★★★</span>
+                        </div>
+                    </div>
+                    <div class="news-item-body">
+                        9月16日美联储宣布加息25bp至3.75-4.00%，为2023年7月以来首次加息。点阵图显示年内还有一次加息。10年美债收益率升至4.95%，美元指数走强。金价从4400回落至4368。
+                    </div>
+                    <div class="causal-chain">
+                        <div class="causal-chain-label">🔗 因果传导链</div>
+                        <span class="chain-step">美联储加息</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">实际利率↑至2.5%</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">持有黄金机会成本上升</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">🥇 紫金短期承压</span>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-item-header">
+                        <div class="news-item-title">📊 金铜基本面仍强劲，央行持续购金</div>
+                        <div>
+                            <span class="badge badge-green">🟢 正面</span>
+                            <span class="stars">★★★☆☆</span>
+                        </div>
+                    </div>
+                    <div class="news-item-body">
+                        中国央行8月增持黄金20.2吨，连续22个月增持。LME铜维持14400美元高位。高盛维持年底金价4900目标。紫金Q2净利润+45.5%。
+                    </div>
+                    <div class="causal-chain">
+                        <div class="causal-chain-label">🔗 因果传导链</div>
+                        <span class="chain-step">央行连续购金</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">官方需求支撑金价</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">紫金黄金板块利润稳定</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">🥇 长期逻辑不变</span>
+                    </div>
+                </div>
+
+                <div class="highlight-block">
+                    <strong>💡 投资逻辑：</strong>买它=买45%黄金+45%铜+10%矿业经营beta。<em>卖出条件：</em>金价跌破3800或美联储进入持续降息周期（黄金牛市结束信号）。
+                </div>
+            </div>
+
+            <!-- 吉利汽车新闻 -->
+            <div class="card">
+                <div class="stock-header">
+                    <div class="stock-icon">🚗</div>
+                    <div class="stock-name">吉利汽车 00175</div>
+                    <div class="stock-price red mono">HK$15.91 (-5.6%)</div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-item-header">
+                        <div class="news-item-title">📊 Q2业绩强劲，高端化见效</div>
+                        <div>
+                            <span class="badge badge-green">🟢 正面</span>
+                            <span class="stars">★★★☆☆</span>
+                        </div>
+                    </div>
+                    <div class="news-item-body">
+                        Q2营收898.2亿元（+14.1%），归母净利润51.2亿元（+62.9%）。高端品牌+出口推动单车利润提升。出口目标上修至92万辆。
+                    </div>
+                    <div class="causal-chain">
+                        <div class="causal-chain-label">🔗 因果传导链</div>
+                        <span class="chain-step">高端化+出口</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">单车利润↑</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">盈利预期上调</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">🚗 吉利估值修复</span>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-item-header">
+                        <div class="news-item-title">🏭 行业销量承压，竞争加剧</div>
+                        <div>
+                            <span class="badge badge-red">🔴 负面</span>
+                            <span class="stars">★★★☆☆</span>
+                        </div>
+                    </div>
+                    <div class="news-item-body">
+                        里昂预计9月内地乘用车销量同比跌约24%。价格战持续，新能源车企竞争白热化。
+                    </div>
+                    <div class="causal-chain">
+                        <div class="causal-chain-label">🔗 因果传导链</div>
+                        <span class="chain-step">行业销量下滑</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">价格战加剧</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">利润率承压</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">🚗 吉利估值压制</span>
+                    </div>
+                </div>
+
+                <div class="highlight-block">
+                    <strong>💡 投资逻辑：</strong>买它=买中国汽车消费复苏+出口成长。<em>卖出条件：</em>连续两个季度净利润同比下滑超20%，或行业价格战导致毛利率跌破15%。
+                </div>
+            </div>
+        </div>
+
+        <div class="two-col">
+            <!-- 万洲国际新闻 -->
+            <div class="card">
+                <div class="stock-header">
+                    <div class="stock-icon">🥩</div>
+                    <div class="stock-name">万洲国际 00288</div>
+                    <div class="stock-price red mono">HK$6.66 (-8.5%)</div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-item-header">
+                        <div class="news-item-title">🔴 Smithfield下调指引，北美业务承压</div>
+                        <div>
+                            <span class="badge badge-red">🔴 负面</span>
+                            <span class="stars">★★★★☆</span>
+                        </div>
+                    </div>
+                    <div class="news-item-body">
+                        Smithfield下调2026财年全业务板块经营溢利指引。美国猪肉价格低迷，饲料成本上升。9/11除息后股价创52周新低。
+                    </div>
+                    <div class="causal-chain">
+                        <div class="causal-chain-label">🔗 因果传导链</div>
+                        <span class="chain-step">美国猪价低迷</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">Smithfield利润下滑</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">万洲北美业务拖累</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">🥩 万洲盈利下修</span>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-item-header">
+                        <div class="news-item-title">💰 高股息防御属性凸显</div>
+                        <div>
+                            <span class="badge badge-green">🟢 正面</span>
+                            <span class="stars">★★☆☆☆</span>
+                        </div>
+                    </div>
+                    <div class="news-item-body">
+                        预计全年股息0.61港元，当前股息率约9.4%。消费必需品在滞胀环境中具防御性。
+                    </div>
+                    <div class="causal-chain">
+                        <div class="causal-chain-label">🔗 因果传导链</div>
+                        <span class="chain-step">经济不确定性↑</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">资金寻求防御</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">高股息消费必需品受青睐</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">🥩 万洲有支撑</span>
+                    </div>
+                </div>
+
+                <div class="highlight-block">
+                    <strong>💡 投资逻辑：</strong>买它=买高股息消费必需品+周期底部。<em>卖出条件：</em>股息率跌破6%（股价大涨或分红削减），或连续两年净利润同比下滑超15%。
+                </div>
+            </div>
+
+            <!-- 小米集团新闻 -->
+            <div class="card">
+                <div class="stock-header">
+                    <div class="stock-icon">📱</div>
+                    <div class="stock-name">小米集团 01810</div>
+                    <div class="stock-price green mono">HK$27.58 (+4.47% ⚠️)</div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-item-header">
+                        <div class="news-item-title">📈 AI/半导体板块爆发，小米大涨4.47%</div>
+                        <div>
+                            <span class="badge badge-green">🟢 正面</span>
+                            <span class="stars">★★★★☆</span>
+                        </div>
+                    </div>
+                    <div class="news-item-body">
+                        9月21日小米大涨4.47%至27.58港元，恒生科技指数涨2.2%。AI芯片+端侧AI概念催化，半导体板块集体走强。
+                    </div>
+                    <div class="causal-chain">
+                        <div class="causal-chain-label">🔗 因果传导链</div>
+                        <span class="chain-step">AI产业趋势</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">半导体板块估值修复</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">小米自研芯片+AI手机预期</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">📱 小米估值反弹</span>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-item-header">
+                        <div class="news-item-title">🚗 汽车业务交付加速，持续回购</div>
+                        <div>
+                            <span class="badge badge-green">🟢 正面</span>
+                            <span class="stars">★★★☆☆</span>
+                        </div>
+                    </div>
+                    <div class="news-item-body">
+                        小米澎程三款增程SUV上市，覆盖20-30万元。9月持续回购（9/8斥资8201万港元回购）。
+                    </div>
+                    <div class="causal-chain">
+                        <div class="causal-chain-label">🔗 因果传导链</div>
+                        <span class="chain-step">汽车产品线扩充</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">交付量预期↑</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">长期成长逻辑验证</span><span class="chain-arrow">→</span>
+                        <span class="chain-step">📱 小米估值修复</span>
+                    </div>
+                </div>
+
+                <div class="highlight-block">
+                    <strong>💡 投资逻辑：</strong>买它=买中国消费科技+汽车成长股，深度套牢中。<em>卖出条件：</em>汽车业务连续三个季度交付不及预期，或全球科技股进入熊市（纳斯达克跌破年线20%）。
+                </div>
+            </div>
+        </div>
+
+        <!-- 本周异动汇总 -->
+        <div class="card">
+            <div class="card-title">📊 本周异动汇总</div>
+            <table>
+                <thead><tr><th>日期</th><th>标的</th><th>异动</th><th>情绪</th><th>原因</th></tr></thead>
+                <tbody>
+                    <tr><td class="mono">9月16日</td><td>紫金矿业</td><td class="red mono">-3.95% 🔴</td><td><span class="badge badge-red">🔴 负面</span></td><td>美联储加息25bp+有色金属板块回调</td></tr>
+                    <tr><td class="mono">9月17日</td><td>黄金/紫金</td><td class="mono">金价4327</td><td><span class="badge badge-yellow">🟡 中性</span></td><td>FOMC后金价探底回升</td></tr>
+                    <tr><td class="mono">9月18日</td><td>紫金矿业</td><td class="green mono">+1.65%</td><td><span class="badge badge-green">🟢 正面</span></td><td>超跌反弹+美元边际走弱</td></tr>
+                    <tr><td class="mono">9月21日</td><td>小米集团</td><td class="green mono">+4.47% ⚠️</td><td><span class="badge badge-green">🟢 正面</span></td><td>AI/半导体板块集体爆发+汽车预期改善</td></tr>
+                    <tr><td class="mono">9月21日</td><td>布伦特原油</td><td class="red mono">-3.4% ⚠️</td><td><span class="badge badge-green">🟢 正面</span></td><td>中东局势缓和预期，油价从107回落至100</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 新闻vs价格复盘 -->
+        <div class="card">
+            <div class="card-title">🔍 新闻 vs 价格复盘（本周逻辑验证）</div>
+            <p style="font-size:16px;color:#94a3b8;margin-bottom:20px;">验证：这周的新闻，市场真的按这个逻辑走了吗？</p>
+            <table class="review-table">
+                <thead>
+                    <tr><th>我当时的判断</th><th>新闻事件</th><th>实际市场反应</th><th>验证结果</th><th>教训</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>加息→金价跌→紫金跌</td>
+                        <td>9/16美联储加息25bp</td>
+                        <td>紫金9/16跌3.95%，9/17探底30.90后反弹</td>
+                        <td><span class="badge badge-green">✅ 正确</span></td>
+                        <td>加息冲击被快速消化，"卖预期买事实"</td>
+                    </tr>
+                    <tr>
+                        <td>中东冲突→油价涨→通胀压力大</td>
+                        <td>9月中旬中东局势</td>
+                        <td>油价先涨到107，后因缓和预期暴跌至100</td>
+                        <td><span class="badge badge-yellow">⚠️ 部分对</span></td>
+                        <td>地缘事件方向对但持续时间短，波动极大</td>
+                    </tr>
+                    <tr>
+                        <td>滞胀→黄金受益→紫金应表现好</td>
+                        <td>滞胀逻辑持续验证</td>
+                        <td>金价高位震荡，但紫金本周跌6.9%</td>
+                        <td><span class="badge badge-red">❌ 错误</span></td>
+                        <td>黄金≠紫金，加息周期里矿业股受利率压制更重</td>
+                    </tr>
+                    <tr>
+                        <td>小米套牢深→科技成长在高利率承压</td>
+                        <td>9/21小米大涨4.47%</td>
+                        <td>AI板块爆发带动，单日大涨但不改趋势</td>
+                        <td><span class="badge badge-yellow">⚠️ 部分错</span></td>
+                        <td>反弹≠反转，深度套牢股的反弹要减仓不是加仓</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="highlight-block" style="margin-top:20px;">
+                <strong>📊 本周复盘胜率：</strong>4个判断中 ✅正确1个、⚠️部分对/错2个、❌错误1个 → <strong>正确率25%，部分正确率50%</strong><br>
+                <strong>核心教训：</strong><em>不要把"黄金价格涨"直接等同于"紫金矿业涨"——加息周期里矿业股的估值压缩会抵消商品涨幅。</em>以后做判断要区分"商品价格"和"股票估值"两个维度。
+            </div>
+        </div>
+
+        <!-- 下周关注 -->
+        <div class="card">
+            <div class="card-title">📌 下周关注（2026.09.22 - 09.28）</div>
+            <div class="highlight-block red">
+                <strong>下周核心矛盾：</strong>美联储9月加息靴子落地后，市场焦点转向"10月是否再加"。美国9月PMI（9/24）和Q3 GDP（9/26）是关键数据。如果数据强劲，10月加息预期升温，金铜继续承压；如果数据走弱，衰退交易升温，债券受益。<br>
+                <em>Dalio滞胀判断不变：短期波动不改变中期配置方向。</em>
+            </div>
+            <table style="margin-top:20px;">
+                <thead><tr><th>日期</th><th>事件</th><th>影响标的</th><th>传导链路</th><th>我的预判</th></tr></thead>
+                <tbody>
+                    <tr>
+                        <td class="mono">9/24 周三</td>
+                        <td><strong>美国9月PMI初值</strong></td>
+                        <td>🥇紫金（最大）+全部</td>
+                        <td>PMI→经济热度→美联储10月加息预期→美元/实际利率→金铜</td>
+                        <td><span class="badge badge-yellow">🟡 中性偏空</span></td>
+                    </tr>
+                    <tr>
+                        <td class="mono">9/25 周四</td>
+                        <td><strong>中国9月官方PMI</strong></td>
+                        <td>🥇紫金 🚗吉利 📱小米</td>
+                        <td>PMI→中国经济预期→铜需求+A股整体情绪</td>
+                        <td><span class="badge badge-green">🟢 中性偏多</span></td>
+                    </tr>
+                    <tr>
+                        <td class="mono">9/26 周五</td>
+                        <td><strong>美国Q3 GDP初值</strong></td>
+                        <td>全部</td>
+                        <td>GDP→经济衰退/软着陆判断→美联储政策路径→全球风险资产</td>
+                        <td><span class="badge badge-orange">🟠 高不确定性</span></td>
+                    </tr>
+                    <tr>
+                        <td class="mono">9月下旬</td>
+                        <td><strong>小米汽车9月交付数据</strong></td>
+                        <td>📱小米（直接影响）</td>
+                        <td>交付量→汽车业务预期→小米估值</td>
+                        <td><span class="badge badge-green">🟢 偏正面</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,318 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>催化剂日历 - Tony's Investment Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0e17; color: #e2e8f0; line-height: 1.7; font-size: 17px; }
+        .mono { font-family: 'SF Mono', 'Roboto Mono', Menlo, monospace; font-variant-numeric: tabular-nums; }
+        .nav { background: #111827; border-bottom: 1px solid #1e293b; padding: 20px 36px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+        .nav-brand { font-size: 24px; font-weight: 700; color: #fbbf24; }
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a { color: #94a3b8; text-decoration: none; font-size: 17px; padding: 10px 18px; border-radius: 8px; transition: all 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: #fbbf24; background: #1e293b; }
+        .container { max-width: 1800px; margin: 0 auto; padding: 36px; }
+        .status-banner { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 1px solid #334155; border-radius: 16px; padding: 24px 28px; margin-bottom: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+        .status-item { font-size: 16px; color: #94a3b8; }
+        .status-item strong { color: #e2e8f0; font-size: 17px; }
+        .card { background: #111827; border: 1px solid #1e293b; border-radius: 16px; padding: 32px; margin-bottom: 28px; }
+        .card-title { font-size: 22px; font-weight: 600; margin-bottom: 24px; }
+        table { width: 100%; border-collapse: collapse; font-size: 16px; }
+        th { text-align: left; padding: 14px 16px; color: #94a3b8; font-weight: 500; border-bottom: 2px solid #1e293b; font-size: 15px; }
+        td { padding: 14px 16px; border-bottom: 1px solid #1e293b; vertical-align: top; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover { background: #1e293b; }
+        .green { color: #34d399; } .red { color: #f87171; } .yellow { color: #fbbf24; } .orange { color: #fb923c; }
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 6px; font-size: 14px; font-weight: 600; }
+        .badge-green { background: rgba(52,211,153,.15); color: #34d399; }
+        .badge-red { background: rgba(248,113,113,.15); color: #f87171; }
+        .badge-yellow { background: rgba(251,191,36,.15); color: #fbbf24; }
+        .badge-orange { background: rgba(251,146,60,.15); color: #fb923c; }
+        .highlight-block { background: rgba(251,191,36,.08); border-left: 4px solid #fbbf24; padding: 18px 22px; border-radius: 0 10px 10px 0; margin: 16px 0; font-size: 16px; line-height: 1.8; }
+        .highlight-block.red { background: rgba(248,113,113,.08); border-left-color: #f87171; }
+        .highlight-block.green { background: rgba(52,211,153,.08); border-left-color: #34d399; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+        @media (max-width: 1200px) { .two-col { grid-template-columns: 1fr; } }
+        .win-rate-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 20px 0; }
+        @media (max-width: 1024px) { .win-rate-grid { grid-template-columns: repeat(2, 1fr); } }
+        .stat-card { background: #1e293b; border-radius: 12px; padding: 20px; text-align: center; }
+        .stat-label { font-size: 14px; color: #94a3b8; margin-bottom: 8px; }
+        .stat-value { font-size: 32px; font-weight: 700; }
+        .event-passed { opacity: 0.7; }
+        .event-passed td:first-child { text-decoration: line-through; }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-brand">🎛️ Tony's Investment Dashboard</div>
+        <div class="nav-links">
+            <a href="index.html">📊 仪表盘</a>
+            <a href="holdings.html">💼 持仓详情</a>
+            <a href="news.html">📰 新闻周报</a>
+            <a href="calendar.html" class="active">📅 催化剂</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="status-banner">
+            <div class="status-item">📅 最后更新：<strong>2026-09-22</strong></div>
+            <div class="status-item">⏰ 预计下次更新：<strong>2026-09-28 20:23</strong>（每周日）</div>
+            <div class="status-item">🔮 未来30天重要事件跟踪 + 判断胜率</div>
+        </div>
+
+        <!-- 宏观意外监控 -->
+        <div class="card">
+            <div class="card-title">⚠️ 宏观意外监控（哪些事超出了我的模型预期？）</div>
+            <p style="font-size:16px;color:#94a3b8;margin-bottom:20px;">不是数据更新，而是<strong style="color:#e2e8f0;">逻辑更新</strong>的提醒——如果发生了下面这些事，说明我的滞胀判断可能错了。</p>
+            <table>
+                <thead>
+                    <tr><th>监控项</th><th>当前状态</th><th>触发阈值</th><th>如果触发意味着什么</th><th>应对动作</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>🥇 金价走势</td>
+                        <td class="mono yellow">4300 美元/oz</td>
+                        <td>跌破 3800 持续1周</td>
+                        <td>滞胀逻辑被市场否定</td>
+                        <td><span class="badge badge-red">🔴 重新评估黄金配置</span></td>
+                    </tr>
+                    <tr>
+                        <td>📈 美国10年实际利率</td>
+                        <td class="mono yellow">2.50%</td>
+                        <td>跌破 1.5% 或突破 3.0%</td>
+                        <td>either 通胀退潮 或 通胀失控</td>
+                        <td><span class="badge badge-yellow">🟡 调整滞胀仓位比例</span></td>
+                    </tr>
+                    <tr>
+                        <td>🛢️ 布伦特原油</td>
+                        <td class="mono orange">95.99 美元</td>
+                        <td>跌破 80 或突破 120</td>
+                        <td>either 通缩 或 滞胀失控</td>
+                        <td><span class="badge badge-yellow">🟡 调整通胀因子权重</span></td>
+                    </tr>
+                    <tr>
+                        <td>🏦 中国10年国债收益率</td>
+                        <td class="mono">1.6775%</td>
+                        <td>跌破 1.3% 或突破 2.2%</td>
+                        <td>either 极度通缩 或 通胀重启</td>
+                        <td><span class="badge badge-yellow">🟡 调整债券配置</span></td>
+                    </tr>
+                    <tr>
+                        <td>🌍 全球央行政策</td>
+                        <td class="mono orange">美联储加息周期</td>
+                        <td>美联储突然转向降息</td>
+                        <td>经济衰退确认</td>
+                        <td><span class="badge badge-red">🔴 大幅加债券、减股票</span></td>
+                    </tr>
+                    <tr>
+                        <td>⚔️ 地缘冲突</td>
+                        <td class="mono yellow">中东缓和预期</td>
+                        <td>重大冲突升级/扩散</td>
+                        <td>油价暴涨→滞胀加剧</td>
+                        <td><span class="badge badge-green">🟢 加黄金、能源</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="highlight-block red" style="margin-top:20px;">
+                <strong>🚨 本周意外：</strong>金价单日大跌1.56%至4300美元，布油跌破100关口至95.99美元——加息后实际利率上行压制金价，中东缓和持续打压油价。<em>这是"通胀压力缓解"而非"滞胀逻辑反转"，继续观察4200支撑位。</em>
+            </div>
+        </div>
+        <!-- 判断胜率统计 -->
+        <div class="card">
+            <div class="card-title">🎯 我的判断胜率统计</div>
+            <div class="win-rate-grid">
+                <div class="stat-card">
+                    <div class="stat-label">总判断数</div>
+                    <div class="stat-value mono">8</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">✅ 判断正确</div>
+                    <div class="stat-value green mono">3</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">⚠️ 部分正确</div>
+                    <div class="stat-value yellow mono">3</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">❌ 判断错误</div>
+                    <div class="stat-value red mono">2</div>
+                </div>
+            </div>
+            <div class="highlight-block">
+                <strong>📊 当前胜率：</strong>完全正确 37.5%，部分正确 37.5% → <strong>整体正确率 75%</strong><br>
+                <strong>容易错的类型：</strong>
+                <ul style="margin-left:20px;margin-top:8px;">
+                    <li><strong>商品价格 vs 股票估值混淆</strong>：金价涨≠紫金涨（加息周期矿业股估值压缩）</li>
+                    <li><strong>地缘事件持续时间</strong>：方向对但时间判断偏长，波动结束比预期快</li>
+                    <li><strong>深度套牢股反弹</strong>：把反弹当反转，低估了套牢盘抛压</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 未来30天事件 -->
+        <div class="card">
+            <div class="card-title">🔮 未来30天事件（含我的判断+实际结果）</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>事件</th>
+                        <th>影响范围</th>
+                        <th>重要性</th>
+                        <th>我的判断</th>
+                        <th>实际结果</th>
+                        <th>验证</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 已发生事件 -->
+                    <tr class="event-passed">
+                        <td class="mono">9月11日</td>
+                        <td><strong>美国8月CPI公布</strong></td>
+                        <td>全球</td>
+                        <td><span class="badge badge-red">🔴 极高</span></td>
+                        <td>通胀高→加息预期→金铜跌</td>
+                        <td>CPI 3.4%超预期，紫金跌5.42%</td>
+                        <td><span class="badge badge-green">✅ 正确</span></td>
+                    </tr>
+                    <tr class="event-passed">
+                        <td class="mono">9月16日</td>
+                        <td><strong>美联储FOMC议息</strong></td>
+                        <td>全球</td>
+                        <td><span class="badge badge-red">🔴 极高</span></td>
+                        <td>加息→短期金铜承压，长期滞胀逻辑验证</td>
+                        <td>加息25bp至3.75-4.00%，紫金跌3.95%后反弹</td>
+                        <td><span class="badge badge-green">✅ 正确</span></td>
+                    </tr>
+                    <tr class="event-passed">
+                        <td class="mono">9月20日</td>
+                        <td><strong>中国LPR报价</strong></td>
+                        <td>中国</td>
+                        <td><span class="badge badge-orange">🟡 中</span></td>
+                        <td>维持不变→对市场影响中性</td>
+                        <td>维持3.0%不变，市场反应平淡</td>
+                        <td><span class="badge badge-green">✅ 正确</span></td>
+                    </tr>
+                    <!-- 即将发生事件 -->
+                    <tr>
+                        <td class="mono yellow">9月24日</td>
+                        <td><strong>美国9月PMI初值</strong></td>
+                        <td>全球</td>
+                        <td><span class="badge badge-yellow">🟡 高</span></td>
+                        <td>经济偏强→10月加息预期升温→金铜承压</td>
+                        <td style="color:#64748b;">待公布</td>
+                        <td style="color:#64748b;">—</td>
+                    </tr>
+                    <tr>
+                        <td class="mono yellow">9月25日</td>
+                        <td><strong>中国9月官方PMI</strong></td>
+                        <td>中国</td>
+                        <td><span class="badge badge-yellow">🟡 高</span></td>
+                        <td>约49.5-50.0→经济温和复苏→铜需求有支撑</td>
+                        <td style="color:#64748b;">待公布</td>
+                        <td style="color:#64748b;">—</td>
+                    </tr>
+                    <tr>
+                        <td class="mono orange">9月26日</td>
+                        <td><strong>美国Q3 GDP初值</strong></td>
+                        <td>全球</td>
+                        <td><span class="badge badge-yellow">🟡 高</span></td>
+                        <td>高不确定性：软着陆则风险资产涨，衰退则债券涨</td>
+                        <td style="color:#64748b;">待公布</td>
+                        <td style="color:#64748b;">—</td>
+                    </tr>
+                    <tr>
+                        <td class="mono">9月下旬</td>
+                        <td><strong>小米汽车交付数据</strong></td>
+                        <td>小米</td>
+                        <td><span class="badge badge-orange">🟡 中</span></td>
+                        <td>交付环比改善→小米估值修复</td>
+                        <td style="color:#64748b;">待公布</td>
+                        <td style="color:#64748b;">—</td>
+                    </tr>
+                    <tr>
+                        <td class="mono">9月末</td>
+                        <td><strong>美国PCE物价</strong></td>
+                        <td>全球</td>
+                        <td><span class="badge badge-yellow">🟡 高</span></td>
+                        <td>核心PCE约3.3%→通胀粘性→美联储偏鹰</td>
+                        <td style="color:#64748b;">待公布</td>
+                        <td style="color:#64748b;">—</td>
+                    </tr>
+                    <tr>
+                        <td class="mono">10月初</td>
+                        <td><strong>中国9月PMI</strong></td>
+                        <td>中国</td>
+                        <td><span class="badge badge-yellow">🟡 高</span></td>
+                        <td>约49.5-50.0→制造业弱复苏</td>
+                        <td style="color:#64748b;">待公布</td>
+                        <td style="color:#64748b;">—</td>
+                    </tr>
+                    <tr>
+                        <td class="mono">10月初</td>
+                        <td><strong>美国9月非农</strong></td>
+                        <td>全球</td>
+                        <td><span class="badge badge-yellow">🟡 高</span></td>
+                        <td>约10-15万→就业放缓但未衰退</td>
+                        <td style="color:#64748b;">待公布</td>
+                        <td style="color:#64748b;">—</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="two-col">
+            <div class="card">
+                <div class="card-title">📅 30-90天重大事件</div>
+                <table>
+                    <tbody>
+                        <tr><td><span class="badge badge-red">🔴 极高</span> 中央经济工作会议</td><td>中国</td></tr>
+                        <tr><td><span class="badge badge-yellow">🟡 高</span> 两会</td><td>中国</td></tr>
+                        <tr><td><span class="badge badge-yellow">🟡 高</span> 美联储11月议息</td><td>全球</td></tr>
+                        <tr><td><span class="badge badge-yellow">🟡 高</span> 美国大选/中期选举</td><td>全球</td></tr>
+                        <tr><td><span class="badge badge-yellow">🟡 高</span> 中国政治局会议</td><td>中国</td></tr>
+                        <tr><td><span class="badge badge-orange">🟡 中</span> 重要行业政策窗口</td><td>相关行业</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <div class="card-title">🔄 定期事件</div>
+                <h4 style="font-size:17px;margin-bottom:12px;">每月固定</h4>
+                <div style="font-size:16px;line-height:1.8;color:#94a3b8;margin-bottom:20px;">
+                    <div>• 每月初：PMI（中国、美国、欧元区）</div>
+                    <div>• 每月中：CPI/PPI（中国、美国）、工业增加值、零售销售、社融</div>
+                    <div>• 每月末：PCE（美国）、非农就业（美国，每月第一个周五）</div>
+                </div>
+                <h4 style="font-size:17px;margin-bottom:12px;">每周固定</h4>
+                <div style="font-size:16px;line-height:1.8;color:#94a3b8;">
+                    <div>• 每周三：EIA 原油库存</div>
+                    <div>• 每周四：初请失业金（美国）</div>
+                    <div>• 每周五：CFTC 持仓报告</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">🎯 事件影响分析模板</div>
+            <div class="highlight-block">
+                <strong>事件：（名称）</strong><br>
+                • <strong>市场预期</strong>：（共识是什么）<br>
+                • <strong>我的判断</strong>：（与共识有何不同）<br>
+                • <strong>如果符合预期</strong>：市场会怎么反应，我该怎么做<br>
+                • <strong>如果超预期</strong>：市场会怎么反应，我该怎么做<br>
+                • <strong>如果低于预期</strong>：市场会怎么反应，我该怎么做<br>
+                • <strong>相关头寸</strong>：（哪些持仓会受影响）
+            </div>
+            <div class="highlight-block red" style="margin-top:20px;">
+                <strong>⚠️ 下周关键事件预演：9/24 美国PMI + 9/26 Q3 GDP</strong><br>
+                <strong>情景1：数据强劲 + 加息预期升温</strong> → 金价跌2-3%至4280，紫金跌3-5% → 反而是加仓黄金ETF机会<br>
+                <strong>情景2：数据走弱 + 衰退交易升温</strong> → 债券涨，股票跌，黄金避险涨 → 紫金受益<br>
+                <strong>情景3：数据符合预期</strong> → 市场窄幅波动，等待10月非农<br>
+                <em>无论哪种结果，黄金的中期滞胀逻辑都在，只是短期波动方向不同。</em>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

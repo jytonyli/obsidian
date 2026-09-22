@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🥓 万洲国际深度分析 | Tony's Investment Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #0f172a; color: #e2e8f0; font-size: 17px; line-height: 1.6; }
+        .nav { background: #111827; border-bottom: 1px solid #1e293b; padding: 20px 36px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+        .nav-brand { font-size: 24px; font-weight: 700; color: #fbbf24; }
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a { color: #94a3b8; text-decoration: none; font-size: 17px; padding: 10px 18px; border-radius: 8px; transition: all 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: #fbbf24; background: #1e293b; }
+        .container { max-width: 1800px; margin: 0 auto; padding: 36px; }
+        .status-banner { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 1px solid #334155; border-radius: 16px; padding: 24px 28px; margin-bottom: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+        .status-item { font-size: 16px; color: #94a3b8; }
+        .status-item strong { color: #e2e8f0; font-size: 17px; }
+        .card { background: #111827; border: 1px solid #1e293b; border-radius: 16px; padding: 32px; margin-bottom: 28px; }
+        .card-title { font-size: 22px; font-weight: 600; margin-bottom: 24px; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 24px; }
+        .stat-card { background: #1e293b; border-radius: 12px; padding: 24px; border-left: 4px solid #3b82f6; }
+        .stat-card.us { border-left-color: #3b82f6; }
+        .stat-card.cn { border-left-color: #ef4444; }
+        .stat-card.dividend { border-left-color: #fbbf24; }
+        .stat-label { font-size: 15px; color: #94a3b8; margin-bottom: 8px; }
+        .stat-value { font-size: 36px; font-weight: 700; font-family: 'SF Mono', 'Consolas', monospace; }
+        .stat-change { font-size: 15px; margin-top: 8px; }
+        .up { color: #10b981; }
+        .down { color: #ef4444; }
+        .neutral { color: #94a3b8; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        @media (max-width: 1200px) { .two-col { grid-template-columns: 1fr; } }
+        table { width: 100%; border-collapse: collapse; font-size: 16px; }
+        th { text-align: left; padding: 14px 16px; color: #94a3b8; font-weight: 500; border-bottom: 2px solid #1e293b; font-size: 15px; }
+        td { padding: 14px 16px; border-bottom: 1px solid #1e293b; }
+        tr:hover { background: #1e293b; }
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 14px; font-weight: 500; }
+        .badge-green { background: rgba(16,185,129,0.15); color: #10b981; }
+        .badge-red { background: rgba(239,68,68,0.15); color: #ef4444; }
+        .badge-yellow { background: rgba(251,191,36,0.15); color: #fbbf24; }
+        .highlight-block { padding: 16px 20px; border-radius: 10px; margin: 16px 0; font-size: 16px; line-height: 1.7; }
+        .highlight-block.green { background: rgba(16,185,129,0.08); border-left: 4px solid #10b981; }
+        .highlight-block.red { background: rgba(239,68,68,0.08); border-left: 4px solid #ef4444; }
+        .highlight-block.yellow { background: rgba(251,191,36,0.08); border-left: 4px solid #fbbf24; }
+        .mono { font-family: 'SF Mono', 'Consolas', monospace; }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-brand">🎛️ Tony's Investment Dashboard</div>
+        <div class="nav-links">
+            <a href="index.html">📊 仪表盘</a>
+            <a href="holdings.html">💼 持仓详情</a>
+            <a href="news.html">📰 新闻周报</a>
+            <a href="calendar.html">📅 催化剂</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="status-banner">
+            <div class="status-item">📅 最后更新：<strong>2026-09-22</strong></div>
+            <div class="status-item">🥓 万洲国际(00288.HK) 多因子驱动深度分析</div>
+            <div class="status-item">🎯 持仓80,000股 | 成本HK$7.28 | 现价HK$6.54</div>
+        </div>
+
+        <!-- 持仓概览 -->
+        <div class="card">
+            <div class="card-title">📊 万洲国际持仓概览</div>
+            <div class="stat-grid">
+                <div class="stat-card us">
+                    <div class="stat-label">港股现价</div>
+                    <div class="stat-value mono">HK$6.54</div>
+                    <div class="stat-change down">-1.80% 今日</div>
+                </div>
+                <div class="stat-card cn">
+                    <div class="stat-label">持仓盈亏</div>
+                    <div class="stat-value mono down">-10.2%</div>
+                    <div class="stat-change down">-¥59,200 浮动亏损</div>
+                </div>
+                <div class="stat-card dividend">
+                    <div class="stat-label">持仓市值</div>
+                    <div class="stat-value mono">¥45.2万</div>
+                    <div class="stat-change neutral">占总资产 2.9%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">股息率（TTM）</div>
+                    <div class="stat-value mono">~7.7%</div>
+                    <div class="stat-change up">🟢 高股息防御资产</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 因子拆解 -->
+        <div class="card">
+            <div class="card-title">🧬 万洲国际三因子拆解（全球猪肉+消费防御+高股息）</div>
+            <p style="font-size:16px;color:#94a3b8;margin-bottom:20px;">万洲是全球最大猪肉公司，业务横跨中美，是典型的"消费防御+高股息"资产，和经济周期相关性低。</p>
+            <div class="stat-grid">
+                <div class="stat-card us" style="border-left-color:#3b82f6;">
+                    <div style="font-size:16px;color:#94a3b8;">🇺🇸 美国猪肉业务（Smithfield）</div>
+                    <div class="stat-value mono" style="font-size:28px;margin:12px 0;">~50%</div>
+                    <div style="font-size:15px;color:#94a3b8;">美国生猪养殖+加工<br>**核心驱动：美国猪周期 + 美国CPI**<br>近期下调指引是主要利空</div>
+                </div>
+                <div class="stat-card cn" style="border-left-color:#ef4444;">
+                    <div style="font-size:16px;color:#94a3b8;">🇨🇳 中国猪肉业务</div>
+                    <div class="stat-value mono" style="font-size:28px;margin:12px 0;">~35%</div>
+                    <div style="font-size:15px;color:#94a3b8;">双汇发展<br>**核心驱动：中国猪价 + 消费复苏**<br>下半年猪价温和复苏</div>
+                </div>
+                <div class="stat-card dividend" style="border-left-color:#fbbf24;">
+                    <div style="font-size:16px;color:#94a3b8;">💰 高股息防御属性</div>
+                    <div class="stat-value mono" style="font-size:28px;margin:12px 0;">~15%</div>
+                    <div style="font-size:15px;color:#94a3b8;">7.7%股息率<br>**核心驱动：利率下行 → 高股息资产重估**<br>滞胀环境下的避风港</div>
+                </div>
+            </div>
+            <div class="highlight-block green">
+                <strong>💡 关键洞察：</strong>万洲不是周期股，是<strong style="color:#10b981;">"消费防御+高股息"债券替代品</strong>。它的涨跌主要看两件事：① Smithfield美国业务利润是否稳定 ② 股息率是否有吸引力。在滞胀/衰退环境下，这类必选消费+高股息资产反而相对抗跌，Dalio框架下是通缩衰退环境的配置。
+            </div>
+        </div>
+
+        <!-- 核心驱动因子 -->
+        <div class="card">
+            <div class="card-title">📈 四大核心驱动因子实时状态</div>
+            <div class="stat-grid">
+                <div class="stat-card us">
+                    <div class="stat-label">🇺🇸 美国生猪价格</div>
+                    <div class="stat-value mono">~$80/百磅</div>
+                    <div class="stat-change down">↓ 猪周期下行</div>
+                    <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
+                        <strong style="color:#e2e8f0;">对万洲影响：</strong>50%利润来自Smithfield<br>
+                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-red">⚠️ 下调指引</span><br>
+                        <strong style="color:#e2e8f0;">利空点：</strong>Smithfield下调2026全年经营溢利指引
+                    </div>
+                </div>
+                <div class="stat-card cn">
+                    <div class="stat-label">🇨🇳 中国猪价</div>
+                    <div class="stat-value mono">~15元/公斤</div>
+                    <div class="stat-change neutral">→ 温和复苏</div>
+                    <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
+                        <strong style="color:#e2e8f0;">对万洲影响：</strong>双汇发展利润<br>
+                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-yellow">筑底复苏</span><br>
+                        <strong style="color:#e2e8f0;">利好点：</strong>下半年猪价温和回升
+                    </div>
+                </div>
+                <div class="stat-card dividend">
+                    <div class="stat-label">💰 股息率 vs 中国10Y国债</div>
+                    <div class="stat-value mono">7.7% - 1.68% = 6.0%</div>
+                    <div class="stat-change up">🟢 利差极大</div>
+                    <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
+                        <strong style="color:#e2e8f0;">对万洲影响：</strong>股息率溢价是估值底<br>
+                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-green">极具吸引力</span><br>
+                        <strong style="color:#e2e8f0;">逻辑：</strong>无风险利率1.68%，万洲7.7%股息率是债券的4.6倍
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">🍖 全球猪肉需求</div>
+                    <div class="stat-value mono">稳定</div>
+                    <div class="stat-change neutral">→ 必选消费刚需</div>
+                    <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
+                        <strong style="color:#e2e8f0;">对万洲影响：</strong>需求端稳定<br>
+                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-green">刚需属性</span><br>
+                        <strong style="color:#e2e8f0;">逻辑：</strong>猪肉是刚需，经济好坏都要吃
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 次级驱动因子 -->
+        <div class="card">
+            <div class="card-title">🌍 次级驱动因子（影响方向+程度）</div>
+            <table>
+                <thead>
+                    <tr><th>因子</th><th>当前值</th><th>对万洲影响</th><th>影响程度</th><th>逻辑链条</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>💵 美元汇率</td>
+                        <td class="mono">美元指数100.5</td>
+                        <td>🟢 利多</td>
+                        <td>★★★☆☆</td>
+                        <td>美元强→Smithfield美元利润换算成港币更多→报表利润增加</td>
+                    </tr>
+                    <tr>
+                        <td>🏭 饲料成本（玉米豆粕）</td>
+                        <td class="mono">回落</td>
+                        <td>🟢 利多</td>
+                        <td>★★★★☆</td>
+                        <td>饲料成本下降→养殖利润修复→毛利率提升</td>
+                    </tr>
+                    <tr>
+                        <td>📉 中国消费降级</td>
+                        <td class="mono">持续</td>
+                        <td>🟡 混合</td>
+                        <td>★★★☆☆</td>
+                        <td>消费降级→肉制品需求从高端转向大众→双汇反而受益</td>
+                    </tr>
+                    <tr>
+                        <td>📈 美国通胀CPI</td>
+                        <td class="mono">3.4%</td>
+                        <td>🟡 混合</td>
+                        <td>★★★☆☆</td>
+                        <td>美国通胀高→肉价涨→Smithfield收入增；但成本也涨</td>
+                    </tr>
+                    <tr>
+                        <td>🌐 中美贸易关系</td>
+                        <td class="mono">关税稳定</td>
+                        <td>🟡 中性</td>
+                        <td>★★☆☆☆</td>
+                        <td>万洲中美业务各自独立，贸易战影响小</td>
+                    </tr>
+                    <tr>
+                        <td>🏦 港股通资金流入</td>
+                        <td class="mono">持续流入</td>
+                        <td>🟢 利多</td>
+                        <td>★★★☆☆</td>
+                        <td>低利率环境下，南下资金追逐高股息→万洲受益</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 投资逻辑与买卖条件 -->
+        <div class="two-col">
+            <div class="card">
+                <div class="card-title">✅ 为什么买万洲？</div>
+                <div class="highlight-block green">
+                    <strong>核心逻辑：滞胀/衰退环境的防御性底仓</strong>
+                    <ul style="margin-left:20px;margin-top:10px;line-height:2;">
+                        <li>💰 <strong>7.7%高股息率</strong>：是中国10年国债利率的4.6倍，纯现金回报</li>
+                        <li>🍖 <strong>必选消费刚需</strong>：猪肉是主食，经济好坏都要吃，穿越周期</li>
+                        <li>🌍 <strong>全球分散</strong>：中美两地业务，不押注单一国家周期</li>
+                        <li>📊 <strong>估值便宜</strong>：PE仅7倍，在港股消费股中最低</li>
+                        <li>🛡️ <strong>Dalio框架匹配</strong>：通缩衰退环境的防御性资产，低配环境下也能有现金流</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">❌ 什么时候卖万洲？</div>
+                <div class="highlight-block red">
+                    <strong>触发以下任一条件，减持或清仓：</strong>
+                    <ul style="margin-left:20px;margin-top:10px;line-height:2;">
+                        <li>💰 <strong>股息率跌破6%</strong> → 估值不再有吸引力，高股息逻辑破了</li>
+                        <li>📉 <strong>Smithfield连续2年利润下滑15%+</strong> → 美国业务基本面恶化</li>
+                        <li>🏭 <strong>公司削减分红</strong> → 高股息故事终结</li>
+                        <li>📈 <strong>中国经济强劲复苏+利率上行</strong> → 资金从高股息转向成长股，万洲跑输</li>
+                        <li>🍖 <strong>猪肉需求长期结构性下降</strong> → 消费者转向其他蛋白，长期天花板压低</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dalio战术定位 -->
+        <div class="card">
+            <div class="card-title">🎯 Dalio框架下的万洲定位</div>
+            <table>
+                <thead>
+                    <tr><th>经济环境</th><th>万洲表现</th><th>Dalio建议</th><th>当前状态</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>📈 通胀性繁荣</td>
+                        <td>★★★☆☆ 一般（收入涨但成本也涨）</td>
+                        <td>低配</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>📉 通胀性衰退（滞胀）</td>
+                        <td>★★★★☆ 好（必选消费+提价能力，抗通胀）</td>
+                        <td>维持</td>
+                        <td><span class="badge badge-green">✅ 当前3%仓位合理</span></td>
+                    </tr>
+                    <tr>
+                        <td>📈 通缩性繁荣</td>
+                        <td>★★☆☆☆ 差（资金追成长，高股息跑输）</td>
+                        <td>低配</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>📉 通缩性衰退</td>
+                        <td>★★★★★ 极好（必选消费+高股息，避风港）</td>
+                        <td>高配</td>
+                        <td><span class="badge badge-green">✅ Dalio30%衰退环境的核心持仓之一</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="highlight-block green" style="margin-top:20px;">
+                <strong>💡 Dalio建议：</strong>万洲是你组合里<strong>最"Dalio"的持仓</strong>——必选消费+高股息，在滞胀和衰退环境都能扛。当前2.9%仓位合理，<strong style="color:#10b981;">建议维持，不用动</strong>。如果后续要加防御，反而可以考虑小幅加仓到3-5%。
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

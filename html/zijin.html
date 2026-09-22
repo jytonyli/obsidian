@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⛏️ 紫金矿业深度分析 | Tony's Investment Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #0f172a; color: #e2e8f0; font-size: 17px; line-height: 1.6; }
+        .nav { background: #111827; border-bottom: 1px solid #1e293b; padding: 20px 36px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+        .nav-brand { font-size: 24px; font-weight: 700; color: #fbbf24; }
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a { color: #94a3b8; text-decoration: none; font-size: 17px; padding: 10px 18px; border-radius: 8px; transition: all 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: #fbbf24; background: #1e293b; }
+        .container { max-width: 1800px; margin: 0 auto; padding: 36px; }
+        .status-banner { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 1px solid #334155; border-radius: 16px; padding: 24px 28px; margin-bottom: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+        .status-item { font-size: 16px; color: #94a3b8; }
+        .status-item strong { color: #e2e8f0; font-size: 17px; }
+        .card { background: #111827; border: 1px solid #1e293b; border-radius: 16px; padding: 32px; margin-bottom: 28px; }
+        .card-title { font-size: 22px; font-weight: 600; margin-bottom: 24px; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 24px; }
+        .stat-card { background: #1e293b; border-radius: 12px; padding: 24px; border-left: 4px solid #3b82f6; }
+        .stat-card.gold { border-left-color: #fbbf24; }
+        .stat-card.copper { border-left-color: #f97316; }
+        .stat-card.dollar { border-left-color: #10b981; }
+        .stat-card.rate { border-left-color: #ef4444; }
+        .stat-label { font-size: 15px; color: #94a3b8; margin-bottom: 8px; }
+        .stat-value { font-size: 36px; font-weight: 700; font-family: 'SF Mono', 'Consolas', monospace; }
+        .stat-change { font-size: 15px; margin-top: 8px; }
+        .up { color: #10b981; }
+        .down { color: #ef4444; }
+        .neutral { color: #94a3b8; }
+        .factor-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 24px; }
+        .factor-card { background: #1e293b; border-radius: 12px; padding: 24px; text-align: center; }
+        .factor-pct { font-size: 42px; font-weight: 700; margin: 12px 0; }
+        .factor-desc { font-size: 15px; color: #94a3b8; line-height: 1.6; }
+        table { width: 100%; border-collapse: collapse; font-size: 16px; }
+        th { text-align: left; padding: 14px 16px; color: #94a3b8; font-weight: 500; border-bottom: 2px solid #1e293b; font-size: 15px; }
+        td { padding: 14px 16px; border-bottom: 1px solid #1e293b; }
+        tr:hover { background: #1e293b; }
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 14px; font-weight: 500; }
+        .badge-green { background: rgba(16,185,129,0.15); color: #10b981; }
+        .badge-red { background: rgba(239,68,68,0.15); color: #ef4444; }
+        .badge-yellow { background: rgba(251,191,36,0.15); color: #fbbf24; }
+        .badge-blue { background: rgba(59,130,246,0.15); color: #3b82f6; }
+        .highlight-block { padding: 16px 20px; border-radius: 10px; margin: 16px 0; font-size: 16px; line-height: 1.7; }
+        .highlight-block.green { background: rgba(16,185,129,0.08); border-left: 4px solid #10b981; }
+        .highlight-block.red { background: rgba(239,68,68,0.08); border-left: 4px solid #ef4444; }
+        .highlight-block.yellow { background: rgba(251,191,36,0.08); border-left: 4px solid #fbbf24; }
+        .chart-container { height: 350px; margin: 20px 0; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        @media (max-width: 1200px) { .two-col, .factor-row { grid-template-columns: 1fr; } }
+        .section-subtitle { font-size: 18px; font-weight: 600; margin: 20px 0 12px; color: #e2e8f0; }
+        .mono { font-family: 'SF Mono', 'Consolas', monospace; }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-brand">🎛️ Tony's Investment Dashboard</div>
+        <div class="nav-links">
+            <a href="index.html">📊 仪表盘</a>
+            <a href="holdings.html">💼 持仓详情</a>
+            <a href="news.html">📰 新闻周报</a>
+            <a href="calendar.html">📅 催化剂</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="status-banner">
+            <div class="status-item">📅 最后更新：<strong>2026-09-22</strong></div>
+            <div class="status-item">⛏️ 紫金矿业(601899.SH) 多因子驱动深度分析</div>
+            <div class="status-item">🎯 持仓150,000股 | 成本¥33.618 | 现价¥31.41</div>
+        </div>
+
+        <!-- 持仓概览 -->
+        <div class="card">
+            <div class="card-title">📊 紫金矿业持仓概览</div>
+            <div class="stat-grid">
+                <div class="stat-card gold">
+                    <div class="stat-label">A股现价</div>
+                    <div class="stat-value mono">¥31.41</div>
+                    <div class="stat-change up">+0.35% 今日</div>
+                </div>
+                <div class="stat-card copper">
+                    <div class="stat-label">持仓盈亏</div>
+                    <div class="stat-value mono down">-6.6%</div>
+                    <div class="stat-change down">-¥331,200 浮动亏损</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">持仓市值</div>
+                    <div class="stat-value mono">¥471.2万</div>
+                    <div class="stat-change neutral">占总资产 30.3%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">总市值</div>
+                    <div class="stat-value mono">8224亿</div>
+                    <div class="stat-change neutral">PE(TTM) 12.3x</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 因子拆解 -->
+        <div class="card">
+            <div class="card-title">🧬 紫金矿业三因子拆解（为什么它不是"一个股票"）</div>
+            <p style="font-size:16px;color:#94a3b8;margin-bottom:20px;">紫金矿业同时覆盖三个完全不同的宏观因子，涨跌幅由这三个因子加权决定。理解这一点，才能判断它未来的走势。</p>
+            <div class="factor-row">
+                <div class="factor-card" style="border-top: 4px solid #fbbf24;">
+                    <div style="font-size:16px;color:#94a3b8;">🥇 黄金因子</div>
+                    <div class="factor-pct" style="color:#fbbf24;">45%</div>
+                    <div class="factor-desc">金矿产量贡献利润<br>**核心驱动：伦敦金价格**<br>滞胀/避险/央行购金受益</div>
+                </div>
+                <div class="factor-card" style="border-top: 4px solid #f97316;">
+                    <div style="font-size:16px;color:#94a3b8;">🛢️ 铜/工业金属因子</div>
+                    <div class="factor-pct" style="color:#f97316;">45%</div>
+                    <div class="factor-desc">铜矿+锌+银利润<br>**核心驱动：LME铜价格**<br>全球制造业/中国基建需求受益</div>
+                </div>
+                <div class="factor-card" style="border-top: 4px solid #3b82f6;">
+                    <div style="font-size:16px;color:#94a3b8;">📈 公司经营beta</div>
+                    <div class="factor-pct" style="color:#3b82f6;">10%</div>
+                    <div class="factor-desc">管理层/产量扩张/成本控制<br>**核心驱动：公司自身经营**<br>海外矿山投产、并购整合</div>
+                </div>
+            </div>
+            <div class="highlight-block yellow">
+                <strong>💡 关键洞察：</strong>紫金矿业本质上是"1/3黄金ETF + 1/3铜ETF + 1/3矿业经营期权"的组合。它的涨跌不是由"公司好不好"决定的，而是由金价+铜价+美元+实际利率这四个宏观变量共同决定的。<strong style="color:#fbbf24;">分析紫金 = 分析这四个宏观因子，而不是读财报。</strong>
+            </div>
+        </div>
+
+        <!-- 核心驱动因子实时状态 -->
+        <div class="card">
+            <div class="card-title">📈 四大核心驱动因子实时状态</div>
+            <div class="stat-grid">
+                <div class="stat-card gold">
+                    <div class="stat-label">🥇 伦敦金现（美元/oz）</div>
+                    <div class="stat-value mono">4300</div>
+                    <div class="stat-change down">-1.56% 今日 | 4368→4300</div>
+                    <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
+                        <strong style="color:#e2e8f0;">对紫金影响：</strong>45%利润挂钩金价<br>
+                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-yellow">高位回调</span><br>
+                        <strong style="color:#e2e8f0;">支撑/阻力：</strong>4200支撑 / 4500阻力
+                    </div>
+                </div>
+                <div class="stat-card copper">
+                    <div class="stat-label">🛢️ LME铜（美元/吨）</div>
+                    <div class="stat-value mono">14521</div>
+                    <div class="stat-change up">+0.8% 今日 | 高位震荡</div>
+                    <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
+                        <strong style="color:#e2e8f0;">对紫金影响：</strong>45%利润挂钩铜价<br>
+                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-red">历史高位</span><br>
+                        <strong style="color:#e2e8f0;">支撑/阻力：</strong>14000支撑 / 15000阻力
+                    </div>
+                </div>
+                <div class="stat-card dollar">
+                    <div class="stat-label">💵 美元指数</div>
+                    <div class="stat-value mono">100.5</div>
+                    <div class="stat-change neutral">→ 稳定在100上方</div>
+                    <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
+                        <strong style="color:#e2e8f0;">对紫金影响：</strong>美元强→金价/铜价承压<br>
+                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-yellow">中性偏强</span><br>
+                        <strong style="color:#e2e8f0;">逻辑：</strong>金铜都是美元计价，反向相关
+                    </div>
+                </div>
+                <div class="stat-card rate">
+                    <div class="stat-label">📈 美国10年实际利率(TIPS)</div>
+                    <div class="stat-value mono">2.50%</div>
+                    <div class="stat-change up">↑ 历史98分位</div>
+                    <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
+                        <strong style="color:#e2e8f0;">对紫金影响：</strong>实际利率高→黄金持有成本高→金价承压<br>
+                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-red">压制金价</span><br>
+                        <strong style="color:#e2e8f0;">逻辑：</strong>黄金核心锚是实际利率，不是名义利率
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 次级驱动因子 -->
+        <div class="card">
+            <div class="card-title">🌍 次级驱动因子（影响方向+程度）</div>
+            <table>
+                <thead>
+                    <tr><th>因子</th><th>当前值</th><th>对紫金影响</th><th>影响程度</th><th>逻辑链条</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>🏛️ 中国10年国债收益率</td>
+                        <td class="mono">1.6775%</td>
+                        <td>→ 中性</td>
+                        <td>★★☆☆☆</td>
+                        <td>中国利率低→宽松预期→利好铜需求→间接利好紫金</td>
+                    </tr>
+                    <tr>
+                        <td>🛢️ 布伦特原油</td>
+                        <td class="mono">95.99美元</td>
+                        <td>🟡 混合</td>
+                        <td>★★★☆☆</td>
+                        <td>油价高→通胀→利好金价；但油价高→经济放缓→利空铜价</td>
+                    </tr>
+                    <tr>
+                        <td>🏭 中国制造业PMI</td>
+                        <td class="mono">49.8（8月）</td>
+                        <td>🔴 偏空</td>
+                        <td>★★★★☆</td>
+                        <td>PMI低于50→制造业收缩→铜需求下降→利空铜价因子</td>
+                    </tr>
+                    <tr>
+                        <td>🏦 美联储政策利率</td>
+                        <td class="mono">3.75-4.00%</td>
+                        <td>🔴 偏空</td>
+                        <td>★★★★★</td>
+                        <td>加息周期→美元强+实际利率高→金价铜价双承压</td>
+                    </tr>
+                    <tr>
+                        <td>⚔️ 地缘冲突（中东）</td>
+                        <td class="mono">缓和预期</td>
+                        <td>🟡 中性</td>
+                        <td>★★★☆☆</td>
+                        <td>冲突升级→油价涨+避险→利好金价；缓和→金价回落</td>
+                    </tr>
+                    <tr>
+                        <td>🏛️ 央行购金（中国）</td>
+                        <td class="mono">连续22个月增持</td>
+                        <td>🟢 利多</td>
+                        <td>★★★★☆</td>
+                        <td>央行持续购金→金价底部支撑→利好黄金因子</td>
+                    </tr>
+                    <tr>
+                        <td>💱 USD/CNY汇率</td>
+                        <td class="mono">6.70</td>
+                        <td>🟢 利多A股</td>
+                        <td>★★☆☆☆</td>
+                        <td>人民币稳定→外资流入A股→紫金A股估值支撑</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 投资逻辑与买卖条件 -->
+        <div class="two-col">
+            <div class="card">
+                <div class="card-title">✅ 为什么买紫金？</div>
+                <div class="highlight-block green">
+                    <strong>核心逻辑：Dalio滞胀判断的最佳A股载体</strong>
+                    <ul style="margin-left:20px;margin-top:10px;line-height:2;">
+                        <li>🥇 <strong>黄金暴露45%</strong>：直接受益于滞胀+去美元化+央行购金，相当于"黄金ETF的股票版"</li>
+                        <li>🛢️ <strong>铜暴露45%</strong>：全球能源转型+中国基建复苏的铜需求长期逻辑</li>
+                        <li>📈 <strong>经营alpha</strong>：全球矿山并购扩张，产量年增10%+，成本控制优秀</li>
+                        <li>💵 <strong>估值便宜</strong>：PE 12x，在黄金股中估值最低，没有泡沫</li>
+                        <li>🇨🇳 <strong>中国优先</strong>：A股交易，不受港股/美股波动影响，汇率风险小</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">❌ 什么时候卖紫金？</div>
+                <div class="highlight-block red">
+                    <strong>触发以下任一条件，减持或清仓：</strong>
+                    <ul style="margin-left:20px;margin-top:10px;line-height:2;">
+                        <li>🥇 <strong>金价跌破3800美元/oz持续1周</strong> → 滞胀逻辑被市场否定，黄金因子彻底走坏</li>
+                        <li>📈 <strong>美联储转向降息周期确认</strong> → 实际利率下行利好债券，滞胀结束，切换到通缩繁荣</li>
+                        <li>🛢️ <strong>LME铜跌破12000美元/吨</strong> → 全球制造业衰退确认，铜因子走坏</li>
+                        <li>🏭 <strong>中国地产投资跌幅扩大到-30%+</strong> → 铜需求崩塌，中国需求端逻辑破了</li>
+                        <li>📊 <strong>单只仓位超过35%</strong> → 集中度过高，减持到目标仓位</li>
+                        <li>⚔️ <strong>公司基本面恶化</strong>：重大矿山事故、海外资产被没收、管理层重大失误</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dalio战术定位 -->
+        <div class="card">
+            <div class="card-title">🎯 Dalio框架下的紫金定位</div>
+            <table>
+                <thead>
+                    <tr><th>经济环境</th><th>紫金表现</th><th>当前配置目标</th><th>当前实际</th><th>判断</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>📈 通胀性繁荣</td>
+                        <td>★★★★★ 极好（金+铜双涨）</td>
+                        <td>15%（低配）</td>
+                        <td>~30%（超配）</td>
+                        <td><span class="badge badge-red">超配</span></td>
+                    </tr>
+                    <tr>
+                        <td>📉 通胀性衰退（滞胀）</td>
+                        <td>★★★★☆ 很好（金涨铜跌，黄金占优）</td>
+                        <td>40%（核心）</td>
+                        <td>~13.6%黄金暴露</td>
+                        <td><span class="badge badge-yellow">不够，需加黄金ETF</span></td>
+                    </tr>
+                    <tr>
+                        <td>📈 通缩性繁荣</td>
+                        <td>★★★☆☆ 一般（铜涨金跌）</td>
+                        <td>15%（低配）</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>📉 通缩性衰退</td>
+                        <td>★☆☆☆☆ 差（金铜双跌）</td>
+                        <td>30%（高配债券对冲）</td>
+                        <td>0%债券</td>
+                        <td><span class="badge badge-red">缺债券对冲</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="highlight-block yellow" style="margin-top:20px;">
+                <strong>💡 Dalio建议：</strong>紫金作为单一持仓占30%过高了。建议减持5-10%紫金，换成：<br>
+                ① <strong>黄金ETF（518880）8-10%</strong> —— 保持黄金总暴露，但纯度更高（没有铜的周期波动）<br>
+                ② <strong>十年国债ETF（511010）15-20%</strong> —— 补上"通缩衰退"环境的对冲，紫金完全没有这个功能
+            </div>
+        </div>
+
+        <!-- 近期关键催化剂 -->
+        <div class="card">
+            <div class="card-title">📅 未来30天影响紫金的关键事件</div>
+            <table>
+                <thead>
+                    <tr><th>日期</th><th>事件</th><th>影响因子</th><th>重要性</th><th>我的判断</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>9月24日</td>
+                        <td>美国9月PMI初值</td>
+                        <td>铜需求 + 美联储政策</td>
+                        <td>★★★★☆</td>
+                        <td>PMI弱→经济放缓→利空铜但利好美联储转鸽→金价可能涨</td>
+                    </tr>
+                    <tr>
+                        <td>9月25日</td>
+                        <td>中国9月官方PMI</td>
+                        <td>铜需求（中国制造业）</td>
+                        <td>★★★★★</td>
+                        <td>如果回到50以上→铜价涨→利好紫金铜因子</td>
+                    </tr>
+                    <tr>
+                        <td>10月初</td>
+                        <td>中国9月CPI/PPI</td>
+                        <td>通胀预期 → 金价</td>
+                        <td>★★★☆☆</td>
+                        <td>PPI回升→通胀预期→利好金价</td>
+                    </tr>
+                    <tr>
+                        <td>10月FOMC</td>
+                        <td>美联储议息会议</td>
+                        <td>美元 + 实际利率 → 金铜双杀/双涨</td>
+                        <td>★★★★★</td>
+                        <td>如果暂停加息→利好；如果再加息→利空金铜</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</body>
+</html>

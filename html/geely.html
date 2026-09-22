@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚗 吉利汽车深度分析 | Tony's Investment Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #0f172a; color: #e2e8f0; font-size: 17px; line-height: 1.6; }
+        .nav { background: #111827; border-bottom: 1px solid #1e293b; padding: 20px 36px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+        .nav-brand { font-size: 24px; font-weight: 700; color: #fbbf24; }
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a { color: #94a3b8; text-decoration: none; font-size: 17px; padding: 10px 18px; border-radius: 8px; transition: all 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: #fbbf24; background: #1e293b; }
+        .container { max-width: 1800px; margin: 0 auto; padding: 36px; }
+        .status-banner { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 1px solid #334155; border-radius: 16px; padding: 24px 28px; margin-bottom: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+        .status-item { font-size: 16px; color: #94a3b8; }
+        .status-item strong { color: #e2e8f0; font-size: 17px; }
+        .card { background: #111827; border: 1px solid #1e293b; border-radius: 16px; padding: 32px; margin-bottom: 28px; }
+        .card-title { font-size: 22px; font-weight: 600; margin-bottom: 24px; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 24px; }
+        .stat-card { background: #1e293b; border-radius: 12px; padding: 24px; border-left: 4px solid #3b82f6; }
+        .stat-card.sales { border-left-color: #10b981; }
+        .stat-card.ev { border-left-color: #fbbf24; }
+        .stat-card.consumer { border-left-color: #8b5cf6; }
+        .stat-label { font-size: 15px; color: #94a3b8; margin-bottom: 8px; }
+        .stat-value { font-size: 36px; font-weight: 700; font-family: 'SF Mono', 'Consolas', monospace; }
+        .stat-change { font-size: 15px; margin-top: 8px; }
+        .up { color: #10b981; }
+        .down { color: #ef4444; }
+        .neutral { color: #94a3b8; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        @media (max-width: 1200px) { .two-col { grid-template-columns: 1fr; } }
+        table { width: 100%; border-collapse: collapse; font-size: 16px; }
+        th { text-align: left; padding: 14px 16px; color: #94a3b8; font-weight: 500; border-bottom: 2px solid #1e293b; font-size: 15px; }
+        td { padding: 14px 16px; border-bottom: 1px solid #1e293b; }
+        tr:hover { background: #1e293b; }
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 14px; font-weight: 500; }
+        .badge-green { background: rgba(16,185,129,0.15); color: #10b981; }
+        .badge-red { background: rgba(239,68,68,0.15); color: #ef4444; }
+        .badge-yellow { background: rgba(251,191,36,0.15); color: #fbbf24; }
+        .highlight-block { padding: 16px 20px; border-radius: 10px; margin: 16px 0; font-size: 16px; line-height: 1.7; }
+        .highlight-block.green { background: rgba(16,185,129,0.08); border-left: 4px solid #10b981; }
+        .highlight-block.red { background: rgba(239,68,68,0.08); border-left: 4px solid #ef4444; }
+        .highlight-block.yellow { background: rgba(251,191,36,0.08); border-left: 4px solid #fbbf24; }
+        .mono { font-family: 'SF Mono', 'Consolas', monospace; }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-brand">🎛️ Tony's Investment Dashboard</div>
+        <div class="nav-links">
+            <a href="index.html">📊 仪表盘</a>
+            <a href="holdings.html">💼 持仓详情</a>
+            <a href="news.html">📰 新闻周报</a>
+            <a href="calendar.html">📅 催化剂</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="status-banner">
+            <div class="status-item">📅 最后更新：<strong>2026-09-22</strong></div>
+            <div class="status-item">🚗 吉利汽车(00175.HK) 多因子驱动深度分析</div>
+            <div class="status-item">🎯 持仓70,000股 | 成本HK$16.844 | 现价HK$15.70</div>
+        </div>
+
+        <!-- 持仓概览 -->
+        <div class="card">
+            <div class="card-title">📊 吉利汽车持仓概览</div>
+            <div class="stat-grid">
+                <div class="stat-card sales">
+                    <div class="stat-label">港股现价</div>
+                    <div class="stat-value mono">HK$15.70</div>
+                    <div class="stat-change down">-1.26% 今日</div>
+                </div>
+                <div class="stat-card ev">
+                    <div class="stat-label">持仓盈亏</div>
+                    <div class="stat-value mono down">-6.8%</div>
+                    <div class="stat-change down">-¥55,883 浮动亏损</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">持仓市值</div>
+                    <div class="stat-value mono">¥94.9万</div>
+                    <div class="stat-change neutral">占总资产 6.1%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">总市值</div>
+                    <div class="stat-value mono">1600亿+</div>
+                    <div class="stat-change neutral">PE(TTM) ~12x</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 因子拆解 -->
+        <div class="card">
+            <div class="card-title">🧬 吉利汽车三因子拆解（为什么它涨跌和你想的不一样）</div>
+            <p style="font-size:16px;color:#94a3b8;margin-bottom:20px;">吉利汽车不是"一家车厂"，它是三个业务线的组合，每条线受不同宏观变量驱动。</p>
+            <div class="stat-grid">
+                <div class="stat-card sales" style="border-left-color:#10b981;">
+                    <div style="font-size:16px;color:#94a3b8;">🇨🇳 中国乘用车销量</div>
+                    <div class="stat-value mono" style="font-size:28px;margin:12px 0;">~50%</div>
+                    <div style="font-size:15px;color:#94a3b8;">吉利品牌+领克<br>**核心驱动：中国汽车销量周期**<br>消费信心 + 车贷利率</div>
+                </div>
+                <div class="stat-card ev" style="border-left-color:#fbbf24;">
+                    <div style="font-size:16px;color:#94a3b8;">🔋 新能源转型（极氪+银河）</div>
+                    <div class="stat-value mono" style="font-size:28px;margin:12px 0;">~30%</div>
+                    <div style="font-size:15px;color:#94a3b8;">新能源品牌溢价<br>**核心驱动：新能源渗透率 + 比亚迪竞争**</div>
+                </div>
+                <div class="stat-card consumer" style="border-left-color:#8b5cf6;">
+                    <div style="font-size:16px;color:#94a3b8;">🌍 出口+海外品牌</div>
+                    <div class="stat-value mono" style="font-size:28px;margin:12px 0;">~20%</div>
+                    <div style="font-size:15px;color:#94a3b8;">沃尔沃+极氪出口<br>**核心驱动：人民币汇率 + 欧洲关税**</div>
+                </div>
+            </div>
+            <div class="highlight-block yellow">
+                <strong>💡 关键洞察：</strong>吉利本质是"中国汽车消费周期 + 新能源转型期权"的组合。<strong style="color:#fbbf24;">它的短期涨跌主要由月度销量数据和竞争格局决定，长期涨跌由新能源转型成功率决定。</strong>在滞胀环境下，可选消费（买车）是承压板块，Dalio低配。
+            </div>
+        </div>
+
+        <!-- 核心驱动因子 -->
+        <div class="card">
+            <div class="card-title">📈 四大核心驱动因子实时状态</div>
+            <div class="stat-grid">
+                <div class="stat-card sales">
+                    <div class="stat-label">🚗 中国乘用车月度销量</div>
+                    <div class="stat-value mono">2400万/年</div>
+                    <div class="stat-change neutral">+5% YoY 2026年</div>
+                    <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
+                        <strong style="color:#e2e8f0;">对吉利影响：</strong>直接影响基本盘销量<br>
+                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-yellow">存量竞争</span><br>
+                        <strong style="color:#e2e8f0;">逻辑：</strong>中国车市进入存量竞争，吉利份额争夺是关键
+                    </div>
+                </div>
+                <div class="stat-card ev">
+                    <div class="stat-label">⚡ 新能源渗透率</div>
+                    <div class="stat-value mono">52%</div>
+                    <div class="stat-change up">↑ 持续提升</div>
+                    <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
+                        <strong style="color:#e2e8f0;">对吉利影响：</strong>极氪+银河是增长引擎<br>
+                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-yellow">竞争激烈</span><br>
+                        <strong style="color:#e2e8f0;">竞争对手：</strong>比亚迪、特斯拉、小米汽车
+                    </div>
+                </div>
+                <div class="stat-card consumer">
+                    <div class="stat-label">💳 居民消费信心</div>
+                    <div class="stat-value mono">偏弱</div>
+                    <div class="stat-change down">↓ 地产下行压制</div>
+                    <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
+                        <strong style="color:#e2e8f0;">对吉利影响：</strong>可选消费（买车）延后<br>
+                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-red">承压</span><br>
+                        <strong style="color:#e2e8f0;">逻辑：</strong>滞胀环境下，大件可选消费最先砍
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">💱 港币/人民币汇率</div>
+                    <div class="stat-value mono">0.91</div>
+                    <div class="stat-change neutral">→ 稳定</div>
+                    <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
+                        <strong style="color:#e2e8f0;">对吉利影响：</strong>港股估值锚<br>
+                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-yellow">中性</span><br>
+                        <strong style="color:#e2e8f0;">逻辑：</strong>吉利是港股，人民币资产港股定价
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 次级驱动因子 -->
+        <div class="card">
+            <div class="card-title">🌍 次级驱动因子（影响方向+程度）</div>
+            <table>
+                <thead>
+                    <tr><th>因子</th><th>当前值</th><th>对吉利影响</th><th>影响程度</th><th>逻辑链条</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>📈 中国10年国债收益率</td>
+                        <td class="mono">1.6775%</td>
+                        <td>🟢 利多</td>
+                        <td>★★★★☆</td>
+                        <td>低利率→车贷成本低→刺激买车需求→利好吉利销量</td>
+                    </tr>
+                    <tr>
+                        <td>🏠 中国房地产市场</td>
+                        <td class="mono">投资-19%</td>
+                        <td>🔴 利空</td>
+                        <td>★★★★★</td>
+                        <td>地产下行→财富效应负→不敢买车→可选消费承压</td>
+                    </tr>
+                    <tr>
+                        <td>⚔️ 行业价格战</td>
+                        <td class="mono">持续激烈</td>
+                        <td>🔴 利空</td>
+                        <td>★★★★★</td>
+                        <td>比亚迪降价→全行业毛利率承压→吉利盈利下滑</td>
+                    </tr>
+                    <tr>
+                        <td>🔋 电池原材料价格</td>
+                        <td class="mono">碳酸锂~10万/吨</td>
+                        <td>🟢 利多</td>
+                        <td>★★★☆☆</td>
+                        <td>碳酸锂降价→新能源车企成本下降→毛利率修复</td>
+                    </tr>
+                    <tr>
+                        <td>🇪🇺 欧洲电动车关税</td>
+                        <td class="mono">对中国加税</td>
+                        <td>🔴 利空</td>
+                        <td>★★★☆☆</td>
+                        <td>吉利出口欧洲受阻→海外增长天花板压低</td>
+                    </tr>
+                    <tr>
+                        <td>📊 恒生指数整体情绪</td>
+                        <td class="mono">25088</td>
+                        <td>🟡 混合</td>
+                        <td>★★★☆☆</td>
+                        <td>港股整体估值提升带动，但个股基本面更重要</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 投资逻辑与买卖条件 -->
+        <div class="two-col">
+            <div class="card">
+                <div class="card-title">✅ 为什么买吉利？</div>
+                <div class="highlight-block green">
+                    <strong>核心逻辑：低估值的中国自主车龙头</strong>
+                    <ul style="margin-left:20px;margin-top:10px;line-height:2;">
+                        <li>📊 <strong>估值便宜</strong>：PE仅12倍，在港股汽车股中偏低</li>
+                        <li>🔋 <strong>新能源转型</strong>：极氪+银河系列月销破5万，增长快</li>
+                        <li>🌍 <strong>全球化</strong>：沃尔沃品牌+海外出口，分散中国市场风险</li>
+                        <li>🏆 <strong>自主龙头地位</strong>：中国品牌前三，份额稳定提升</li>
+                        <li>💰 <strong>现金流健康</strong>：有分红能力，财务稳健</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">❌ 什么时候卖吉利？</div>
+                <div class="highlight-block red">
+                    <strong>触发以下任一条件，减持或清仓：</strong>
+                    <ul style="margin-left:20px;margin-top:10px;line-height:2;">
+                        <li>📉 <strong>连续2个季度毛利率跌破15%</strong> → 价格战打不起，盈利恶化</li>
+                        <li>📊 <strong>月度市占率连续3个月下滑</strong> → 竞争格局恶化，份额丢了</li>
+                        <li>🚗 <strong>极氪月销跌破1万台</strong> → 新能源转型故事破了</li>
+                        <li>🏠 <strong>中国消费进一步恶化</strong> → 可选消费全面下行，吉利首当其冲</li>
+                        <li>⚔️ <strong>价格战进一步升级</strong> → 比亚迪/特斯拉降价到吉利无法承受</li>
+                        <li>📊 <strong>Dalio判断通缩衰退确认</strong> → 可选消费是最弱板块，低配</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dalio战术定位 -->
+        <div class="card">
+            <div class="card-title">🎯 Dalio框架下的吉利定位</div>
+            <table>
+                <thead>
+                    <tr><th>经济环境</th><th>吉利表现</th><th>Dalio建议</th><th>当前状态</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>📈 通胀性繁荣</td>
+                        <td>★★★☆☆ 一般（经济好买车多，但利率高成本高）</td>
+                        <td>低配（15%总仓位中）</td>
+                        <td><span class="badge badge-yellow">6% → 应减到2-3%</span></td>
+                    </tr>
+                    <tr>
+                        <td>📉 通胀性衰退（滞胀）</td>
+                        <td>★☆☆☆☆ 很差（滞胀=消费下降+成本上升双杀）</td>
+                        <td>严重低配</td>
+                        <td><span class="badge badge-red">Dalio低配方向，当前超配</span></td>
+                    </tr>
+                    <tr>
+                        <td>📈 通缩性繁荣</td>
+                        <td>★★★★★ 极好（低利率+消费复苏，买车潮）</td>
+                        <td>高配</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>📉 通缩性衰退</td>
+                        <td>★★☆☆☆ 差（消费萎缩，买车延后）</td>
+                        <td>低配</td>
+                        <td>—</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="highlight-block yellow" style="margin-top:20px;">
+                <strong>💡 Dalio建议：</strong>吉利是典型的<strong>通缩性繁荣资产</strong>，在滞胀环境下表现差。当前Dalio判断滞胀为主，吉利6%仓位偏高，<strong style="color:#fbbf24;">建议减持到2-3%</strong>，把钱换到国债ETF（511010）对冲衰退风险。
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
