@@ -44,6 +44,8 @@
         .highlight-block.red { background: rgba(239,68,68,0.08); border-left: 4px solid #ef4444; }
         .highlight-block.yellow { background: rgba(251,191,36,0.08); border-left: 4px solid #fbbf24; }
         .mono { font-family: 'SF Mono', 'Consolas', monospace; }
+        .analysis-box { background: #1e293b; border-radius: 12px; padding: 24px; margin: 16px 0; }
+        .analysis-box h4 { font-size: 18px; margin-bottom: 12px; color: #fbbf24; }
     </style>
 </head>
 <body>
@@ -58,163 +60,273 @@
     </nav>
     <div class="container">
         <div class="status-banner">
-            <div class="status-item">📅 最后更新：<strong>2026-09-22</strong></div>
+            <div class="status-item">📅 最后更新：<strong>2026-09-23</strong></div>
             <div class="status-item">🚗 吉利汽车(00175.HK) 多因子驱动深度分析</div>
-            <div class="status-item">🎯 持仓70,000股 | 成本HK$16.844 | 现价HK$15.70</div>
+            <div class="status-item">🎯 持仓70,000股 | 成本HK$16.844 | 现价HK$15.77</div>
         </div>
 
         <!-- 持仓概览 -->
         <div class="card">
-            <div class="card-title">📊 吉利汽车持仓概览</div>
+            <div class="card-title">📊 吉利汽车持仓概览（2026-09-23更新）</div>
             <div class="stat-grid">
                 <div class="stat-card sales">
                     <div class="stat-label">港股现价</div>
-                    <div class="stat-value mono">HK$15.70</div>
-                    <div class="stat-change down">-1.26% 今日</div>
+                    <div class="stat-value mono">HK$15.77</div>
+                    <div class="stat-change down">本周跌8.5%（从17.2跌至15.77）</div>
                 </div>
                 <div class="stat-card ev">
                     <div class="stat-label">持仓盈亏</div>
-                    <div class="stat-value mono down">-6.8%</div>
-                    <div class="stat-change down">-¥55,883 浮动亏损</div>
+                    <div class="stat-value mono down">-6.4%</div>
+                    <div class="stat-change down">-¥65,000 浮动亏损</div>
+                </div>
+                <div class="stat-card consumer">
+                    <div class="stat-label">PE(TTM) / 股息率</div>
+                    <div class="stat-value mono">8.93x / 3.14%</div>
+                    <div class="stat-change up">🟢 估值处于历史低位</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">持仓市值</div>
-                    <div class="stat-value mono">¥94.9万</div>
-                    <div class="stat-change neutral">占总资产 6.1%</div>
+                    <div class="stat-label">券商目标价</div>
+                    <div class="stat-value mono">HK$23-32.6</div>
+                    <div class="stat-change up">上行空间 46%-107%（22家买入评级）</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-label">总市值</div>
-                    <div class="stat-value mono">1600亿+</div>
-                    <div class="stat-change neutral">PE(TTM) ~12x</div>
-                </div>
+            </div>
+            <div class="highlight-block yellow">
+                <strong>📉 近期下跌原因：</strong>9月以来股价从17.2跌至15.77，跌幅8.5%。主要受中国车市价格战持续、消费信心偏弱、港股整体回调影响。但基本面其实不差：上半年出口+158%，利润+46%，只是市场情绪低迷。
             </div>
         </div>
 
         <!-- 因子拆解 -->
         <div class="card">
             <div class="card-title">🧬 吉利汽车三因子拆解（为什么它涨跌和你想的不一样）</div>
-            <p style="font-size:16px;color:#94a3b8;margin-bottom:20px;">吉利汽车不是"一家车厂"，它是三个业务线的组合，每条线受不同宏观变量驱动。</p>
+            <p style="font-size:16px;color:#94a3b8;margin-bottom:20px;">吉利不是"一家车厂"，它是三个业务线的组合，每条线受不同宏观变量驱动。<em>2026年出口爆发后，业务结构正在发生重大变化。</em></p>
             <div class="stat-grid">
                 <div class="stat-card sales" style="border-left-color:#10b981;">
-                    <div style="font-size:16px;color:#94a3b8;">🇨🇳 中国乘用车销量</div>
-                    <div class="stat-value mono" style="font-size:28px;margin:12px 0;">~50%</div>
-                    <div style="font-size:15px;color:#94a3b8;">吉利品牌+领克<br>**核心驱动：中国汽车销量周期**<br>消费信心 + 车贷利率</div>
+                    <div style="font-size:16px;color:#94a3b8;">🇨🇳 中国乘用车基本盘</div>
+                    <div class="stat-value mono" style="font-size:28px;margin:12px 0;">~45%</div>
+                    <div style="font-size:15px;color:#94a3b8;">吉利品牌+领克<br><strong>核心驱动：中国汽车销量周期 + 价格战</strong><br>上半年国内销量增长仅1%，价格战承压</div>
                 </div>
                 <div class="stat-card ev" style="border-left-color:#fbbf24;">
-                    <div style="font-size:16px;color:#94a3b8;">🔋 新能源转型（极氪+银河）</div>
-                    <div class="stat-value mono" style="font-size:28px;margin:12px 0;">~30%</div>
-                    <div style="font-size:15px;color:#94a3b8;">新能源品牌溢价<br>**核心驱动：新能源渗透率 + 比亚迪竞争**</div>
+                    <div style="font-size:16px;color:#94a3b8;">⚡ 新能源转型（极氪+银河）</div>
+                    <div class="stat-value mono" style="font-size:28px;margin:12px 0;">~25%</div>
+                    <div style="font-size:15px;color:#94a3b8;">新能源品牌溢价<br><strong>核心驱动：新能源渗透率 + 比亚迪竞争</strong><br>新能源占比已达55%，转型成果显著</div>
                 </div>
                 <div class="stat-card consumer" style="border-left-color:#8b5cf6;">
-                    <div style="font-size:16px;color:#94a3b8;">🌍 出口+海外品牌</div>
-                    <div class="stat-value mono" style="font-size:28px;margin:12px 0;">~20%</div>
-                    <div style="font-size:15px;color:#94a3b8;">沃尔沃+极氪出口<br>**核心驱动：人民币汇率 + 欧洲关税**</div>
+                    <div style="font-size:16px;color:#94a3b8;">🌍 出口+海外品牌（爆发式增长）</div>
+                    <div class="stat-value mono" style="font-size:28px;margin:12px 0;">~30%</div>
+                    <div style="font-size:15px;color:#94a3b8;">上半年出口47.4万辆（+158%）<br><strong>核心驱动：全球化布局 + 汇率 + 关税</strong><br>出口占比从20%飙升至33%，成为核心增长引擎</div>
                 </div>
             </div>
-            <div class="highlight-block yellow">
-                <strong>💡 关键洞察：</strong>吉利本质是"中国汽车消费周期 + 新能源转型期权"的组合。<strong style="color:#fbbf24;">它的短期涨跌主要由月度销量数据和竞争格局决定，长期涨跌由新能源转型成功率决定。</strong>在滞胀环境下，可选消费（买车）是承压板块，Dalio低配。
+            <div class="highlight-block green">
+                <strong>💡 关键洞察：</strong>吉利正在从"中国车厂"变成<strong style="color:#10b981;">"全球化车企"</strong>——出口半年就超去年全年，全年目标从64万上调至92万辆。<strong>它的估值逻辑正在从"中国消费周期股"切换成"全球成长股"</strong>，但市场还按旧逻辑给它定价（PE仅9倍），这就是预期差。
             </div>
         </div>
 
-        <!-- 核心驱动因子 -->
+        <!-- 核心驱动因子实时状态 -->
         <div class="card">
-            <div class="card-title">📈 四大核心驱动因子实时状态</div>
+            <div class="card-title">📈 四大核心驱动因子实时状态（2026-09-23）</div>
             <div class="stat-grid">
                 <div class="stat-card sales">
                     <div class="stat-label">🚗 中国乘用车月度销量</div>
-                    <div class="stat-value mono">2400万/年</div>
-                    <div class="stat-change neutral">+5% YoY 2026年</div>
+                    <div class="stat-value mono">27万辆/月</div>
+                    <div class="stat-change up">↑ 8月销量+8% YoY</div>
                     <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
                         <strong style="color:#e2e8f0;">对吉利影响：</strong>直接影响基本盘销量<br>
-                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-yellow">存量竞争</span><br>
-                        <strong style="color:#e2e8f0;">逻辑：</strong>中国车市进入存量竞争，吉利份额争夺是关键
+                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-yellow">存量竞争，价格战持续</span><br>
+                        <strong style="color:#e2e8f0;">详细：</strong>上半年总销量142.3万辆（+1%），8月单月27万辆（+8%），增速在回升。但行业利润率仅3.4%，价格战仍在压制毛利。
                     </div>
                 </div>
                 <div class="stat-card ev">
-                    <div class="stat-label">⚡ 新能源渗透率</div>
-                    <div class="stat-value mono">52%</div>
+                    <div class="stat-label">🔋 新能源转型进展</div>
+                    <div class="stat-value mono">55%占比</div>
                     <div class="stat-change up">↑ 持续提升</div>
                     <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
                         <strong style="color:#e2e8f0;">对吉利影响：</strong>极氪+银河是增长引擎<br>
-                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-yellow">竞争激烈</span><br>
-                        <strong style="color:#e2e8f0;">竞争对手：</strong>比亚迪、特斯拉、小米汽车
+                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-green">转型成果显著</span><br>
+                        <strong style="color:#e2e8f0;">详细：</strong>新能源占比已达55%，出口中新能源占59%（+585%）。产品结构升级推动毛利率从16.6%提升至17.95%。
                     </div>
                 </div>
                 <div class="stat-card consumer">
-                    <div class="stat-label">💳 居民消费信心</div>
-                    <div class="stat-value mono">偏弱</div>
-                    <div class="stat-change down">↓ 地产下行压制</div>
+                    <div class="stat-label">🌍 出口增长（最大亮点）</div>
+                    <div class="stat-value mono">47.4万辆/H1</div>
+                    <div class="stat-change up">↑ +158% YoY，超去年全年</div>
                     <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
-                        <strong style="color:#e2e8f0;">对吉利影响：</strong>可选消费（买车）延后<br>
-                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-red">承压</span><br>
-                        <strong style="color:#e2e8f0;">逻辑：</strong>滞胀环境下，大件可选消费最先砍
+                        <strong style="color:#e2e8f0;">对吉利影响：</strong>第二增长曲线<br>
+                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-green">爆发式增长</span><br>
+                        <strong style="color:#e2e8f0;">详细：</strong>上半年出口47.4万辆，已超2025全年。全年目标从64万上调至92万辆，冲刺100万里程碑。新能源出口占比59%，结构持续优化。
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">💱 港币/人民币汇率</div>
-                    <div class="stat-value mono">0.91</div>
-                    <div class="stat-change neutral">→ 稳定</div>
+                    <div class="stat-label">💰 盈利能力</div>
+                    <div class="stat-value mono">毛利率17.95%</div>
+                    <div class="stat-change up">↑ 同比+1.34pp</div>
                     <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
-                        <strong style="color:#e2e8f0;">对吉利影响：</strong>港股估值锚<br>
-                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-yellow">中性</span><br>
-                        <strong style="color:#e2e8f0;">逻辑：</strong>吉利是港股，人民币资产港股定价
+                        <strong style="color:#e2e8f0;">对吉利影响：</strong>利润质量提升<br>
+                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-green">改善中</span><br>
+                        <strong style="color:#e2e8f0;">详细：</strong>上半年归母净利润90.9亿元（+46%），毛利率从16.6%提升至17.95%。产品高端化+出口高溢价+规模效应共同驱动。
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 次级驱动因子 -->
+        <!-- 深度分析：风险收益比评估 -->
         <div class="card">
-            <div class="card-title">🌍 次级驱动因子（影响方向+程度）</div>
-            <table>
-                <thead>
-                    <tr><th>因子</th><th>当前值</th><th>对吉利影响</th><th>影响程度</th><th>逻辑链条</th></tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>📈 中国10年国债收益率</td>
-                        <td class="mono">1.6775%</td>
-                        <td>🟢 利多</td>
-                        <td>★★★★☆</td>
-                        <td>低利率→车贷成本低→刺激买车需求→利好吉利销量</td>
-                    </tr>
-                    <tr>
-                        <td>🏠 中国房地产市场</td>
-                        <td class="mono">投资-19%</td>
-                        <td>🔴 利空</td>
-                        <td>★★★★★</td>
-                        <td>地产下行→财富效应负→不敢买车→可选消费承压</td>
-                    </tr>
-                    <tr>
-                        <td>⚔️ 行业价格战</td>
-                        <td class="mono">持续激烈</td>
-                        <td>🔴 利空</td>
-                        <td>★★★★★</td>
-                        <td>比亚迪降价→全行业毛利率承压→吉利盈利下滑</td>
-                    </tr>
-                    <tr>
-                        <td>🔋 电池原材料价格</td>
-                        <td class="mono">碳酸锂~10万/吨</td>
-                        <td>🟢 利多</td>
-                        <td>★★★☆☆</td>
-                        <td>碳酸锂降价→新能源车企成本下降→毛利率修复</td>
-                    </tr>
-                    <tr>
-                        <td>🇪🇺 欧洲电动车关税</td>
-                        <td class="mono">对中国加税</td>
-                        <td>🔴 利空</td>
-                        <td>★★★☆☆</td>
-                        <td>吉利出口欧洲受阻→海外增长天花板压低</td>
-                    </tr>
-                    <tr>
-                        <td>📊 恒生指数整体情绪</td>
-                        <td class="mono">25088</td>
-                        <td>🟡 混合</td>
-                        <td>★★★☆☆</td>
-                        <td>港股整体估值提升带动，但个股基本面更重要</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="card-title">🔬 深度分析：风险收益比评估</div>
+
+            <div class="analysis-box">
+                <h4>📊 估值与目标价对比</h4>
+                <table>
+                    <thead>
+                        <tr><th>机构</th><th>评级</th><th>目标价</th><th>对应PE</th><th>距现价上行空间</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>中金公司</td>
+                            <td>跑赢行业</td>
+                            <td class="mono">HK$30.0</td>
+                            <td class="mono">12.6x 2026E</td>
+                            <td class="up">+90%</td>
+                        </tr>
+                        <tr>
+                            <td>国泰海通</td>
+                            <td>增持</td>
+                            <td class="mono">HK$32.6</td>
+                            <td class="mono">15x 2026E</td>
+                            <td class="up">+107%</td>
+                        </tr>
+                        <tr>
+                            <td>美银证券</td>
+                            <td>买入</td>
+                            <td class="mono">HK$27.6</td>
+                            <td class="mono">~11x 2026E</td>
+                            <td class="up">+75%</td>
+                        </tr>
+                        <tr>
+                            <td>华创证券</td>
+                            <td>强推</td>
+                            <td class="mono">HK$22.4-26.9</td>
+                            <td class="mono">10-12x 2026E</td>
+                            <td class="up">+42%-70%</td>
+                        </tr>
+                        <tr>
+                            <td>东方证券</td>
+                            <td>买入</td>
+                            <td class="mono">HK$23.9</td>
+                            <td class="mono">~10x 2026E</td>
+                            <td class="up">+52%</td>
+                        </tr>
+                        <tr style="background:#1e293b;">
+                            <td><strong>22家投行平均</strong></td>
+                            <td><strong>买入为主</strong></td>
+                            <td class="mono"><strong>HK$28.5</strong></td>
+                            <td class="mono"><strong>~11x 2026E</strong></td>
+                            <td class="up"><strong>+81%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="highlight-block green" style="margin-top:16px;">
+                    <strong>💡 估值结论：</strong>当前PE 8.93x（TTM），2026年预期PE仅7.9倍。作为对比：比亚迪PE约25x，特斯拉PE约60x。吉利作为出口爆发的全球车企，估值严重偏低，<strong style="color:#10b981;">存在明显的估值修复空间</strong>。
+                </div>
+            </div>
+
+            <div class="analysis-box">
+                <h4>📉 风险收益比三情景分析</h4>
+                <table>
+                    <thead>
+                        <tr><th>情景</th><th>假设</th><th>PE</th><th>目标股价</th><th>距现价</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge badge-green">乐观</span></td>
+                            <td>出口持续超预期+价格战缓和+消费复苏</td>
+                            <td>12-15x</td>
+                            <td class="mono">HK$25-33</td>
+                            <td class="up">上行 +59%-109%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-yellow">中性</span></td>
+                            <td>出口增长但价格战持续，利润平稳增长</td>
+                            <td>9-10x</td>
+                            <td class="mono">HK$17-19</td>
+                            <td class="up">上行 +8%-20%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-red">悲观</span></td>
+                            <td>价格战升级+消费进一步恶化+出口受阻</td>
+                            <td>7-8x</td>
+                            <td class="mono">HK$12-14</td>
+                            <td class="down">下行 -11%~-24%</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="highlight-block yellow" style="margin-top:16px;">
+                    <strong>💡 风险收益比评估：</strong>乐观情景上行60-100%，悲观情景下行10-25%。<strong>盈亏比约 3:1 到 4:1</strong>，相当不错。主要下行风险是价格战和消费低迷，但这些已经在股价中反映了很多（PE仅9倍），而出口增长这个利好还没被充分定价。
+                </div>
+            </div>
+
+            <div class="analysis-box">
+                <h4>⚠️ 主要风险因素</h4>
+                <table>
+                    <thead>
+                        <tr><th>风险</th><th>当前状态</th><th>影响程度</th><th>评估</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>⚔️ 行业价格战</td>
+                            <td>持续，行业利润率3.4%</td>
+                            <td>★★★★★</td>
+                            <td>最大风险，但吉利毛利率反而在提升，说明产品力强</td>
+                        </tr>
+                        <tr>
+                            <td>🏠 中国消费低迷</td>
+                            <td>地产下行，财富效应负</td>
+                            <td>★★★★☆</td>
+                            <td>国内销量增长仅1%，但出口对冲了国内疲软</td>
+                        </tr>
+                        <tr>
+                            <td>🇪🇺 欧洲关税壁垒</td>
+                            <td>对中国电动车加征关税</td>
+                            <td>★★★☆☆</td>
+                            <td>吉利在欧洲有工厂（沃尔沃），受影响相对小</td>
+                        </tr>
+                        <tr>
+                            <td>🔋 电池原材料涨价</td>
+                            <td>El Nino推高粮价，碳酸锂低位</td>
+                            <td>★★☆☆☆</td>
+                            <td>碳酸锂目前低位，电池成本压力不大</td>
+                        </tr>
+                        <tr>
+                            <td>💱 人民币汇率波动</td>
+                            <td>人民币相对稳定</td>
+                            <td>★★☆☆☆</td>
+                            <td>出口收入以美元结算，人民币贬值利好</td>
+                        </tr>
+                        <tr>
+                            <td>📊 港股整体情绪</td>
+                            <td>港股低迷，估值受压</td>
+                            <td>★★★☆☆</td>
+                            <td>系统性风险，但也是港股低估的原因之一</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="analysis-box">
+                <h4>💎 核心亮点（为什么市场可能低估了它）</h4>
+                <div style="font-size:16px;line-height:2;">
+                    <strong>1. 出口爆发式增长，市场还没充分定价</strong><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;上半年出口+158%，半年就超去年全年。全年目标92万辆，冲刺100万。<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;出口业务的利润率通常比国内高，而且分散了中国市场风险。<br><br>
+                    <strong>2. 利润增速远超收入增速</strong><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;收入+14.7%，但归母净利润+46%。说明产品结构在升级，高端车型占比提升。<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;毛利率从16.6%提升到17.95%，还在改善通道中。<br><br>
+                    <strong>3. 估值在全球车企中最低</strong><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;PE 8.9倍，对比比亚迪25倍、特斯拉60倍、丰田12倍。<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;作为增长最快的中国车企之一，这个估值明显偏低。<br><br>
+                    <strong>4. 价格战中的赢家</strong><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;行业价格战打了三年，很多车企亏损，但吉利毛利率反而在提升。<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;这说明吉利的成本控制和产品竞争力是真正强的，不是靠降价换销量。
+                </div>
+            </div>
         </div>
 
         <!-- 投资逻辑与买卖条件 -->
@@ -222,13 +334,14 @@
             <div class="card">
                 <div class="card-title">✅ 为什么买吉利？</div>
                 <div class="highlight-block green">
-                    <strong>核心逻辑：低估值的中国自主车龙头</strong>
+                    <strong>核心逻辑：低估值的全球化中国车企龙头</strong>
                     <ul style="margin-left:20px;margin-top:10px;line-height:2;">
-                        <li>📊 <strong>估值便宜</strong>：PE仅12倍，在港股汽车股中偏低</li>
-                        <li>🔋 <strong>新能源转型</strong>：极氪+银河系列月销破5万，增长快</li>
-                        <li>🌍 <strong>全球化</strong>：沃尔沃品牌+海外出口，分散中国市场风险</li>
-                        <li>🏆 <strong>自主龙头地位</strong>：中国品牌前三，份额稳定提升</li>
-                        <li>💰 <strong>现金流健康</strong>：有分红能力，财务稳健</li>
+                        <li>📊 <strong>估值便宜</strong>：PE仅8.9倍，2026年预期PE 7.9倍，在全球车企中最低</li>
+                        <li>🌍 <strong>出口爆发</strong>：上半年+158%，全年冲刺100万辆，第二增长曲线成型</li>
+                        <li>🔋 <strong>新能源转型成功</strong>：新能源占比55%，出口中占59%</li>
+                        <li>💰 <strong>利润高质量增长</strong>：收入+15%，利润+46%，毛利率持续提升</li>
+                        <li>🏆 <strong>价格战中的赢家</strong>：行业亏损它反而毛利提升，产品力验证</li>
+                        <li>📈 <strong>券商一致看多</strong>：22家投行买入评级，目标价均价28.5港元（+81%）</li>
                     </ul>
                 </div>
             </div>
@@ -238,11 +351,11 @@
                     <strong>触发以下任一条件，减持或清仓：</strong>
                     <ul style="margin-left:20px;margin-top:10px;line-height:2;">
                         <li>📉 <strong>连续2个季度毛利率跌破15%</strong> → 价格战打不起，盈利恶化</li>
-                        <li>📊 <strong>月度市占率连续3个月下滑</strong> → 竞争格局恶化，份额丢了</li>
-                        <li>🚗 <strong>极氪月销跌破1万台</strong> → 新能源转型故事破了</li>
+                        <li>📊 <strong>月度出口增速转负</strong> → 第二增长曲线断了，核心逻辑破了</li>
+                        <li>🚗 <strong>极氪/银河月销连续下滑3个月</strong> → 新能源转型遇阻</li>
                         <li>🏠 <strong>中国消费进一步恶化</strong> → 可选消费全面下行，吉利首当其冲</li>
                         <li>⚔️ <strong>价格战进一步升级</strong> → 比亚迪/特斯拉降价到吉利无法承受</li>
-                        <li>📊 <strong>Dalio判断通缩衰退确认</strong> → 可选消费是最弱板块，低配</li>
+                        <li>📈 <strong>目标价到达HK$25-28</strong> → 估值修复完成，获利了结一半</li>
                     </ul>
                 </div>
             </div>
@@ -258,32 +371,33 @@
                 <tbody>
                     <tr>
                         <td>📈 通胀性繁荣</td>
-                        <td>★★★☆☆ 一般（经济好买车多，但利率高成本高）</td>
-                        <td>低配（15%总仓位中）</td>
-                        <td><span class="badge badge-yellow">6% → 应减到2-3%</span></td>
+                        <td>★★★★☆ 好（经济好买车多，出口也受益）</td>
+                        <td>高配</td>
+                        <td>—</td>
                     </tr>
                     <tr>
                         <td>📉 通胀性衰退（滞胀）</td>
-                        <td>★☆☆☆☆ 很差（滞胀=消费下降+成本上升双杀）</td>
-                        <td>严重低配</td>
-                        <td><span class="badge badge-red">Dalio低配方向，当前超配</span></td>
+                        <td>★★☆☆☆ 差（国内消费承压，但出口对冲）</td>
+                        <td>低配</td>
+                        <td><span class="badge badge-yellow">⚠️ 6.1%仓位偏高，建议3-4%</span></td>
                     </tr>
                     <tr>
                         <td>📈 通缩性繁荣</td>
-                        <td>★★★★★ 极好（低利率+消费复苏，买车潮）</td>
+                        <td>★★★★★ 极好（低利率+消费复苏，买车潮+估值提升）</td>
                         <td>高配</td>
                         <td>—</td>
                     </tr>
                     <tr>
                         <td>📉 通缩性衰退</td>
-                        <td>★★☆☆☆ 差（消费萎缩，买车延后）</td>
-                        <td>低配</td>
-                        <td>—</td>
+                        <td>★★★☆☆ 一般（国内消费差，但出口+低估值托底）</td>
+                        <td>维持</td>
+                        <td><span class="badge badge-green">✅ 出口分散化降低了国内衰退影响</span></td>
                     </tr>
                 </tbody>
             </table>
             <div class="highlight-block yellow" style="margin-top:20px;">
-                <strong>💡 Dalio建议：</strong>吉利是典型的<strong>通缩性繁荣资产</strong>，在滞胀环境下表现差。当前Dalio判断滞胀为主，吉利6%仓位偏高，<strong style="color:#fbbf24;">建议减持到2-3%</strong>，把钱换到国债ETF（511010）对冲衰退风险。
+                <strong>💡 Dalio建议：</strong>吉利是典型的<strong>成长型周期股</strong>，在通缩繁荣环境表现最好。当前滞胀环境下，6.1%仓位略高，<strong style="color:#fbbf24;">建议维持3-4%核心仓位</strong>，不要因为短期下跌就加仓太多——它是进攻型资产，不是防御型。<br><br>
+                <strong>📌 当前结论：</strong>基本面在改善（出口爆发+利润高增+毛利率提升），但市场情绪低迷（价格战+消费弱+港股低估值），股价跌出来的机会。<strong>风险收益比不错（盈亏比3:1），建议持有，逢低可小幅加仓到4%</strong>。目标价HK$25-28，到达后获利了结。
             </div>
         </div>
 
