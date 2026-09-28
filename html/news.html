@@ -6,45 +6,45 @@
     <title>新闻周报 - Tony's Investment Dashboard</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0e17; color: #e2e8f0; line-height: 1.7; font-size: 17px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f2ecdf; color: #3a3226; line-height: 1.7; font-size: 17px; }
         .mono { font-family: 'SF Mono', 'Roboto Mono', Menlo, monospace; font-variant-numeric: tabular-nums; }
-        .nav { background: #111827; border-bottom: 1px solid #1e293b; padding: 20px 36px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
-        .nav-brand { font-size: 24px; font-weight: 700; color: #fbbf24; }
+        .nav { background: #faf6ec; border-bottom: 1px solid #e8dfca; padding: 20px 36px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+        .nav-brand { font-size: 24px; font-weight: 700; color: #a87b1f; }
         .nav-links { display: flex; gap: 28px; }
-        .nav-links a { color: #94a3b8; text-decoration: none; font-size: 17px; padding: 10px 18px; border-radius: 8px; transition: all 0.2s; }
-        .nav-links a:hover, .nav-links a.active { color: #fbbf24; background: #1e293b; }
+        .nav-links a { color: #8a7c64; text-decoration: none; font-size: 17px; padding: 10px 18px; border-radius: 8px; transition: all 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: #a87b1f; background: #e8dfca; }
         .container { max-width: 1800px; margin: 0 auto; padding: 36px; }
-        .status-banner { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 1px solid #334155; border-radius: 16px; padding: 24px 28px; margin-bottom: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-        .status-item { font-size: 16px; color: #94a3b8; }
-        .status-item strong { color: #e2e8f0; font-size: 17px; }
-        .card { background: #111827; border: 1px solid #1e293b; border-radius: 16px; padding: 32px; margin-bottom: 28px; }
+        .status-banner { background: linear-gradient(135deg, #e8dfca 0%, #ece4d1 100%); border: 1px solid #d8cdb4; border-radius: 16px; padding: 24px 28px; margin-bottom: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+        .status-item { font-size: 16px; color: #8a7c64; }
+        .status-item strong { color: #3a3226; font-size: 17px; }
+        .card { background: #faf6ec; border: 1px solid #e8dfca; border-radius: 16px; padding: 32px; margin-bottom: 28px; }
         .card-title { font-size: 22px; font-weight: 600; margin-bottom: 24px; }
         .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
         @media (max-width: 1200px) { .two-col { grid-template-columns: 1fr; } }
         table { width: 100%; border-collapse: collapse; font-size: 16px; }
-        th { text-align: left; padding: 14px 16px; color: #94a3b8; font-weight: 500; border-bottom: 2px solid #1e293b; font-size: 15px; }
-        td { padding: 14px 16px; border-bottom: 1px solid #1e293b; }
+        th { text-align: left; padding: 14px 16px; color: #8a7c64; font-weight: 500; border-bottom: 2px solid #e8dfca; font-size: 15px; }
+        td { padding: 14px 16px; border-bottom: 1px solid #e8dfca; }
         tr:last-child td { border-bottom: none; }
-        tr:hover { background: #1e293b; }
-        .green { color: #34d399; } .red { color: #f87171; } .yellow { color: #fbbf24; } .orange { color: #fb923c; }
+        tr:hover { background: #e8dfca; }
+        .green { color: #4a7c59; } .red { color: #b5493a; } .yellow { color: #a87b1f; } .orange { color: #c07a3e; }
         .badge { display: inline-block; padding: 4px 12px; border-radius: 6px; font-size: 14px; font-weight: 600; }
-        .badge-green { background: rgba(52,211,153,.15); color: #34d399; }
-        .badge-red { background: rgba(248,113,113,.15); color: #f87171; }
-        .badge-yellow { background: rgba(251,191,36,.15); color: #fbbf24; }
-        .badge-orange { background: rgba(251,146,60,.15); color: #fb923c; }
-        .highlight-block { background: rgba(251,191,36,.08); border-left: 4px solid #fbbf24; padding: 18px 22px; border-radius: 0 10px 10px 0; margin: 16px 0; font-size: 16px; line-height: 1.8; }
-        .highlight-block.red { background: rgba(248,113,113,.08); border-left-color: #f87171; }
-        .highlight-block.green { background: rgba(52,211,153,.08); border-left-color: #34d399; }
-        .news-item { padding: 18px; background: #1e293b; border-radius: 10px; margin-bottom: 14px; }
+        .badge-green { background: rgba(74,124,89,0.18); color: #4a7c59; }
+        .badge-red { background: rgba(181,73,58,0.18); color: #b5493a; }
+        .badge-yellow { background: rgba(168,123,31,0.18); color: #a87b1f; }
+        .badge-orange { background: rgba(192,122,62,0.18); color: #c07a3e; }
+        .highlight-block { background: rgba(168,123,31,0.12); border-left: 4px solid #a87b1f; padding: 18px 22px; border-radius: 0 10px 10px 0; margin: 16px 0; font-size: 16px; line-height: 1.8; }
+        .highlight-block.red { background: rgba(181,73,58,0.12); border-left-color: #b5493a; }
+        .highlight-block.green { background: rgba(74,124,89,0.12); border-left-color: #4a7c59; }
+        .news-item { padding: 18px; background: #e8dfca; border-radius: 10px; margin-bottom: 14px; }
         .news-item-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; gap: 12px; }
         .news-item-title { font-weight: 600; font-size: 18px; }
-        .news-item-body { font-size: 16px; color: #94a3b8; line-height: 1.8; margin-bottom: 12px; }
-        .causal-chain { background: #0f172a; border-radius: 8px; padding: 14px 16px; font-size: 15px; line-height: 1.7; }
-        .causal-chain-label { font-weight: 600; color: #fbbf24; margin-bottom: 6px; }
+        .news-item-body { font-size: 16px; color: #8a7c64; line-height: 1.8; margin-bottom: 12px; }
+        .causal-chain { background: #ece4d1; border-radius: 8px; padding: 14px 16px; font-size: 15px; line-height: 1.7; }
+        .causal-chain-label { font-weight: 600; color: #a87b1f; margin-bottom: 6px; }
         .chain-step { display: inline-block; margin: 2px 0; }
-        .chain-arrow { color: #64748b; margin: 0 6px; }
-        .stars { color: #fbbf24; letter-spacing: 2px; }
-        .stock-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #1e293b; }
+        .chain-arrow { color: #a1937a; margin: 0 6px; }
+        .stars { color: #a87b1f; letter-spacing: 2px; }
+        .stock-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e8dfca; }
         .stock-icon { font-size: 28px; }
         .stock-name { font-size: 20px; font-weight: 600; }
         .stock-price { margin-left: auto; font-size: 18px; font-weight: 600; }
@@ -344,7 +344,7 @@
         <!-- 新闻vs价格复盘 -->
         <div class="card">
             <div class="card-title">🔍 新闻 vs 价格复盘（本周逻辑验证）</div>
-            <p style="font-size:16px;color:#94a3b8;margin-bottom:20px;">验证：这周的新闻，市场真的按这个逻辑走了吗？</p>
+            <p style="font-size:16px;color:#8a7c64;margin-bottom:20px;">验证：这周的新闻，市场真的按这个逻辑走了吗？</p>
             <table class="review-table">
                 <thead>
                     <tr><th>我当时的判断</th><th>新闻事件</th><th>实际市场反应</th><th>验证结果</th><th>教训</th></tr>

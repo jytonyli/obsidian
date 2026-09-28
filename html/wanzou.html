@@ -6,46 +6,46 @@
     <title>🥓 万洲国际深度分析 | Tony's Investment Dashboard</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #0f172a; color: #e2e8f0; font-size: 17px; line-height: 1.6; }
-        .nav { background: #111827; border-bottom: 1px solid #1e293b; padding: 20px 36px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
-        .nav-brand { font-size: 24px; font-weight: 700; color: #fbbf24; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #ece4d1; color: #3a3226; font-size: 17px; line-height: 1.6; }
+        .nav { background: #faf6ec; border-bottom: 1px solid #e8dfca; padding: 20px 36px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+        .nav-brand { font-size: 24px; font-weight: 700; color: #a87b1f; }
         .nav-links { display: flex; gap: 28px; }
-        .nav-links a { color: #94a3b8; text-decoration: none; font-size: 17px; padding: 10px 18px; border-radius: 8px; transition: all 0.2s; }
-        .nav-links a:hover, .nav-links a.active { color: #fbbf24; background: #1e293b; }
+        .nav-links a { color: #8a7c64; text-decoration: none; font-size: 17px; padding: 10px 18px; border-radius: 8px; transition: all 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: #a87b1f; background: #e8dfca; }
         .container { max-width: 1800px; margin: 0 auto; padding: 36px; }
-        .status-banner { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 1px solid #334155; border-radius: 16px; padding: 24px 28px; margin-bottom: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-        .status-item { font-size: 16px; color: #94a3b8; }
-        .status-item strong { color: #e2e8f0; font-size: 17px; }
-        .card { background: #111827; border: 1px solid #1e293b; border-radius: 16px; padding: 32px; margin-bottom: 28px; }
+        .status-banner { background: linear-gradient(135deg, #e8dfca 0%, #ece4d1 100%); border: 1px solid #d8cdb4; border-radius: 16px; padding: 24px 28px; margin-bottom: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+        .status-item { font-size: 16px; color: #8a7c64; }
+        .status-item strong { color: #3a3226; font-size: 17px; }
+        .card { background: #faf6ec; border: 1px solid #e8dfca; border-radius: 16px; padding: 32px; margin-bottom: 28px; }
         .card-title { font-size: 22px; font-weight: 600; margin-bottom: 24px; }
         .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 24px; }
-        .stat-card { background: #1e293b; border-radius: 12px; padding: 24px; border-left: 4px solid #3b82f6; }
-        .stat-card.us { border-left-color: #3b82f6; }
-        .stat-card.cn { border-left-color: #ef4444; }
-        .stat-card.dividend { border-left-color: #fbbf24; }
-        .stat-label { font-size: 15px; color: #94a3b8; margin-bottom: 8px; }
+        .stat-card { background: #e8dfca; border-radius: 12px; padding: 24px; border-left: 4px solid #4a6fa5; }
+        .stat-card.us { border-left-color: #4a6fa5; }
+        .stat-card.cn { border-left-color: #b5493a; }
+        .stat-card.dividend { border-left-color: #a87b1f; }
+        .stat-label { font-size: 15px; color: #8a7c64; margin-bottom: 8px; }
         .stat-value { font-size: 36px; font-weight: 700; font-family: 'SF Mono', 'Consolas', monospace; }
         .stat-change { font-size: 15px; margin-top: 8px; }
-        .up { color: #10b981; }
-        .down { color: #ef4444; }
-        .neutral { color: #94a3b8; }
+        .up { color: #4a7c59; }
+        .down { color: #b5493a; }
+        .neutral { color: #8a7c64; }
         .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
         @media (max-width: 1200px) { .two-col { grid-template-columns: 1fr; } }
         table { width: 100%; border-collapse: collapse; font-size: 16px; }
-        th { text-align: left; padding: 14px 16px; color: #94a3b8; font-weight: 500; border-bottom: 2px solid #1e293b; font-size: 15px; }
-        td { padding: 14px 16px; border-bottom: 1px solid #1e293b; }
-        tr:hover { background: #1e293b; }
+        th { text-align: left; padding: 14px 16px; color: #8a7c64; font-weight: 500; border-bottom: 2px solid #e8dfca; font-size: 15px; }
+        td { padding: 14px 16px; border-bottom: 1px solid #e8dfca; }
+        tr:hover { background: #e8dfca; }
         .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 14px; font-weight: 500; }
-        .badge-green { background: rgba(16,185,129,0.15); color: #10b981; }
-        .badge-red { background: rgba(239,68,68,0.15); color: #ef4444; }
-        .badge-yellow { background: rgba(251,191,36,0.15); color: #fbbf24; }
+        .badge-green { background: rgba(74,124,89,0.18); color: #4a7c59; }
+        .badge-red { background: rgba(181,73,58,0.18); color: #b5493a; }
+        .badge-yellow { background: rgba(168,123,31,0.18); color: #a87b1f; }
         .highlight-block { padding: 16px 20px; border-radius: 10px; margin: 16px 0; font-size: 16px; line-height: 1.7; }
-        .highlight-block.green { background: rgba(16,185,129,0.08); border-left: 4px solid #10b981; }
-        .highlight-block.red { background: rgba(239,68,68,0.08); border-left: 4px solid #ef4444; }
-        .highlight-block.yellow { background: rgba(251,191,36,0.08); border-left: 4px solid #fbbf24; }
+        .highlight-block.green { background: rgba(74,124,89,0.12); border-left: 4px solid #4a7c59; }
+        .highlight-block.red { background: rgba(181,73,58,0.12); border-left: 4px solid #b5493a; }
+        .highlight-block.yellow { background: rgba(168,123,31,0.12); border-left: 4px solid #a87b1f; }
         .mono { font-family: 'SF Mono', 'Consolas', monospace; }
-        .analysis-box { background: #1e293b; border-radius: 12px; padding: 24px; margin: 16px 0; }
-        .analysis-box h4 { font-size: 18px; margin-bottom: 12px; color: #fbbf24; }
+        .analysis-box { background: #e8dfca; border-radius: 12px; padding: 24px; margin: 16px 0; }
+        .analysis-box h4 { font-size: 18px; margin-bottom: 12px; color: #a87b1f; }
     </style>
 
     <link rel="stylesheet" href="responsive.css">
@@ -100,26 +100,26 @@
         <!-- 因子拆解 -->
         <div class="card">
             <div class="card-title">🧬 万洲国际三因子拆解（全球猪肉+消费防御+高股息）</div>
-            <p style="font-size:16px;color:#94a3b8;margin-bottom:20px;">万洲是全球最大猪肉公司，业务横跨中美，是典型的"消费防御+高股息"资产，和经济周期相关性低。</p>
+            <p style="font-size:16px;color:#8a7c64;margin-bottom:20px;">万洲是全球最大猪肉公司，业务横跨中美，是典型的"消费防御+高股息"资产，和经济周期相关性低。</p>
             <div class="stat-grid">
-                <div class="stat-card us" style="border-left-color:#3b82f6;">
-                    <div style="font-size:16px;color:#94a3b8;">🇺🇸 美国猪肉业务（Smithfield）</div>
+                <div class="stat-card us" style="border-left-color:#4a6fa5;">
+                    <div style="font-size:16px;color:#8a7c64;">🇺🇸 美国猪肉业务（Smithfield）</div>
                     <div class="stat-value mono" style="font-size:28px;margin:12px 0;">~50%</div>
-                    <div style="font-size:15px;color:#94a3b8;">美国生猪养殖+加工+品牌<br><strong>核心驱动：美国猪周期 + 加工利润</strong><br>当前：猪价下行，Q4养殖业务预计亏损</div>
+                    <div style="font-size:15px;color:#8a7c64;">美国生猪养殖+加工+品牌<br><strong>核心驱动：美国猪周期 + 加工利润</strong><br>当前：猪价下行，Q4养殖业务预计亏损</div>
                 </div>
-                <div class="stat-card cn" style="border-left-color:#ef4444;">
-                    <div style="font-size:16px;color:#94a3b8;">🇨🇳 中国猪肉业务</div>
+                <div class="stat-card cn" style="border-left-color:#b5493a;">
+                    <div style="font-size:16px;color:#8a7c64;">🇨🇳 中国猪肉业务</div>
                     <div class="stat-value mono" style="font-size:28px;margin:12px 0;">~35%</div>
-                    <div style="font-size:15px;color:#94a3b8;">双汇发展（000895.SZ）<br><strong>核心驱动：中国猪价 + 肉制品消费</strong><br>当前：猪价筑底，Q4腌腊需求有望回暖</div>
+                    <div style="font-size:15px;color:#8a7c64;">双汇发展（000895.SZ）<br><strong>核心驱动：中国猪价 + 肉制品消费</strong><br>当前：猪价筑底，Q4腌腊需求有望回暖</div>
                 </div>
-                <div class="stat-card dividend" style="border-left-color:#fbbf24;">
-                    <div style="font-size:16px;color:#94a3b8;">💰 高股息防御属性</div>
+                <div class="stat-card dividend" style="border-left-color:#a87b1f;">
+                    <div style="font-size:16px;color:#8a7c64;">💰 高股息防御属性</div>
                     <div class="stat-value mono" style="font-size:28px;margin:12px 0;">~15%</div>
-                    <div style="font-size:15px;color:#94a3b8;">全年股息预期HK$0.61<br><strong>核心驱动：利率下行 → 高股息资产重估</strong><br>当前：vs中国10Y国债1.68%，利差7.6%</div>
+                    <div style="font-size:15px;color:#8a7c64;">全年股息预期HK$0.61<br><strong>核心驱动：利率下行 → 高股息资产重估</strong><br>当前：vs中国10Y国债1.68%，利差7.6%</div>
                 </div>
             </div>
             <div class="highlight-block green">
-                <strong>💡 关键洞察：</strong>万洲不是纯周期股，是<strong style="color:#10b981;">"全球猪肉加工商+高股息债券替代品"</strong>。它的涨跌主要看：① Smithfield加工利润是否稳定 ② 股息率是否有吸引力 ③ 中美猪周期位置。在滞胀/衰退环境下，必选消费+高股息资产反而相对抗跌。
+                <strong>💡 关键洞察：</strong>万洲不是纯周期股，是<strong style="color:#4a7c59;">"全球猪肉加工商+高股息债券替代品"</strong>。它的涨跌主要看：① Smithfield加工利润是否稳定 ② 股息率是否有吸引力 ③ 中美猪周期位置。在滞胀/衰退环境下，必选消费+高股息资产反而相对抗跌。
             </div>
         </div>
 
@@ -131,40 +131,40 @@
                     <div class="stat-label">🇺🇸 美国生猪价格（USDA预测）</div>
                     <div class="stat-value mono">$58/cwt</div>
                     <div class="stat-change down">↓ Q4预测同比-11%</div>
-                    <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
-                        <strong style="color:#e2e8f0;">对万洲影响：</strong>50%利润来自Smithfield<br>
-                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-red">⚠️ 猪周期下行段</span><br>
-                        <strong style="color:#e2e8f0;">详细：</strong>2026全年均价$66.6/cwt（同比-3%），Q4预计$58/cwt（同比-11%）。Smithfield已下调全年指引，Q4养殖业务预计季节性亏损。
+                    <div style="margin-top:12px;font-size:15px;color:#8a7c64;">
+                        <strong style="color:#3a3226;">对万洲影响：</strong>50%利润来自Smithfield<br>
+                        <strong style="color:#3a3226;">当前状态：</strong><span class="badge badge-red">⚠️ 猪周期下行段</span><br>
+                        <strong style="color:#3a3226;">详细：</strong>2026全年均价$66.6/cwt（同比-3%），Q4预计$58/cwt（同比-11%）。Smithfield已下调全年指引，Q4养殖业务预计季节性亏损。
                     </div>
                 </div>
                 <div class="stat-card cn">
                     <div class="stat-label">🇨🇳 中国生猪价格</div>
                     <div class="stat-value mono">10.58元/公斤</div>
                     <div class="stat-change down">同比-16.6%（去年12.69元）</div>
-                    <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
-                        <strong style="color:#e2e8f0;">对万洲影响：</strong>双汇发展利润<br>
-                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-yellow">政策底已现，市场底等待</span><br>
-                        <strong style="color:#e2e8f0;">中金预测：</strong>Q3均价11.6元/公斤，Q4均价12.8元/公斤。产能去化不充分，真正反转要到2027年。
+                    <div style="margin-top:12px;font-size:15px;color:#8a7c64;">
+                        <strong style="color:#3a3226;">对万洲影响：</strong>双汇发展利润<br>
+                        <strong style="color:#3a3226;">当前状态：</strong><span class="badge badge-yellow">政策底已现，市场底等待</span><br>
+                        <strong style="color:#3a3226;">中金预测：</strong>Q3均价11.6元/公斤，Q4均价12.8元/公斤。产能去化不充分，真正反转要到2027年。
                     </div>
                 </div>
                 <div class="stat-card dividend">
                     <div class="stat-label">💰 股息率 vs 中国10Y国债</div>
                     <div class="stat-value mono">9.3% - 1.68% = 7.6%</div>
                     <div class="stat-change up">🟢 利差处于历史极值</div>
-                    <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
-                        <strong style="color:#e2e8f0;">对万洲影响：</strong>股息率溢价是估值底<br>
-                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-green">极具吸引力</span><br>
-                        <strong style="color:#e2e8f0;">详细：</strong>无风险利率1.68%，万洲全年股息预期HK$0.61，按现价6.54算股息率9.3%，是债券的5.5倍。这是股价的"铁底"。
+                    <div style="margin-top:12px;font-size:15px;color:#8a7c64;">
+                        <strong style="color:#3a3226;">对万洲影响：</strong>股息率溢价是估值底<br>
+                        <strong style="color:#3a3226;">当前状态：</strong><span class="badge badge-green">极具吸引力</span><br>
+                        <strong style="color:#3a3226;">详细：</strong>无风险利率1.68%，万洲全年股息预期HK$0.61，按现价6.54算股息率9.3%，是债券的5.5倍。这是股价的"铁底"。
                     </div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">🌡️ El Niño → 饲料成本</div>
                     <div class="stat-value mono">↑ 上行压力</div>
                     <div class="stat-change down">🔴 全球粮价三年新高</div>
-                    <div style="margin-top:12px;font-size:15px;color:#94a3b8;">
-                        <strong style="color:#e2e8f0;">对万洲影响：</strong>养殖端成本上升<br>
-                        <strong style="color:#e2e8f0;">当前状态：</strong><span class="badge badge-red">⚠️ 边际利空</span><br>
-                        <strong style="color:#e2e8f0;">详细：</strong>2026年强El Niño导致FAO食品价格指数达三年新高。玉米可能涨到$7/蒲式耳，大豆豆粕价格上行。万洲全产业链模式下，养殖端利润受压，但加工端成本转嫁能力较强。
+                    <div style="margin-top:12px;font-size:15px;color:#8a7c64;">
+                        <strong style="color:#3a3226;">对万洲影响：</strong>养殖端成本上升<br>
+                        <strong style="color:#3a3226;">当前状态：</strong><span class="badge badge-red">⚠️ 边际利空</span><br>
+                        <strong style="color:#3a3226;">详细：</strong>2026年强El Niño导致FAO食品价格指数达三年新高。玉米可能涨到$7/蒲式耳，大豆豆粕价格上行。万洲全产业链模式下，养殖端利润受压，但加工端成本转嫁能力较强。
                     </div>
                 </div>
             </div>
@@ -197,16 +197,16 @@
                         </tr>
                     </tbody>
                 </table>
-                <p style="margin-top:16px;font-size:15px;color:#94a3b8;">
-                    <strong style="color:#e2e8f0;">中金研报核心观点（2026.5.28）：</strong><br>
+                <p style="margin-top:16px;font-size:15px;color:#8a7c64;">
+                    <strong style="color:#3a3226;">中金研报核心观点（2026.5.28）：</strong><br>
                     1. <strong>底部已现，但回升缓慢</strong>：Q2均价10元，Q3预计11.6元，Q4预计12.8元。<br>
-                    2. <strong>供应压力大的根本原因</strong>：不是显性产能没去化（能繁母猪已从4100万降到3994万），而是<strong style="color:#fbbf24;">MSY生产效率大幅提升</strong>——从2021年15.5头/年提升到2025年23.94头/年，相当于隐性产能扩张了54%。<br>
+                    2. <strong>供应压力大的根本原因</strong>：不是显性产能没去化（能繁母猪已从4100万降到3994万），而是<strong style="color:#a87b1f;">MSY生产效率大幅提升</strong>——从2021年15.5头/年提升到2025年23.94头/年，相当于隐性产能扩张了54%。<br>
                     3. <strong>政策底 vs 市场底</strong>：4月政策调控方案出台（能繁母猪目标3750万头），政策底已现，但历史经验政策底到市场底有3-4个月时滞。<br>
                     4. <strong>去化仍不充分</strong>：淘汰母猪/猪价比0.76（历史低位），仔猪/猪价比2.40（养殖户补栏意愿仍强），说明产能去化还没到位。<br>
                     5. <strong>猪周期变长</strong>：行业集中度提升（CR20从9.76%到35.98%），从蛛网模型过渡到古诺模型，价格波动减小但周期拉长。
                 </p>
                 <div class="highlight-block yellow" style="margin-top:12px;">
-                    <strong>💡 对万洲的启示：</strong>中国猪价Q3-Q4温和回升（10→12.8元），但<strong style="color:#fbbf24;">回升幅度有限，不是反转，是"暖意渐升"</strong>。对双汇发展来说，猪价温和回升不一定是利空——肉制品需求稳定，成本上升可以转嫁。真正的猪周期大反转可能要到2027年。
+                    <strong>💡 对万洲的启示：</strong>中国猪价Q3-Q4温和回升（10→12.8元），但<strong style="color:#a87b1f;">回升幅度有限，不是反转，是"暖意渐升"</strong>。对双汇发展来说，猪价温和回升不一定是利空——肉制品需求稳定，成本上升可以转嫁。真正的猪周期大反转可能要到2027年。
                 </div>
             </div>
 
@@ -241,7 +241,7 @@
                     </tbody>
                 </table>
                 <div class="highlight-block green" style="margin-top:16px;">
-                    <strong>💡 下行空间有限：</strong>即使在最悲观情景下（利润下滑20%+削减分红），股价最多跌15%到5.5港元。而在中性情景下，当前6.54港元已经是底部区域——<strong style="color:#10b981;">下行风险有限（-10%~-15%），上行空间可观（+30%~+50%），风险收益比极佳</strong>。
+                    <strong>💡 下行空间有限：</strong>即使在最悲观情景下（利润下滑20%+削减分红），股价最多跌15%到5.5港元。而在中性情景下，当前6.54港元已经是底部区域——<strong style="color:#4a7c59;">下行风险有限（-10%~-15%），上行空间可观（+30%~+50%），风险收益比极佳</strong>。
                 </div>
             </div>
 
@@ -321,7 +321,7 @@
                     2. 中国生鲜猪肉业务盈利比预期弱，海外消费情绪疲弱
                 </div>
                 <div class="highlight-block yellow" style="margin-top:12px;">
-                    <strong>💡 解读：</strong>管理层态度是"谨慎乐观"——承认短期有压力，但对下半年复苏和高分红有信心。核心信号是<strong style="color:#fbbf24;">高分红承诺不变</strong>，这是股价的安全垫。
+                    <strong>💡 解读：</strong>管理层态度是"谨慎乐观"——承认短期有压力，但对下半年复苏和高分红有信心。核心信号是<strong style="color:#a87b1f;">高分红承诺不变</strong>，这是股价的安全垫。
                 </div>
             </div>
 
@@ -367,7 +367,7 @@
                             <td class="up">+25%</td>
                             <td>从9.9下调（9/10）</td>
                         </tr>
-                        <tr style="background:#1e293b;">
+                        <tr style="background:#e8dfca;">
                             <td><strong>平均</strong></td>
                             <td><strong>全部买入/增持</strong></td>
                             <td class="mono"><strong>HK$9.8</strong></td>
@@ -377,7 +377,7 @@
                     </tbody>
                 </table>
                 <div class="highlight-block green" style="margin-top:12px;">
-                    <strong>💡 券商共识：</strong>没有一家卖出，全部维持买入/增持。虽然都在下调目标价（因为短期盈利预期变差），但平均目标价HK$9.8意味着<strong style="color:#10b981;">50%上行空间</strong>。核心逻辑一致：估值便宜+高股息+猪周期见底。
+                    <strong>💡 券商共识：</strong>没有一家卖出，全部维持买入/增持。虽然都在下调目标价（因为短期盈利预期变差），但平均目标价HK$9.8意味着<strong style="color:#4a7c59;">50%上行空间</strong>。核心逻辑一致：估值便宜+高股息+猪周期见底。
                 </div>
             </div>
         </div>
@@ -449,7 +449,7 @@
                 </tbody>
             </table>
             <div class="highlight-block green" style="margin-top:20px;">
-                <strong>💡 Dalio建议：</strong>万洲是你组合里<strong>最"Dalio"的持仓</strong>——必选消费+高股息，在滞胀和衰退环境都能扛。当前2.9%仓位合理，<strong style="color:#10b981;">建议维持，不用动</strong>。如果后续要加防御，反而可以考虑小幅加仓到3-5%。<br><br>
+                <strong>💡 Dalio建议：</strong>万洲是你组合里<strong>最"Dalio"的持仓</strong>——必选消费+高股息，在滞胀和衰退环境都能扛。当前2.9%仓位合理，<strong style="color:#4a7c59;">建议维持，不用动</strong>。如果后续要加防御，反而可以考虑小幅加仓到3-5%。<br><br>
                 <strong>📌 当前结论：</strong>短期利空已消化（Smithfield下调指引），估值在历史底部（PE 6.96x，股息率9.3%），下行空间仅10-15%，上行空间30-50%。<strong>风险收益比极佳，继续持有，甚至可以逢低加仓。</strong>
             </div>
         </div>
