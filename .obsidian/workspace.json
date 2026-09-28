@@ -11,10 +11,14 @@
             "id": "e8f6bb3e484768ab",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "02 ⚙️ 经济机器怎么运转.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "02 ⚙️ 经济机器怎么运转"
             }
           }
         ]
@@ -183,14 +187,14 @@
   },
   "active": "e8f6bb3e484768ab",
   "lastOpenFiles": [
-    "⏳ 长期债务周期.md",
+    "01 🎯 投资原则.md",
     "06 💡 每日想法.md",
+    "⏳ 长期债务周期.md",
     "05 ⏳ 长期债务周期.md",
     "⚙️ 经济机器怎么运转.md",
     "04 🔄 短期债务周期.md",
     "03 📈 生产率长期增长.md",
     "02 ⚙️ 经济机器怎么运转.md",
-    "01 🎯 投资原则.md",
     "💡 每日想法.md",
     "🎯 投资原则.md",
     "🔄 短期债务周期.md",
