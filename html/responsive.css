@@ -66,8 +66,7 @@ body {
     background-color: #161616;
     background-image:
         radial-gradient(1000px 700px at 8% -10%, rgba(200,150,40,0.28), transparent 55%),
-        radial-gradient(900px 700px at 96% 5%, rgba(80,120,190,0.25), transparent 55%),
-        radial-gradient(800px 800px at 50% 115%, rgba(200,150,40,0.18), transparent 60%);
+        radial-gradient(900px 700px at 96% 5%, rgba(80,120,190,0.25), transparent 55%);
     background-attachment: fixed;
 }
 .nav {
