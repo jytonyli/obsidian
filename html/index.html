@@ -13,8 +13,8 @@
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f2ecdf;
-            color: #3a3226;
+            background: #0a0e17;
+            color: #e2e8f0;
             line-height: 1.7;
             font-size: 17px;
         }
@@ -24,8 +24,8 @@
         }
         /* 导航栏 */
         .nav {
-            background: #faf6ec;
-            border-bottom: 1px solid #e8dfca;
+            background: #111827;
+            border-bottom: 1px solid #1e293b;
             padding: 20px 36px;
             display: flex;
             align-items: center;
@@ -34,23 +34,23 @@
             top: 0;
             z-index: 100;
         }
-        .nav-brand { font-size: 24px; font-weight: 700; color: #a87b1f; }
+        .nav-brand { font-size: 24px; font-weight: 700; color: #fbbf24; }
         .nav-links { display: flex; gap: 28px; }
-        .nav-links a { color: #8a7c64; text-decoration: none; font-size: 17px; padding: 10px 18px; border-radius: 8px; transition: all 0.2s; }
+        .nav-links a { color: #94a3b8; text-decoration: none; font-size: 17px; padding: 10px 18px; border-radius: 8px; transition: all 0.2s; }
         .nav-links a:hover, .nav-links a.active {
-            color: #a87b1f;
-            background: #e8dfca;
+            color: #fbbf24;
+            background: #1e293b;
         }
         .container { max-width: 1800px; margin: 0 auto; padding: 36px; }
         /* 状态横幅 */
-        .status-banner { background: linear-gradient(135deg, #e8dfca 0%, #ece4d1 100%); border: 1px solid #d8cdb4; border-radius: 16px; padding: 24px 28px; margin-bottom: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+        .status-banner { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 1px solid #334155; border-radius: 16px; padding: 24px 28px; margin-bottom: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
         .status-left {
             display: flex;
             flex-direction: column;
             gap: 6px;
         }
-        .status-item { font-size: 16px; color: #8a7c64; }
-        .status-item strong { color: #3a3226; font-size: 17px; }
+        .status-item { font-size: 16px; color: #94a3b8; }
+        .status-item strong { color: #e2e8f0; font-size: 17px; }
         .update-buttons {
             display: flex;
             gap: 14px;
@@ -65,24 +65,24 @@
             transition: all 0.2s;
         }
         .btn-primary {
-            background: #a87b1f;
-            color: #f2ecdf;
+            background: #fbbf24;
+            color: #0a0e17;
         }
         .btn-primary:hover {
-            background: #8f6a18;
+            background: #f59e0b;
             transform: translateY(-1px);
         }
         .btn-secondary {
-            background: #e8dfca;
-            color: #3a3226;
-            border: 1px solid #d8cdb4;
+            background: #1e293b;
+            color: #e2e8f0;
+            border: 1px solid #334155;
         }
         .btn-secondary:hover {
-            background: #d8cdb4;
+            background: #334155;
             transform: translateY(-1px);
         }
         /* 卡片 */
-        .card { background: #faf6ec; border: 1px solid #e8dfca; border-radius: 16px; padding: 32px; margin-bottom: 28px; }
+        .card { background: #111827; border: 1px solid #1e293b; border-radius: 16px; padding: 32px; margin-bottom: 28px; }
         .card-title { font-size: 22px; font-weight: 600; margin-bottom: 24px; }
         /* 总资产大数字 */
         .hero-grid {
@@ -92,15 +92,15 @@
             margin-bottom: 36px;
         }
         .hero-card {
-            background: linear-gradient(135deg, #e8dfca 0%, #ece4d1 100%);
-            border: 1px solid #d8cdb4;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
             border-radius: 16px;
             padding: 32px;
             text-align: center;
         }
         .hero-label {
             font-size: 15px;
-            color: #8a7c64;
+            color: #94a3b8;
             margin-bottom: 14px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -108,13 +108,13 @@
         .hero-value {
             font-size: 40px;
             font-weight: 700;
-            color: #a87b1f;
+            color: #fbbf24;
         }
-        .hero-value.green { color: #4a7c59; }
-        .hero-value.red { color: #b5493a; }
+        .hero-value.green { color: #34d399; }
+        .hero-value.red { color: #f87171; }
         .hero-sub {
             font-size: 15px;
-            color: #a1937a;
+            color: #64748b;
             margin-top: 8px;
         }
         /* 表格 */
@@ -126,27 +126,27 @@
         th {
             text-align: left;
             padding: 16px 18px;
-            color: #8a7c64;
+            color: #94a3b8;
             font-weight: 500;
-            border-bottom: 2px solid #e8dfca;
+            border-bottom: 2px solid #1e293b;
             font-size: 14px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
         td {
             padding: 16px 18px;
-            border-bottom: 1px solid #e8dfca;
+            border-bottom: 1px solid #1e293b;
         }
         tr:last-child td {
             border-bottom: none;
         }
         tr:hover {
-            background: #e8dfca;
+            background: #1e293b;
         }
-        .green { color: #4a7c59; }
-        .red { color: #b5493a; }
-        .yellow { color: #a87b1f; }
-        .orange { color: #c07a3e; }
+        .green { color: #34d399; }
+        .red { color: #f87171; }
+        .yellow { color: #fbbf24; }
+        .orange { color: #fb923c; }
         /* 涨跌标签 */
         .badge {
             display: inline-block;
@@ -155,11 +155,11 @@
             font-size: 14px;
             font-weight: 600;
         }
-        .badge-green { background: rgba(52,211,153,0.15); color: #4a7c59; }
-        .badge-red { background: rgba(248,113,113,0.15); color: #b5493a; }
-        .badge-yellow { background: rgba(168,123,31,0.18); color: #a87b1f; }
-        .badge-orange { background: rgba(192,122,62,0.18); color: #c07a3e; }
-        .badge-red-warning { background: rgba(239,68,68,0.2); color: #b5493a; }
+        .badge-green { background: rgba(52, 211, 153, 0.15); color: #34d399; }
+        .badge-red { background: rgba(248, 113, 113, 0.15); color: #f87171; }
+        .badge-yellow { background: rgba(251, 191, 36, 0.15); color: #fbbf24; }
+        .badge-orange { background: rgba(251, 146, 60, 0.15); color: #fb923c; }
+        .badge-red-warning { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
         /* 图表容器 */
         .chart-container {
             height: 380px;
@@ -188,8 +188,8 @@
         }
         /* 高亮块 */
         .highlight-block {
-            background: rgba(168,123,31,0.12);
-            border-left: 4px solid #a87b1f;
+            background: rgba(251, 191, 36, 0.08);
+            border-left: 4px solid #fbbf24;
             padding: 18px 22px;
             border-radius: 0 10px 10px 0;
             margin: 16px 0;
@@ -197,20 +197,20 @@
             line-height: 1.8;
         }
         .highlight-block.red {
-            background: rgba(248,113,113,0.08);
-            border-left-color: #b5493a;
+            background: rgba(248, 113, 113, 0.08);
+            border-left-color: #f87171;
         }
         .highlight-block.green {
-            background: rgba(52,211,153,0.08);
-            border-left-color: #4a7c59;
+            background: rgba(52, 211, 153, 0.08);
+            border-left-color: #34d399;
         }
         /* 日志表格 */
         .log-table td {
             font-size: 15px;
-            color: #8a7c64;
+            color: #94a3b8;
         }
         .log-table td:first-child {
-            color: #3a3226;
+            color: #e2e8f0;
             font-weight: 500;
         }
         /* 五股力量 */
@@ -219,7 +219,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 14px 0;
-            border-bottom: 1px solid #e8dfca;
+            border-bottom: 1px solid #1e293b;
             font-size: 16px;
         }
         .force-item:last-child {
@@ -227,7 +227,7 @@
         }
         .section-subtitle {
             font-size: 17px;
-            color: #8a7c64;
+            color: #94a3b8;
             margin: 20px 0 16px;
             font-weight: 500;
         }
@@ -237,7 +237,7 @@
             align-items: center;
             margin-bottom: 20px;
             padding: 12px 16px;
-            background: #e8dfca;
+            background: #1e293b;
             border-radius: 8px;
         }
     </style>
@@ -311,7 +311,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><a href="zijin.html" style="color:#3a3226;text-decoration:none;border-bottom:1px dashed #a87b1f;" title="点击查看紫金矿业多因子深度分析"><strong>紫金矿业</strong> 601899</a></td>
+                                <td><a href="zijin.html" style="color:#e2e8f0;text-decoration:none;border-bottom:1px dashed #fbbf24;" title="点击查看紫金矿业多因子深度分析"><strong>紫金矿业</strong> 601899</a></td>
                                 <td class="mono">30.4%</td>
                                 <td class="mono">33.618</td>
                                 <td class="mono">31.41</td>
@@ -319,7 +319,7 @@
                                 <td class="red mono">-¥331,200</td>
                             </tr>
                             <tr>
-                                <td><a href="geely.html" style="color:#3a3226;text-decoration:none;border-bottom:1px dashed #a87b1f;" title="点击查看吉利汽车多因子深度分析">吉利汽车 00175</a></td>
+                                <td><a href="geely.html" style="color:#e2e8f0;text-decoration:none;border-bottom:1px dashed #fbbf24;" title="点击查看吉利汽车多因子深度分析">吉利汽车 00175</a></td>
                                 <td class="mono">6.2%</td>
                                 <td class="mono">16.844</td>
                                 <td class="mono">15.76</td>
@@ -327,7 +327,7 @@
                                 <td class="red mono">-¥65,550</td>
                             </tr>
                             <tr>
-                                <td><a href="wanzou.html" style="color:#3a3226;text-decoration:none;border-bottom:1px dashed #a87b1f;" title="点击查看万洲国际多因子深度分析">万洲国际 00288</a></td>
+                                <td><a href="wanzou.html" style="color:#e2e8f0;text-decoration:none;border-bottom:1px dashed #fbbf24;" title="点击查看万洲国际多因子深度分析">万洲国际 00288</a></td>
                                 <td class="mono">2.9%</td>
                                 <td class="mono">7.28</td>
                                 <td class="mono">6.445</td>
@@ -335,7 +335,7 @@
                                 <td class="red mono">-¥57,705</td>
                             </tr>
                             <tr>
-                                <td><a href="xiaomi.html" style="color:#3a3226;text-decoration:none;border-bottom:1px dashed #a87b1f;" title="点击查看小米集团多因子深度分析">小米集团 01810</a></td>
+                                <td><a href="xiaomi.html" style="color:#e2e8f0;text-decoration:none;border-bottom:1px dashed #fbbf24;" title="点击查看小米集团多因子深度分析">小米集团 01810</a></td>
                                 <td class="mono">5.6%</td>
                                 <td class="mono">45.294</td>
                                 <td class="mono">26.18 ⚠️</td>
@@ -384,8 +384,8 @@
         <div class="card">
             <div class="card-title">📈 核心指标快照</div>
             <div class="update-time-row">
-                <span style="font-size:15px;color:#8a7c64;">📊 数据更新时间：<strong style="color:#3a3226;font-size:16px;">2026-09-23 16:37</strong></span>
-                <span style="font-size:15px;color:#8a7c64;">上次周更新：<strong style="color:#3a3226;font-size:16px;">2026-09-21 20:23</strong></span>
+                <span style="font-size:15px;color:#94a3b8;">📊 数据更新时间：<strong style="color:#e2e8f0;font-size:16px;">2026-09-23 16:37</strong></span>
+                <span style="font-size:15px;color:#94a3b8;">上次周更新：<strong style="color:#e2e8f0;font-size:16px;">2026-09-21 20:23</strong></span>
             </div>
             <div class="chart-row">
                 <div>
@@ -457,8 +457,8 @@
         <!-- Dalio 10年实际利率三情景 -->
         <div class="card">
             <div class="card-title">🔭 Dalio 框架：未来10年美国实际利率三情景（2026–2036）</div>
-            <div style="font-size:15px;color:#8a7c64;margin-bottom:18px;">
-                核心约束：当 <span class="mono" style="color:#a87b1f;">实际利率 &gt; 实际GDP增速</span>，存量债务/GDP 会自动复利上行。系统内生动力是把实际利率压到低于潜在增速——这是历史上大国化解巨额主权债务的通用路径（二战后美国路径）。
+            <div style="font-size:15px;color:#94a3b8;margin-bottom:18px;">
+                核心约束：当 <span class="mono" style="color:#fbbf24;">实际利率 &gt; 实际GDP增速</span>，存量债务/GDP 会自动复利上行。系统内生动力是把实际利率压到低于潜在增速——这是历史上大国化解巨额主权债务的通用路径（二战后美国路径）。
             </div>
             <table>
                 <thead>
@@ -472,14 +472,14 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>① 有序财政调整</strong><br><span style="font-size:13px;color:#8a7c64;">Dalio偏好方案</span></td>
+                        <td><strong>① 有序财政调整</strong><br><span style="font-size:13px;color:#94a3b8;">Dalio偏好方案</span></td>
                         <td class="mono yellow">~20%</td>
                         <td>未来10年逐步下行 ~100bp，最终稳定在 <span class="mono">0%–1%</span>（略低于潜在增速）</td>
                         <td>赤字压到GDP 3%附近，支出削减+增税+压低实际利率三管齐下；美联储配合，允许适度通胀稀释真实债务</td>
                         <td>温和通胀，名义利率回落但实际利率中枢下移；黄金受支撑，长债承压；债务缓慢消化</td>
                     </tr>
                     <tr>
-                        <td><strong>② 政治僵持/不改革</strong><br><span style="font-size:13px;color:#8a7c64;">基准风险情景</span></td>
+                        <td><strong>② 政治僵持/不改革</strong><br><span style="font-size:13px;color:#94a3b8;">基准风险情景</span></td>
                         <td class="mono orange">~60%</td>
                         <td>前3年实际利率<span class="red">阶段性冲高至2%附近</span>，随后被迫回落至 <span class="mono">0%甚至阶段性为负</span></td>
                         <td>国债供给暴增、海外买家不足→期限溢价上行→债务利息吞噬财政→<b>财政主导（fiscal dominance）</b>：美联储被迫印钱购债，通胀回升快于名义利率</td>
@@ -493,7 +493,7 @@
                         <td>通缩初期黄金也会被抛售变现，但央行救市后实际利率转负，黄金随后上涨</td>
                     </tr>
                     <tr>
-                        <td><strong>④ 强劲财政整顿</strong><br><span style="font-size:13px;color:#8a7c64;">尾部反向情景</span></td>
+                        <td><strong>④ 强劲财政整顿</strong><br><span style="font-size:13px;color:#94a3b8;">尾部反向情景</span></td>
                         <td class="mono green">~10%</td>
                         <td>实际利率可在数年内维持 <span class="mono">2%+</span> 高位</td>
                         <td>政治意外达成加税+砍支出共识，财政可信度修复，美元信用短期回升</td>
@@ -614,15 +614,15 @@
             tooltip: {
                 trigger: 'item',
                 formatter: '{b}: {c}% ({d}%)',
-                backgroundColor: '#e8dfca',
-                borderColor: '#d8cdb4',
-                textStyle: { color: '#3a3226', fontSize: 15 }
+                backgroundColor: '#1e293b',
+                borderColor: '#334155',
+                textStyle: { color: '#e2e8f0', fontSize: 15 }
             },
             legend: {
                 orient: 'vertical',
                 right: 10,
                 top: 'center',
-                textStyle: { color: '#8a7c64', fontSize: 15 },
+                textStyle: { color: '#94a3b8', fontSize: 15 },
                 itemWidth: 14,
                 itemHeight: 14
             },
@@ -633,7 +633,7 @@
                 avoidLabelOverlap: false,
                 itemStyle: {
                     borderRadius: 8,
-                    borderColor: '#faf6ec',
+                    borderColor: '#111827',
                     borderWidth: 2
                 },
                 label: { show: false },
@@ -642,15 +642,15 @@
                         show: true,
                         fontSize: 16,
                         fontWeight: 'bold',
-                        color: '#3a3226'
+                        color: '#e2e8f0'
                     }
                 },
                 data: [
-                    { value: 30.4, name: '紫金矿业', itemStyle: { color: '#a87b1f' } },
-                    { value: 6.2, name: '吉利汽车', itemStyle: { color: '#4a6fa5' } },
-                    { value: 2.9, name: '万洲国际', itemStyle: { color: '#4a7c59' } },
-                    { value: 5.6, name: '小米集团', itemStyle: { color: '#b06a8a' } },
-                    { value: 55.0, name: '现金/货基', itemStyle: { color: '#a1937a' } }
+                    { value: 30.4, name: '紫金矿业', itemStyle: { color: '#fbbf24' } },
+                    { value: 6.2, name: '吉利汽车', itemStyle: { color: '#60a5fa' } },
+                    { value: 2.9, name: '万洲国际', itemStyle: { color: '#34d399' } },
+                    { value: 5.6, name: '小米集团', itemStyle: { color: '#f472b6' } },
+                    { value: 55.0, name: '现金/货基', itemStyle: { color: '#64748b' } }
                 ]
             }]
         };
