@@ -11,10 +11,14 @@
             "id": "d3668b4a06006eb6",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "01 🎯 投资原则.md",
+                "mode": "preview",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "01 🎯 投资原则"
             }
           }
         ]
@@ -183,10 +187,10 @@
   },
   "active": "d3668b4a06006eb6",
   "lastOpenFiles": [
-    "03 📈 生产率长期增长.md",
-    "index.html",
     "02 ⚙️ 经济机器怎么运转.md",
+    "03 📈 生产率长期增长.md",
     "01 🎯 投资原则.md",
+    "index.html",
     "06 💡 每日想法.md",
     "⏳ 长期债务周期.md",
     "05 ⏳ 长期债务周期.md",
