@@ -35,11 +35,6 @@
         .highlight-block.green { background: rgba(52,211,153,.08); border-left-color: #34d399; }
         .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
         @media (max-width: 1200px) { .two-col { grid-template-columns: 1fr; } }
-        .win-rate-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 20px 0; }
-        @media (max-width: 1024px) { .win-rate-grid { grid-template-columns: repeat(2, 1fr); } }
-        .stat-card { background: #2c2c2c; border-radius: 12px; padding: 20px; text-align: center; }
-        .stat-label { font-size: 14px; color: #9a9a9a; margin-bottom: 8px; }
-        .stat-value { font-size: 32px; font-weight: 700; }
         .event-passed { opacity: 0.7; }
         .event-passed td:first-child { text-decoration: line-through; }
     </style>
@@ -61,7 +56,7 @@
         <div class="status-banner">
             <div class="status-item">📅 最后更新：<strong>2026-09-29</strong></div>
             <div class="status-item">⏰ 预计下次更新：<strong>2026-09-28 20:23</strong>（每周日）</div>
-            <div class="status-item">🔮 未来30天重要事件跟踪 + 判断胜率</div>
+            <div class="status-item">🔮 未来30天重要事件跟踪</div>
         </div>
 
         <!-- 本周催化剂 -->
@@ -163,38 +158,6 @@
                 <strong>🚨 本周意外：</strong>金价单日大跌1.56%至4300美元，布油跌破100关口至95.99美元——加息后实际利率上行压制金价，中东缓和持续打压油价。<em>这是"通胀压力缓解"而非"滞胀逻辑反转"，继续观察4200支撑位。</em>
             </div>
         </div>
-        <!-- 判断胜率统计 -->
-        <div class="card">
-            <div class="card-title">🎯 我的判断胜率统计</div>
-            <div class="win-rate-grid">
-                <div class="stat-card">
-                    <div class="stat-label">总判断数</div>
-                    <div class="stat-value mono">8</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">✅ 判断正确</div>
-                    <div class="stat-value green mono">3</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">⚠️ 部分正确</div>
-                    <div class="stat-value yellow mono">3</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">❌ 判断错误</div>
-                    <div class="stat-value red mono">2</div>
-                </div>
-            </div>
-            <div class="highlight-block">
-                <strong>📊 当前胜率：</strong>完全正确 37.5%，部分正确 37.5% → <strong>整体正确率 75%</strong><br>
-                <strong>容易错的类型：</strong>
-                <ul style="margin-left:20px;margin-top:8px;">
-                    <li><strong>商品价格 vs 股票估值混淆</strong>：金价涨≠紫金涨（加息周期矿业股估值压缩）</li>
-                    <li><strong>地缘事件持续时间</strong>：方向对但时间判断偏长，波动结束比预期快</li>
-                    <li><strong>深度套牢股反弹</strong>：把反弹当反转，低估了套牢盘抛压</li>
-                </ul>
-            </div>
-        </div>
-
         <!-- 未来30天事件 -->
         <div class="card">
             <div class="card-title">🔮 未来30天事件（含我的判断+实际结果）</div>
