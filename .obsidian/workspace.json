@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "d81278edee2962de",
+        "id": "ef0e40135f4ecdea",
         "type": "tabs",
         "children": [
           {
-            "id": "e8f6bb3e484768ab",
+            "id": "d3668b4a06006eb6",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "03 📈 生产率长期增长.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "03 📈 生产率长期增长"
+              "title": "New tab"
             }
           }
         ]
@@ -185,8 +181,9 @@
       "bases:Create new base": false
     }
   },
-  "active": "e8f6bb3e484768ab",
+  "active": "d3668b4a06006eb6",
   "lastOpenFiles": [
+    "03 📈 生产率长期增长.md",
     "index.html",
     "02 ⚙️ 经济机器怎么运转.md",
     "01 🎯 投资原则.md",
@@ -195,7 +192,6 @@
     "05 ⏳ 长期债务周期.md",
     "⚙️ 经济机器怎么运转.md",
     "04 🔄 短期债务周期.md",
-    "03 📈 生产率长期增长.md",
     "💡 每日想法.md",
     "🎯 投资原则.md",
     "🔄 短期债务周期.md",
@@ -222,7 +218,6 @@
     "03_资产类别与市场/黄金",
     "03_资产类别与市场",
     "02_国家与地区",
-    "01_宏观驱动力与周期",
     "Untitled.canvas"
   ]
 }
