@@ -429,9 +429,9 @@
                     <tr><td>🏦 上海金 (T+D)</td><td class="mono">~900 元/克</td><td class="mono">~896</td><td class="mono">~960</td><td class="mono">跟随国际</td></tr>
                     <tr><td>💵 美元指数</td><td class="mono"><strong>101.1</strong></td><td class="mono">99.0</td><td class="mono">~100</td><td class="green mono">+1.1%</td></tr>
                     <tr><td>💱 USD/CNY</td><td class="mono"><strong>6.7037</strong></td><td class="mono">6.7128</td><td class="mono">~6.75</td><td class="green mono">↓ 人民币升</td></tr>
-                    <tr><td>⚡ LME 铜</td><td class="mono orange"><strong>14461 USD</strong></td><td class="mono">14379</td><td class="mono">~14036</td><td class="green mono">+3.0%</td></tr>
-                    <tr><td>🛢️ 布伦特原油</td><td class="mono orange"><strong>100.0 USD</strong> ⚠️</td><td class="mono">98.7</td><td class="mono">~89.70</td><td class="green mono">+11.5%</td></tr>
-                    <tr><td>🔋 电池级碳酸锂</td><td class="mono"><strong>8.5 万元/吨</strong></td><td class="mono">~8.2</td><td class="mono">~7.5</td><td class="green mono">+13.3%</td></tr>
+                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('lmecopper', this)">⚡ LME 铜</td><td class="mono orange"><strong>14461 USD</strong></td><td class="mono">14379</td><td class="mono">~14036</td><td class="green mono">+3.0%</td></tr>
+                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('brent', this)">🛢️ 布伦特原油</td><td class="mono orange"><strong>100.0 USD</strong> ⚠️</td><td class="mono">98.7</td><td class="mono">~89.70</td><td class="green mono">+11.5%</td></tr>
+                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('lithium', this)">🔋 电池级碳酸锂</td><td class="mono"><strong>8.5 万元/吨</strong></td><td class="mono">~8.2</td><td class="mono">~7.5</td><td class="green mono">+13.3%</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('tips', this)">📉 美国10年实际利率</td><td class="mono red"><strong>2.29%</strong></td><td class="mono">2.40%</td><td class="mono">~2.30%</td><td class="green mono">↓ 回落</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('pbcg', this)">🏛️ 央行购金 (中国8月)</td><td class="mono green">+20.2吨</td><td class="mono">—</td><td class="mono">+19吨</td><td class="mono green">✅ 连续22个月</td></tr>
                 </tbody>
@@ -716,6 +716,30 @@
                 values: [-2.5, -2.3, -2.0, -1.8, -1.5, -1.2, -1.5, -1.3, -1.5, -1.5, -0.8, null],
                 color: '#f87171',
                 unit: '%'
+            },
+            lmecopper: {
+                title: 'LME铜 近12个月（USD/吨）',
+                source: '数据来源：LME 3个月期铜月度均价；2025-10至2026-07为估算值',
+                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
+                values: [9800, 10200, 10500, 11000, 11500, 12000, 12500, 13000, 13500, 14000, 14036, 14461],
+                color: '#d97706',
+                unit: ' USD/吨'
+            },
+            brent: {
+                title: '布伦特原油 近12个月（USD/桶）',
+                source: '数据来源：ICE Brent近月合约月度均价；2025-10至2026-07为估算值',
+                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
+                values: [72, 74, 76, 78, 80, 82, 84, 86, 88, 89.7, 95, 100],
+                color: '#dc2626',
+                unit: ' USD/桶'
+            },
+            lithium: {
+                title: '电池级碳酸锂 近12个月（万元/吨）',
+                source: '数据来源：SMM/上海钢联电池级碳酸锂现货均价；2025-10至2026-07为估算值',
+                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
+                values: [5.5, 5.8, 6.0, 6.2, 6.5, 6.8, 7.0, 7.2, 7.3, 7.5, 8.0, 8.5],
+                color: '#22d3ee',
+                unit: ' 万元/吨'
             }
         };
     </script>
