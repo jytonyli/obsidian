@@ -499,6 +499,129 @@
  </div>
 
  <button id="scrollTop" class="scroll-top" title="返回顶部">↑</button>
+<script>
+ // 三股力量叠加（结构示意，非真实数据）
+ var threeChart = echarts.init(document.getElementById('threeForcesChart'));
+ (function () {
+ var xs = [], prod = [], short = [], long = [], sum = [];
+ for (var i = 0; i <= 100; i += 2) {
+ xs.push(i);
+ var p = 1 + 0.018 * i; // 生产率：长期斜线
+ var s = 0.13 * Math.sin(i / 8 * Math.PI * 2); // 短周期：5-8年波动
+ var l = 0.5 * Math.sin(i / 55 * Math.PI * 2); // 长周期：50-75年大波
+ prod.push(+p.toFixed(2));
+ short.push(+(p + s).toFixed(2));
+ long.push(+(p + l).toFixed(2));
+ sum.push(+(p + s + l).toFixed(2));
+ }
+ var toData = function (arr) { return xs.map(function (x, j) { return [x, arr[j]]; }); };
+ threeChart.setOption({
+ tooltip: {
+ trigger: 'axis',
+ backgroundColor: 'rgba(38,38,38,0.95)',
+ borderColor: 'rgba(255,255,255,0.15)',
+ textStyle: { color: '#eaeaea', fontSize: 13 },
+ valueFormatter: function (v) { return v.toFixed(2); }
+ },
+ legend: {
+ top: 0,
+ textStyle: { color: '#9a9a9a', fontSize: 13 },
+ itemWidth: 18, itemHeight: 10,
+ data: ['生产率（长期斜线）', '+ 短周期波动', '+ 长周期大波', '叠加结果']
+ },
+ grid: { left: 50, right: 24, top: 44, bottom: 36 },
+ xAxis: {
+ type: 'value', name: '时间 →', nameTextStyle: { color: '#9a9a9a', fontSize: 12 },
+ axisLine: { lineStyle: { color: 'rgba(255,255,255,0.2)' } },
+ axisLabel: { color: '#9a9a9a', fontSize: 12 },
+ splitLine: { show: false }
+ },
+ yAxis: {
+ type: 'value', name: '经济产出（示意）', nameTextStyle: { color: '#9a9a9a', fontSize: 12 },
+ axisLine: { lineStyle: { color: 'rgba(255,255,255,0.15)' } },
+ axisLabel: { color: '#9a9a9a', fontSize: 12 },
+ splitLine: { lineStyle: { color: 'rgba(255,255,255,0.06)' } }
+ },
+ series: [
+ {
+ name: '生产率（长期斜线）', type: 'line',
+ data: toData(prod), smooth: true, symbol: 'none',
+ lineStyle: { width: 3, color: '#34d399' }
+ },
+ {
+ name: '+ 短周期波动', type: 'line',
+ data: toData(short), smooth: true, symbol: 'none',
+ lineStyle: { width: 2, color: '#60a5fa', type: 'dashed' }
+ },
+ {
+ name: '+ 长周期大波', type: 'line',
+ data: toData(long), smooth: true, symbol: 'none',
+ lineStyle: { width: 2, color: '#f87171', type: 'dashed' }
+ },
+ {
+ name: '叠加结果', type: 'line',
+ data: toData(sum), smooth: true, symbol: 'none',
+ lineStyle: { width: 3.5, color: '#fbbf24' },
+ areaStyle: { color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: 'rgba(251,191,36,0.25)' }, { offset: 1, color: 'rgba(251,191,36,0.02)' }] } }
+ }
+ ]
+ });
+ })();
 
+ // 情景饼图
+ var pieChart = echarts.init(document.getElementById('scenarioPie'));
+ pieChart.setOption({
+ tooltip: {
+ trigger: 'item',
+ formatter: '{b}: {c}%',
+ backgroundColor: 'rgba(38,38,38,0.95)',
+ borderColor: 'rgba(255,255,255,0.15)',
+ textStyle: { color: '#eaeaea', fontSize: 14 }
+ },
+ legend: {
+ orient: 'vertical',
+ right: 6,
+ top: 'center',
+ textStyle: { color: '#9a9a9a', fontSize: 13 },
+ itemWidth: 14,
+ itemHeight: 14
+ },
+ series: [{
+ type: 'pie',
+ radius: ['42%', '72%'],
+ center: ['34%', '50%'],
+ avoidLabelOverlap: false,
+ itemStyle: { borderRadius: 8, borderColor: '#161616', borderWidth: 2 },
+ label: { show: false },
+ emphasis: { label: { show: true, fontSize: 15, fontWeight: 'bold', color: '#eaeaea' } },
+ data: [
+ { value: 60, name: '基准：财政主导压回 0%', itemStyle: { color: '#fb923c' } },
+ { value: 20, name: '有序调整：赤字收敛', itemStyle: { color: '#fbbf24' } },
+ { value: 10, name: '通缩危机', itemStyle: { color: '#f87171' } },
+ { value: 10, name: '财政整顿：利率高位', itemStyle: { color: '#34d399' } }
+ ]
+ }]
+ });
+ window.addEventListener('resize', function() { pieChart.resize(); threeChart.resize(); });
+
+ // 返回顶部 + 目录高亮
+ var scrollTopBtn = document.getElementById('scrollTop');
+ var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+ window.addEventListener('scroll', function() {
+ scrollTopBtn.classList.toggle('show', window.scrollY > 600);
+ var pos = window.scrollY + 140;
+ var current = 0;
+ tocLinks.forEach(function(link, i) {
+ var target = document.querySelector(link.getAttribute('href'));
+ if (target && target.offsetTop <= pos) current = i;
+ });
+ tocLinks.forEach(function(link, i) {
+ link.classList.toggle('active', i === current);
+ });
+ }, { passive: true });
+ scrollTopBtn.addEventListener('click', function() {
+ window.scrollTo({ top: 0, behavior: 'smooth' });
+ });
+ </script>
 </body>
 </html>
