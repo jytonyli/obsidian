@@ -373,12 +373,12 @@
                             <tr><th>指标</th><th>当前值</th><th>上周</th><th>上月</th><th>当日涨幅</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>🇨🇳 上证指数</td><td class="mono"><strong>3842.19</strong></td><td class="mono">3830.45</td><td class="mono">~3900</td><td class="green mono">+0.31%</td></tr>
-                            <tr><td>🇨🇳 中证 500</td><td class="mono"><strong>7435.16</strong></td><td class="mono">7439.63</td><td class="mono">~7700</td><td class="red mono">-0.06%</td></tr>
-                            <tr><td>🇭🇰 恒生指数</td><td class="mono"><strong>24613.27</strong></td><td class="mono">24642.51</td><td class="mono">~25000</td><td class="green mono">+0.37%</td></tr>
-                            <tr><td>🇭🇰 恒生科技</td><td class="mono"><strong>4253.89</strong></td><td class="mono">4296.0</td><td class="mono">~4400</td><td class="green mono">+0.10%</td></tr>
-                            <tr><td>🇺🇸 S&P 500</td><td class="mono">7670.84</td><td class="mono">7683.69</td><td class="mono">~7600</td><td class="red mono">-0.17%</td></tr>
-                            <tr><td>🇺🇸 纳斯达克</td><td class="mono"><strong>26797.54</strong></td><td class="mono">~26900</td><td class="mono">~27000</td><td class="mono">—</td></tr>
+                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('sse', this)">🇨🇳 上证指数</td><td class="mono"><strong>3842.19</strong></td><td class="mono">3830.45</td><td class="mono">~3986</td><td class="green mono">+0.31%</td></tr>
+                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('csi500', this)">🇨🇳 中证 500</td><td class="mono"><strong>7435.16</strong></td><td class="mono">7439.63</td><td class="mono">~7600</td><td class="red mono">-0.06%</td></tr>
+                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('hsi', this)">🇭🇰 恒生指数</td><td class="mono"><strong>24613.27</strong></td><td class="mono">24642.51</td><td class="mono">~25460</td><td class="green mono">+0.37%</td></tr>
+                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('hstech', this)">🇭🇰 恒生科技</td><td class="mono"><strong>4253.89</strong></td><td class="mono">4296.0</td><td class="mono">~4400</td><td class="green mono">+0.10%</td></tr>
+                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('spx', this)">🇺🇸 S&P 500</td><td class="mono"><strong>7695.82</strong></td><td class="mono">7683.69</td><td class="mono">~7686</td><td class="green mono">+0.33%</td></tr>
+                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('ixic', this)">🇺🇸 纳斯达克</td><td class="mono"><strong>26940.89</strong></td><td class="mono">~26800</td><td class="mono">~26800</td><td class="green mono">+0.53%</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -402,12 +402,12 @@
                             <tr><td class="clickable-indicator" onclick="toggleMacroChart('cpi', this)">美国 CPI (8月)</td><td class="mono">3.4%</td><td class="mono">—</td><td class="mono">3.4%</td><td class="red mono">粘性</td></tr>
                             <tr><td class="clickable-indicator" onclick="toggleMacroChart('pce', this)">美国核心 PCE</td><td class="mono yellow">3.3%</td><td class="mono">—</td><td class="mono">~3.2%</td><td class="red mono">高于目标</td></tr>
                             <tr class="group-header"><td colspan="5">🇨🇳 中国</td></tr>
-                            <tr><td>中国 10 年国债</td><td class="mono"><strong>1.68%</strong></td><td class="mono">1.67%</td><td class="mono">~1.75%</td><td class="mono">↓ 历史低位</td></tr>
-                            <tr><td>中国 LPR (1Y)</td><td class="mono">3.0%</td><td class="mono">同上</td><td class="mono">同上</td><td class="mono">→ 不变</td></tr>
+                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('cn10y', this)">中国 10 年国债</td><td class="mono"><strong>1.68%</strong></td><td class="mono">1.67%</td><td class="mono">~1.75%</td><td class="mono">↓ 历史低位</td></tr>
+                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('cnlpr', this)">中国 LPR (1Y)</td><td class="mono">3.0%</td><td class="mono">同上</td><td class="mono">同上</td><td class="mono">→ 不变</td></tr>
                             <tr><td class="clickable-indicator" onclick="toggleMacroChart('cnsocialfin', this)">中国社融存量同比</td><td class="mono"><strong>~8.7%</strong></td><td class="mono">—</td><td class="mono">~8.5%</td><td class="green mono">→ 平稳</td></tr>
                             <tr><td class="clickable-indicator" onclick="toggleMacroChart('cnm1', this)">中国 M1 同比</td><td class="mono"><strong>~2.3%</strong></td><td class="mono">—</td><td class="mono">~2.1%</td><td class="green mono">↑ 温和回升</td></tr>
                             <tr><td class="clickable-indicator" onclick="toggleMacroChart('cnppi', this)">中国 PPI 同比</td><td class="mono red"><strong>~-0.8%</strong></td><td class="mono">—</td><td class="mono">~-1.5%</td><td class="green mono">↑ 收窄</td></tr>
-                            <tr><td>中国 CPI (8月)</td><td class="mono">0.5%</td><td class="mono">—</td><td class="mono">0.5%</td><td class="mono">→ 温和</td></tr>
+                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('cncpi', this)">中国 CPI (8月)</td><td class="mono">0.5%</td><td class="mono">—</td><td class="mono">0.5%</td><td class="mono">→ 温和</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -426,9 +426,9 @@
                 </thead>
                 <tbody>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('gold', this)">🥇 伦敦金现</td><td class="mono yellow"><strong>4199.31 USD/oz</strong> ⚠️逼近4200</td><td class="mono">4181.66</td><td class="mono">~4500</td><td class="red mono">-6.7%</td></tr>
-                    <tr><td>🏦 上海金 (T+D)</td><td class="mono">~900 元/克</td><td class="mono">~896</td><td class="mono">~960</td><td class="mono">跟随国际</td></tr>
-                    <tr><td>💵 美元指数</td><td class="mono"><strong>101.1</strong></td><td class="mono">99.0</td><td class="mono">~100</td><td class="green mono">+1.1%</td></tr>
-                    <tr><td>💱 USD/CNY</td><td class="mono"><strong>6.7037</strong></td><td class="mono">6.7128</td><td class="mono">~6.75</td><td class="green mono">↓ 人民币升</td></tr>
+                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('shanghaigold', this)">🏦 上海金 (T+D)</td><td class="mono">~900 元/克</td><td class="mono">~896</td><td class="mono">~960</td><td class="mono">跟随国际</td></tr>
+                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('dollarindex', this)">💵 美元指数</td><td class="mono"><strong>101.1</strong></td><td class="mono">99.0</td><td class="mono">~100</td><td class="green mono">+1.1%</td></tr>
+                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('usdcny', this)">💱 USD/CNY</td><td class="mono"><strong>6.7037</strong></td><td class="mono">6.7128</td><td class="mono">~6.75</td><td class="green mono">↓ 人民币升</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('lmecopper', this)">⚡ LME 铜</td><td class="mono orange"><strong>14461 USD</strong></td><td class="mono">14379</td><td class="mono">~14036</td><td class="green mono">+3.0%</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('brent', this)">🛢️ 布伦特原油</td><td class="mono orange"><strong>100.0 USD</strong> ⚠️</td><td class="mono">98.7</td><td class="mono">~89.70</td><td class="green mono">+11.5%</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('lithium', this)">🔋 电池级碳酸锂</td><td class="mono"><strong>8.5 万元/吨</strong></td><td class="mono">~8.2</td><td class="mono">~7.5</td><td class="green mono">+13.3%</td></tr>
@@ -740,6 +740,102 @@
                 values: [5.5, 5.8, 6.0, 6.2, 6.5, 6.8, 7.0, 7.2, 7.3, 7.5, 8.0, 8.5],
                 color: '#22d3ee',
                 unit: ' 万元/吨'
+            },
+            sse: {
+                title: '上证指数 近12个月（点）',
+                source: '数据来源：同花顺；2026-08=3986.30、2026-09=3842.19为真实收盘，其余为估算值',
+                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
+                values: [3350, 3400, 3450, 4140, 4130, 4160, 4200, 4180, 4100, 4050, 3986, 3842],
+                color: '#ef4444',
+                unit: ' 点'
+            },
+            csi500: {
+                title: '中证500 近12个月（点）',
+                source: '数据来源：同花顺；2026-09=7435.16为真实收盘，其余为估算值',
+                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
+                values: [6200, 6300, 6400, 7200, 7150, 7300, 7500, 7600, 7500, 7550, 7600, 7435],
+                color: '#f97316',
+                unit: ' 点'
+            },
+            hsi: {
+                title: '恒生指数 近12个月（点）',
+                source: '数据来源：同花顺；2026-08=25460(期货)、2026-09=24613.27为真实收盘，其余为估算值',
+                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
+                values: [21000, 21500, 22000, 23500, 24000, 24500, 24800, 25000, 25200, 25300, 25460, 24613],
+                color: '#eab308',
+                unit: ' 点'
+            },
+            hstech: {
+                title: '恒生科技 近12个月（点）',
+                source: '数据来源：同花顺；2026-09=4253.89为真实收盘，其余为估算值',
+                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
+                values: [3600, 3700, 3800, 4100, 4200, 4300, 4350, 4400, 4450, 4420, 4400, 4254],
+                color: '#a855f7',
+                unit: ' 点'
+            },
+            spx: {
+                title: 'S&P 500 近12个月（点）',
+                source: '数据来源：同花顺；2026-08=7686.14、2026-09=7695.82为真实收盘，其余为估算值',
+                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
+                values: [6800, 6900, 7000, 7100, 7200, 7300, 7400, 7500, 7550, 7600, 7686, 7696],
+                color: '#22c55e',
+                unit: ' 点'
+            },
+            ixic: {
+                title: '纳斯达克综指 近12个月（点）',
+                source: '数据来源：同花顺；2026-09=26940.89为真实收盘，其余为估算值',
+                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
+                values: [22000, 22500, 23000, 23500, 24000, 24500, 25000, 25500, 26000, 26300, 26800, 26941],
+                color: '#3b82f6',
+                unit: ' 点'
+            },
+            cn10y: {
+                title: '中国10年国债收益率 近12个月（%）',
+                source: '数据来源：中债登；2026-09=1.68%为真实值，其余为估算值',
+                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
+                values: [1.85, 1.82, 1.80, 1.78, 1.76, 1.75, 1.73, 1.72, 1.70, 1.69, 1.68, 1.68],
+                color: '#06b6d4',
+                unit: '%'
+            },
+            cnlpr: {
+                title: '中国LPR(1Y) 近12个月（%）',
+                source: '数据来源：中国人民银行；2026-02起下调至3.0%',
+                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
+                values: [3.1, 3.1, 3.1, 3.1, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0],
+                color: '#14b8a6',
+                unit: '%'
+            },
+            cncpi: {
+                title: '中国CPI同比 近12个月（%）',
+                source: '数据来源：国家统计局；2026-08=0.5%为真实值，2026-09尚未公布',
+                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
+                values: [0.3, 0.4, 0.5, 0.6, 0.7, 0.5, 0.4, 0.5, 0.5, 0.5, 0.5, null],
+                color: '#f59e0b',
+                unit: '%'
+            },
+            shanghaigold: {
+                title: '上海金(T+D) 近12个月（元/克）',
+                source: '数据来源：上海黄金交易所；2026-09≈900为估算值，其余为估算值',
+                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
+                values: [720, 735, 750, 780, 810, 830, 850, 870, 890, 920, 960, 900],
+                color: '#fbbf24',
+                unit: ' 元/克'
+            },
+            dollarindex: {
+                title: '美元指数 近12个月',
+                source: '数据来源：ICE；2026-09=101.1为真实值，其余为估算值',
+                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
+                values: [104, 103.5, 103, 102.5, 102, 101.5, 101, 100.5, 100, 99.5, 100, 101.1],
+                color: '#6366f1',
+                unit: ''
+            },
+            usdcny: {
+                title: 'USD/CNY 近12个月',
+                source: '数据来源：中国外汇交易中心；2026-09=6.7037为真实值，其余为估算值',
+                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
+                values: [7.15, 7.12, 7.10, 7.05, 7.00, 6.95, 6.90, 6.85, 6.80, 6.75, 6.72, 6.70],
+                color: '#8b5cf6',
+                unit: ''
             }
         };
     </script>
