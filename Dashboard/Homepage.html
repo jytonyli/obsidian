@@ -126,6 +126,9 @@
         }
         .fixed-table { table-layout: fixed; }
         .fixed-table td, .fixed-table th { overflow: hidden; text-overflow: ellipsis; }
+        .clickable-indicator { cursor: pointer; text-decoration: underline dotted; text-underline-offset: 3px; }
+        .clickable-indicator:hover { color: #fbbf24; }
+        #macroChartPanel { display: none; margin-top: 16px; padding: 16px; background: #1e1e1e; border-radius: 10px; border: 1px solid #333; }
         th {
             text-align: left;
             padding: 14px 16px;
@@ -409,10 +412,18 @@
                     <tr><td>USD/CNY</td><td class="mono"><strong>6.7037</strong></td><td class="mono">6.7128</td><td class="mono">~6.75</td><td class="green mono">↓ 人民币升</td></tr>
                     <tr><td>LME 铜</td><td class="mono orange"><strong>14461 USD</strong></td><td class="mono">14379</td><td class="mono">~14036</td><td class="green mono">+0.34%</td></tr>
                     <tr><td>布伦特原油</td><td class="mono orange"><strong>100.0 USD</strong> ⚠️</td><td class="mono">98.7</td><td class="mono">~89.70</td><td class="green mono">+1.3%</td></tr>
-                    <tr><td>美国10年实际利率</td><td class="mono red"><strong>2.29%</strong></td><td class="mono">2.40%</td><td class="mono">~2.30%</td><td class="green mono">↓ 回落</td></tr>
-                    <tr><td>央行购金 (中国8月)</td><td class="mono green">+20.2吨</td><td class="mono">—</td><td class="mono">+19吨</td><td class="mono green">✅ 连续22个月</td></tr>
+                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('tips')">美国10年实际利率</td><td class="mono red"><strong>2.29%</strong></td><td class="mono">2.40%</td><td class="mono">~2.30%</td><td class="green mono">↓ 回落</td></tr>
+                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('pbcg')">央行购金 (中国8月)</td><td class="mono green">+20.2吨</td><td class="mono">—</td><td class="mono">+19吨</td><td class="mono green">✅ 连续22个月</td></tr>
                 </tbody>
             </table>
+            <div id="macroChartPanel">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                    <strong id="macroChartTitle" style="font-size:15px;"></strong>
+                    <span style="color:#666;font-size:12px;cursor:pointer;" onclick="document.getElementById('macroChartPanel').style.display='none'">✕ 关闭</span>
+                </div>
+                <div id="macroChart" style="height:280px;"></div>
+                <div style="color:#666;font-size:11px;margin-top:6px;" id="macroChartSource"></div>
+            </div>
         </div>
 
         <!-- 周期定位 + 五股力量 -->
@@ -523,6 +534,72 @@
         window.addEventListener('resize', function() {
             allocChart.resize();
         });
+
+        // 宏观指标12个月趋势图（点击展开）
+        var macroChart = null;
+        var macroData = {
+            tips: {
+                title: '美国10年实际利率（TIPS）近12个月',
+                source: '数据来源：FRED FII10 月度均值；2025-10至2026-02为估算值',
+                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
+                values: [2.05, 1.98, 1.92, 2.00, 1.93, 1.91, 1.94, 2.04, 2.18, 2.35, 2.40, 2.29],
+                color: '#60a5fa',
+                unit: '%'
+            },
+            pbcg: {
+                title: '中国央行月度购金量 近12个月',
+                source: '数据来源：中国人民银行/国家外汇管理局（盎司折算吨）；世界黄金协会；2025-10/11、2026-06为估算值',
+                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
+                values: [3, 3, 0.93, 1.24, 0.93, 4.97, 8.09, 9.95, 10, 20, 20.2, null],
+                color: '#fbbf24',
+                unit: '吨'
+            }
+        };
+        function toggleMacroChart(key) {
+            var panel = document.getElementById('macroChartPanel');
+            var d = macroData[key];
+            if (panel.style.display === 'block' && document.getElementById('macroChartTitle').textContent === d.title) {
+                panel.style.display = 'none';
+                return;
+            }
+            panel.style.display = 'block';
+            document.getElementById('macroChartTitle').textContent = d.title;
+            document.getElementById('macroChartSource').textContent = d.source;
+            if (!macroChart) macroChart = echarts.init(document.getElementById('macroChart'));
+            macroChart.setOption({
+                tooltip: {
+                    trigger: 'axis',
+                    backgroundColor: 'rgba(38,38,38,0.95)',
+                    borderColor: 'rgba(255,255,255,0.15)',
+                    textStyle: { color: '#eaeaea', fontSize: 13 },
+                    formatter: function(params) {
+                        var v = params[0].value;
+                        return params[0].name + '：' + (v === null ? '暂无数据' : v + d.unit);
+                    }
+                },
+                grid: { left: 50, right: 20, top: 20, bottom: 30 },
+                xAxis: {
+                    type: 'category', data: d.months,
+                    axisLine: { lineStyle: { color: 'rgba(255,255,255,0.2)' } },
+                    axisLabel: { color: '#9a9a9a', fontSize: 11 }
+                },
+                yAxis: {
+                    type: 'value', scale: true,
+                    axisLine: { lineStyle: { color: 'rgba(255,255,255,0.15)' } },
+                    axisLabel: { color: '#9a9a9a', fontSize: 11, formatter: '{value}' + d.unit },
+                    splitLine: { lineStyle: { color: 'rgba(255,255,255,0.06)' } }
+                },
+                series: [{
+                    type: 'line', smooth: true,
+                    symbol: 'circle', symbolSize: 6,
+                    lineStyle: { width: 2.5, color: d.color },
+                    itemStyle: { color: d.color, borderColor: '#1e1e1e', borderWidth: 2 },
+                    areaStyle: { color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: d.color + '40' }, { offset: 1, color: d.color + '05' }] } },
+                    data: d.values
+                }]
+            }, true);
+            macroChart.resize();
+        }
     </script>
 </body>
 </html>
