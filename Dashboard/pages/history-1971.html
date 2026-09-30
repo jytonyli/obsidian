@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1971–1980 · 美元脱钩黄金与滞胀 | Tony's Investment Dashboard</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23fbbf24'/%3E%3Cpath d='M12 44 L26 28 L36 36 L52 14' stroke='%23161616' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            color: #eaeaea; line-height: 1.75; font-size: 17px;
+            background-color: #161616;
+            background-image:
+                radial-gradient(1000px 700px at 8% -10%, rgba(251,191,36,0.16), transparent 55%),
+                radial-gradient(900px 700px at 96% 5%, rgba(180,60,60,0.20), transparent 55%);
+            background-attachment: fixed;
+        }
+        .mono { font-family: 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
+        .nav {
+            background: rgba(22,22,22,0.45); backdrop-filter: blur(24px) saturate(1.6);
+            -webkit-backdrop-filter: blur(24px) saturate(1.6);
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+            padding: 20px 36px; display: flex; align-items: center; justify-content: space-between;
+            position: sticky; top: 0; z-index: 100;
+        }
+        .nav-brand { font-size: 24px; font-weight: 700; color: #fbbf24; }
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a { color: #9a9a9a; text-decoration: none; font-size: 17px; padding: 10px 18px; border-radius: 8px; transition: all 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: #fbbf24; background: rgba(255,255,255,0.08); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 36px; }
+        .status-banner {
+            background: rgba(38,38,38,0.38); backdrop-filter: blur(18px) saturate(1.4);
+            -webkit-backdrop-filter: blur(18px) saturate(1.4);
+            border: 1px solid rgba(255,255,255,0.13); border-radius: 16px;
+            padding: 24px 28px; margin-bottom: 28px; box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+        }
+        .status-item { font-size: 16px; color: #9a9a9a; }
+        .status-item strong { color: #eaeaea; font-size: 17px; }
+        .card {
+            background: rgba(38,38,38,0.38); backdrop-filter: blur(18px) saturate(1.4);
+            -webkit-backdrop-filter: blur(18px) saturate(1.4);
+            border: 1px solid rgba(255,255,255,0.13); border-radius: 16px;
+            padding: 32px; margin-bottom: 28px; box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+        }
+        .card-title { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+        .card-sub { font-size: 15px; color: #9a9a9a; margin-bottom: 22px; }
+        .section-subtitle { font-size: 17px; color: #9a9a9a; margin: 22px 0 14px; font-weight: 500; }
+        table { width: 100%; border-collapse: collapse; font-size: 15px; table-layout: fixed; margin: 14px 0; }
+        th { text-align: left; padding: 14px 16px; color: #9a9a9a; font-weight: 500; border-bottom: 2px solid rgba(255,255,255,0.12); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+        td { padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); vertical-align: top; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover { background: rgba(255,255,255,0.04); }
+        .green { color: #34d399; } .red { color: #f87171; } .yellow { color: #fbbf24; } .orange { color: #fb923c; }
+        .highlight-block {
+            background: rgba(251,191,36,0.08); border-left: 4px solid #fbbf24;
+            padding: 18px 22px; border-radius: 0 10px 10px 0; margin: 16px 0;
+            font-size: 15px; line-height: 1.8;
+        }
+        .highlight-block.red { background: rgba(248,113,113,0.08); border-left-color: #f87171; }
+        .highlight-block.green { background: rgba(52,211,153,0.08); border-left-color: #34d399; }
+        .highlight-block.orange { background: rgba(251,146,60,0.08); border-left-color: #fb923c; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 14px 0; }
+        .data-strip {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px; padding: 12px 18px; margin: 14px 0;
+            font-family: 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace;
+            font-size: 14px; color: #9a9a9a; line-height: 1.9;
+        }
+        .data-strip .num { color: #fbbf24; font-weight: 700; }
+        .takeaway {
+            background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.35);
+            border-radius: 12px; padding: 18px 22px; margin: 16px 0;
+            font-size: 16px; line-height: 1.8;
+        }
+        .takeaway .label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #161616; background: #fbbf24; border-radius: 6px; padding: 2px 10px; margin-right: 10px; }
+        .so-what {
+            background: rgba(52,211,153,0.08); border-left: 4px solid #34d399;
+            border-radius: 0 12px 12px 0; padding: 18px 22px; margin: 22px 0 6px;
+            font-size: 15px; line-height: 1.8;
+        }
+        .so-what .label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #161616; background: #34d399; border-radius: 6px; padding: 2px 10px; margin-right: 10px; }
+        .vflow { display: grid; grid-template-columns: 28px 1fr; gap: 0 14px; margin: 18px 0; }
+        .vflow .dot { justify-self: center; width: 14px; height: 14px; border-radius: 50%; background: #fbbf24; margin-top: 22px; }
+        .vflow .dot.red { background: #f87171; } .vflow .dot.green { background: #34d399; }
+        .vflow .node { padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .vflow .node:last-child { border-bottom: none; }
+        .vflow .node-title { font-weight: 600; font-size: 16px; }
+        .vflow .node-desc { font-size: 14px; color: #9a9a9a; margin-top: 4px; }
+        .chart-container { height: 400px; margin: 16px 0; }
+        .chapter-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 4px; }
+        .chapter-no { font-size: 15px; color: #fbbf24; font-weight: 700; }
+        @media (max-width: 1024px) {
+            body { font-size: 16px; } .container { padding: 20px 16px; }
+            .nav { padding: 14px 16px; flex-wrap: wrap; gap: 10px; }
+            .nav-brand { font-size: 19px; } .nav-links { gap: 4px; flex-wrap: wrap; }
+            .nav-links a { font-size: 14px; padding: 7px 10px; }
+            .card { padding: 20px 16px; border-radius: 12px; margin-bottom: 18px; }
+            .card-title { font-size: 18px; }
+            table { font-size: 13px; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            th { padding: 10px 8px; font-size: 11px; } td { padding: 10px 8px; }
+            .two-col { grid-template-columns: 1fr; }
+            .chart-container { height: 300px; }
+        }
+        @media (max-width: 640px) {
+            body { font-size: 15px; line-height: 1.6; } .container { padding: 14px 10px; }
+            .nav { padding: 10px 12px; flex-direction: column; align-items: flex-start; gap: 6px; }
+            .nav-brand { font-size: 17px; }
+            .nav-links { width: 100%; gap: 2px; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+            .nav-links a { font-size: 13px; padding: 6px 8px; white-space: nowrap; }
+            .card { padding: 16px 12px; border-radius: 10px; margin-bottom: 14px; }
+            .card-title { font-size: 16px; }
+            .highlight-block { padding: 12px 14px; font-size: 13px; margin: 10px 0; }
+            .data-strip { font-size: 12.5px; padding: 10px 12px; }
+            .takeaway, .so-what { font-size: 13.5px; padding: 14px 14px; }
+            .vflow { grid-template-columns: 22px 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-brand">🎛️ Tony's Investment Dashboard</div>
+        <div class="nav-links">
+            <a href="../Homepage.html">📊 仪表盘</a>
+            <a href="holdings.html">💼 持仓详情</a>
+            <a href="news.html">📰 新闻周报</a>
+            <a href="calendar.html">📅 催化剂</a>
+            <a href="../notebook.html">📓 笔记本</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="status-banner">
+            <div>
+                <div class="status-item" style="font-size:22px;font-weight:700;color:#eaeaea;">📜 1971–1980 · 美元脱钩黄金与滞胀</div>
+                <div class="status-item" style="margin-top:6px;">历史参照 ②/③ · 来源：notebook 05 章「长期债务周期」· 深度研究材料</div>
+            </div>
+            <div class="status-item"><span style="display:inline-block;background:rgba(251,191,36,0.12);border:1px solid rgba(251,191,36,0.4);color:#fbbf24;border-radius:999px;padding:3px 12px;font-size:13px;font-weight:600;">⚠ 数据快照：2026-09-29</span></div>
+        </div>
+
+        <div class="card">
+            <div class="chapter-head"><span class="chapter-no">DEEP DIVE</span></div>
+            <div class="card-title">布雷顿森林解体 + 滞胀：黄金最辉煌的十年</div>
+            <div class="card-sub">美元和黄金脱钩的那一刻，黄金不再是"货币"，反而自由了——10 年 +2300%（$35→$850）。发动机是持续为负的实际利率；1980 年沃尔克把利率拉到 20%，亲手终结了这轮牛市。</div>
+
+            <div class="takeaway"><span class="label">一句话结论</span><strong>负实际利率 = 黄金的发动机；沃尔克 = 发动机的熄火开关。</strong>1971–1980 的黄金牛市不是"避险"，是货币信用危机 + 输入性通胀 + 实际利率为负的三重奏。当实际利率由负转正，牛市就结束——这条因果链，正是你现在判断金价的核心框架。</div>
+            <div class="data-strip">📊 关键数据：金价 <span class="num">$35 → $850</span>（+2300%）｜ 美元 10 年贬值 <span class="num">~50%</span>｜ 美国 CPI 峰值 <span class="num">13.5%</span>（1980）｜ 联邦基金利率峰值 <span class="num">20%</span>（1981）｜ 油价 <span class="num">$3 → $37</span>（两次石油危机）</div>
+
+            <h3 class="section-subtitle">🧱 布雷顿森林为什么必然解体</h3>
+            <ul class="checklist" style="list-style:none;padding:0;margin:14px 0;">
+                <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#fbbf24;">•</span><strong>1944 布雷顿森林</strong>：美元锚定黄金 $35/oz，各国货币锚定美元；美元=世界储备货币。</li>
+                <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#fbbf24;">•</span><strong>特里芬难题</strong>：全球需要美元储备 → 美国必须持续逆差输出美元 → 逆差太多 → 美元兑黄金的可信度崩塌。体系自相矛盾，注定解体。</li>
+                <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#fbbf24;">•</span><strong>1960s 末</strong>：法国等国开始把美元换成黄金，美国黄金储备从 1950s 的 ~2 万吨掉到 ~0.9 万吨，金库见底。</li>
+            </ul>
+
+            <h3 class="section-subtitle">⏳ 时间线：从脱钩到 850 美元</h3>
+            <div class="vflow">
+                <div class="dot"></div>
+                <div class="node"><div class="node-title">1971.8.15 尼克松冲击：关闭黄金窗口</div><div class="node-desc">单方面终止美元兑黄金，+10% 进口附加税。布雷顿森林名存实亡。黄金仍锁在 $35 官方价，但自由市场价格开始裂开。</div></div>
+                <div class="dot"></div>
+                <div class="node"><div class="node-title">1973 布雷顿森林正式瓦解 + 第一次石油危机</div><div class="node-desc">主要货币全面浮动；10 月赎罪日战争 → 石油禁运，油价 $3 → $12。输入性通胀开始。</div></div>
+                <div class="dot green"></div>
+                <div class="node"><div class="node-title">1974.12 黄金突破 $195</div><div class="node-desc">美国解禁私人持有黄金（1933 年禁令解除），金价一度冲 $197——放开那刻，压抑 40 年的需求释放。</div></div>
+                <div class="dot red"></div>
+                <div class="node"><div class="node-title">1975–1976 深度回撤 -47%</div><div class="node-desc">美联储加息压通胀，金价 $195 → $103。记住：1970s 大牛市里也有接近腰斩的两年——"吃碎玻璃"的教科书样本。</div></div>
+                <div class="dot"></div>
+                <div class="node"><div class="node-title">1979 第二次石油危机</div><div class="node-desc">伊朗革命 + 两伊战争，油价 $12 → $37；美国 CPI 飙向 11–13%，实际利率深度为负。</div></div>
+                <div class="dot green"></div>
+                <div class="node"><div class="node-title">1980.1.21 金价见顶 $850</div><div class="node-desc">10 年 +2300%。苏联入侵阿富汗 + 通胀恐慌，最后的加速赶顶。</div></div>
+                <div class="dot red"></div>
+                <div class="node"><div class="node-title">1979–1981 沃尔克冲击：20% 利率</div><div class="node-desc">联邦基金利率拉到 20%（名义），实际利率由负转正（+5%+）。利率"高过通胀"，黄金的发动机熄火。</div></div>
+                <div class="dot red"></div>
+                <div class="node"><div class="node-title">1981 之后：20 年熊市</div><div class="node-desc">金价 1985 $300、1999 $250——实际利率长期为正的时代，黄金无人问津。直到 2001 互联网泡沫 + 2008 金融危机才重新启动。</div></div>
+            </div>
+
+            <h3 class="section-subtitle">📈 金价 vs 美国 CPI vs 联邦基金利率（1971–1981，真实数据）</h3>
+            <div class="chart-container" id="goldChart"></div>
+            <div class="highlight-block" style="font-size:13px;">三条线讲完整个故事：金价（金）一路上行、CPI（红）推着实际利率转负、联邦基金利率（绿）1980–81 暴力上穿 CPI——<strong>实际利率转正的那一刻，就是牛市顶。</strong></div>
+
+            <h3 class="section-subtitle">⚙️ 机制：为什么黄金涨了 2300%</h3>
+            <table>
+                <colgroup><col style="width:24%"><col style="width:28%"><col style="width:48%"></colgroup>
+                <thead><tr><th>驱动</th><th>量级</th><th>怎么传导</th></tr></thead>
+                <tbody>
+                    <tr><td>货币信用危机</td><td class="yellow">美元 -50%（10 年）</td><td>美元脱钩黄金 → 全球对"美元还是不是硬通货"存疑 → 央行和民众换黄金</td></tr>
+                    <tr><td>输入性通胀</td><td class="red">CPI 峰值 13.5%</td><td>两次石油危机 + 工资-物价螺旋 → 现金购买力被吞 → 实物资产重估</td></tr>
+                    <tr><td>负实际利率</td><td class="red">1970s 大部分年份为负</td><td>名义利率 < 通胀 → 持有现金/债券亏钱 → 黄金成为唯一"不亏"的资产</td></tr>
+                    <tr><td>供给锁死</td><td>金矿产量刚性强</td><td>需求爆发时供给跟不上，价格只能单边向上</td></tr>
+                    <tr><td>政策放开</td><td>1974 解禁</td><td>压抑 40 年的私人需求集中释放，放大涨幅</td></tr>
+                </tbody>
+            </table>
+
+            <h3 class="section-subtitle">🔍 最像今天的十年</h3>
+            <div class="two-col">
+                <div class="highlight-block orange"><strong>和 2026 的相似处</strong><br>财政扩张 + 债务高企；地缘冲突（中东）反复；美元信用受考验（央行购金）；实际利率维持高位但增长疲软——"财政主导"的前夜。</div>
+                <div class="highlight-block red"><strong>和 2026 的不同处</strong><br>现在实际利率是 +2.4%（很高），1970s 是负的——所以本轮金价靠央行购金 + 去美元化托底，比 1970s 更依赖"政策转向"的预期；一旦出现沃尔克式强力紧缩 + 财政整顿，回调会像 1975–76 一样深。</div>
+            </div>
+
+            <div class="so-what"><span class="label">所以呢？</span>
+                ① 你的黄金仓位押的不是"金价涨"，是<strong>实际利率终将转负/被压回</strong>——盯 10Y TIPS，别盯新闻标题；<br>
+                ② 1975–76 的 -47% 回撤证明：<strong>牛市中途腰斩是常态</strong>，决策卡的认错条件（实际利率持续 &gt;2.5% + 央行购金停滞）比"回撤多少"更重要；<br>
+                ③ 若美联储 2026 真的转向激进紧缩 + 国会落地财政整顿，<strong>照着沃尔克剧本走——先减黄金，别等它自己跌够</strong>。</div>
+        </div>
+
+        <div class="status-banner" style="justify-content:space-between;">
+            <div class="status-item">上一篇：<a href="history-1929.html" style="color:#fbbf24;">1929–1945 通缩去杠杆 →</a></div>
+            <div class="status-item">下一篇：<a href="history-1990.html" style="color:#fbbf24;">1990–至今 日本失去的三十年 →</a></div>
+        </div>
+    </div>
+
+    <script>
+        var goldChart = echarts.init(document.getElementById('goldChart'));
+        goldChart.setOption({
+            tooltip: {
+                trigger: 'axis',
+                backgroundColor: 'rgba(38,38,38,0.95)',
+                borderColor: 'rgba(255,255,255,0.15)',
+                textStyle: { color: '#eaeaea', fontSize: 13 }
+            },
+            legend: {
+                top: 0,
+                textStyle: { color: '#9a9a9a', fontSize: 13 },
+                data: ['金价（美元/oz，左轴）', '美国 CPI（%，右轴）', '联邦基金利率（%，右轴）']
+            },
+            grid: { left: 56, right: 56, top: 44, bottom: 40 },
+            xAxis: {
+                type: 'category',
+                data: ['1971','1972','1973','1974','1975','1976','1977','1978','1979','1980','1981'],
+                axisLine: { lineStyle: { color: 'rgba(255,255,255,0.2)' } },
+                axisLabel: { color: '#9a9a9a', fontSize: 12 }
+            },
+            yAxis: [
+                {
+                    type: 'value', name: '金价 $/oz', nameTextStyle: { color: '#9a9a9a', fontSize: 12 },
+                    axisLine: { lineStyle: { color: 'rgba(255,255,255,0.15)' } },
+                    axisLabel: { color: '#9a9a9a', fontSize: 12 },
+                    splitLine: { lineStyle: { color: 'rgba(255,255,255,0.06)' } }
+                },
+                {
+                    type: 'value', name: '%', nameTextStyle: { color: '#9a9a9a', fontSize: 12 },
+                    axisLine: { lineStyle: { color: 'rgba(255,255,255,0.15)' } },
+                    axisLabel: { color: '#9a9a9a', fontSize: 12 },
+                    splitLine: { show: false },
+                    min: 0, max: 25
+                }
+            ],
+            series: [
+                {
+                    name: '金价（美元/oz，左轴）', type: 'line', yAxisIndex: 0, smooth: true, symbol: 'circle', symbolSize: 7,
+                    lineStyle: { width: 3, color: '#fbbf24' },
+                    itemStyle: { color: '#fbbf24', borderColor: '#161616', borderWidth: 2 },
+                    areaStyle: { color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: 'rgba(251,191,36,0.3)' }, { offset: 1, color: 'rgba(251,191,36,0.02)' }] } },
+                    markPoint: {
+                        data: [
+                            { coord: ['1971', 43], name: '1971 $43', value: '起点 $43' },
+                            { coord: ['1980', 850], name: '1980 峰值 $850', value: '1980 峰值 $850' }
+                        ],
+                        symbolSize: 52, label: { color: '#eaeaea', fontSize: 11, formatter: function (p) { return p.name.split(' ').join('\n'); } }
+                    },
+                    data: [43, 64, 112, 197, 140, 103, 165, 226, 524, 850, 459]
+                },
+                {
+                    name: '美国 CPI（%，右轴）', type: 'line', yAxisIndex: 1, smooth: true, symbol: 'none',
+                    lineStyle: { width: 2.5, color: '#f87171', type: 'dashed' },
+                    data: [4.2, 3.4, 8.7, 12.3, 6.9, 4.8, 6.8, 9.1, 13.3, 13.5, 10.3]
+                },
+                {
+                    name: '联邦基金利率（%，右轴）', type: 'line', yAxisIndex: 1, smooth: true, symbol: 'none',
+                    lineStyle: { width: 2.5, color: '#34d399' },
+                    data: [4.7, 4.4, 8.7, 10.5, 5.8, 5.0, 5.5, 7.9, 11.2, 13.4, 20.0]
+                }
+            ]
+        });
+        window.addEventListener('resize', function () { goldChart.resize(); });
+    </script>
+</body>
+</html>

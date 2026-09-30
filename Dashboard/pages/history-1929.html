@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1929–1945 · 通缩去杠杆的完整剧本 | Tony's Investment Dashboard</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f87171'/%3E%3Cpath d='M12 44 L26 28 L36 36 L52 14' stroke='%23161616' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            color: #eaeaea; line-height: 1.75; font-size: 17px;
+            background-color: #161616;
+            background-image:
+                radial-gradient(1000px 700px at 8% -10%, rgba(200,60,60,0.20), transparent 55%),
+                radial-gradient(900px 700px at 96% 5%, rgba(80,120,190,0.20), transparent 55%);
+            background-attachment: fixed;
+        }
+        .mono { font-family: 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
+        .nav {
+            background: rgba(22,22,22,0.45); backdrop-filter: blur(24px) saturate(1.6);
+            -webkit-backdrop-filter: blur(24px) saturate(1.6);
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+            padding: 20px 36px; display: flex; align-items: center; justify-content: space-between;
+            position: sticky; top: 0; z-index: 100;
+        }
+        .nav-brand { font-size: 24px; font-weight: 700; color: #fbbf24; }
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a { color: #9a9a9a; text-decoration: none; font-size: 17px; padding: 10px 18px; border-radius: 8px; transition: all 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: #fbbf24; background: rgba(255,255,255,0.08); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 36px; }
+        .status-banner {
+            background: rgba(38,38,38,0.38); backdrop-filter: blur(18px) saturate(1.4);
+            -webkit-backdrop-filter: blur(18px) saturate(1.4);
+            border: 1px solid rgba(255,255,255,0.13); border-radius: 16px;
+            padding: 24px 28px; margin-bottom: 28px; box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+        }
+        .status-item { font-size: 16px; color: #9a9a9a; }
+        .status-item strong { color: #eaeaea; font-size: 17px; }
+        .card {
+            background: rgba(38,38,38,0.38); backdrop-filter: blur(18px) saturate(1.4);
+            -webkit-backdrop-filter: blur(18px) saturate(1.4);
+            border: 1px solid rgba(255,255,255,0.13); border-radius: 16px;
+            padding: 32px; margin-bottom: 28px; box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+        }
+        .card-title { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+        .card-sub { font-size: 15px; color: #9a9a9a; margin-bottom: 22px; }
+        .section-subtitle { font-size: 17px; color: #9a9a9a; margin: 22px 0 14px; font-weight: 500; }
+        table { width: 100%; border-collapse: collapse; font-size: 15px; table-layout: fixed; margin: 14px 0; }
+        th { text-align: left; padding: 14px 16px; color: #9a9a9a; font-weight: 500; border-bottom: 2px solid rgba(255,255,255,0.12); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+        td { padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); vertical-align: top; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover { background: rgba(255,255,255,0.04); }
+        .green { color: #34d399; } .red { color: #f87171; } .yellow { color: #fbbf24; } .orange { color: #fb923c; }
+        .highlight-block {
+            background: rgba(251,191,36,0.08); border-left: 4px solid #fbbf24;
+            padding: 18px 22px; border-radius: 0 10px 10px 0; margin: 16px 0;
+            font-size: 15px; line-height: 1.8;
+        }
+        .highlight-block.red { background: rgba(248,113,113,0.08); border-left-color: #f87171; }
+        .highlight-block.green { background: rgba(52,211,153,0.08); border-left-color: #34d399; }
+        .highlight-block.orange { background: rgba(251,146,60,0.08); border-left-color: #fb923c; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 14px 0; }
+        .data-strip {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px; padding: 12px 18px; margin: 14px 0;
+            font-family: 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace;
+            font-size: 14px; color: #9a9a9a; line-height: 1.9;
+        }
+        .data-strip .num { color: #fbbf24; font-weight: 700; }
+        .takeaway {
+            background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.35);
+            border-radius: 12px; padding: 18px 22px; margin: 16px 0;
+            font-size: 16px; line-height: 1.8;
+        }
+        .takeaway .label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #161616; background: #fbbf24; border-radius: 6px; padding: 2px 10px; margin-right: 10px; }
+        .so-what {
+            background: rgba(52,211,153,0.08); border-left: 4px solid #34d399;
+            border-radius: 0 12px 12px 0; padding: 18px 22px; margin: 22px 0 6px;
+            font-size: 15px; line-height: 1.8;
+        }
+        .so-what .label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #161616; background: #34d399; border-radius: 6px; padding: 2px 10px; margin-right: 10px; }
+        .vflow { display: grid; grid-template-columns: 28px 1fr; gap: 0 14px; margin: 18px 0; }
+        .vflow .dot { justify-self: center; width: 14px; height: 14px; border-radius: 50%; background: #fbbf24; margin-top: 22px; }
+        .vflow .dot.red { background: #f87171; } .vflow .dot.green { background: #34d399; }
+        .vflow .node { padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .vflow .node:last-child { border-bottom: none; }
+        .vflow .node-title { font-weight: 600; font-size: 16px; }
+        .vflow .node-desc { font-size: 14px; color: #9a9a9a; margin-top: 4px; }
+        .chart-container { height: 360px; margin: 16px 0; }
+        .chapter-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 4px; }
+        .chapter-no { font-size: 15px; color: #f87171; font-weight: 700; }
+        @media (max-width: 1024px) {
+            body { font-size: 16px; } .container { padding: 20px 16px; }
+            .nav { padding: 14px 16px; flex-wrap: wrap; gap: 10px; }
+            .nav-brand { font-size: 19px; } .nav-links { gap: 4px; flex-wrap: wrap; }
+            .nav-links a { font-size: 14px; padding: 7px 10px; }
+            .card { padding: 20px 16px; border-radius: 12px; margin-bottom: 18px; }
+            .card-title { font-size: 18px; }
+            table { font-size: 13px; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            th { padding: 10px 8px; font-size: 11px; } td { padding: 10px 8px; }
+            .two-col { grid-template-columns: 1fr; }
+            .chart-container { height: 260px; }
+        }
+        @media (max-width: 640px) {
+            body { font-size: 15px; line-height: 1.6; } .container { padding: 14px 10px; }
+            .nav { padding: 10px 12px; flex-direction: column; align-items: flex-start; gap: 6px; }
+            .nav-brand { font-size: 17px; }
+            .nav-links { width: 100%; gap: 2px; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+            .nav-links a { font-size: 13px; padding: 6px 8px; white-space: nowrap; }
+            .card { padding: 16px 12px; border-radius: 10px; margin-bottom: 14px; }
+            .card-title { font-size: 16px; }
+            .highlight-block { padding: 12px 14px; font-size: 13px; margin: 10px 0; }
+            .data-strip { font-size: 12.5px; padding: 10px 12px; }
+            .takeaway, .so-what { font-size: 13.5px; padding: 14px 14px; }
+            .vflow { grid-template-columns: 22px 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-brand">🎛️ Tony's Investment Dashboard</div>
+        <div class="nav-links">
+            <a href="../Homepage.html">📊 仪表盘</a>
+            <a href="holdings.html">💼 持仓详情</a>
+            <a href="news.html">📰 新闻周报</a>
+            <a href="calendar.html">📅 催化剂</a>
+            <a href="../notebook.html">📓 笔记本</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="status-banner">
+            <div>
+                <div class="status-item" style="font-size:22px;font-weight:700;color:#eaeaea;">📜 1929–1945 · 通缩去杠杆的完整剧本</div>
+                <div class="status-item" style="margin-top:6px;">历史参照 ①/③ · 来源：notebook 05 章「长期债务周期」· 深度研究材料</div>
+            </div>
+            <div class="status-item"><span style="display:inline-block;background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.4);color:#f87171;border-radius:999px;padding:3px 12px;font-size:13px;font-weight:600;">⚠ 数据快照：2026-09-29</span></div>
+        </div>
+
+        <div class="card">
+            <div class="chapter-head"><span class="chapter-no">DEEP DIVE</span></div>
+            <div class="card-title">美国大萧条 + 二战：通缩去杠杆的完整剧本</div>
+            <div class="card-sub">Dalio 笔下去杠杆的「标准教材」：前半段靠违约和紧缩（痛苦 4 年），后半段靠印钞和战争支出（1941–45）才真正走出。货币贬值的那一跳（金价 +69%），是全书最重要的转折信号。</div>
+
+            <div class="takeaway"><span class="label">一句话结论</span><strong>通缩去杠杆拖 4 年，印钞去杠杆只要 4 年。</strong>1929–1933 的"违约+紧缩"把美国打到了失业率 25%；1933 金本位脱钩（金价 $20.67→$35）+ 1941 后的战争赤字，用通胀稀释了债务，才真正结束大萧条。</div>
+            <div class="data-strip">📊 关键数据：道琼斯 <span class="num">-89%</span>（1929→1932）｜ 实际 GDP <span class="num">-27%</span>｜ 失业率 <span class="num">25%</span>｜ 银行倒闭 <span class="num">9000+</span> 家｜ 官方金价 <span class="num">$20.67 → $35</span>（+69%）｜ 债务/GDP 二战峰值 <span class="num">~120%</span></div>
+
+            <h3 class="section-subtitle">🧱 泡沫怎么形成的（1920s）</h3>
+            <ul class="checklist" style="list-style:none;padding:0;margin:14px 0;">
+                <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#f87171;">•</span><strong>保证金炒股</strong>：散户 10% 保证金杠杆买股，1929 年保证金贷款占股市市值 ~13%。</li>
+                <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#f87171;">•</span><strong>银行体系脆弱</strong>：银行拿存款炒股、放贷给投机，准备金率极低，无存款保险。</li>
+                <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#f87171;">•</span><strong>金本位约束</strong>：央行不能自由印钞救银行——黄金外流 = 货币必须紧缩，这是通缩去杠杆的制度根源。</li>
+            </ul>
+
+            <h3 class="section-subtitle">⏳ 时间线：先通缩后印钞</h3>
+            <div class="vflow">
+                <div class="dot red"></div>
+                <div class="node"><div class="node-title">1929.10 黑色星期二，崩盘开始</div><div class="node-desc">道指 9 月见顶 381，10 月 29 日单日 -12%，随后进入 34 个月熊市。</div></div>
+                <div class="dot red"></div>
+                <div class="node"><div class="node-title">1930–1932 银行连环倒闭 + 通缩螺旋</div><div class="node-desc">9000+ 家银行倒闭，存款蒸发；债务通缩：价格跌 → 实际债务涨 → 被迫卖资产 → 价格更跌。</div></div>
+                <div class="dot red"></div>
+                <div class="node"><div class="node-title">1932.7 道指见底 41 点（-89%）</div><div class="node-desc">失业率爬向 25%，名义 GDP 比 1929 缩水约一半。</div></div>
+                <div class="dot"></div>
+                <div class="node"><div class="node-title">1933.3 银行假日 + 罗斯福新政</div><div class="node-desc">全国银行停业 4 天重组；《紧急银行法》+ 存款保险，重建信用。</div></div>
+                <div class="dot orange"></div>
+                <div class="node"><div class="node-title">1933.4 金本位脱钩：金价 $20.67 → $35</div><div class="node-desc"><strong class="yellow">美元一次性贬值 41%（含 1934 官方价），黄金 +69%。</strong>这是"违约 + 印钞"信号，也是黄金长期剧本的模板。</div></div>
+                <div class="dot"></div>
+                <div class="node"><div class="node-title">1935–1936 虚弱复苏</div><div class="node-desc">新政支出 + 贬值效果显现，但私人部门仍在去杠杆。</div></div>
+                <div class="dot red"></div>
+                <div class="node"><div class="node-title">1937–1938 二次衰退</div><div class="node-desc">财政过早收紧 + 联储误加息，道指再跌 49%——去杠杆未完就收紧，教训。</div></div>
+                <div class="dot green"></div>
+                <div class="node"><div class="node-title">1941–1945 战争支出：印钞去杠杆</div><div class="node-desc">军费占 GDP 峰值 40%+，联储大量买入国债（财政主导）；名义增长跑赢债务，债务/GDP 120% 之后被增长 + 通胀稀释。</div></div>
+                <div class="dot green"></div>
+                <div class="node"><div class="node-title">1945 之后：通胀稀释 + 战后繁荣</div><div class="node-desc">债务/GDP 从 1946 年 ~120% 一路降到 1970s 的 ~30%——不是还掉的，是通胀和增长"化掉"的。</div></div>
+            </div>
+
+            <h3 class="section-subtitle">📉 道琼斯指数 1929–1945（年度收盘，真实数据）</h3>
+            <div class="chart-container" id="dowChart"></div>
+            <div class="highlight-block red" style="font-size:13px;">注：年度收盘价，非逐日。可见 1929→1932 的 -89% 长熊、1937 二次衰退、1942 战争低点 92 点，直到 1945 才收复 1929 的一半——<strong>通缩去杠杆的 16 年，比任何"预测拐点"都漫长。</strong></div>
+
+            <h3 class="section-subtitle">⚙️ 机制：去杠杆的四种手段在这段历史里怎么排的</h3>
+            <table>
+                <colgroup><col style="width:22%"><col style="width:26%"><col style="width:52%"></colgroup>
+                <thead><tr><th>手段</th><th>何时主导</th><th>效果</th></tr></thead>
+                <tbody>
+                    <tr><td>债务违约/重组</td><td class="red">1929–1933 主导</td><td>9000 家银行倒闭，股票 -89%，痛苦出清</td></tr>
+                    <tr><td>财政紧缩</td><td class="red">1930–1932</td><td>胡佛增税 + 削减支出，把衰退推成萧条</td></tr>
+                    <tr><td>印钞买债</td><td class="yellow">1933（金价跳升）、1941–45 主导</td><td>美元贬值 + 联储买国债，通胀稀释债务</td></tr>
+                    <tr><td>财富转移/加税</td><td>1935+</td><td>富人税、社保，缓解社会矛盾</td></tr>
+                </tbody>
+            </table>
+            <div class="highlight-block green"><strong>Dalio 的结论</strong>：靠「违约+紧缩」单独走完去杠杆 = 大萧条式灾难；靠「印钞+温和紧缩」的组合 = 漂亮去杠杆。1933 和 1941 两次"印钞转向"，才是真正结束萧条的开关。</div>
+
+            <h3 class="section-subtitle">🥇 黄金在这段历史的角色</h3>
+            <ul class="checklist" style="list-style:none;padding:0;margin:14px 0;">
+                <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#fbbf24;">•</span>1933 年前黄金是"货币"，被要求上缴（没收令）；1933 年后黄金是"资产"，官方价 $20.67→$35。</li>
+                <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#fbbf24;">•</span><strong>美元贬值那一刻，黄金 +69%</strong>——这是"债务危机 → 货币贬值 → 黄金重估"链条最干净的一次演示。</li>
+                <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#fbbf24;">•</span>私人持有黄金 1933 年被禁、1974 年才解禁——政策风险和黄金牛市总是伴生。</li>
+            </ul>
+
+            <div class="so-what"><span class="label">所以呢？</span>
+                ① 通缩去杠杆的前半段（1930–32），<strong>现金是王</strong>——所有资产一起跌；但如果判断"政策必然转向印钞"，黄金的跳升就是先行信号（1933 +69%）；<br>
+                ② <strong>顺序比方向重要</strong>：现在若出现硬着陆，剧本是"先通缩冲击（现金/短债）→ 再政策转向印钞（黄金）"，两个阶段资产完全不同；<br>
+                ③ 1937 的教训：<strong>去杠杆未完成就过早收紧 = 二次探底</strong>——对应 2026 美联储若因通胀过早转向紧缩，别急着反转黄金仓位。</div>
+        </div>
+
+        <div class="status-banner" style="justify-content:space-between;">
+            <div class="status-item">← 上一段：无（05 章 <a href="../notebook.html#ch5" style="color:#fbbf24;">长期债务周期</a>）</div>
+            <div class="status-item">下一篇：<a href="history-1971.html" style="color:#fbbf24;">1971–1980 美元脱钩黄金与滞胀 →</a></div>
+        </div>
+    </div>
+
+    <script>
+        var dowChart = echarts.init(document.getElementById('dowChart'));
+        dowChart.setOption({
+            tooltip: {
+                trigger: 'axis',
+                backgroundColor: 'rgba(38,38,38,0.95)',
+                borderColor: 'rgba(255,255,255,0.15)',
+                textStyle: { color: '#eaeaea', fontSize: 13 }
+            },
+            grid: { left: 52, right: 20, top: 24, bottom: 40 },
+            xAxis: {
+                type: 'category',
+                data: ['1929','1930','1931','1932','1933','1934','1935','1936','1937','1938','1939','1940','1941','1942','1943','1944','1945'],
+                axisLine: { lineStyle: { color: 'rgba(255,255,255,0.2)' } },
+                axisLabel: { color: '#9a9a9a', fontSize: 12 }
+            },
+            yAxis: {
+                type: 'value', name: '道琼斯（点）', nameTextStyle: { color: '#9a9a9a', fontSize: 12 },
+                axisLine: { lineStyle: { color: 'rgba(255,255,255,0.15)' } },
+                axisLabel: { color: '#9a9a9a', fontSize: 12 },
+                splitLine: { lineStyle: { color: 'rgba(255,255,255,0.06)' } }
+            },
+            series: [{
+                name: '道琼斯年度收盘',
+                type: 'line', smooth: true, symbol: 'circle', symbolSize: 7,
+                lineStyle: { width: 3, color: '#f87171' },
+                itemStyle: { color: '#f87171', borderColor: '#161616', borderWidth: 2 },
+                areaStyle: { color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: 'rgba(248,113,113,0.3)' }, { offset: 1, color: 'rgba(248,113,113,0.02)' }] } },
+                markPoint: {
+                    data: [
+                        { coord: ['1929', 381], name: '1929 峰值 381', value: '1929 峰值 381' },
+                        { coord: ['1932', 41], name: '1932 底部 41', value: '1932 底部 41' },
+                        { coord: ['1945', 193], name: '1945 收盘 193', value: '1945 收盘 193' }
+                    ],
+                    symbolSize: 52, label: { color: '#eaeaea', fontSize: 11, formatter: function (p) { return p.name.split(' ').join('\n'); } }
+                },
+                data: [248, 165, 78, 60, 100, 104, 144, 179, 121, 99, 150, 131, 111, 119, 136, 152, 193]
+            }]
+        });
+        window.addEventListener('resize', function () { dowChart.resize(); });
+    </script>
+</body>
+</html>
