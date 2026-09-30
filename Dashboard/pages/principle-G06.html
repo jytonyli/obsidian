@@ -123,6 +123,10 @@
  .chapter-nav { display: flex; gap: 10px; flex-wrap: wrap; margin: 14px 0 4px; }
  .chapter-nav a { color: #9a9a9a; text-decoration: none; font-size: 14px; padding: 8px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.05); transition: all 0.2s; }
  .chapter-nav a:hover { color: #fbbf24; border-color: rgba(251,191,36,0.5); background: rgba(251,191,36,0.08); }
+ .snapshot-badge {
+ display: inline-block; background: rgba(251,191,36,0.12); border: 1px solid rgba(251,191,36,0.4);
+ color: #fbbf24; border-radius: 999px; padding: 3px 12px; font-size: 13px; font-weight: 600;
+ }
  .scroll-top.show { opacity: 1; pointer-events: auto; }
  @media (max-width: 1024px) {
  body { font-size: 16px; } .container { padding: 20px 16px; }
@@ -172,7 +176,10 @@
  <div class="status-item" style="font-size:22px;font-weight:700;color:#eaeaea;">🌍 周期定位先行 · 原则详解</div>
  <div class="status-item" style="margin-top:6px;">收录笔记本 02–05 章完整内容：经济机器 / 生产率长期增长 / 短期债务周期 / 长期债务周期</div>
  </div>
- <div class="status-item"><a href="../notebook.html#ch1" style="color:#fbbf24;">← 返回原则清单</a></div>
+ <div>
+ <div class="status-item"><span class="snapshot-badge">⚠ 数据快照：2026-09-29 · 不随行情自动更新</span></div>
+ <div class="status-item" style="margin-top:8px;"><a href="../notebook.html#ch1" style="color:#fbbf24;">← 返回原则清单</a></div>
+ </div>
  </div>
 
  <!-- ===== 全景统领 ===== -->
@@ -188,7 +195,7 @@
  </div>
 
  <div class="chart-container" id="threeForcesChart" style="height:340px;"></div>
- <div class="highlight-block red" style="font-size:13px;">图：结构示意（非真实数据）。<strong>实线</strong> = 生产率（长期斜线）与叠加结果；<strong>虚线</strong> = 短周期与长周期的波动成分。</div>
+ <div class="highlight-block red" style="font-size:13px;">图：结构示意（非真实数据）。<strong>实线</strong> = 生产率（长期斜线）与叠加结果；<strong>虚线</strong> = 短周期与长周期的波动成分。<br>📍 当前位置（2026）：<strong class="red">长周期后段</strong> + <strong class="orange">短周期「④紧缩 → ⑤放缓」</strong> + <strong class="yellow">信用偏收缩</strong>。</div>
 
  <h3 class="section-subtitle">📍 2026 定位速览（先看结论，再往下翻证据）</h3>
  <table>
@@ -506,9 +513,9 @@
 
  <h3 class="section-subtitle">📜 历史参照</h3>
  <ul class="checklist">
- <li><strong>1929–1945</strong>：美国大萧条 + 二战，典型通缩去杠杆后印钞战争支出。 <a href="history-1929.html" style="color:#fbbf24;text-decoration:none;">📄 深度研究 →</a></li>
- <li><strong>1971–1980</strong>：布雷顿森林解体、美元脱钩黄金、滞胀，黄金从 $35 涨到 $850。 <a href="history-1971.html" style="color:#fbbf24;text-decoration:none;">📄 深度研究 →</a></li>
- <li><strong>1990–至今</strong>：日本资产负债表衰退，零利率后失去的三十年。 <a href="history-1990.html" style="color:#fbbf24;text-decoration:none;">📄 深度研究 →</a></li>
+ <li><strong>1929–1945</strong>：美国大萧条 + 二战，典型通缩去杠杆后印钞战争支出。 <a href="history-1929.html" style="color:#fbbf24;text-decoration:none;">→</a></li>
+ <li><strong>1971–1980</strong>：布雷顿森林解体、美元脱钩黄金、滞胀，黄金从 $35 涨到 $850。 <a href="history-1971.html" style="color:#fbbf24;text-decoration:none;">→</a></li>
+ <li><strong>1990–至今</strong>：日本资产负债表衰退，零利率后失去的三十年。 <a href="history-1990.html" style="color:#fbbf24;text-decoration:none;">→</a></li>
  </ul>
 
  <div class="so-what"><span class="label">所以呢？</span>
@@ -516,6 +523,22 @@
  ② 实际利率高企带来的每一次金价回调，都是「吃碎玻璃」式机会，而不是逻辑反转——除非认错条件触发；<br>
  ③ 动摇黄金逻辑的唯一信号：<strong class="mono">强劲财政整顿落地（加税+砍支出）或实际利率持续 &gt;2.5% 超 12 个月且央行购金停滞</strong>。未触发前，按 01 章决策卡机械执行。</div>
  </div>
+ </div>
+
+ <div class="card" id="action">
+ <div class="card-title">🧭 现在怎么下注（2026 · 从速览到动作）</div>
+ <div class="card-sub">速览表告诉你现在处在哪个阶段；这里把每个阶段翻译成「买什么 / 等到什么才动」。</div>
+ <table>
+ <colgroup><col style="width:24%"><col style="width:38%"><col style="width:38%"></colgroup>
+ <thead><tr><th>定位结论</th><th>动作</th><th>触发 / 认错信号</th></tr></thead>
+ <tbody>
+ <tr><td><strong>⏳ 长周期后段</strong></td><td>黄金是底仓，不是炒作；回调是「吃碎玻璃」机会</td><td>认错：强劲财政整顿落地（加税+砍支出），或实际利率持续 &gt;2.5% 超 12 个月且央行购金停滞</td></tr>
+ <tr><td><strong>🔄 美国紧缩后段</strong></td><td>持现金 + 短债，别追股票</td><td>降息落地前权益承压；收益率曲线转陡 = 复苏早期信号</td></tr>
+ <tr><td><strong>💳 中国信用偏收缩</strong></td><td>股票观望，不猜底</td><td>等社融增速拐头 + 新增贷款转正再加</td></tr>
+ <tr><td><strong>🎯 盯两个信号</strong></td><td>信号出现前机械等待</td><td>收益率曲线转陡 + 信贷脉冲回升</td></tr>
+ </tbody>
+ </table>
+ <div class="highlight-block green">决策闭环：下注前先写下决策准则（凭什么这么决定 → 赌哪个变量 → 什么情况认错 → 到点机械执行），模板见 <a href="../../📋 决策准则与复盘.md" style="color:#fbbf24;">📋 决策准则与复盘.md</a>。</div>
  </div>
 
  <div class="card" id="history">
@@ -606,6 +629,12 @@
  name: '叠加结果', type: 'line',
  data: toData(sum), smooth: true, symbol: 'none',
  lineStyle: { width: 3.5, color: '#fbbf24' },
+ markLine: {
+ symbol: 'none',
+ lineStyle: { color: '#eaeaea', type: 'dashed', width: 1.5 },
+ label: { color: '#eaeaea', fontSize: 13, formatter: '📌 现在（2026）', position: 'insideEndTop' },
+ data: [{ xAxis: 92 }]
+ },
  areaStyle: { color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: 'rgba(251,191,36,0.25)' }, { offset: 1, color: 'rgba(251,191,36,0.02)' }] } }
  }
  ]
