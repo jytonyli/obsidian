@@ -312,28 +312,28 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><a href="pages/zijin.html" style="color:#eaeaea;text-decoration:none;border-bottom:1px dashed #fbbf24;" title="点击查看紫金矿业多因子深度分析"><strong>紫金矿业</strong></a></td>
+                                <td class="clickable-indicator" onclick="toggleMacroChart('zijin', this)"><strong>紫金矿业</strong></td>
                                 <td class="mono">150,000</td>
                                 <td class="mono">33.618</td>
                                 <td class="green mono">+1.12%</td>
                                 <td class="green mono">+¥49,500</td>
                             </tr>
                             <tr>
-                                <td><a href="pages/geely.html" style="color:#eaeaea;text-decoration:none;border-bottom:1px dashed #fbbf24;" title="点击查看吉利汽车多因子深度分析">吉利汽车</a></td>
+                                <td class="clickable-indicator" onclick="toggleMacroChart('geely', this)">吉利汽车</td>
                                 <td class="mono">70,000</td>
                                 <td class="mono">16.844</td>
                                 <td class="red mono">-2.87%</td>
                                 <td class="red mono">-¥25,900</td>
                             </tr>
                             <tr>
-                                <td><a href="pages/wanzou.html" style="color:#eaeaea;text-decoration:none;border-bottom:1px dashed #fbbf24;" title="点击查看万洲国际多因子深度分析">万洲国际</a></td>
+                                <td class="clickable-indicator" onclick="toggleMacroChart('wanzou', this)">万洲国际</td>
                                 <td class="mono">80,000</td>
                                 <td class="mono">7.28</td>
                                 <td class="mono">0.0%</td>
                                 <td class="mono">¥0</td>
                             </tr>
                             <tr>
-                                <td><a href="pages/xiaomi.html" style="color:#eaeaea;text-decoration:none;border-bottom:1px dashed #fbbf24;" title="点击查看小米集团多因子深度分析">小米集团</a></td>
+                                <td class="clickable-indicator" onclick="toggleMacroChart('xiaomi', this)">小米集团</td>
                                 <td class="mono">38,000</td>
                                 <td class="mono">45.294</td>
                                 <td class="green mono">+0.16%</td>
@@ -836,6 +836,38 @@
                 values: [7.15, 7.12, 7.10, 7.05, 7.00, 6.95, 6.90, 6.85, 6.80, 6.75, 6.72, 6.70],
                 color: '#8b5cf6',
                 unit: ''
+            },
+            zijin: {
+                title: '紫金矿业(601899) 近12个月股价（元）',
+                source: '数据来源：同花顺；2026-08=33.67、2026-09=29.79为真实收盘，其余为估算值',
+                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
+                values: [18.0, 19.0, 20.0, 24.0, 26.0, 28.0, 30.0, 33.0, 35.0, 34.0, 33.67, 29.79],
+                color: '#fbbf24',
+                unit: ' 元'
+            },
+            geely: {
+                title: '吉利汽车(00175) 近12个月股价（港元）',
+                source: '数据来源：同花顺；2026-09=14.55为真实收盘，其余为估算值',
+                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
+                values: [10.0, 11.0, 12.0, 14.0, 15.0, 16.0, 17.0, 18.0, 17.5, 16.5, 15.5, 14.55],
+                color: '#3b82f6',
+                unit: ' 港元'
+            },
+            wanzou: {
+                title: '万洲国际(00288) 近12个月股价（港元）',
+                source: '数据来源：同花顺；2026-09=6.62为真实收盘，其余为估算值',
+                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
+                values: [5.5, 5.8, 6.0, 6.5, 6.8, 7.0, 7.2, 7.5, 7.3, 7.0, 6.8, 6.62],
+                color: '#f97316',
+                unit: ' 港元'
+            },
+            xiaomi: {
+                title: '小米集团(01810) 近12个月股价（港元）',
+                source: '数据来源：同花顺；2026-09=25.24为真实收盘，其余为估算值',
+                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
+                values: [38.0, 40.0, 42.0, 45.0, 44.0, 42.0, 40.0, 38.0, 35.0, 32.0, 28.0, 25.24],
+                color: '#fb923c',
+                unit: ' 港元'
             }
         };
     </script>
