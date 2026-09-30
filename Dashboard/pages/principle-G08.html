@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G-08 分散下限 · 原则详解 | Tony's Investment Dashboard</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23fbbf24'/%3E%3Cpath d='M12 44 L26 28 L36 36 L52 14' stroke='%23161616' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            color: #eaeaea; line-height: 1.75; font-size: 17px;
+            background-color: #161616;
+            background-image:
+                radial-gradient(1000px 700px at 8% -10%, rgba(251,191,36,0.16), transparent 55%),
+                radial-gradient(900px 700px at 96% 5%, rgba(52,211,153,0.12), transparent 55%);
+            background-attachment: fixed;
+        }
+        .mono { font-family: 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
+        .nav {
+            background: rgba(22,22,22,0.45); backdrop-filter: blur(24px) saturate(1.6);
+            -webkit-backdrop-filter: blur(24px) saturate(1.6);
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+            padding: 20px 36px; display: flex; align-items: center; justify-content: space-between;
+            position: sticky; top: 0; z-index: 100;
+        }
+        .nav-brand { font-size: 24px; font-weight: 700; color: #fbbf24; }
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a { color: #9a9a9a; text-decoration: none; font-size: 17px; padding: 10px 18px; border-radius: 8px; transition: all 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: #fbbf24; background: rgba(255,255,255,0.08); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 36px; }
+        .status-banner {
+            background: rgba(38,38,38,0.38); backdrop-filter: blur(18px) saturate(1.4);
+            -webkit-backdrop-filter: blur(18px) saturate(1.4);
+            border: 1px solid rgba(255,255,255,0.13); border-radius: 16px;
+            padding: 24px 28px; margin-bottom: 28px; box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+        }
+        .status-item { font-size: 16px; color: #9a9a9a; }
+        .status-item strong { color: #eaeaea; font-size: 17px; }
+        .card {
+            background: rgba(38,38,38,0.38); backdrop-filter: blur(18px) saturate(1.4);
+            -webkit-backdrop-filter: blur(18px) saturate(1.4);
+            border: 1px solid rgba(255,255,255,0.13); border-radius: 16px;
+            padding: 32px; margin-bottom: 28px; box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+        }
+        .card-title { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+        .card-sub { font-size: 15px; color: #9a9a9a; margin-bottom: 22px; }
+        .section-subtitle { font-size: 17px; color: #9a9a9a; margin: 22px 0 14px; font-weight: 500; }
+        table { width: 100%; border-collapse: collapse; font-size: 15px; table-layout: fixed; margin: 14px 0; }
+        th { text-align: left; padding: 14px 16px; color: #9a9a9a; font-weight: 500; border-bottom: 2px solid rgba(255,255,255,0.12); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+        td { padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); vertical-align: top; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover { background: rgba(255,255,255,0.04); }
+        .green { color: #34d399; } .red { color: #f87171; } .yellow { color: #fbbf24; } .orange { color: #fb923c; }
+        .highlight-block {
+            background: rgba(251,191,36,0.08); border-left: 4px solid #fbbf24;
+            padding: 18px 22px; border-radius: 0 10px 10px 0; margin: 16px 0;
+            font-size: 15px; line-height: 1.8;
+        }
+        .highlight-block.red { background: rgba(248,113,113,0.08); border-left-color: #f87171; }
+        .highlight-block.green { background: rgba(52,211,153,0.08); border-left-color: #34d399; }
+        .highlight-block.orange { background: rgba(251,146,60,0.08); border-left-color: #fb923c; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 14px 0; }
+        .data-strip {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px; padding: 12px 18px; margin: 14px 0;
+            font-family: 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace;
+            font-size: 14px; color: #9a9a9a; line-height: 1.9;
+        }
+        .data-strip .num { color: #fbbf24; font-weight: 700; }
+        .takeaway {
+            background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.35);
+            border-radius: 12px; padding: 18px 22px; margin: 16px 0;
+            font-size: 16px; line-height: 1.8;
+        }
+        .takeaway .label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #161616; background: #fbbf24; border-radius: 6px; padding: 2px 10px; margin-right: 10px; }
+        .so-what {
+            background: rgba(52,211,153,0.08); border-left: 4px solid #34d399;
+            border-radius: 0 12px 12px 0; padding: 18px 22px; margin: 22px 0 6px;
+            font-size: 15px; line-height: 1.8;
+        }
+        .so-what .label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #161616; background: #34d399; border-radius: 6px; padding: 2px 10px; margin-right: 10px; }
+        .chapter-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 4px; }
+        .chapter-no { font-size: 15px; color: #fbbf24; font-weight: 700; }
+        #chartBox { width: 100%; height: 360px; margin: 14px 0; }
+        @media (max-width: 1024px) {
+            body { font-size: 16px; } .container { padding: 20px 16px; }
+            .nav { padding: 14px 16px; flex-wrap: wrap; gap: 10px; }
+            .nav-brand { font-size: 19px; } .nav-links { gap: 4px; flex-wrap: wrap; }
+            .nav-links a { font-size: 14px; padding: 7px 10px; }
+            .card { padding: 20px 16px; border-radius: 12px; margin-bottom: 18px; }
+            .card-title { font-size: 18px; }
+            table { font-size: 13px; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            th { padding: 10px 8px; font-size: 11px; } td { padding: 10px 8px; }
+            .two-col { grid-template-columns: 1fr; }
+            #chartBox { height: 280px; }
+        }
+        @media (max-width: 640px) {
+            body { font-size: 15px; line-height: 1.6; } .container { padding: 14px 10px; }
+            .nav { padding: 10px 12px; flex-direction: column; align-items: flex-start; gap: 6px; }
+            .nav-brand { font-size: 17px; }
+            .nav-links { width: 100%; gap: 2px; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+            .nav-links a { font-size: 13px; padding: 6px 8px; white-space: nowrap; }
+            .card { padding: 16px 12px; border-radius: 10px; margin-bottom: 14px; }
+            .card-title { font-size: 16px; }
+            .highlight-block { padding: 12px 14px; font-size: 13px; margin: 10px 0; }
+            .data-strip { font-size: 12.5px; padding: 10px 12px; }
+            .takeaway, .so-what { font-size: 13.5px; padding: 14px 14px; }
+            #chartBox { height: 240px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-brand">🎛️ Tony's Investment Dashboard</div>
+        <div class="nav-links">
+            <a href="../Homepage.html">📊 仪表盘</a>
+            <a href="holdings.html">💼 持仓详情</a>
+            <a href="news.html">📰 新闻周报</a>
+            <a href="calendar.html">📅 催化剂</a>
+            <a href="../notebook.html">📓 笔记本</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="status-banner">
+            <div>
+                <div class="status-item" style="font-size:22px;font-weight:700;color:#eaeaea;">🏆 G-08 分散下限 · 原则详解</div>
+                <div class="status-item" style="margin-top:6px;">原则清单 01 章 · 圣杯（The Holy Grail）的量化落地</div>
+            </div>
+            <div class="status-item"><a href="../notebook.html#ch1" style="color:#fbbf24;">← 返回原则清单</a></div>
+        </div>
+
+        <div class="card">
+            <div class="chapter-head"><span class="chapter-no">PRINCIPLE G-08</span></div>
+            <div class="card-title">至少 15 个低相关回报流；合并同因子下注</div>
+            <div class="card-sub">15 是下限不是上限。关键是「低相关」，不是「数量多」——10 只同涨同跌的股票，等于 1 个赌注。</div>
+
+            <div class="takeaway"><span class="label">一句话结论</span><strong>分散化是投资里唯一的免费午餐。</strong>Dalio 研究了数千个历史案例：把 15–20 个<strong>彼此不相关</strong>的回报流组合在一起，可以在不降低预期收益的前提下，把风险降低约 <strong>80%</strong>。</div>
+
+            <div class="data-strip">📊 关键数据：分散化 <span class="num">15–20</span> 个回报流 → 风险 <span class="num">-80%</span> ｜ 紫金单仓 <span class="num">30.4%</span>（红线 <span class="num">35%</span>） ｜ 传统 60/40 组合中股票承担 <span class="num">~90%</span> 风险</div>
+
+            <h3 class="section-subtitle">📉 分散效果示意（相关性越低，风险降得越多）</h3>
+            <div id="chartBox"></div>
+
+            <h3 class="section-subtitle">⚠️ 两个最大的误区</h3>
+            <div class="two-col">
+                <div class="highlight-block red" style="margin:0;">
+                    <strong>误区一：买得多 ≠ 分散</strong><br>
+                    买 10 只 A 股银行股，危机时相关性趋近 <strong>1</strong>——一起跌，等于满仓一个赌注。真正的分散是跨<strong>资产、国家、货币、驱动因子</strong>。
+                </div>
+                <div class="highlight-block red" style="margin:0;">
+                    <strong>误区二：同因子重复下注</strong><br>
+                    紫金 30.4% + 黄金股 ETF + 黄金期货 = 名义 3 个持仓，实际是 <strong>1 个黄金赌注</strong>。合并同因子后，你的真实分散度远低于持仓数。
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">🧮 我的组合真实分散度体检（2026-09）</h3>
+            <table>
+                <colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup>
+                <thead><tr><th>因子/回报流</th><th>我现在的暴露</th><th>是否达标</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>黄金/通胀因子</strong></td><td>紫金 30.4% + 黄金股 ETF（高度集中）</td><td class="orange">⚠️ 同因子重复，单仓贴近红线 35%</td></tr>
+                    <tr><td><strong>中国权益</strong></td><td>A 股 + 港股（港股含美元暴露）</td><td class="green">部分达标</td></tr>
+                    <tr><td><strong>美元资产</strong></td><td>港股联系汇率 + 现金</td><td class="orange">偏弱，缺美国股票/债券暴露</td></tr>
+                    <tr><td><strong>现金缓冲</strong></td><td>现金（当低波缓冲用）</td><td class="green">达标</td></tr>
+                </tbody>
+            </table>
+
+            <h3 class="section-subtitle">✅ 怎么补到 15 个低相关回报流</h3>
+            <ul style="list-style:none;padding:0;margin:14px 0;">
+                <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#34d399;">①</span><strong>按驱动因子分，不按名字分</strong>：权益（A股/港股/美股）、利率（长债/现金）、通胀（黄金/铜/商品）、货币（美元/其他）、另类——每个因子 2–4 个具体工具。</li>
+                <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#34d399;">②</span><strong>单仓红线 35%</strong>：紫金 30.4% 已在边缘，加仓前先问「它和组合里其他资产的相关性是多少」。</li>
+                <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#34d399;">③</span><strong>危机时自查</strong>：每个季度问一次"如果 2022 年式股债双杀再来一次，我组合里是不是全在跌"。</li>
+            </ul>
+
+            <div class="so-what"><span class="label">执行清单</span>
+                ① 持仓表按「因子」列重新归类，数一数真实回报流有几个（别数名字）；<br>
+                ② 低于 15 个 → 下一步动作是补分散，不是加仓已有头寸；<br>
+                ③ 任何新买入前，先算它和紫金/黄金的相关性——同因子就不算新回报流。</div>
+        </div>
+
+        <div class="status-banner" style="justify-content:space-between;">
+            <div class="status-item">← 上一篇：<a href="principle-G07.html" style="color:#fbbf24;">G-07 组合韧性</a></div>
+            <div class="status-item">下一篇：<a href="principle-G09.html" style="color:#fbbf24;">G-09 现金与通胀 →</a></div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var el = document.getElementById('chartBox');
+            if (!el || typeof echarts === 'undefined') return;
+            var chart = echarts.init(el);
+            chart.setOption({
+                backgroundColor: 'transparent',
+                title: { text: '组合风险 vs 低相关资产数量（示意）', left: 'center', top: 0, textStyle: { color: '#9a9a9a', fontSize: 13 } },
+                tooltip: { trigger: 'axis', textStyle: { fontSize: 12 } },
+                grid: { left: 45, right: 20, top: 45, bottom: 30 },
+                xAxis: { type: 'category', data: [1, 2, 5, 8, 10, 12, 15, 18, 20, 25], name: '低相关回报流数量', nameTextStyle: { color: '#9a9a9a' }, axisLabel: { color: '#9a9a9a', fontSize: 11 }, axisLine: { lineStyle: { color: 'rgba(255,255,255,0.15)' } } },
+                yAxis: { type: 'value', min: 0, max: 100, name: '组合风险（相对%）', nameTextStyle: { color: '#9a9a9a' }, axisLabel: { color: '#9a9a9a', fontSize: 11, formatter: '{value}%' }, splitLine: { lineStyle: { color: 'rgba(255,255,255,0.07)' } } },
+                series: [{
+                    name: '组合风险', type: 'line', data: [100, 88, 62, 42, 33, 27, 21, 18, 16, 13],
+                    smooth: true, symbol: 'circle', symbolSize: 6,
+                    lineStyle: { color: '#fbbf24', width: 3 }, itemStyle: { color: '#fbbf24' },
+                    markLine: {
+                        silent: true, symbol: 'none',
+                        lineStyle: { color: '#34d399', type: 'dashed' },
+                        data: [{ xAxis: 15 }],
+                        label: { color: '#34d399', fontSize: 11, formatter: '15 个下限 ↓风险约 80%', position: 'end' }
+                    }
+                }]
+            });
+            window.addEventListener('resize', function () { chart.resize(); });
+        })();
+    </script>
+</body>
+</html>
