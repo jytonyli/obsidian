@@ -1,204 +1,204 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>G-09 现金与通胀 · 原则详解 | Tony's Investment Dashboard</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23fbbf24'/%3E%3Cpath d='M12 44 L26 28 L36 36 L52 14' stroke='%23161616' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            color: #eaeaea; line-height: 1.75; font-size: 17px;
-            background-color: #161616;
-            background-image:
-                radial-gradient(1000px 700px at 8% -10%, rgba(251,191,36,0.16), transparent 55%),
-                radial-gradient(900px 700px at 96% 5%, rgba(52,211,153,0.12), transparent 55%);
-            background-attachment: fixed;
-        }
-        .mono { font-family: 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
-        .nav {
-            background: rgba(22,22,22,0.45); backdrop-filter: blur(24px) saturate(1.6);
-            -webkit-backdrop-filter: blur(24px) saturate(1.6);
-            border-bottom: 1px solid rgba(255,255,255,0.12);
-            padding: 20px 36px; display: flex; align-items: center; justify-content: space-between;
-            position: sticky; top: 0; z-index: 100;
-        }
-        .nav-brand { font-size: 24px; font-weight: 700; color: #fbbf24; }
-        .nav-links { display: flex; gap: 28px; }
-        .nav-links a { color: #9a9a9a; text-decoration: none; font-size: 17px; padding: 10px 18px; border-radius: 8px; transition: all 0.2s; }
-        .nav-links a:hover, .nav-links a.active { color: #fbbf24; background: rgba(255,255,255,0.08); }
-        .container { max-width: 1200px; margin: 0 auto; padding: 36px; }
-        .status-banner {
-            background: rgba(38,38,38,0.38); backdrop-filter: blur(18px) saturate(1.4);
-            -webkit-backdrop-filter: blur(18px) saturate(1.4);
-            border: 1px solid rgba(255,255,255,0.13); border-radius: 16px;
-            padding: 24px 28px; margin-bottom: 28px; box-shadow: 0 8px 32px rgba(0,0,0,0.35);
-        }
-        .status-item { font-size: 16px; color: #9a9a9a; }
-        .status-item strong { color: #eaeaea; font-size: 17px; }
-        .card {
-            background: rgba(38,38,38,0.38); backdrop-filter: blur(18px) saturate(1.4);
-            -webkit-backdrop-filter: blur(18px) saturate(1.4);
-            border: 1px solid rgba(255,255,255,0.13); border-radius: 16px;
-            padding: 32px; margin-bottom: 28px; box-shadow: 0 8px 32px rgba(0,0,0,0.35);
-        }
-        .card-title { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
-        .card-sub { font-size: 15px; color: #9a9a9a; margin-bottom: 22px; }
-        .section-subtitle { font-size: 17px; color: #9a9a9a; margin: 22px 0 14px; font-weight: 500; }
-        table { width: 100%; border-collapse: collapse; font-size: 15px; table-layout: fixed; margin: 14px 0; }
-        th { text-align: left; padding: 14px 16px; color: #9a9a9a; font-weight: 500; border-bottom: 2px solid rgba(255,255,255,0.12); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
-        td { padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); vertical-align: top; }
-        tr:last-child td { border-bottom: none; }
-        tr:hover { background: rgba(255,255,255,0.04); }
-        .green { color: #34d399; } .red { color: #f87171; } .yellow { color: #fbbf24; } .orange { color: #fb923c; }
-        .highlight-block {
-            background: rgba(251,191,36,0.08); border-left: 4px solid #fbbf24;
-            padding: 18px 22px; border-radius: 0 10px 10px 0; margin: 16px 0;
-            font-size: 15px; line-height: 1.8;
-        }
-        .highlight-block.red { background: rgba(248,113,113,0.08); border-left-color: #f87171; }
-        .highlight-block.green { background: rgba(52,211,153,0.08); border-left-color: #34d399; }
-        .highlight-block.orange { background: rgba(251,146,60,0.08); border-left-color: #fb923c; }
-        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 14px 0; }
-        .data-strip {
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 10px; padding: 12px 18px; margin: 14px 0;
-            font-family: 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace;
-            font-size: 14px; color: #9a9a9a; line-height: 1.9;
-        }
-        .data-strip .num { color: #fbbf24; font-weight: 700; }
-        .takeaway {
-            background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.35);
-            border-radius: 12px; padding: 18px 22px; margin: 16px 0;
-            font-size: 16px; line-height: 1.8;
-        }
-        .takeaway .label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #161616; background: #fbbf24; border-radius: 6px; padding: 2px 10px; margin-right: 10px; }
-        .so-what {
-            background: rgba(52,211,153,0.08); border-left: 4px solid #34d399;
-            border-radius: 0 12px 12px 0; padding: 18px 22px; margin: 22px 0 6px;
-            font-size: 15px; line-height: 1.8;
-        }
-        .so-what .label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #161616; background: #34d399; border-radius: 6px; padding: 2px 10px; margin-right: 10px; }
-        .chapter-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 4px; }
-        .chapter-no { font-size: 15px; color: #fbbf24; font-weight: 700; }
-        #chartBox { width: 100%; height: 360px; margin: 14px 0; }
-        @media (max-width: 1024px) {
-            body { font-size: 16px; } .container { padding: 20px 16px; }
-            .nav { padding: 14px 16px; flex-wrap: wrap; gap: 10px; }
-            .nav-brand { font-size: 19px; } .nav-links { gap: 4px; flex-wrap: wrap; }
-            .nav-links a { font-size: 14px; padding: 7px 10px; }
-            .card { padding: 20px 16px; border-radius: 12px; margin-bottom: 18px; }
-            .card-title { font-size: 18px; }
-            table { font-size: 13px; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-            th { padding: 10px 8px; font-size: 11px; } td { padding: 10px 8px; }
-            .two-col { grid-template-columns: 1fr; }
-            #chartBox { height: 280px; }
-        }
-        @media (max-width: 640px) {
-            body { font-size: 15px; line-height: 1.6; } .container { padding: 14px 10px; }
-            .nav { padding: 10px 12px; flex-direction: column; align-items: flex-start; gap: 6px; }
-            .nav-brand { font-size: 17px; }
-            .nav-links { width: 100%; gap: 2px; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
-            .nav-links a { font-size: 13px; padding: 6px 8px; white-space: nowrap; }
-            .card { padding: 16px 12px; border-radius: 10px; margin-bottom: 14px; }
-            .card-title { font-size: 16px; }
-            .highlight-block { padding: 12px 14px; font-size: 13px; margin: 10px 0; }
-            .data-strip { font-size: 12.5px; padding: 10px 12px; }
-            .takeaway, .so-what { font-size: 13.5px; padding: 14px 14px; }
-            #chartBox { height: 240px; }
-        }
-    </style>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>现金与通胀 · 原则详解 | Tony's Investment Dashboard</title>
+ <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23fbbf24'/%3E%3Cpath d='M12 44 L26 28 L36 36 L52 14' stroke='%23161616' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+ <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+ <style>
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+ html { scroll-behavior: smooth; }
+ body {
+ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+ color: #eaeaea; line-height: 1.75; font-size: 17px;
+ background-color: #161616;
+ background-image:
+ radial-gradient(1000px 700px at 8% -10%, rgba(251,191,36,0.16), transparent 55%),
+ radial-gradient(900px 700px at 96% 5%, rgba(52,211,153,0.12), transparent 55%);
+ background-attachment: fixed;
+ }
+ .mono { font-family: 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
+ .nav {
+ background: rgba(22,22,22,0.45); backdrop-filter: blur(24px) saturate(1.6);
+ -webkit-backdrop-filter: blur(24px) saturate(1.6);
+ border-bottom: 1px solid rgba(255,255,255,0.12);
+ padding: 20px 36px; display: flex; align-items: center; justify-content: space-between;
+ position: sticky; top: 0; z-index: 100;
+ }
+ .nav-brand { font-size: 24px; font-weight: 700; color: #fbbf24; }
+ .nav-links { display: flex; gap: 28px; }
+ .nav-links a { color: #9a9a9a; text-decoration: none; font-size: 17px; padding: 10px 18px; border-radius: 8px; transition: all 0.2s; }
+ .nav-links a:hover, .nav-links a.active { color: #fbbf24; background: rgba(255,255,255,0.08); }
+ .container { max-width: 1200px; margin: 0 auto; padding: 36px; }
+ .status-banner {
+ background: rgba(38,38,38,0.38); backdrop-filter: blur(18px) saturate(1.4);
+ -webkit-backdrop-filter: blur(18px) saturate(1.4);
+ border: 1px solid rgba(255,255,255,0.13); border-radius: 16px;
+ padding: 24px 28px; margin-bottom: 28px; box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+ }
+ .status-item { font-size: 16px; color: #9a9a9a; }
+ .status-item strong { color: #eaeaea; font-size: 17px; }
+ .card {
+ background: rgba(38,38,38,0.38); backdrop-filter: blur(18px) saturate(1.4);
+ -webkit-backdrop-filter: blur(18px) saturate(1.4);
+ border: 1px solid rgba(255,255,255,0.13); border-radius: 16px;
+ padding: 32px; margin-bottom: 28px; box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+ }
+ .card-title { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+ .card-sub { font-size: 15px; color: #9a9a9a; margin-bottom: 22px; }
+ .section-subtitle { font-size: 17px; color: #9a9a9a; margin: 22px 0 14px; font-weight: 500; }
+ table { width: 100%; border-collapse: collapse; font-size: 15px; table-layout: fixed; margin: 14px 0; }
+ th { text-align: left; padding: 14px 16px; color: #9a9a9a; font-weight: 500; border-bottom: 2px solid rgba(255,255,255,0.12); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+ td { padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); vertical-align: top; }
+ tr:last-child td { border-bottom: none; }
+ tr:hover { background: rgba(255,255,255,0.04); }
+ .green { color: #34d399; } .red { color: #f87171; } .yellow { color: #fbbf24; } .orange { color: #fb923c; }
+ .highlight-block {
+ background: rgba(251,191,36,0.08); border-left: 4px solid #fbbf24;
+ padding: 18px 22px; border-radius: 0 10px 10px 0; margin: 16px 0;
+ font-size: 15px; line-height: 1.8;
+ }
+ .highlight-block.red { background: rgba(248,113,113,0.08); border-left-color: #f87171; }
+ .highlight-block.green { background: rgba(52,211,153,0.08); border-left-color: #34d399; }
+ .highlight-block.orange { background: rgba(251,146,60,0.08); border-left-color: #fb923c; }
+ .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 14px 0; }
+ .data-strip {
+ background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+ border-radius: 10px; padding: 12px 18px; margin: 14px 0;
+ font-family: 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace;
+ font-size: 14px; color: #9a9a9a; line-height: 1.9;
+ }
+ .data-strip .num { color: #fbbf24; font-weight: 700; }
+ .takeaway {
+ background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.35);
+ border-radius: 12px; padding: 18px 22px; margin: 16px 0;
+ font-size: 16px; line-height: 1.8;
+ }
+ .takeaway .label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #161616; background: #fbbf24; border-radius: 6px; padding: 2px 10px; margin-right: 10px; }
+ .so-what {
+ background: rgba(52,211,153,0.08); border-left: 4px solid #34d399;
+ border-radius: 0 12px 12px 0; padding: 18px 22px; margin: 22px 0 6px;
+ font-size: 15px; line-height: 1.8;
+ }
+ .so-what .label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #161616; background: #34d399; border-radius: 6px; padding: 2px 10px; margin-right: 10px; }
+ .chapter-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 4px; }
+ .chapter-no { font-size: 15px; color: #fbbf24; font-weight: 700; }
+ #chartBox { width: 100%; height: 360px; margin: 14px 0; }
+ @media (max-width: 1024px) {
+ body { font-size: 16px; } .container { padding: 20px 16px; }
+ .nav { padding: 14px 16px; flex-wrap: wrap; gap: 10px; }
+ .nav-brand { font-size: 19px; } .nav-links { gap: 4px; flex-wrap: wrap; }
+ .nav-links a { font-size: 14px; padding: 7px 10px; }
+ .card { padding: 20px 16px; border-radius: 12px; margin-bottom: 18px; }
+ .card-title { font-size: 18px; }
+ table { font-size: 13px; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+ th { padding: 10px 8px; font-size: 11px; } td { padding: 10px 8px; }
+ .two-col { grid-template-columns: 1fr; }
+ #chartBox { height: 280px; }
+ }
+ @media (max-width: 640px) {
+ body { font-size: 15px; line-height: 1.6; } .container { padding: 14px 10px; }
+ .nav { padding: 10px 12px; flex-direction: column; align-items: flex-start; gap: 6px; }
+ .nav-brand { font-size: 17px; }
+ .nav-links { width: 100%; gap: 2px; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+ .nav-links a { font-size: 13px; padding: 6px 8px; white-space: nowrap; }
+ .card { padding: 16px 12px; border-radius: 10px; margin-bottom: 14px; }
+ .card-title { font-size: 16px; }
+ .highlight-block { padding: 12px 14px; font-size: 13px; margin: 10px 0; }
+ .data-strip { font-size: 12.5px; padding: 10px 12px; }
+ .takeaway, .so-what { font-size: 13.5px; padding: 14px 14px; }
+ #chartBox { height: 240px; }
+ }
+ </style>
 </head>
 <body>
-    <nav class="nav">
-        <div class="nav-brand">🎛️ Tony's Investment Dashboard</div>
-        <div class="nav-links">
-            <a href="../Homepage.html">📊 仪表盘</a>
-            <a href="holdings.html">💼 持仓详情</a>
-            <a href="news.html">📰 新闻周报</a>
-            <a href="calendar.html">📅 催化剂</a>
-            <a href="../notebook.html">📓 笔记本</a>
-        </div>
-    </nav>
+ <nav class="nav">
+ <div class="nav-brand">🎛️ Tony's Investment Dashboard</div>
+ <div class="nav-links">
+ <a href="../Homepage.html">📊 仪表盘</a>
+ <a href="holdings.html">💼 持仓详情</a>
+ <a href="news.html">📰 新闻周报</a>
+ <a href="calendar.html">📅 催化剂</a>
+ <a href="../notebook.html">📓 笔记本</a>
+ </div>
+ </nav>
 
-    <div class="container">
-        <div class="status-banner">
-            <div>
-                <div class="status-item" style="font-size:22px;font-weight:700;color:#eaeaea;">💰 G-09 现金与通胀 · 原则详解</div>
-                <div class="status-item" style="margin-top:6px;">原则清单 01 章 · 黄金长逻辑的核心依据</div>
-            </div>
-            <div class="status-item"><a href="../notebook.html#ch1" style="color:#fbbf24;">← 返回原则清单</a></div>
-        </div>
+ <div class="container">
+ <div class="status-banner">
+ <div>
+ <div class="status-item" style="font-size:22px;font-weight:700;color:#eaeaea;">💰 现金与通胀 · 原则详解</div>
+ <div class="status-item" style="margin-top:6px;">原则清单 01 章 · 黄金长逻辑的核心依据</div>
+ </div>
+ <div class="status-item"><a href="../notebook.html#ch1" style="color:#fbbf24;">← 返回原则清单</a></div>
+ </div>
 
-        <div class="card">
-            <div class="chapter-head"><span class="chapter-no">PRINCIPLE G-09</span></div>
-            <div class="card-title">现金不是垃圾，但长期持有现金会被通胀偷走——黄金+分散才是真安全</div>
-            <div class="card-sub">现金在通缩/危机阶段是王（能买打折资产）；但在长期通胀面前，现金是确定性亏损的资产。</div>
+ <div class="card">
+ <div class="chapter-head"><span class="chapter-no">PRINCIPLE</span></div>
+ <div class="card-title">现金不是垃圾，但长期持有现金会被通胀偷走——黄金+分散才是真安全</div>
+ <div class="card-sub">现金在通缩/危机阶段是王（能买打折资产）；但在长期通胀面前，现金是确定性亏损的资产。</div>
 
-            <div class="takeaway"><span class="label">一句话结论</span><strong>现金是「时刻表」不是「终点站」。</strong>危机时拿现金是为了等便宜货，长期全持现金等于每年被通胀收税。黄金 + 分散才是真正的安全资产。</div>
+ <div class="takeaway"><span class="label">一句话结论</span><strong>现金是「时刻表」不是「终点站」。</strong>危机时拿现金是为了等便宜货，长期全持现金等于每年被通胀收税。黄金 + 分散才是真正的安全资产。</div>
 
-            <div class="data-strip">📊 关键数据：美国实际利率 <span class="num">~2.4%</span> &gt; 实际增速 <span class="num">1.5–2%</span>（不可持续） ｜ 建议黄金底仓 <span class="num">10–15%</span> ｜ Dalio 家办 ~<span class="num">75%</span> 押黄金 ETF ｜ 中国央行购金 <span class="num">22+</span> 个月</div>
+ <div class="data-strip">📊 关键数据：美国实际利率 <span class="num">~2.4%</span> &gt; 实际增速 <span class="num">1.5–2%</span>（不可持续） ｜ 建议黄金底仓 <span class="num">10–15%</span> ｜ Dalio 家办 ~<span class="num">75%</span> 押黄金 ETF ｜ 中国央行购金 <span class="num">22+</span> 个月</div>
 
-            <h3 class="section-subtitle">🔬 机制：实际利率是持有现金的真实回报</h3>
-            <div class="highlight-block"><strong>实际利率 = 名义利率 − 通胀。</strong>你存银行拿到的是名义利率，但通胀会吃掉一部分购买力。实际利率为负时，现金的购买力就在确定性缩水——存得越久，亏得越多。当前美国实际利率 ~2.4% 看似为正，但这是 <strong>20 年新高</strong>，而债务/GDP 120%+ 意味着财政利息负担会迫使央行最终「印钱买债」、把实际利率压回低位——这正是黄金长逻辑。</div>
+ <h3 class="section-subtitle">🔬 机制：实际利率是持有现金的真实回报</h3>
+ <div class="highlight-block"><strong>实际利率 = 名义利率 − 通胀。</strong>你存银行拿到的是名义利率，但通胀会吃掉一部分购买力。实际利率为负时，现金的购买力就在确定性缩水——存得越久，亏得越多。当前美国实际利率 ~2.4% 看似为正，但这是 <strong>20 年新高</strong>，而债务/GDP 120%+ 意味着财政利息负担会迫使央行最终「印钱买债」、把实际利率压回低位——这正是黄金长逻辑。</div>
 
-            <h3 class="section-subtitle">📈 历史证据：现金在三个时代被通胀偷走</h3>
-            <div id="chartBox"></div>
-            <table>
-                <colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup>
-                <thead><tr><th>时代</th><th>发生了什么</th><th>现金/黄金表现</th></tr></thead>
-                <tbody>
-                    <tr><td><strong>1923 魏玛</strong></td><td>印钞失控，物价指数级上升</td><td class="red">现金归零；黄金保值</td></tr>
-                    <tr><td><strong>1971–1980 滞胀</strong></td><td>美元脱钩黄金，CPI 双位数</td><td class="red">现金购买力 -50%+；黄金 $35 → $850（<span class="green">+24 倍</span>）</td></tr>
-                    <tr><td><strong>1990–至今 日本</strong></td><td>通缩 + 零利率（反例）</td><td class="green">现金相对强，黄金平淡——通缩期现金为王</td></tr>
-                </tbody>
-            </table>
-            <div class="highlight-block orange" style="font-size:14px;">对比看：<strong>通缩期（日本）现金是王，通胀期（魏玛/1970s）黄金是王。</strong>所以原则不是"永远别拿现金"，而是"知道当前在哪个环境"——回到 G-06 周期定位。</div>
+ <h3 class="section-subtitle">📈 历史证据：现金在三个时代被通胀偷走</h3>
+ <div id="chartBox"></div>
+ <table>
+ <colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup>
+ <thead><tr><th>时代</th><th>发生了什么</th><th>现金/黄金表现</th></tr></thead>
+ <tbody>
+ <tr><td><strong>1923 魏玛</strong></td><td>印钞失控，物价指数级上升</td><td class="red">现金归零；黄金保值</td></tr>
+ <tr><td><strong>1971–1980 滞胀</strong></td><td>美元脱钩黄金，CPI 双位数</td><td class="red">现金购买力 -50%+；黄金 $35 → $850（<span class="green">+24 倍</span>）</td></tr>
+ <tr><td><strong>1990–至今 日本</strong></td><td>通缩 + 零利率（反例）</td><td class="green">现金相对强，黄金平淡——通缩期现金为王</td></tr>
+ </tbody>
+ </table>
+ <div class="highlight-block orange" style="font-size:14px;">对比看：<strong>通缩期（日本）现金是王，通胀期（魏玛/1970s）黄金是王。</strong>所以原则不是"永远别拿现金"，而是"知道当前在哪个环境"——回到 周期定位。</div>
 
-            <h3 class="section-subtitle">🛡️ 怎么执行</h3>
-            <ul style="list-style:none;padding:0;margin:14px 0;">
-                <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#34d399;">①</span><strong>现金只当缓冲</strong>：留 6–12 个月生活支出 + 抄底弹药，别把它当长期资产。</li>
-                <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#34d399;">②</span><strong>黄金底仓 10–15%</strong>：长期债务周期后段（现在），黄金是对冲"印钱买债"的主仓，Dalio 家办实证 ~75% 押黄金 ETF。</li>
-                <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#34d399;">③</span><strong>分散>单一</strong>：黄金 + 资源股 + 通胀挂钩资产 + 现金按环境调权重，别把"真安全"误读成"满仓黄金"。</li>
-            </ul>
+ <h3 class="section-subtitle">🛡️ 怎么执行</h3>
+ <ul style="list-style:none;padding:0;margin:14px 0;">
+ <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#34d399;">①</span><strong>现金只当缓冲</strong>：留 6–12 个月生活支出 + 抄底弹药，别把它当长期资产。</li>
+ <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#34d399;">②</span><strong>黄金底仓 10–15%</strong>：长期债务周期后段（现在），黄金是对冲"印钱买债"的主仓，Dalio 家办实证 ~75% 押黄金 ETF。</li>
+ <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#34d399;">③</span><strong>分散>单一</strong>：黄金 + 资源股 + 通胀挂钩资产 + 现金按环境调权重，别把"真安全"误读成"满仓黄金"。</li>
+ </ul>
 
-            <div class="so-what"><span class="label">执行清单</span>
-                ① 现金仓位=危机弹药，明确标注"什么时候用"（G-05 决策卡）；<br>
-                ② 黄金暴露（紫金+黄金股ETF）占组合目标 10–15%，同因子合并计算（G-08）；<br>
-                ③ 每月 15 日查实际利率（10Y TIPS）：它见顶回落 = 黄金主升的确认信号。</div>
-        </div>
+ <div class="so-what"><span class="label">执行清单</span>
+ ① 现金仓位=危机弹药，明确标注"什么时候用"（决策卡）；<br>
+ ② 黄金暴露（紫金+黄金股ETF）占组合目标 10–15%，同因子合并计算（分散下限）；<br>
+ ③ 每月 15 日查实际利率（10Y TIPS）：它见顶回落 = 黄金主升的确认信号。</div>
+ </div>
 
-        <div class="status-banner" style="justify-content:space-between;">
-            <div class="status-item">← 上一篇：<a href="principle-G08.html" style="color:#fbbf24;">G-08 分散下限</a></div>
-            <div class="status-item">下一篇：<a href="principle-G05.html" style="color:#fbbf24;">G-05 决策先于行动 →</a></div>
-        </div>
-    </div>
+ <div class="status-banner" style="justify-content:space-between;">
+ <div class="status-item">← 上一篇：<a href="principle-G08.html" style="color:#fbbf24;">分散下限</a></div>
+ <div class="status-item">下一篇：<a href="principle-G05.html" style="color:#fbbf24;">决策先于行动 →</a></div>
+ </div>
+ </div>
 
-    <script>
-        (function () {
-            var el = document.getElementById('chartBox');
-            if (!el || typeof echarts === 'undefined') return;
-            var chart = echarts.init(el);
-            chart.setOption({
-                backgroundColor: 'transparent',
-                tooltip: { trigger: 'axis', textStyle: { fontSize: 12 } },
-                legend: { data: ['美元购买力（1971=100）', '黄金价格（右轴，美元/盎司）'], textStyle: { color: '#9a9a9a', fontSize: 12 }, top: 0 },
-                grid: { left: 45, right: 55, top: 40, bottom: 30 },
-                xAxis: { type: 'category', data: ['1971', '1973', '1975', '1977', '1979', '1980'], axisLabel: { color: '#9a9a9a', fontSize: 11 }, axisLine: { lineStyle: { color: 'rgba(255,255,255,0.15)' } } },
-                yAxis: [
-                    { type: 'value', name: '购买力', nameTextStyle: { color: '#9a9a9a' }, axisLabel: { color: '#9a9a9a', fontSize: 11 }, splitLine: { lineStyle: { color: 'rgba(255,255,255,0.07)' } } },
-                    { type: 'value', name: '金价 $', nameTextStyle: { color: '#fbbf24' }, axisLabel: { color: '#9a9a9a', fontSize: 11 }, splitLine: { show: false } }
-                ],
-                series: [
-                    { name: '美元购买力（1971=100）', type: 'line', data: [100, 85, 74, 65, 57, 51], smooth: true, symbol: 'none', lineStyle: { color: '#f87171', width: 3 }, areaStyle: { color: 'rgba(248,113,113,0.15)' } },
-                    { name: '黄金价格（右轴，美元/盎司）', type: 'line', yAxisIndex: 1, data: [35, 97, 161, 148, 306, 850], smooth: true, symbol: 'circle', symbolSize: 5, lineStyle: { color: '#fbbf24', width: 2.5 }, itemStyle: { color: '#fbbf24' } }
-                ]
-            });
-            window.addEventListener('resize', function () { chart.resize(); });
-        })();
-    </script>
+ <script>
+ (function () {
+ var el = document.getElementById('chartBox');
+ if (!el || typeof echarts === 'undefined') return;
+ var chart = echarts.init(el);
+ chart.setOption({
+ backgroundColor: 'transparent',
+ tooltip: { trigger: 'axis', textStyle: { fontSize: 12 } },
+ legend: { data: ['美元购买力（1971=100）', '黄金价格（右轴，美元/盎司）'], textStyle: { color: '#9a9a9a', fontSize: 12 }, top: 0 },
+ grid: { left: 45, right: 55, top: 40, bottom: 30 },
+ xAxis: { type: 'category', data: ['1971', '1973', '1975', '1977', '1979', '1980'], axisLabel: { color: '#9a9a9a', fontSize: 11 }, axisLine: { lineStyle: { color: 'rgba(255,255,255,0.15)' } } },
+ yAxis: [
+ { type: 'value', name: '购买力', nameTextStyle: { color: '#9a9a9a' }, axisLabel: { color: '#9a9a9a', fontSize: 11 }, splitLine: { lineStyle: { color: 'rgba(255,255,255,0.07)' } } },
+ { type: 'value', name: '金价 $', nameTextStyle: { color: '#fbbf24' }, axisLabel: { color: '#9a9a9a', fontSize: 11 }, splitLine: { show: false } }
+ ],
+ series: [
+ { name: '美元购买力（1971=100）', type: 'line', data: [100, 85, 74, 65, 57, 51], smooth: true, symbol: 'none', lineStyle: { color: '#f87171', width: 3 }, areaStyle: { color: 'rgba(248,113,113,0.15)' } },
+ { name: '黄金价格（右轴，美元/盎司）', type: 'line', yAxisIndex: 1, data: [35, 97, 161, 148, 306, 850], smooth: true, symbol: 'circle', symbolSize: 5, lineStyle: { color: '#fbbf24', width: 2.5 }, itemStyle: { color: '#fbbf24' } }
+ ]
+ });
+ window.addEventListener('resize', function () { chart.resize(); });
+ })();
+ </script>
 </body>
 </html>
