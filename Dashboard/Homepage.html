@@ -373,12 +373,12 @@
                             <tr><th>指标</th><th>当前值</th><th>上周</th><th>上月</th><th>当日涨幅</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('sse', this)">🇨🇳 上证指数</td><td class="mono"><strong>3842.19</strong></td><td class="mono">3830.45</td><td class="mono">~3986</td><td class="green mono">+0.31%</td></tr>
-                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('csi500', this)">🇨🇳 中证 500</td><td class="mono"><strong>7435.16</strong></td><td class="mono">7439.63</td><td class="mono">~7600</td><td class="red mono">-0.06%</td></tr>
-                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('hsi', this)">🇭🇰 恒生指数</td><td class="mono"><strong>24613.27</strong></td><td class="mono">24642.51</td><td class="mono">~25460</td><td class="green mono">+0.37%</td></tr>
-                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('hstech', this)">🇭🇰 恒生科技</td><td class="mono"><strong>4253.89</strong></td><td class="mono">4296.0</td><td class="mono">~4400</td><td class="green mono">+0.10%</td></tr>
-                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('spx', this)">🇺🇸 S&P 500</td><td class="mono"><strong>7716.92</strong></td><td class="mono">7743.41</td><td class="mono">7686.14</td><td class="green mono">+0.60%</td></tr>
-                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('ixic', this)">🇺🇸 纳斯达克</td><td class="mono"><strong>27065.36</strong></td><td class="mono">27068.72</td><td class="mono">26370.89</td><td class="green mono">+1.00%</td></tr>
+                            <tr><td>🇨🇳 上证指数</td><td class="mono"><strong>3842.19</strong></td><td class="mono">3830.45</td><td class="mono">~3986</td><td class="green mono">+0.31%</td></tr>
+                            <tr><td>🇨🇳 中证 500</td><td class="mono"><strong>7435.16</strong></td><td class="mono">7439.63</td><td class="mono">~7600</td><td class="red mono">-0.06%</td></tr>
+                            <tr><td>🇭🇰 恒生指数</td><td class="mono"><strong>24613.27</strong></td><td class="mono">24642.51</td><td class="mono">~25460</td><td class="green mono">+0.37%</td></tr>
+                            <tr><td>🇭🇰 恒生科技</td><td class="mono"><strong>4253.89</strong></td><td class="mono">4296.0</td><td class="mono">~4400</td><td class="green mono">+0.10%</td></tr>
+                            <tr><td>🇺🇸 S&P 500</td><td class="mono"><strong>7716.92</strong></td><td class="mono">7743.41</td><td class="mono">7686.14</td><td class="green mono">+0.60%</td></tr>
+                            <tr><td>🇺🇸 纳斯达克</td><td class="mono"><strong>27065.36</strong></td><td class="mono">27068.72</td><td class="mono">26370.89</td><td class="green mono">+1.00%</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -740,54 +740,6 @@
                 values: [5.5, 5.8, 6.0, 6.2, 6.5, 6.8, 7.0, 7.2, 7.3, 7.5, 8.0, 8.5],
                 color: '#22d3ee',
                 unit: ' 万元/吨'
-            },
-            sse: {
-                title: '上证指数 近12个月月末收盘（点）',
-                source: '数据来源：同花顺月末收盘价；26-02至26-09为真实数据，25-10至26-01为估算值',
-                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
-                values: [3350, 3400, 3450, 4140, 4162.88, 3891.86, 4200, 4180, 4094.40, 3832.26, 3986.30, 3842.19],
-                color: '#ef4444',
-                unit: ' 点'
-            },
-            csi500: {
-                title: '中证500 近12个月月末收盘（点）',
-                source: '数据来源：同花顺；26-09=7435.16为真实收盘，其余为估算值',
-                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
-                values: [6200, 6300, 6400, 7200, 7150, 7300, 7500, 7600, 7500, 7550, 7600, 7435.16],
-                color: '#f97316',
-                unit: ' 点'
-            },
-            hsi: {
-                title: '恒生指数 近12个月月末收盘（点）',
-                source: '数据来源：同花顺月末收盘价；26-03、26-07、26-09为真实数据，其余为估算值',
-                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
-                values: [21000, 21500, 22000, 23500, 24000, 24788.14, 24800, 25000, 25200, 25884.43, 25460, 24613.27],
-                color: '#eab308',
-                unit: ' 点'
-            },
-            hstech: {
-                title: '恒生科技 近12个月月末收盘（点）',
-                source: '数据来源：同花顺月末收盘价；26-03至26-09为真实数据，25-10至26-02为估算值',
-                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
-                values: [3600, 3700, 3800, 4100, 4200, 4649.82, 4350, 4400, 4472.23, 4829.22, 4619.87, 4253.89],
-                color: '#a855f7',
-                unit: ' 点'
-            },
-            spx: {
-                title: 'S&P 500 近12个月月末收盘（点）',
-                source: '数据来源：同花顺月末收盘价；26-06至26-09为真实数据，25-10至26-05为估算值',
-                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
-                values: [6800, 6900, 7000, 7100, 7200, 7300, 7400, 7500, 7499.36, 7489.72, 7686.14, 7716.92],
-                color: '#22c55e',
-                unit: ' 点'
-            },
-            ixic: {
-                title: '纳斯达克综指 近12个月月末收盘（点）',
-                source: '数据来源：同花顺月末收盘价；26-07至26-09为真实数据，25-10至26-06为估算值',
-                months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
-                values: [22000, 22500, 23000, 23500, 24000, 24500, 25000, 25500, 26000, 25373.85, 26370.89, 27065.36],
-                color: '#3b82f6',
-                unit: ' 点'
             },
             cn10y: {
                 title: '中国10年国债收益率 近12个月（%）',
