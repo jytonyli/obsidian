@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🚗 吉利汽车深度分析 | Tony's Investment Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="../data/kline_00175.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #262626; color: #eaeaea; font-size: 17px; line-height: 1.6; }
@@ -96,6 +98,12 @@
             <div class="highlight-block yellow">
                 <strong>📉 近期下跌原因：</strong>9月以来股价从17.2跌至15.77，跌幅8.5%。主要受中国车市价格战持续、消费信心偏弱、港股整体回调影响。但基本面其实不差：上半年出口+158%，利润+46%，只是市场情绪低迷。
             </div>
+        </div>
+
+        <!-- 近一月股价走势 -->
+        <div class="card">
+            <div class="card-title">📈 近一月股价走势</div>
+            <div id="priceChart" style="height:380px;"></div>
         </div>
 
         <!-- 因子拆解 -->
@@ -418,5 +426,58 @@
         </div>
 
     </div>
+    <script>
+        (function() {
+            var data = window.KLINE_00175 || [];
+            var dates = data.map(function(d) { return d.date.slice(5); });
+            var closes = data.map(function(d) { return d.close; });
+            var cost = 16.844;
+            var chart = echarts.init(document.getElementById('priceChart'));
+            chart.setOption({
+                tooltip: {
+                    trigger: 'axis',
+                    backgroundColor: 'rgba(38,38,38,0.95)',
+                    borderColor: 'rgba(255,255,255,0.15)',
+                    textStyle: { color: '#eaeaea', fontSize: 13 },
+                    formatter: function(params) {
+                        var idx = params[0].dataIndex;
+                        var d = data[idx];
+                        return '<strong>' + d.date + '</strong><br/>'
+                            + '开盘: ' + d.open + '<br/>'
+                            + '最高: ' + d.high + '<br/>'
+                            + '最低: ' + d.low + '<br/>'
+                            + '收盘: <strong>' + d.close + '</strong>';
+                    }
+                },
+                grid: { left: 56, right: 24, top: 36, bottom: 40 },
+                xAxis: {
+                    type: 'category', data: dates,
+                    axisLine: { lineStyle: { color: 'rgba(255,255,255,0.2)' } },
+                    axisLabel: { color: '#9a9a9a', fontSize: 11 }
+                },
+                yAxis: {
+                    type: 'value', scale: true,
+                    axisLine: { lineStyle: { color: 'rgba(255,255,255,0.15)' } },
+                    axisLabel: { color: '#9a9a9a', fontSize: 12, formatter: 'HK${value}' },
+                    splitLine: { lineStyle: { color: 'rgba(255,255,255,0.06)' } }
+                },
+                series: [{
+                    name: '收盘价', type: 'line', smooth: true,
+                    symbol: 'circle', symbolSize: 5,
+                    lineStyle: { width: 2.5, color: '#60a5fa' },
+                    itemStyle: { color: '#60a5fa', borderColor: '#232323', borderWidth: 2 },
+                    areaStyle: { color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: 'rgba(96,165,250,0.25)' }, { offset: 1, color: 'rgba(96,165,250,0.02)' }] } },
+                    data: closes,
+                    markLine: {
+                        silent: true, symbol: 'none',
+                        lineStyle: { color: '#ef4444', type: 'dashed', width: 1.5 },
+                        label: { color: '#ef4444', fontSize: 12, formatter: '成本 HK$' + cost },
+                        data: [{ yAxis: cost }]
+                    }
+                }]
+            });
+            window.addEventListener('resize', function() { chart.resize(); });
+        })();
+    </script>
 </body>
 </html>
