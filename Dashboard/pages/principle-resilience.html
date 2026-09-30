@@ -3,7 +3,7 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>决策先于行动 · 原则详解 | Tony's Investment Dashboard</title>
+ <title>组合韧性 · 原则详解 | Tony's Investment Dashboard</title>
  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23fbbf24'/%3E%3Cpath d='M12 44 L26 28 L36 36 L52 14' stroke='%23161616' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
  <style>
@@ -82,12 +82,6 @@
  font-size: 15px; line-height: 1.8;
  }
  .so-what .label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #161616; background: #34d399; border-radius: 6px; padding: 2px 10px; margin-right: 10px; }
- .decision-card {
- background: rgba(20,20,20,0.6); border: 1px solid rgba(251,191,36,0.35);
- border-radius: 12px; padding: 20px 24px; margin: 14px 0;
- font-family: 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace;
- font-size: 14px; line-height: 2; white-space: pre-wrap; color: #d4d4d4;
- }
  .chapter-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 4px; }
  .chapter-no { font-size: 15px; color: #fbbf24; font-weight: 700; }
  @media (max-width: 1024px) {
@@ -112,7 +106,6 @@
  .highlight-block { padding: 12px 14px; font-size: 13px; margin: 10px 0; }
  .data-strip { font-size: 12.5px; padding: 10px 12px; }
  .takeaway, .so-what { font-size: 13.5px; padding: 14px 14px; }
- .decision-card { font-size: 12.5px; padding: 14px 12px; }
  }
  </style>
 </head>
@@ -131,74 +124,60 @@
  <div class="container">
  <div class="status-banner">
  <div>
- <div class="status-item" style="font-size:22px;font-weight:700;color:#eaeaea;">📋 决策先于行动 · 原则详解</div>
- <div class="status-item" style="margin-top:6px;">原则清单 01 章 · 对应 📋 决策准则与复盘.md 准则库 · 最核心的一条原则</div>
+ <div class="status-item" style="font-size:22px;font-weight:700;color:#eaeaea;">🌤️ 组合韧性 · 原则详解</div>
+ <div class="status-item" style="margin-top:6px;">原则清单 01 章 · 全天候（All Weather）思想的落地版</div>
  </div>
  <div class="status-item"><a href="../notebook.html#ch1" style="color:#fbbf24;">← 返回原则清单</a></div>
  </div>
 
  <div class="card">
  <div class="chapter-head"><span class="chapter-no">PRINCIPLE</span></div>
- <div class="card-title">每次决策先写下来，没有卡就不下单</div>
- <div class="card-sub">每次决策前，先写下决策准则（凭什么这么决定 → 赌哪个变量 → 什么情况认错 → 到点机械执行）。</div>
+ <div class="card-title">不预测单一事件，建任何环境都能活的组合</div>
+ <div class="card-sub">预测会错——这不是谦虚，是概率。组合韧性的意思是：单点预测错了，组合不至于死。</div>
 
- <div class="takeaway"><span class="label">一句话结论</span><strong>写下来的决策才叫决策，没写下来的叫情绪。</strong>Dalio 的原话："Every time I make a decision, I write down the criteria I used to make that decision. After the outcome is known, I evaluate whether it was a good decision given those criteria, then I improve the criteria."——先写准则，事后对照，再升级准则。</div>
+ <div class="takeaway"><span class="label">一句话结论</span><strong>韧性 = 任何季节都不会亏太多。</strong>Dalio 的全天候理念：不预测未来，而是构建一个覆盖「增长↑↓ × 通胀↑↓」四种环境的组合，谁赢谁输不重要，组合永远有资产在涨。</div>
 
- <h3 class="section-subtitle">📇 决策卡模板（每次一笔）</h3>
- <div class="decision-card">📅 时间： （写具体日期，别写"近期"）
-🎯 决策： （买/卖/不动 + 仓位数字，必须是可执行动作）
-🌍 周期定位： （当前在短/长债务周期哪个阶段？滞胀？衰退？）
-🔮 我赌的变量： （最多 3 个，写清楚方向）
-📋 用的准则： （写下用到的原则名称）
-🛑 认错条件： （什么情况发生 = 我错了，必须行动。要可观测、可量化）
-📌 验证节点： （什么时候回看这个决策）</div>
-
- <h3 class="section-subtitle">📝 示例：美联储加息后，紫金矿业要不要减？</h3>
- <div class="decision-card">📅 时间： 2026-09-29
-🎯 决策： 维持紫金矿业 30.4% 仓位不动，不加不减。
- 若金价跌破 4000 且实际利率见顶信号出现（10Y TIPS 连续
- 2 个月回落 / 长债拍卖投标倍数显著恶化），加仓至 35%。
-🌍 周期定位： 长期债务周期后段 + 滞胀期。名义 10Y 5.27%（20年新高），
- 实际利率 ~2.4% 高位，但 实际利率 > 实际增速 不可持续。
-🔮 我赌的变量： ① 财政主导最终把实际利率压回低位（10年主线）；
- ② 央行购金托底，中国已连续 22+ 个月；
- ③ 美联储 9 月加息在 Dalio 剧本内，不是新信息。
-📋 用的准则： 周期定位先行、组合韧性、
- 决策先于行动（本卡）。
-🛑 认错条件： 出现"强劲财政整顿"情景：美国加税+砍支出立法落地，
- 或实际利率维持 2.5%+ 超过 12 个月且央行购金连续
- 3 个月停滞 → 减回 20%，不再等。
-📌 验证节点： 每月 15 日查：10Y TIPS、国债拍卖投标倍数、央行购金月报。
- 2026-12-31 正式复盘本卡。</div>
-
- <h3 class="section-subtitle">⚙️ 为什么这条最值钱</h3>
+ <h3 class="section-subtitle">🌤️ 全天候四象限（每种环境都有一格资产在赢）</h3>
  <table>
- <colgroup><col style="width:20%"><col style="width:80%"></colgroup>
- <thead><tr><th>好处</th><th>大白话</th></tr></thead>
+ <colgroup><col style="width:34%"><col style="width:33%"><col style="width:33%"></colgroup>
+ <thead><tr><th></th><th>通胀 ↓</th><th>通胀 ↑</th></tr></thead>
  <tbody>
- <tr><td><strong>可审计</strong></td><td>事后能分清：是判断错了（准则问题），还是没按计划做（执行问题）。不会一笔糊涂账</td></tr>
- <tr><td><strong>可迭代</strong></td><td>同一准则被证伪 2–3 次就改掉。原则清单就是从这些记录里长出来的（复盘迭代）</td></tr>
- <tr><td><strong>情绪无处藏</strong></td><td>写下来的那一刻你没法骗自己——「我是在按纪律加仓」还是「我被跌怕了想抄底」，一写就现形</td></tr>
- <tr><td><strong>决策可复制</strong></td><td>下次遇到同样场景，翻记录直接照做，不用重新纠结</td></tr>
+ <tr><td><strong>增长 ↑</strong></td><td class="green">股票、信用债</td><td class="green">股票、商品、黄金</td></tr>
+ <tr><td><strong>增长 ↓</strong></td><td class="green">长久期国债</td><td class="yellow">黄金、商品</td></tr>
  </tbody>
  </table>
- <div class="highlight-block">💡 写「认错条件」是这张卡最难、也最值钱的一步。Dalio 说："<strong>Be open-minded, but not so open-minded that your brain falls out.</strong>"（要开放，但不能开放到脑子都掉了）——认错条件就是防止你「脑子掉了」的护栏。</div>
+ <div class="highlight-block">⚠️ 我的个人约束：券商<strong>不能加杠杆、不能做空、不能买期权、不能直接买国债/实物金</strong>。落地替代：<br>① 黄金暴露 → <strong>紫金矿业（黄金+铜）</strong> + 黄金股 ETF；<br>② 长久期对冲 → 用<strong>现金本身</strong>当低波缓冲；<br>③ 美元分散 → 港股（联系汇率）天然带美元暴露；<br>④ 股票风险 → A 股波动大，按<strong>风险贡献</strong>下调个股仓位，而非按钱等权。</div>
 
- <h3 class="section-subtitle">❌ 反面案例：不写认错条件的典型死法</h3>
- <ul class="checklist" style="list-style:none;padding:0;margin:14px 0;">
- <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#f87171;">•</span><strong>2008 抄底太早</strong>：很多人 2008 年 9–10 月"觉得跌够了"冲进去，标普 1565→1020 已经 -35%，结果 666 才见底——没写认错条件（"如果跌破 900 就止损"），一路扛到 -57%，还加仓摊平。详细见 <a href="history-2008.html" style="color:#fbbf24;">2008 深度研究</a>。</li>
- <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#f87171;">•</span><strong>拿得住 vs 扛得住</strong>：写卡和不写卡的区别不是赚不赚，是<strong>亏的时候你知不知道自己在赌什么、什么价位必须走</strong>。</li>
+ <h3 class="section-subtitle">🛡️ 怎么检验我的组合有没有韧性</h3>
+ <table>
+ <colgroup><col style="width:22%"><col style="width:46%"><col style="width:32%"></colgroup>
+ <thead><tr><th>压力情景</th><th>我的组合会怎样</th><th>该有的反应</th></tr></thead>
+ <tbody>
+ <tr><td><strong>2008 式信用危机</strong></td><td>股票跌、黄金初期跟跌（流动性危机）、现金最稳</td><td>现金 + 黄金底仓不动，别在 ⑤ 阶段抄底</td></tr>
+ <tr><td><strong>2020 式疫情冲击</strong></td><td>股票快跌快涨，黄金先跌后涨</td><td>保持仓位，不追热点不恐慌</td></tr>
+ <tr><td><strong>1970s 式滞胀</strong></td><td>股票滞涨，黄金 + 商品大赢</td><td class="yellow">黄金 10–15% 底仓的收获期</td></tr>
+ <tr><td><strong>日本式通缩衰退</strong></td><td>股票阴跌，现金 + 债券相对强</td><td>现金为王，别接"便宜"的刀</td></tr>
+ </tbody>
+ </table>
+
+ <h3 class="section-subtitle">⚖️ 韧性 ≠ 什么都不做：战术层可以偏离</h3>
+ <div class="highlight-block">战术上可以对当前所处的短/长债务周期位置做超/低配（周期定位），但<span class="yellow">这部分要单独记，不混进全天候底仓</span>。底仓负责"活下来"，战术仓负责"赢得多"。两者用两张账本。</div>
+
+ <h3 class="section-subtitle">❌ 反面案例：预测对了过程，死于黑天鹅</h3>
+ <ul style="list-style:none;padding:0;margin:14px 0;">
+ <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#f87171;">•</span><strong>2020 年 3 月满仓股票</strong>：很多人"预测"疫情很快结束，满仓扛过 -34% 回撤。预测对了，但过程中可能已经被恐惧击穿、割在地板上——韧性组合不需要"预测对"，它让任何结果都能承受。</li>
+ <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#f87171;">•</span><strong>单押黄金的人</strong>：1980 黄金从 $850 跌回 $300+（-60%+），"最稳的资产"也能套人十年。没有其他象限对冲，单一资产从来不是韧性。</li>
  </ul>
 
  <div class="so-what"><span class="label">执行清单</span>
- ① 任何买入/卖出/加仓/减仓，先填卡（30 秒能填完就说明想清楚了）；<br>
- ② 认错条件必须<strong>可观测、可量化</strong>（"跌破 X 且 Y 指标出现"），不能写"感觉不对"；<br>
- ③ 每张卡归档进 📋 决策准则与复盘.md，月度复盘（复盘迭代）。</div>
+ ① 底仓按四象限配，任何象限都别低于一格的仓位；<br>
+ ② 每季度跑一次压力测试：四个情景各问一遍"我这组合会不会死"；<br>
+ ③ 战术偏离（超配/低配）单独记账，不污染底仓纪律。</div>
  </div>
 
  <div class="status-banner" style="justify-content:space-between;">
- <div class="status-item">← 上一篇：<a href="principle-G08.html" style="color:#fbbf24;">分散下限</a></div>
- <div class="status-item">下一篇：<a href="principle-G10.html" style="color:#fbbf24;">复盘迭代 →</a></div>
+ <div class="status-item">← 上一篇：<a href="principle-cycle-first.html" style="color:#fbbf24;">周期定位先行</a></div>
+ <div class="status-item">下一篇：<a href="principle-diversification.html" style="color:#fbbf24;">分散下限 →</a></div>
  </div>
  </div>
 </body>

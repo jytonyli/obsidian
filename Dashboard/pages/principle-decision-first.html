@@ -3,7 +3,7 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>分散下限 · 原则详解 | Tony's Investment Dashboard</title>
+ <title>决策先于行动 · 原则详解 | Tony's Investment Dashboard</title>
  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23fbbf24'/%3E%3Cpath d='M12 44 L26 28 L36 36 L52 14' stroke='%23161616' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
  <style>
@@ -82,9 +82,14 @@
  font-size: 15px; line-height: 1.8;
  }
  .so-what .label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #161616; background: #34d399; border-radius: 6px; padding: 2px 10px; margin-right: 10px; }
+ .decision-card {
+ background: rgba(20,20,20,0.6); border: 1px solid rgba(251,191,36,0.35);
+ border-radius: 12px; padding: 20px 24px; margin: 14px 0;
+ font-family: 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace;
+ font-size: 14px; line-height: 2; white-space: pre-wrap; color: #d4d4d4;
+ }
  .chapter-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 4px; }
  .chapter-no { font-size: 15px; color: #fbbf24; font-weight: 700; }
- #chartBox { width: 100%; height: 360px; margin: 14px 0; }
  @media (max-width: 1024px) {
  body { font-size: 16px; } .container { padding: 20px 16px; }
  .nav { padding: 14px 16px; flex-wrap: wrap; gap: 10px; }
@@ -95,7 +100,6 @@
  table { font-size: 13px; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
  th { padding: 10px 8px; font-size: 11px; } td { padding: 10px 8px; }
  .two-col { grid-template-columns: 1fr; }
- #chartBox { height: 280px; }
  }
  @media (max-width: 640px) {
  body { font-size: 15px; line-height: 1.6; } .container { padding: 14px 10px; }
@@ -108,7 +112,7 @@
  .highlight-block { padding: 12px 14px; font-size: 13px; margin: 10px 0; }
  .data-strip { font-size: 12.5px; padding: 10px 12px; }
  .takeaway, .so-what { font-size: 13.5px; padding: 14px 14px; }
- #chartBox { height: 240px; }
+ .decision-card { font-size: 12.5px; padding: 14px 12px; }
  }
  </style>
 </head>
@@ -127,93 +131,75 @@
  <div class="container">
  <div class="status-banner">
  <div>
- <div class="status-item" style="font-size:22px;font-weight:700;color:#eaeaea;">🏆 分散下限 · 原则详解</div>
- <div class="status-item" style="margin-top:6px;">原则清单 01 章 · 圣杯（The Holy Grail）的量化落地</div>
+ <div class="status-item" style="font-size:22px;font-weight:700;color:#eaeaea;">📋 决策先于行动 · 原则详解</div>
+ <div class="status-item" style="margin-top:6px;">原则清单 01 章 · 对应 📋 决策准则与复盘.md 准则库 · 最核心的一条原则</div>
  </div>
  <div class="status-item"><a href="../notebook.html#ch1" style="color:#fbbf24;">← 返回原则清单</a></div>
  </div>
 
  <div class="card">
  <div class="chapter-head"><span class="chapter-no">PRINCIPLE</span></div>
- <div class="card-title">至少 15 个低相关回报流；合并同因子下注</div>
- <div class="card-sub">15 是下限不是上限。关键是「低相关」，不是「数量多」——10 只同涨同跌的股票，等于 1 个赌注。</div>
+ <div class="card-title">每次决策先写下来，没有卡就不下单</div>
+ <div class="card-sub">每次决策前，先写下决策准则（凭什么这么决定 → 赌哪个变量 → 什么情况认错 → 到点机械执行）。</div>
 
- <div class="takeaway"><span class="label">一句话结论</span><strong>分散化是投资里唯一的免费午餐。</strong>Dalio 研究了数千个历史案例：把 15–20 个<strong>彼此不相关</strong>的回报流组合在一起，可以在不降低预期收益的前提下，把风险降低约 <strong>80%</strong>。</div>
+ <div class="takeaway"><span class="label">一句话结论</span><strong>写下来的决策才叫决策，没写下来的叫情绪。</strong>Dalio 的原话："Every time I make a decision, I write down the criteria I used to make that decision. After the outcome is known, I evaluate whether it was a good decision given those criteria, then I improve the criteria."——先写准则，事后对照，再升级准则。</div>
 
- <div class="data-strip">📊 关键数据：分散化 <span class="num">15–20</span> 个回报流 → 风险 <span class="num">-80%</span> ｜ 紫金单仓 <span class="num">30.4%</span>（红线 <span class="num">35%</span>） ｜ 传统 60/40 组合中股票承担 <span class="num">~90%</span> 风险</div>
+ <h3 class="section-subtitle">📇 决策卡模板（每次一笔）</h3>
+ <div class="decision-card">📅 时间： （写具体日期，别写"近期"）
+🎯 决策： （买/卖/不动 + 仓位数字，必须是可执行动作）
+🌍 周期定位： （当前在短/长债务周期哪个阶段？滞胀？衰退？）
+🔮 我赌的变量： （最多 3 个，写清楚方向）
+📋 用的准则： （写下用到的原则名称）
+🛑 认错条件： （什么情况发生 = 我错了，必须行动。要可观测、可量化）
+📌 验证节点： （什么时候回看这个决策）</div>
 
- <h3 class="section-subtitle">📉 分散效果示意（相关性越低，风险降得越多）</h3>
- <div id="chartBox"></div>
+ <h3 class="section-subtitle">📝 示例：美联储加息后，紫金矿业要不要减？</h3>
+ <div class="decision-card">📅 时间： 2026-09-29
+🎯 决策： 维持紫金矿业 30.4% 仓位不动，不加不减。
+ 若金价跌破 4000 且实际利率见顶信号出现（10Y TIPS 连续
+ 2 个月回落 / 长债拍卖投标倍数显著恶化），加仓至 35%。
+🌍 周期定位： 长期债务周期后段 + 滞胀期。名义 10Y 5.27%（20年新高），
+ 实际利率 ~2.4% 高位，但 实际利率 > 实际增速 不可持续。
+🔮 我赌的变量： ① 财政主导最终把实际利率压回低位（10年主线）；
+ ② 央行购金托底，中国已连续 22+ 个月；
+ ③ 美联储 9 月加息在 Dalio 剧本内，不是新信息。
+📋 用的准则： 周期定位先行、组合韧性、
+ 决策先于行动（本卡）。
+🛑 认错条件： 出现"强劲财政整顿"情景：美国加税+砍支出立法落地，
+ 或实际利率维持 2.5%+ 超过 12 个月且央行购金连续
+ 3 个月停滞 → 减回 20%，不再等。
+📌 验证节点： 每月 15 日查：10Y TIPS、国债拍卖投标倍数、央行购金月报。
+ 2026-12-31 正式复盘本卡。</div>
 
- <h3 class="section-subtitle">⚠️ 两个最大的误区</h3>
- <div class="two-col">
- <div class="highlight-block red" style="margin:0;">
- <strong>误区一：买得多 ≠ 分散</strong><br>
- 买 10 只 A 股银行股，危机时相关性趋近 <strong>1</strong>——一起跌，等于满仓一个赌注。真正的分散是跨<strong>资产、国家、货币、驱动因子</strong>。
- </div>
- <div class="highlight-block red" style="margin:0;">
- <strong>误区二：同因子重复下注</strong><br>
- 紫金 30.4% + 黄金股 ETF + 黄金期货 = 名义 3 个持仓，实际是 <strong>1 个黄金赌注</strong>。合并同因子后，你的真实分散度远低于持仓数。
- </div>
- </div>
-
- <h3 class="section-subtitle">🧮 我的组合真实分散度体检（2026-09）</h3>
+ <h3 class="section-subtitle">⚙️ 为什么这条最值钱</h3>
  <table>
- <colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup>
- <thead><tr><th>因子/回报流</th><th>我现在的暴露</th><th>是否达标</th></tr></thead>
+ <colgroup><col style="width:20%"><col style="width:80%"></colgroup>
+ <thead><tr><th>好处</th><th>大白话</th></tr></thead>
  <tbody>
- <tr><td><strong>黄金/通胀因子</strong></td><td>紫金 30.4% + 黄金股 ETF（高度集中）</td><td class="orange">⚠️ 同因子重复，单仓贴近红线 35%</td></tr>
- <tr><td><strong>中国权益</strong></td><td>A 股 + 港股（港股含美元暴露）</td><td class="green">部分达标</td></tr>
- <tr><td><strong>美元资产</strong></td><td>港股联系汇率 + 现金</td><td class="orange">偏弱，缺美国股票/债券暴露</td></tr>
- <tr><td><strong>现金缓冲</strong></td><td>现金（当低波缓冲用）</td><td class="green">达标</td></tr>
+ <tr><td><strong>可审计</strong></td><td>事后能分清：是判断错了（准则问题），还是没按计划做（执行问题）。不会一笔糊涂账</td></tr>
+ <tr><td><strong>可迭代</strong></td><td>同一准则被证伪 2–3 次就改掉。原则清单就是从这些记录里长出来的（复盘迭代）</td></tr>
+ <tr><td><strong>情绪无处藏</strong></td><td>写下来的那一刻你没法骗自己——「我是在按纪律加仓」还是「我被跌怕了想抄底」，一写就现形</td></tr>
+ <tr><td><strong>决策可复制</strong></td><td>下次遇到同样场景，翻记录直接照做，不用重新纠结</td></tr>
  </tbody>
  </table>
+ <div class="highlight-block">💡 写「认错条件」是这张卡最难、也最值钱的一步。Dalio 说："<strong>Be open-minded, but not so open-minded that your brain falls out.</strong>"（要开放，但不能开放到脑子都掉了）——认错条件就是防止你「脑子掉了」的护栏。</div>
 
- <h3 class="section-subtitle">✅ 怎么补到 15 个低相关回报流</h3>
- <ul style="list-style:none;padding:0;margin:14px 0;">
- <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#34d399;">①</span><strong>按驱动因子分，不按名字分</strong>：权益（A股/港股/美股）、利率（长债/现金）、通胀（黄金/铜/商品）、货币（美元/其他）、另类——每个因子 2–4 个具体工具。</li>
- <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#34d399;">②</span><strong>单仓红线 35%</strong>：紫金 30.4% 已在边缘，加仓前先问「它和组合里其他资产的相关性是多少」。</li>
- <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#34d399;">③</span><strong>危机时自查</strong>：每个季度问一次"如果 2022 年式股债双杀再来一次，我组合里是不是全在跌"。</li>
+ <h3 class="section-subtitle">❌ 反面案例：不写认错条件的典型死法</h3>
+ <ul class="checklist" style="list-style:none;padding:0;margin:14px 0;">
+ <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#f87171;">•</span><strong>2008 抄底太早</strong>：很多人 2008 年 9–10 月"觉得跌够了"冲进去，标普 1565→1020 已经 -35%，结果 666 才见底——没写认错条件（"如果跌破 900 就止损"），一路扛到 -57%，还加仓摊平。详细见 <a href="history-2008.html" style="color:#fbbf24;">2008 深度研究</a>。</li>
+ <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#f87171;">•</span><strong>拿得住 vs 扛得住</strong>：写卡和不写卡的区别不是赚不赚，是<strong>亏的时候你知不知道自己在赌什么、什么价位必须走</strong>。</li>
  </ul>
 
  <div class="so-what"><span class="label">执行清单</span>
- ① 持仓表按「因子」列重新归类，数一数真实回报流有几个（别数名字）；<br>
- ② 低于 15 个 → 下一步动作是补分散，不是加仓已有头寸；<br>
- ③ 任何新买入前，先算它和紫金/黄金的相关性——同因子就不算新回报流。</div>
+ ① 任何买入/卖出/加仓/减仓，先填卡（30 秒能填完就说明想清楚了）；<br>
+ ② 认错条件必须<strong>可观测、可量化</strong>（"跌破 X 且 Y 指标出现"），不能写"感觉不对"；<br>
+ ③ 每张卡归档进 📋 决策准则与复盘.md，月度复盘（复盘迭代）。</div>
  </div>
 
  <div class="status-banner" style="justify-content:space-between;">
- <div class="status-item">← 上一篇：<a href="principle-G07.html" style="color:#fbbf24;">组合韧性</a></div>
- <div class="status-item">下一篇：<a href="principle-G10.html" style="color:#fbbf24;">复盘迭代 →</a></div>
+ <div class="status-item">← 上一篇：<a href="principle-diversification.html" style="color:#fbbf24;">分散下限</a></div>
+ <div class="status-item">下一篇：<a href="principle-review.html" style="color:#fbbf24;">复盘迭代 →</a></div>
  </div>
  </div>
-
- <script>
- (function () {
- var el = document.getElementById('chartBox');
- if (!el || typeof echarts === 'undefined') return;
- var chart = echarts.init(el);
- chart.setOption({
- backgroundColor: 'transparent',
- title: { text: '组合风险 vs 低相关资产数量（示意）', left: 'center', top: 0, textStyle: { color: '#9a9a9a', fontSize: 13 } },
- tooltip: { trigger: 'axis', textStyle: { fontSize: 12 } },
- grid: { left: 45, right: 20, top: 45, bottom: 30 },
- xAxis: { type: 'category', data: [1, 2, 5, 8, 10, 12, 15, 18, 20, 25], name: '低相关回报流数量', nameTextStyle: { color: '#9a9a9a' }, axisLabel: { color: '#9a9a9a', fontSize: 11 }, axisLine: { lineStyle: { color: 'rgba(255,255,255,0.15)' } } },
- yAxis: { type: 'value', min: 0, max: 100, name: '组合风险（相对%）', nameTextStyle: { color: '#9a9a9a' }, axisLabel: { color: '#9a9a9a', fontSize: 11, formatter: '{value}%' }, splitLine: { lineStyle: { color: 'rgba(255,255,255,0.07)' } } },
- series: [{
- name: '组合风险', type: 'line', data: [100, 88, 62, 42, 33, 27, 21, 18, 16, 13],
- smooth: true, symbol: 'circle', symbolSize: 6,
- lineStyle: { color: '#fbbf24', width: 3 }, itemStyle: { color: '#fbbf24' },
- markLine: {
- silent: true, symbol: 'none',
- lineStyle: { color: '#34d399', type: 'dashed' },
- data: [{ xAxis: 15 }],
- label: { color: '#34d399', fontSize: 11, formatter: '15 个下限 ↓风险约 80%', position: 'end' }
- }
- }]
- });
- window.addEventListener('resize', function () { chart.resize(); });
- })();
- </script>
 </body>
 </html>
