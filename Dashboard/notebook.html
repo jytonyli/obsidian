@@ -163,6 +163,32 @@
             display: inline-block; background: rgba(251,191,36,0.12); border: 1px solid rgba(251,191,36,0.4);
             color: #fbbf24; border-radius: 999px; padding: 3px 12px; font-size: 13px; font-weight: 600;
         }
+        /* 关键数据条（小lin式：每章先用数据说话） */
+        .data-strip {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px; padding: 12px 18px; margin: 14px 0;
+            font-family: 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace;
+            font-size: 14px; color: #9a9a9a; line-height: 1.9;
+        }
+        .data-strip .num { color: #fbbf24; font-weight: 700; }
+        /* 章节结论卡（小lin式：先给答案再展开） */
+        .takeaway {
+            background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.35);
+            border-radius: 12px; padding: 18px 22px; margin: 16px 0;
+            font-size: 16px; line-height: 1.8;
+        }
+        .takeaway .label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #161616; background: #fbbf24; border-radius: 6px; padding: 2px 10px; margin-right: 10px; }
+        /* 章节落地段（小lin式：每章结尾"所以呢"） */
+        .so-what {
+            background: rgba(52,211,153,0.08); border-left: 4px solid #34d399;
+            border-radius: 0 12px 12px 0; padding: 18px 22px; margin: 22px 0 6px;
+            font-size: 15px; line-height: 1.8;
+        }
+        .so-what .label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #161616; background: #34d399; border-radius: 6px; padding: 2px 10px; margin-right: 10px; }
+        @media (max-width: 640px) {
+            .data-strip { font-size: 12.5px; padding: 10px 12px; }
+            .takeaway, .so-what { font-size: 13.5px; padding: 14px 14px; }
+        }
         @media (max-width: 1024px) { .toc { display: none; } }
         /* 引用 */
         .quote-block { border-left: 3px solid rgba(255,255,255,0.25); padding: 6px 0 6px 20px; margin: 14px 0; color: #c8c8c8; font-style: italic; font-size: 15px; }
@@ -220,12 +246,12 @@
 <body>
     <!-- 侧边目录 -->
     <nav class="toc">
-        <div class="toc-title">章节</div>
-        <a href="#ch1">01 投资原则</a>
-        <a href="#ch2">02 经济机器</a>
+        <div class="toc-title">章节 · 先问问题</div>
+        <a href="#ch1">01 免费午餐</a>
+        <a href="#ch2">02 40 万亿</a>
         <a href="#ch3">03 生产率</a>
-        <a href="#ch4">04 短周期</a>
-        <a href="#ch5">05 长周期</a>
+        <a href="#ch4">04 5–8 年</a>
+        <a href="#ch5">05 一生一次</a>
     </nav>
     <button class="scroll-top" id="scrollTop" aria-label="返回顶部">↑</button>
 
@@ -255,31 +281,31 @@
             </div>
         </div>
 
-        <!-- ===== 章节索引 ===== -->
+        <!-- ===== 章节索引（小lin式：每章先抛问题） ===== -->
         <div class="hero-grid">
             <a class="hero-card" href="#ch1">
                 <div class="hero-label">01 · 怎么下注</div>
-                <div class="hero-value" style="font-size:24px;">🎯 投资原则</div>
+                <div class="hero-value" style="font-size:17px;line-height:1.4;">为什么分散化是唯一的免费午餐？</div>
                 <div class="hero-sub">圣杯 / 风险平价 / 全天候 / 决策准则外化</div>
             </a>
             <a class="hero-card" href="#ch2">
                 <div class="hero-label">02 · 底层机器</div>
-                <div class="hero-value" style="font-size:24px;">⚙️ 经济机器怎么运转</div>
+                <div class="hero-value" style="font-size:17px;line-height:1.4;">为什么美国欠 40 万亿还能活得好好的？</div>
                 <div class="hero-sub">交易 / 信用 / 三股力量 / 当前位置</div>
             </a>
             <a class="hero-card" href="#ch3">
                 <div class="hero-label">03 · 长期斜线</div>
-                <div class="hero-value green" style="font-size:24px;">📈 生产率长期增长</div>
+                <div class="hero-value green" style="font-size:17px;line-height:1.4;">为什么生产率决定国家的长期命运？</div>
                 <div class="hero-sub">财富的唯一来源 / 驱动 / 历史数据</div>
             </a>
             <a class="hero-card" href="#ch4">
                 <div class="hero-label">04 · 5–8 年节奏</div>
-                <div class="hero-value orange" style="font-size:24px;">🔄 短期债务周期</div>
+                <div class="hero-value orange" style="font-size:17px;line-height:1.4;">为什么央行加息降息救不了根本问题？</div>
                 <div class="hero-sub">六阶段 / 央行利率 / 当前位置</div>
             </a>
             <a class="hero-card" href="#ch5">
                 <div class="hero-label">05 · 一生一次</div>
-                <div class="hero-value red" style="font-size:24px;">⏳ 长期债务周期</div>
+                <div class="hero-value red" style="font-size:17px;line-height:1.4;">为什么这轮债务周期一辈子只遇到一次？</div>
                 <div class="hero-sub">大拐点 / 去杠杆 / Dalio 家办实证</div>
             </a>
         </div>
@@ -287,8 +313,11 @@
         <!-- ===== 01 投资原则 ===== -->
         <div class="card" id="ch1">
             <div class="chapter-head"><span class="chapter-no">01</span></div>
-            <div class="card-title">🎯 投资原则</div>
+            <div class="card-title">🎯 为什么分散化是唯一的免费午餐？</div>
             <div class="card-sub">知道了经济机器怎么运转之后，怎么下注。核心不是预测对，而是构建一个预测错了也不会死的组合。</div>
+
+            <div class="takeaway"><span class="label">本章结论</span><strong>不预测，先构建一个「预测错了也死不了」的组合。</strong>分散化是投资里唯一的免费午餐：15–20 个低相关回报流，收益不变、风险降约 80%。</div>
+            <div class="data-strip">📊 关键数据：分散化 <span class="num">15–20</span> 个回报流 → 风险 <span class="num">-80%</span> ｜ 紫金单仓 <span class="num">30.4%</span>（红线 <span class="num">35%</span>） ｜ 传统 60/40 组合中股票承担 <span class="num">~90%</span> 风险</div>
 
             <h3 class="section-subtitle">🏆 圣杯（The Holy Grail）</h3>
             <div class="highlight-block">
@@ -393,13 +422,21 @@
 📌 验证节点：    每月 15 日查：10Y TIPS、国债拍卖投标倍数、央行购金月报。
                  2026-12-31 正式复盘本卡。</div>
             <div class="highlight-block">💡 写「认错条件」是这张卡最难、也最值钱的一步。Dalio 说："<strong>Be open-minded, but not so open-minded that your brain falls out.</strong>"（要开放，但不能开放到脑子都掉了）——认错条件就是防止你「脑子掉了」的护栏。</div>
+
+            <div class="so-what"><span class="label">所以呢？</span>
+                ① 每次动手前写一张决策卡（模板在上方），没有卡就不下单；<br>
+                ② 永远别让单一个股超过 <strong>35%</strong>——紫金 30.4% 已在红线边缘，加仓前先问「它和组合里其他资产的相关性是多少」；<br>
+                ③ 原则清单 G-06~G-10 是决策卡的勾选项，每次填卡必须引用至少 2 条。</div>
         </div>
 
         <!-- ===== 02 经济机器 ===== -->
         <div class="card" id="ch2">
             <div class="chapter-head"><span class="chapter-no">02</span></div>
-            <div class="card-title">⚙️ 经济机器怎么运转</div>
+            <div class="card-title">⚙️ 为什么美国欠 40 万亿还能活得好好的？</div>
             <div class="card-sub">Dalio《经济机器是怎样运行的》(How The Economic Machine Works, 30 min 动画) 的核心。经济看似复杂，拆到底很简单——它由无数笔「交易」堆叠而成。</div>
+
+            <div class="takeaway"><span class="label">本章结论</span><strong>经济 = 无数笔交易，但真正的主角是「信用」。</strong>它比货币大 17 倍、可以凭空创造；看懂经济先盯信用，而不是盯钱。美国 40 万亿债务之所以"还活着"，是因为靠信用不断滚动 + 印钞兜底——代价是长期债务周期越走越深。</div>
+            <div class="data-strip">📊 关键数据：美国信用总量 <span class="num">$50 万亿</span> vs 货币 <span class="num">$3 万亿</span>（94% 支出靠信用）｜ 联邦债务 <span class="num">$40 万亿</span> ｜ 10Y 美债 <span class="num">~5.27%</span>（20 年新高）｜ 10Y 实际利率 <span class="num">~2.4%</span>（98 分位）</div>
 
             <h3 class="section-subtitle">🧱 一切从一笔交易开始</h3>
             <ul class="checklist">
@@ -425,6 +462,8 @@
 
             <h3 class="section-subtitle">🏔️ 三股力量叠加</h3>
             <div class="quote-block">Dalio 把任何经济结果看成三条曲线的叠加。</div>
+            <div class="chart-container" id="threeForcesChart" style="height:340px;"></div>
+            <div class="highlight-block red" style="font-size:13px;">图：结构示意（非真实数据）——生产率提供长期斜线，短周期叠加 5–8 年波动，长周期叠加 50–75 年大波。你看到的一切行情，都是这三条线的合体。</div>
             <table>
                 <colgroup><col style="width:16%"><col style="width:20%"><col style="width:30%"><col style="width:34%"></colgroup>
                 <thead><tr><th>力量</th><th>周期</th><th>谁在驱动</th><th>详细页</th></tr></thead>
@@ -451,13 +490,21 @@
                 <li><strong>短周期处在复苏/过热/紧缩/衰退哪一段？</strong><br><span class="orange">美国：④紧缩 → ⑤放缓之间。</span>核心 PCE 仍 3.3%（高于 2% 目标），Q2 GDP ~1.5%，降息被通胀卡住。<br><span class="green">中国：①衰退底部 → ②复苏之间。</span>政策想启动，但房地产投资仍 ~-19%，信用传导堵。<br>判断：美国在紧缩后段（利好长债、黄金）；中国在底部（一旦信用真起来，利好股票）。</li>
                 <li><strong>长周期的债务负担还能靠利率解决吗？</strong><br><span class="red">美国：不能了。</span>联邦债务破 40 万亿、债务/GDP ~120%+，利息支出占财政收入 ~15%+；10Y 实际利率(TIPS) ~2.4% &gt; 实际增长 ~1.5–2%——即使不借新债，债务率也会自动往上走。最终只能靠财政主导 / 印钞。<br><span class="yellow">中国：中央能扛，地方在化债。</span>中央债务率仅 ~22%，地方隐性债务 50–60 万亿靠「短换长、高息换低息」有序化解。<br>判断：美国长周期后段 = 配黄金的宏观底色没变；短期实际利率高企是「吃碎玻璃」式回调，不改长期逻辑。</li>
             </div>
+
+            <div class="so-what"><span class="label">所以呢？</span>
+                ① 盯<strong>信用</strong>而非利率表态：中国看社融是否起来（现在没起来 → 股票别激进）；美国看利率是否见顶（5.27% 高位 → 黄金逻辑还在）；<br>
+                ② 任何政策新闻先走因果链：<strong class="mono">政策 → 信用 → 支出 → 价格</strong>，跳一步就容易被标题党带偏；<br>
+                ③ 用「三股力量」定位每一天：问自己今天这个消息，压的是哪条曲线。</div>
         </div>
 
         <!-- ===== 03 生产率长期增长 ===== -->
         <div class="card" id="ch3">
             <div class="chapter-head"><span class="chapter-no">03</span></div>
-            <div class="card-title">📈 生产率长期增长</div>
+            <div class="card-title">📈 为什么生产率决定国家的长期命运？</div>
             <div class="card-sub">三股力量中最稳、最重要的一条斜线。长期来看，生活水平的提升几乎全部来自生产率，而非债务周期。</div>
+
+            <div class="takeaway"><span class="label">本章结论</span><strong>长期财富 = 生产率，债务周期只制造波动。</strong>谁持续投资教育、技术、储蓄，谁就赢；只靠借债提前消费的繁荣，周期一到全部还回去。</div>
+            <div class="data-strip">📊 关键数据：美国 120 年人均实际 GDP <span class="num">+1.9%/年</span>（大部分来自技术）｜ 中国 1980–2010 生产率 <span class="num">+6%/年</span> ｜ 当前美国实际利率 <span class="num">2.4%</span> &gt; 实际增长 <span class="num">1.5–2%</span> —— 已倒挂</div>
 
             <h3 class="section-subtitle">🎯 为什么它最重要</h3>
             <div class="highlight-block">短期债务周期造成波动，但长期的财富靠生产率：<br><br><strong class="mono">长期人均收入 ≈ 生产率（每小时产出）</strong></div>
@@ -503,13 +550,21 @@
                 <li>如果债务增速长期 &gt; 生产率增速，迟早要经历长期债务周期的去杠杆。</li>
                 <li>Dalio 的核心担忧：<strong class="red">美国当前生产率增长 ~1.5–2%，而实际利率 ~2.4%，已经出现「实际利率 &gt; 实际增长」</strong>，债务/GDP 会自动复利上行。</li>
             </ul>
+
+            <div class="so-what"><span class="label">所以呢？</span>
+                ① 长线仓位押<strong>生产率</strong>：AI / 科技 / 高端制造是新引擎，新能源车、光伏、半导体是中国正在换上的新引擎；<br>
+                ② 紫金是「资源 + 生产率」混合体：金铜是资源属性，产量年增 10% 是经营生产率——买它的一半逻辑赌资源，一半赌经营；<br>
+                ③ 避开纯靠债务扩张、生产率不动的行业——它们涨得快，摔得也快。</div>
         </div>
 
         <!-- ===== 04 短期债务周期 ===== -->
         <div class="card" id="ch4">
             <div class="chapter-head"><span class="chapter-no">04</span></div>
-            <div class="card-title">🔄 短期债务周期（5–8 年）</div>
+            <div class="card-title">🔄 为什么央行加息降息救不了根本问题？</div>
             <div class="card-sub">围绕生产率斜线的起伏，也就是大众说的「商业周期」。主要由央行的利率政策驱动。</div>
+
+            <div class="takeaway"><span class="label">本章结论</span><strong>短周期是央行利率制造的 5–8 年波动</strong>：降息→复苏→过热→加息→紧缩→衰退，循环往复。它能熨平波动，却改变不了生产率斜线和长周期的方向——所以"救"得了一时，救不了根本。</div>
+            <div class="data-strip">📊 关键数据：联邦基金利率 <span class="num">3.50–3.75%</span> ｜ 美国核心 PCE <span class="num">3.3%</span>（目标 2%） ｜ 中国社融 <span class="num">~7.4%</span>、7 月新增贷款 <span class="num">-3400 亿</span>（罕见净减少） ｜ 中国 1Y LPR <span class="num">3.0%</span></div>
 
             <h3 class="section-subtitle">🔁 周期的六个阶段</h3>
             <div class="flow">
@@ -575,13 +630,21 @@
                 <li>当收益率曲线从倒挂变陡、信贷脉冲回升，通常是复苏早期 → 加股票。</li>
                 <li>当央行持续加息、信用收缩，转向现金/短债。</li>
             </ul>
+
+            <div class="so-what"><span class="label">所以呢？</span>
+                ① <strong>美国在 ④→⑤ 之间</strong>（紧缩后段）：持现金 + 黄金，别追股票——降息没落地前，权益承压；<br>
+                ② <strong>中国在 ①→② 之间</strong>（底部）：信用不起来就继续等，等社融增速拐头 + 新增贷款转正再加；<br>
+                ③ 拐点信号只有两个：<strong class="mono">收益率曲线转陡 + 信贷脉冲回升</strong>——出现之前，不猜底。</div>
         </div>
 
         <!-- ===== 05 长期债务周期 ===== -->
         <div class="card" id="ch5">
             <div class="chapter-head"><span class="chapter-no">05</span></div>
-            <div class="card-title">⏳ 长期债务周期（50–75 年）</div>
+            <div class="card-title">⏳ 为什么这轮债务周期一辈子只遇到一次？</div>
             <div class="card-sub">人的一生通常只经历一次。很多个短期债务周期叠加起来，债务一点一点累积，直到利率降到零也刺激不动了，就到了大拐点。</div>
+
+            <div class="takeaway"><span class="label">本章结论</span><strong>债务累积 50–75 年必有一次大清算，利率降到零也救不动。</strong>美国已到后段（40 万亿、实际利率 &gt; 实际增长、财政主导压顶）——Dalio 家办 75% 押 GLD，押的就是这个。</div>
+            <div class="data-strip">📊 关键数据：联邦债务 <span class="num">$40 万亿</span> ｜ 债务/GDP <span class="num">~120%+</span>（二战后峰值） ｜ 利息/财政收入 <span class="num">~15%+</span> ｜ 10Y TIPS <span class="num">~2.4%</span>（98 分位） ｜ Dalio 家办 GLD 占比 <span class="num">~75%</span></div>
 
             <h3 class="section-subtitle">🎢 完整弧线</h3>
             <div class="vflow">
@@ -672,10 +735,83 @@
                 <li><strong>1971–1980</strong>：布雷顿森林解体、美元脱钩黄金、滞胀，黄金从 $35 涨到 $850。</li>
                 <li><strong>1990–至今</strong>：日本资产负债表衰退，零利率后失去的三十年。</li>
             </ul>
+
+            <div class="so-what"><span class="label">所以呢？</span>
+                ① 长期债务周期后段 = <strong>黄金是底仓，不是炒作</strong>——Dalio 家办 75% 押 GLD、建议 10–15%，都是在押这个剧本；<br>
+                ② 实际利率高企带来的每一次金价回调，都是「吃碎玻璃」式机会，而不是逻辑反转——除非认错条件触发；<br>
+                ③ 动摇黄金逻辑的唯一信号：<strong class="mono">强劲财政整顿落地（加税+砍支出）或实际利率持续 &gt;2.5% 超 12 个月且央行购金停滞</strong>。未触发前，按 01 章决策卡机械执行。</div>
         </div>
     </div>
 
     <script>
+        // 三股力量叠加（结构示意，非真实数据）
+        var threeChart = echarts.init(document.getElementById('threeForcesChart'));
+        (function () {
+            var xs = [], prod = [], short = [], long = [], sum = [];
+            for (var i = 0; i <= 100; i += 2) {
+                xs.push(i);
+                var p = 1 + 0.018 * i;                    // 生产率：长期斜线
+                var s = 0.13 * Math.sin(i / 8 * Math.PI * 2);   // 短周期：5-8年波动
+                var l = 0.5 * Math.sin(i / 55 * Math.PI * 2);   // 长周期：50-75年大波
+                prod.push(+p.toFixed(2));
+                short.push(+(p + s).toFixed(2));
+                long.push(+(p + l).toFixed(2));
+                sum.push(+(p + s + l).toFixed(2));
+            }
+            var toData = function (arr) { return xs.map(function (x, j) { return [x, arr[j]]; }); };
+            threeChart.setOption({
+                tooltip: {
+                    trigger: 'axis',
+                    backgroundColor: 'rgba(38,38,38,0.95)',
+                    borderColor: 'rgba(255,255,255,0.15)',
+                    textStyle: { color: '#eaeaea', fontSize: 13 },
+                    valueFormatter: function (v) { return v.toFixed(2); }
+                },
+                legend: {
+                    top: 0,
+                    textStyle: { color: '#9a9a9a', fontSize: 13 },
+                    itemWidth: 18, itemHeight: 10,
+                    data: ['生产率（长期斜线）', '+ 短周期波动', '+ 长周期大波', '叠加结果']
+                },
+                grid: { left: 50, right: 24, top: 44, bottom: 36 },
+                xAxis: {
+                    type: 'value', name: '时间 →', nameTextStyle: { color: '#9a9a9a', fontSize: 12 },
+                    axisLine: { lineStyle: { color: 'rgba(255,255,255,0.2)' } },
+                    axisLabel: { color: '#9a9a9a', fontSize: 12 },
+                    splitLine: { show: false }
+                },
+                yAxis: {
+                    type: 'value', name: '经济产出（示意）', nameTextStyle: { color: '#9a9a9a', fontSize: 12 },
+                    axisLine: { lineStyle: { color: 'rgba(255,255,255,0.15)' } },
+                    axisLabel: { color: '#9a9a9a', fontSize: 12 },
+                    splitLine: { lineStyle: { color: 'rgba(255,255,255,0.06)' } }
+                },
+                series: [
+                    {
+                        name: '生产率（长期斜线）', type: 'line',
+                        data: toData(prod), smooth: true, symbol: 'none',
+                        lineStyle: { width: 3, color: '#34d399' }
+                    },
+                    {
+                        name: '+ 短周期波动', type: 'line',
+                        data: toData(short), smooth: true, symbol: 'none',
+                        lineStyle: { width: 2, color: '#60a5fa', type: 'dashed' }
+                    },
+                    {
+                        name: '+ 长周期大波', type: 'line',
+                        data: toData(long), smooth: true, symbol: 'none',
+                        lineStyle: { width: 2, color: '#f87171', type: 'dashed' }
+                    },
+                    {
+                        name: '叠加结果', type: 'line',
+                        data: toData(sum), smooth: true, symbol: 'none',
+                        lineStyle: { width: 3.5, color: '#fbbf24' },
+                        areaStyle: { color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: 'rgba(251,191,36,0.25)' }, { offset: 1, color: 'rgba(251,191,36,0.02)' }] } }
+                    }
+                ]
+            });
+        })();
+
         // 情景饼图
         var pieChart = echarts.init(document.getElementById('scenarioPie'));
         pieChart.setOption({
@@ -710,7 +846,7 @@
                 ]
             }]
         });
-        window.addEventListener('resize', function() { pieChart.resize(); });
+        window.addEventListener('resize', function() { pieChart.resize(); threeChart.resize(); });
 
         // 返回顶部 + 目录高亮
         var scrollTopBtn = document.getElementById('scrollTop');
