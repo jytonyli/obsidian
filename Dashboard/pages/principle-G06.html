@@ -120,6 +120,9 @@
  box-shadow: 0 8px 24px rgba(0,0,0,0.45); opacity: 0; pointer-events: none;
  transition: all 0.25s;
  }
+ .chapter-nav { display: flex; gap: 10px; flex-wrap: wrap; margin: 14px 0 4px; }
+ .chapter-nav a { color: #9a9a9a; text-decoration: none; font-size: 14px; padding: 8px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.05); transition: all 0.2s; }
+ .chapter-nav a:hover { color: #fbbf24; border-color: rgba(251,191,36,0.5); background: rgba(251,191,36,0.08); }
  .scroll-top.show { opacity: 1; pointer-events: auto; }
  @media (max-width: 1024px) {
  body { font-size: 16px; } .container { padding: 20px 16px; }
@@ -172,6 +175,34 @@
  <div class="status-item"><a href="../notebook.html#ch1" style="color:#fbbf24;">← 返回原则清单</a></div>
  </div>
 
+ <!-- ===== 全景统领 ===== -->
+ <div class="card" id="overview">
+ <div class="card-title">🧭 一图看懂：周期定位</div>
+ <div class="card-sub">先定位周期，再谈买卖。这张图就是经济机器的全部：<strong>实线</strong>是确定性的（生产率斜线 + 叠加结果），<strong>虚线</strong>是周期性波动成分（短周期 5–8 年、长周期 50–75 年）。你看到的一切行情，都是这三条线的合体。</div>
+
+ <div class="chapter-nav">
+ <a href="#ch2">⚙️ 经济机器</a>
+ <a href="#ch3">📈 生产率</a>
+ <a href="#ch4">🔄 短周期</a>
+ <a href="#ch5">⏳ 长周期</a>
+ </div>
+
+ <div class="chart-container" id="threeForcesChart" style="height:340px;"></div>
+ <div class="highlight-block red" style="font-size:13px;">图：结构示意（非真实数据）。<strong>实线</strong> = 生产率（长期斜线）与叠加结果；<strong>虚线</strong> = 短周期与长周期的波动成分。</div>
+
+ <h3 class="section-subtitle">📍 2026 定位速览（先看结论，再往下翻证据）</h3>
+ <table>
+ <colgroup><col style="width:18%"><col style="width:40%"><col style="width:42%"></colgroup>
+ <thead><tr><th>力量</th><th>当前阶段（2026）</th><th>对下注的含义</th></tr></thead>
+ <tbody>
+ <tr><td><strong>📈 生产率</strong></td><td>美国实际增长 ~1.5–2%，AI / 数据中心是新引擎</td><td>长线押生产率（AI / 科技 / 高端制造）；别用短期涨跌判断生产率</td></tr>
+ <tr><td><strong>🔄 短周期</strong></td><td>美国「④紧缩 → ⑤放缓」之间；中国「①底部 → ②复苏」之间</td><td>美国持现金 + 黄金、别追股票；中国等社融拐头再上</td></tr>
+ <tr><td><strong>⏳ 长周期</strong></td><td>美国后段：债务 $40 万亿、实际利率 ~2.4% &gt; 实际增长</td><td>黄金是底仓不是炒作；每次回调是「吃碎玻璃」机会</td></tr>
+ <tr><td><strong>💳 信用</strong></td><td>全球偏收缩：中国宽货币 ≠ 宽信用（社融 7.4%、新增贷款罕见净减）；美国高利率压制</td><td>对股票不宜激进；盯「社融拐头 + 利率见顶」两个信号</td></tr>
+ </tbody>
+ </table>
+ </div>
+
 <!-- ===== 02 经济机器 ===== -->
  <div class="card" id="ch2">
  <div class="card-title">⚙️ 经济机器怎么运转</div>
@@ -204,8 +235,7 @@
 
  <h3 class="section-subtitle">🏔️ 三股力量叠加</h3>
  <div class="quote-block">Dalio 把任何经济结果看成三条曲线的叠加。</div>
- <div class="chart-container" id="threeForcesChart" style="height:340px;"></div>
- <div class="highlight-block red" style="font-size:13px;">图：结构示意（非真实数据）——生产率提供长期斜线，短周期叠加 5–8 年波动，长周期叠加 50–75 年大波。你看到的一切行情，都是这三条线的合体。</div>
+ <div class="highlight-block red" style="font-size:13px;">📈 三股力量全景图已移至页面顶部「🧭 一图看懂：周期定位」。下面表格可直接跳转到各力量详解。</div>
  <table>
  <colgroup><col style="width:16%"><col style="width:20%"><col style="width:30%"><col style="width:34%"></colgroup>
  <thead><tr><th>力量</th><th>周期</th><th>谁在驱动</th><th>详细页</th></tr></thead>
@@ -486,6 +516,24 @@
  ② 实际利率高企带来的每一次金价回调，都是「吃碎玻璃」式机会，而不是逻辑反转——除非认错条件触发；<br>
  ③ 动摇黄金逻辑的唯一信号：<strong class="mono">强劲财政整顿落地（加税+砍支出）或实际利率持续 &gt;2.5% 超 12 个月且央行购金停滞</strong>。未触发前，按 01 章决策卡机械执行。</div>
  </div>
+ </div>
+
+ <div class="card" id="history">
+ <div class="card-title">📚 深度研究库（Dalio 样本库 · 7 段历史）</div>
+ <div class="card-sub">每一段都是经济机器某条曲线的极端样本：去杠杆的种类、印钞的极限、衰退的完整回合。按时间顺序排列，点击进入逐段研究页。</div>
+ <table>
+ <colgroup><col style="width:22%"><col style="width:56%"><col style="width:22%"></colgroup>
+ <thead><tr><th>时期</th><th>一句话定性</th><th>研究页</th></tr></thead>
+ <tbody>
+ <tr><td><strong>1923 德国</strong></td><td>魏玛恶性通胀：印钞的极限</td><td><a href="history-weimar.html" style="color:#fbbf24;text-decoration:none;">魏玛 →</a></td></tr>
+ <tr><td><strong>1929–1945 美国</strong></td><td>大萧条 + 二战：通缩去杠杆后印钞战争支出</td><td><a href="history-1929.html" style="color:#fbbf24;text-decoration:none;">1929 →</a></td></tr>
+ <tr><td><strong>1945–1970 美国</strong></td><td>战后黄金年代：生产率高增 + 债务被稀释</td><td><a href="history-1945.html" style="color:#fbbf24;text-decoration:none;">1945 →</a></td></tr>
+ <tr><td><strong>1971–1980 美国</strong></td><td>布雷顿森林解体、美元脱钩黄金、滞胀：黄金 $35 → $850</td><td><a href="history-1971.html" style="color:#fbbf24;text-decoration:none;">1971 →</a></td></tr>
+ <tr><td><strong>1980–1982 美国</strong></td><td>沃尔克衰退：激进加息杀通胀的完整回合</td><td><a href="history-volcker.html" style="color:#fbbf24;text-decoration:none;">沃尔克 →</a></td></tr>
+ <tr><td><strong>1990–至今 日本</strong></td><td>资产负债表衰退：零利率后失去的三十年</td><td><a href="history-1990.html" style="color:#fbbf24;text-decoration:none;">1990 →</a></td></tr>
+ <tr><td><strong>2008 美国/全球</strong></td><td>现代信用收缩：信贷危机引发全球衰退</td><td><a href="history-2008.html" style="color:#fbbf24;text-decoration:none;">2008 →</a></td></tr>
+ </tbody>
+ </table>
  </div>
 
  <div class="status-banner" style="justify-content:space-between;">
