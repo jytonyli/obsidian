@@ -314,12 +314,6 @@
  name: '叠加结果', type: 'line',
  data: toData(sum), smooth: true, symbol: 'none',
  lineStyle: { width: 3.5, color: '#fbbf24' },
- markLine: {
- symbol: 'none',
- lineStyle: { color: '#eaeaea', type: 'dashed', width: 1.5 },
- label: { color: '#eaeaea', fontSize: 13, formatter: '📌 现在（2026）', position: 'insideEndTop' },
- data: [{ xAxis: 92 }]
- },
  areaStyle: { color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: 'rgba(251,191,36,0.25)' }, { offset: 1, color: 'rgba(251,191,36,0.02)' }] } }
  }
  ]
