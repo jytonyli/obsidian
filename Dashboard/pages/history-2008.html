@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2008 全球金融危机 · 现代信用收缩 | Tony's Investment Dashboard</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23fbbf24'/%3E%3Cpath d='M12 44 L26 28 L36 36 L52 14' stroke='%23161616' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            color: #eaeaea; line-height: 1.75; font-size: 17px;
+            background-color: #161616;
+            background-image:
+                radial-gradient(1000px 700px at 8% -10%, rgba(251,191,36,0.16), transparent 55%),
+                radial-gradient(900px 700px at 96% 5%, rgba(248,113,113,0.16), transparent 55%);
+            background-attachment: fixed;
+        }
+        .mono { font-family: 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
+        .nav {
+            background: rgba(22,22,22,0.45); backdrop-filter: blur(24px) saturate(1.6);
+            -webkit-backdrop-filter: blur(24px) saturate(1.6);
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+            padding: 20px 36px; display: flex; align-items: center; justify-content: space-between;
+            position: sticky; top: 0; z-index: 100;
+        }
+        .nav-brand { font-size: 24px; font-weight: 700; color: #fbbf24; }
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a { color: #9a9a9a; text-decoration: none; font-size: 17px; padding: 10px 18px; border-radius: 8px; transition: all 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: #fbbf24; background: rgba(255,255,255,0.08); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 36px; }
+        .status-banner {
+            background: rgba(38,38,38,0.38); backdrop-filter: blur(18px) saturate(1.4);
+            -webkit-backdrop-filter: blur(18px) saturate(1.4);
+            border: 1px solid rgba(255,255,255,0.13); border-radius: 16px;
+            padding: 24px 28px; margin-bottom: 28px; box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+        }
+        .status-item { font-size: 16px; color: #9a9a9a; }
+        .status-item strong { color: #eaeaea; font-size: 17px; }
+        .card {
+            background: rgba(38,38,38,0.38); backdrop-filter: blur(18px) saturate(1.4);
+            -webkit-backdrop-filter: blur(18px) saturate(1.4);
+            border: 1px solid rgba(255,255,255,0.13); border-radius: 16px;
+            padding: 32px; margin-bottom: 28px; box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+        }
+        .card-title { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+        .card-sub { font-size: 15px; color: #9a9a9a; margin-bottom: 22px; }
+        .section-subtitle { font-size: 17px; color: #9a9a9a; margin: 22px 0 14px; font-weight: 500; }
+        table { width: 100%; border-collapse: collapse; font-size: 15px; table-layout: fixed; margin: 14px 0; }
+        th { text-align: left; padding: 14px 16px; color: #9a9a9a; font-weight: 500; border-bottom: 2px solid rgba(255,255,255,0.12); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+        td { padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); vertical-align: top; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover { background: rgba(255,255,255,0.04); }
+        .green { color: #34d399; } .red { color: #f87171; } .yellow { color: #fbbf24; } .orange { color: #fb923c; }
+        .highlight-block {
+            background: rgba(251,191,36,0.08); border-left: 4px solid #fbbf24;
+            padding: 18px 22px; border-radius: 0 10px 10px 0; margin: 16px 0;
+            font-size: 15px; line-height: 1.8;
+        }
+        .highlight-block.red { background: rgba(248,113,113,0.08); border-left-color: #f87171; }
+        .highlight-block.green { background: rgba(52,211,153,0.08); border-left-color: #34d399; }
+        .highlight-block.orange { background: rgba(251,146,60,0.08); border-left-color: #fb923c; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 14px 0; }
+        .data-strip {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px; padding: 12px 18px; margin: 14px 0;
+            font-family: 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace;
+            font-size: 14px; color: #9a9a9a; line-height: 1.9;
+        }
+        .data-strip .num { color: #fbbf24; font-weight: 700; }
+        .takeaway {
+            background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.35);
+            border-radius: 12px; padding: 18px 22px; margin: 16px 0;
+            font-size: 16px; line-height: 1.8;
+        }
+        .takeaway .label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #161616; background: #fbbf24; border-radius: 6px; padding: 2px 10px; margin-right: 10px; }
+        .so-what {
+            background: rgba(52,211,153,0.08); border-left: 4px solid #34d399;
+            border-radius: 0 12px 12px 0; padding: 18px 22px; margin: 22px 0 6px;
+            font-size: 15px; line-height: 1.8;
+        }
+        .so-what .label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #161616; background: #34d399; border-radius: 6px; padding: 2px 10px; margin-right: 10px; }
+        .vflow { display: grid; grid-template-columns: 28px 1fr; gap: 0 14px; margin: 18px 0; }
+        .vflow .dot { justify-self: center; width: 14px; height: 14px; border-radius: 50%; background: #fbbf24; margin-top: 22px; }
+        .vflow .dot.red { background: #f87171; } .vflow .dot.green { background: #34d399; }
+        .vflow .node { padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .vflow .node:last-child { border-bottom: none; }
+        .vflow .node-title { font-weight: 600; font-size: 16px; }
+        .vflow .node-desc { font-size: 14px; color: #9a9a9a; margin-top: 4px; }
+        .chart-container { height: 380px; margin: 16px 0; }
+        .chapter-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 4px; }
+        .chapter-no { font-size: 15px; color: #fbbf24; font-weight: 700; }
+        @media (max-width: 1024px) {
+            body { font-size: 16px; } .container { padding: 20px 16px; }
+            .nav { padding: 14px 16px; flex-wrap: wrap; gap: 10px; }
+            .nav-brand { font-size: 19px; } .nav-links { gap: 4px; flex-wrap: wrap; }
+            .nav-links a { font-size: 14px; padding: 7px 10px; }
+            .card { padding: 20px 16px; border-radius: 12px; margin-bottom: 18px; }
+            .card-title { font-size: 18px; }
+            table { font-size: 13px; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            th { padding: 10px 8px; font-size: 11px; } td { padding: 10px 8px; }
+            .two-col { grid-template-columns: 1fr; }
+            .chart-container { height: 300px; }
+        }
+        @media (max-width: 640px) {
+            body { font-size: 15px; line-height: 1.6; } .container { padding: 14px 10px; }
+            .nav { padding: 10px 12px; flex-direction: column; align-items: flex-start; gap: 6px; }
+            .nav-brand { font-size: 17px; }
+            .nav-links { width: 100%; gap: 2px; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+            .nav-links a { font-size: 13px; padding: 6px 8px; white-space: nowrap; }
+            .card { padding: 16px 12px; border-radius: 10px; margin-bottom: 14px; }
+            .card-title { font-size: 16px; }
+            .highlight-block { padding: 12px 14px; font-size: 13px; margin: 10px 0; }
+            .data-strip { font-size: 12.5px; padding: 10px 12px; }
+            .takeaway, .so-what { font-size: 13.5px; padding: 14px 14px; }
+            .vflow { grid-template-columns: 22px 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-brand">🎛️ Tony's Investment Dashboard</div>
+        <div class="nav-links">
+            <a href="../Homepage.html">📊 仪表盘</a>
+            <a href="holdings.html">💼 持仓详情</a>
+            <a href="news.html">📰 新闻周报</a>
+            <a href="calendar.html">📅 催化剂</a>
+            <a href="../notebook.html">📓 笔记本</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="status-banner">
+            <div>
+                <div class="status-item" style="font-size:22px;font-weight:700;color:#eaeaea;">📜 2008 全球金融危机 · 现代信用收缩</div>
+                <div class="status-item" style="margin-top:6px;">Dalio 样本库补充 · 1929 的现代版本 · 对应 notebook 02 章「信用是主角」</div>
+            </div>
+            <div class="status-item"><span style="display:inline-block;background:rgba(251,191,36,0.12);border:1px solid rgba(251,191,36,0.4);color:#fbbf24;border-radius:999px;padding:3px 12px;font-size:13px;font-weight:600;">⚠ 数据快照：2026-09-29</span></div>
+        </div>
+
+        <div class="card">
+            <div class="chapter-head"><span class="chapter-no">DEEP DIVE</span></div>
+            <div class="card-title">2008：泡沫在"影子银行"，雷曼倒塌，信用冻结</div>
+            <div class="card-sub">1929 的现代翻版：同样是债务泡沫，但这次风险藏在银行体系之外（影子银行/证券化），雷曼倒闭引爆全球信贷冻结。Dalio 把它当"监管失误 + 央行救市"的样板：去杠杆用了一年（对比大萧条的 4 年），代价是私人债务转成政府债务。</div>
+
+            <div class="takeaway"><span class="label">一句话结论</span><strong>现代去杠杆 = 私人债务变公共债务。</strong>2008 里政府用 7000 亿 TARP + 4.5 万亿 QE 接住私人坏账，把"债务危机"转成"主权债务上升"——美国债务/GDP 从 2008 年 64% 一路爬到 2020 年 120%+。<strong>所以 2008 不是结束，是 05 章长周期"美国后段"的开端。</strong></div>
+            <div class="data-strip">📊 关键数据：标普 <span class="num">1565 → 666</span>（-57%）｜ 房价 <span class="num">-33%</span>（Case-Shiller）｜ 雷曼资产 <span class="num">6390 亿</span>$（最大破产案）｜ TARP <span class="num">7000 亿</span>$ ｜ QE 三轮 <span class="num">4.5 万亿</span>$ ｜ 失业率 <span class="num">10%</span>（2009.10）</div>
+
+            <h3 class="section-subtitle">🧱 泡沫怎么形成的（2001–2006）</h3>
+            <ul class="checklist" style="list-style:none;padding:0;margin:14px 0;">
+                <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#fbbf24;">•</span><strong>低利率 + 宽松监管</strong>：互联网泡沫后利率 1%，鼓励买房；次级贷、NINJA 贷款（无收入无资产）泛滥。</li>
+                <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#fbbf24;">•</span><strong>影子银行</strong>：房贷打包成 MBS/CDO 卖到全球，风险藏在表外、评级机构给了 AAA。银行体系"看起来"很安全。</li>
+                <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#fbbf24;">•</span><strong>杠杆叠加</strong>：投行 30:1+ 杠杆，回购市场隔夜滚债——信用链条像多米诺骨牌，一张倒全倒。</li>
+            </ul>
+
+            <h3 class="section-subtitle">⏳ 时间线：从房价见顶到信贷冻结</h3>
+            <div class="vflow">
+                <div class="dot"></div>
+                <div class="node"><div class="node-title">2006 房价见顶（Case-Shiller 峰值）</div><div class="node-desc">连续 5 年上涨后拐头；次级贷违约开始上升。</div></div>
+                <div class="dot"></div>
+                <div class="node"><div class="node-title">2007.4–8 第一批裂缝</div><div class="node-desc">新世纪金融倒闭；8 月巴黎银行冻结三只基金——市场第一次意识到"AAA 也不安全"。</div></div>
+                <div class="dot red"></div>
+                <div class="node"><div class="node-title">2008.3 贝尔斯登被收购</div><div class="node-desc">摩根大通 $2/股 接盘（一年前 $150）；美联储开始救，但市场以为"只是个别机构问题"。</div></div>
+                <div class="dot red"></div>
+                <div class="node"><div class="node-title">2008.9.15 雷曼倒闭</div><div class="node-desc">政府不救（道德风险），雷曼破产——全球货币市场基金破净、回购冻结，信贷瞬间停摆。<strong>标普 2008 全年 -57%。</strong></div></div>
+                <div class="dot red"></div>
+                <div class="node"><div class="node-title">2008.10–11 全面救市</div><div class="node-desc">TARP 7000 亿 + 美联储紧急放贷工具 + 2008.11 QE1 启动——"不惜一切代价"止血。</div></div>
+                <div class="dot red"></div>
+                <div class="node"><div class="node-title">2009.3 标普 666 见底</div><div class="node-desc">失业率冲 10%；全球贸易暴跌；但信贷指标开始回稳（3 月是底，事后看）。</div></div>
+                <div class="dot green"></div>
+                <div class="node"><div class="node-title">2009–2015 慢复苏 + QE2/QE3</div><div class="node-desc">美联储资产负债表 0.9 万亿 → 4.5 万亿；股市 2009 年起 10 年大牛，但普通家庭 6 年才缓过来。</div></div>
+            </div>
+
+            <h3 class="section-subtitle">📈 标普 500：2007 峰值 → 2009 谷底（月度，真实数据）</h3>
+            <div class="chart-container" id="sp500Chart"></div>
+            <div class="highlight-block red" style="font-size:13px;">2007.10 1565 → 2009.3 666：-57%，比 1929 第一年还狠（但只跌了 17 个月，1929 跌了 34 个月）。<strong>央行救市把"大萧条级"的跌幅压成了"深度熊市"——代价是政府债务永久抬升。</strong></div>
+
+            <h3 class="section-subtitle">⚙️ 机制：信用收缩怎么传导成金融危机</h3>
+            <table>
+                <colgroup><col style="width:24%"><col style="width:30%"><col style="width:46%"></colgroup>
+                <thead><tr><th>环节</th><th>2008 发生了什么</th><th>后果</th></tr></thead>
+                <tbody>
+                    <tr><td>房价下跌</td><td class="red">-33%</td><td>MBS/CDO 价值崩塌，AAA 变垃圾</td></tr>
+                    <tr><td>机构互不信任</td><td class="red">雷曼倒闭后</td><td>回购市场冻结 → 连高盛都不敢借出隔夜钱</td></tr>
+                    <tr><td>信贷冻结</td><td class="red">企业借不到钱</td><td>实体经济 1–2 个季度后塌陷（失业 10%）</td></tr>
+                    <tr><td>央行救市</td><td class="yellow">QE + 担保</td><td>用政府资产负债表接私人坏账 → 债务/GDP 永久上台阶</td></tr>
+                    <tr><td>监管补洞</td><td>2010 多德-弗兰克</td><td>影子银行纳入监管，但"下一颗雷"总在别处</td></tr>
+                </tbody>
+            </table>
+            <div class="highlight-block"><strong>Dalio 的结论</strong>：2008 = <strong>监管失误（泡沫期）+ 决策失误（雷曼）</strong>的典型案例；但它也证明"只要央行+财政全力出手，现代去杠杆可以压缩到 1–2 年"。代价写进了 05 章：<strong>美国债务/GDP 从 64% 涨到 120%+，长周期的"弹药"被这次危机提前打掉了。</strong></div>
+
+            <h3 class="section-subtitle">🔍 对照中国今天的结构</h3>
+            <div class="two-col">
+                <div class="highlight-block orange"><strong>结构相似处</strong><br>房地产 → 地方政府平台 → 银行/影子银行 的链条，与 2008 美国"房贷 → 证券化 → 全球"高度同构。风险不在表内贷款，在表外与链条传导。</div>
+                <div class="highlight-block green"><strong>化解方式不同</strong><br>中国选择"化债 + 中央加杠杆 + 时间换空间"（12 万亿化债），本质是 2008 美国救市策略的"提前版"——私人/地方债务逐步转中央。盯<strong>社融和信贷脉冲</strong>判断是否走出来（notebook 02 章的核心指标）。</div>
+            </div>
+
+            <div class="so-what"><span class="label">所以呢？</span>
+                ① 信贷冻结比股市下跌可怕得多——<strong>盯信用指标（回购利差、社融、银行间利率）</strong>，别只看指数，这是 2008 最值钱的教训；<br>
+                ② 现代去杠杆 1–2 年结束 = <strong>危机后的底是"政策底"不是"市场底"</strong>——先等信贷指标回稳再抄底（2009.3 信号是货币市场利率正常化）；<br>
+                ③ 对你持仓的直接含义：美国 2008 债务转移 → 主权债膨胀 → 货币信用稀释 → <strong>黄金在那 10 年（2008–2012）从 870 涨到 1920</strong>——债务危机后硬资产的表现，你已经在持有。</div>
+        </div>
+
+        <div class="status-banner" style="justify-content:space-between;">
+            <div class="status-item">← 前篇：<a href="history-volcker.html" style="color:#fbbf24;">1980–1982 沃尔克衰退</a></div>
+            <div class="status-item">回：<a href="../notebook.html#ch2" style="color:#fbbf24;">笔记本 02 章 经济机器 →</a></div>
+        </div>
+    </div>
+
+    <script>
+        var sp500Chart = echarts.init(document.getElementById('sp500Chart'));
+        sp500Chart.setOption({
+            tooltip: {
+                trigger: 'axis',
+                backgroundColor: 'rgba(38,38,38,0.95)',
+                borderColor: 'rgba(255,255,255,0.15)',
+                textStyle: { color: '#eaeaea', fontSize: 13 }
+            },
+            grid: { left: 56, right: 24, top: 24, bottom: 44 },
+            xAxis: {
+                type: 'category',
+                data: ['07.01','07.05','07.09','08.01','08.05','08.09','09.01','09.05','09.09','09.01','10.05','10.09','11.01','11.05','11.09','12.01','12.05','12.09','09.03'],
+                axisLine: { lineStyle: { color: 'rgba(255,255,255,0.2)' } },
+                axisLabel: { color: '#9a9a9a', fontSize: 11, formatter: function (v, i) { return i % 2 === 0 ? v : ''; } }
+            },
+            yAxis: {
+                type: 'value', name: '标普 500（点）', nameTextStyle: { color: '#9a9a9a', fontSize: 12 },
+                axisLine: { lineStyle: { color: 'rgba(255,255,255,0.15)' } },
+                axisLabel: { color: '#9a9a9a', fontSize: 12 },
+                splitLine: { lineStyle: { color: 'rgba(255,255,255,0.06)' } }
+            },
+            series: [{
+                name: '标普 500 月度收盘',
+                type: 'line', smooth: false, symbol: 'circle', symbolSize: 5,
+                lineStyle: { width: 3, color: '#fbbf24' },
+                itemStyle: { color: '#fbbf24', borderColor: '#161616', borderWidth: 1.5 },
+                areaStyle: { color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: 'rgba(251,191,36,0.3)' }, { offset: 1, color: 'rgba(251,191,36,0.02)' }] } },
+                markPoint: {
+                    data: [
+                        { coord: ['07.10', 1565], name: '2007.10 峰值 1565', value: '2007.10 峰值 1565' },
+                        { coord: ['09.03', 666], name: '2009.3 谷底 666', value: '2009.3 谷底 666' }
+                    ],
+                    symbolSize: 52, label: { color: '#eaeaea', fontSize: 11, formatter: function (p) { return p.name.split(' ').join('\n'); } }
+                },
+                data: [1438, 1503, 1526, 1378, 1280, 1166, 1020, 909, 968, 826, 848, 890, 841, 919, 896, 1000, 1063, 989, 666]
+            }]
+        });
+        window.addEventListener('resize', function () { sp500Chart.resize(); });
+    </script>
+</body>
+</html>

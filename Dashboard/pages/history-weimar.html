@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1923 魏玛恶性通胀 · 印钞的极限 | Tony's Investment Dashboard</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f87171'/%3E%3Cpath d='M12 44 L26 28 L36 36 L52 14' stroke='%23161616' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            color: #eaeaea; line-height: 1.75; font-size: 17px;
+            background-color: #161616;
+            background-image:
+                radial-gradient(1000px 700px at 8% -10%, rgba(248,113,113,0.18), transparent 55%),
+                radial-gradient(900px 700px at 96% 5%, rgba(180,120,60,0.16), transparent 55%);
+            background-attachment: fixed;
+        }
+        .mono { font-family: 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
+        .nav {
+            background: rgba(22,22,22,0.45); backdrop-filter: blur(24px) saturate(1.6);
+            -webkit-backdrop-filter: blur(24px) saturate(1.6);
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+            padding: 20px 36px; display: flex; align-items: center; justify-content: space-between;
+            position: sticky; top: 0; z-index: 100;
+        }
+        .nav-brand { font-size: 24px; font-weight: 700; color: #fbbf24; }
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a { color: #9a9a9a; text-decoration: none; font-size: 17px; padding: 10px 18px; border-radius: 8px; transition: all 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: #fbbf24; background: rgba(255,255,255,0.08); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 36px; }
+        .status-banner {
+            background: rgba(38,38,38,0.38); backdrop-filter: blur(18px) saturate(1.4);
+            -webkit-backdrop-filter: blur(18px) saturate(1.4);
+            border: 1px solid rgba(255,255,255,0.13); border-radius: 16px;
+            padding: 24px 28px; margin-bottom: 28px; box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+        }
+        .status-item { font-size: 16px; color: #9a9a9a; }
+        .status-item strong { color: #eaeaea; font-size: 17px; }
+        .card {
+            background: rgba(38,38,38,0.38); backdrop-filter: blur(18px) saturate(1.4);
+            -webkit-backdrop-filter: blur(18px) saturate(1.4);
+            border: 1px solid rgba(255,255,255,0.13); border-radius: 16px;
+            padding: 32px; margin-bottom: 28px; box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+        }
+        .card-title { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+        .card-sub { font-size: 15px; color: #9a9a9a; margin-bottom: 22px; }
+        .section-subtitle { font-size: 17px; color: #9a9a9a; margin: 22px 0 14px; font-weight: 500; }
+        table { width: 100%; border-collapse: collapse; font-size: 15px; table-layout: fixed; margin: 14px 0; }
+        th { text-align: left; padding: 14px 16px; color: #9a9a9a; font-weight: 500; border-bottom: 2px solid rgba(255,255,255,0.12); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+        td { padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); vertical-align: top; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover { background: rgba(255,255,255,0.04); }
+        .green { color: #34d399; } .red { color: #f87171; } .yellow { color: #fbbf24; } .orange { color: #fb923c; }
+        .highlight-block {
+            background: rgba(251,191,36,0.08); border-left: 4px solid #fbbf24;
+            padding: 18px 22px; border-radius: 0 10px 10px 0; margin: 16px 0;
+            font-size: 15px; line-height: 1.8;
+        }
+        .highlight-block.red { background: rgba(248,113,113,0.08); border-left-color: #f87171; }
+        .highlight-block.green { background: rgba(52,211,153,0.08); border-left-color: #34d399; }
+        .highlight-block.orange { background: rgba(251,146,60,0.08); border-left-color: #fb923c; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 14px 0; }
+        .data-strip {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px; padding: 12px 18px; margin: 14px 0;
+            font-family: 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace;
+            font-size: 14px; color: #9a9a9a; line-height: 1.9;
+        }
+        .data-strip .num { color: #fbbf24; font-weight: 700; }
+        .takeaway {
+            background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.35);
+            border-radius: 12px; padding: 18px 22px; margin: 16px 0;
+            font-size: 16px; line-height: 1.8;
+        }
+        .takeaway .label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #161616; background: #fbbf24; border-radius: 6px; padding: 2px 10px; margin-right: 10px; }
+        .so-what {
+            background: rgba(52,211,153,0.08); border-left: 4px solid #34d399;
+            border-radius: 0 12px 12px 0; padding: 18px 22px; margin: 22px 0 6px;
+            font-size: 15px; line-height: 1.8;
+        }
+        .so-what .label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #161616; background: #34d399; border-radius: 6px; padding: 2px 10px; margin-right: 10px; }
+        .vflow { display: grid; grid-template-columns: 28px 1fr; gap: 0 14px; margin: 18px 0; }
+        .vflow .dot { justify-self: center; width: 14px; height: 14px; border-radius: 50%; background: #fbbf24; margin-top: 22px; }
+        .vflow .dot.red { background: #f87171; } .vflow .dot.green { background: #34d399; }
+        .vflow .node { padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .vflow .node:last-child { border-bottom: none; }
+        .vflow .node-title { font-weight: 600; font-size: 16px; }
+        .vflow .node-desc { font-size: 14px; color: #9a9a9a; margin-top: 4px; }
+        .chart-container { height: 360px; margin: 16px 0; }
+        .chapter-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 4px; }
+        .chapter-no { font-size: 15px; color: #f87171; font-weight: 700; }
+        @media (max-width: 1024px) {
+            body { font-size: 16px; } .container { padding: 20px 16px; }
+            .nav { padding: 14px 16px; flex-wrap: wrap; gap: 10px; }
+            .nav-brand { font-size: 19px; } .nav-links { gap: 4px; flex-wrap: wrap; }
+            .nav-links a { font-size: 14px; padding: 7px 10px; }
+            .card { padding: 20px 16px; border-radius: 12px; margin-bottom: 18px; }
+            .card-title { font-size: 18px; }
+            table { font-size: 13px; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            th { padding: 10px 8px; font-size: 11px; } td { padding: 10px 8px; }
+            .two-col { grid-template-columns: 1fr; }
+            .chart-container { height: 280px; }
+        }
+        @media (max-width: 640px) {
+            body { font-size: 15px; line-height: 1.6; } .container { padding: 14px 10px; }
+            .nav { padding: 10px 12px; flex-direction: column; align-items: flex-start; gap: 6px; }
+            .nav-brand { font-size: 17px; }
+            .nav-links { width: 100%; gap: 2px; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+            .nav-links a { font-size: 13px; padding: 6px 8px; white-space: nowrap; }
+            .card { padding: 16px 12px; border-radius: 10px; margin-bottom: 14px; }
+            .card-title { font-size: 16px; }
+            .highlight-block { padding: 12px 14px; font-size: 13px; margin: 10px 0; }
+            .data-strip { font-size: 12.5px; padding: 10px 12px; }
+            .takeaway, .so-what { font-size: 13.5px; padding: 14px 14px; }
+            .vflow { grid-template-columns: 22px 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-brand">🎛️ Tony's Investment Dashboard</div>
+        <div class="nav-links">
+            <a href="../Homepage.html">📊 仪表盘</a>
+            <a href="holdings.html">💼 持仓详情</a>
+            <a href="news.html">📰 新闻周报</a>
+            <a href="calendar.html">📅 催化剂</a>
+            <a href="../notebook.html">📓 笔记本</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="status-banner">
+            <div>
+                <div class="status-item" style="font-size:22px;font-weight:700;color:#eaeaea;">📜 1923 魏玛恶性通胀 · 印钞的极限</div>
+                <div class="status-item" style="margin-top:6px;">Dalio 样本库补充 · 通胀性去杠杆的极端模板 · 对应 notebook 02 章「信用与印钞」</div>
+            </div>
+            <div class="status-item"><span style="display:inline-block;background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.4);color:#f87171;border-radius:999px;padding:3px 12px;font-size:13px;font-weight:600;">⚠ 数据快照：2026-09-29</span></div>
+        </div>
+
+        <div class="card">
+            <div class="chapter-head"><span class="chapter-no">DEEP DIVE</span></div>
+            <div class="card-title">魏玛德国：当"印钞稀释债务"失去边界</div>
+            <div class="card-sub">Dalio 的债务危机框架里，去杠杆有两条路：通缩（违约+紧缩，1929 美国）和通胀（印钞+货币化，魏玛德国）。魏玛是后者的极限案例——不是"货币贬值"，是货币系统死亡：1923 年 11 月，1 美元 = 4.2 万亿马克，一个面包卖 2000 亿马克。</div>
+
+            <div class="takeaway"><span class="label">一句话结论</span><strong>印钞有边界：当货币不再被信任，通胀就会吃掉一切。</strong>魏玛证明"财政主导+印钞"的终点不是温和通胀，而是货币归零——但美国大概率不会走到那一步，因为美元是储备货币、债务是本币债、财政还有税基。这条"红线"画出来，反而让黄金的"温和通胀稀释"逻辑更清晰。</div>
+            <div class="data-strip">📊 关键数据：1 美元 = <span class="num">4.2 万亿</span>马克（1923.11）｜ 月通胀率 <span class="num">~30,000%+</span>｜ 货币供应 1913→1923 膨胀 <span class="num">~3,000 亿倍</span>｜ 工资每天发两次 ｜ 一战后赔款 <span class="num">1320 亿金马克</span></div>
+
+            <h3 class="section-subtitle">🧱 怎么走到这一步的</h3>
+            <ul class="checklist" style="list-style:none;padding:0;margin:14px 0;">
+                <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#f87171;">•</span><strong>1914 停金本位</strong>：一战开打，德国停兑黄金、印钞筹军费。</li>
+                <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#f87171;">•</span><strong>1919 凡尔赛赔款</strong>：1320 亿金马克天文数字——按当时德国 5 年 GDP 计，只能靠印钞或违约。</li>
+                <li style="padding:10px 0 10px 28px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;position:relative;"><span style="position:absolute;left:6px;color:#f87171;">•</span><strong>1923.1 法国占鲁尔</strong>：赔款违约 → 法比联军占领鲁尔工业区 → 德国"消极抵抗"停生产 → 税基没了，只能印钞发工资。</li>
+            </ul>
+
+            <h3 class="section-subtitle">⏳ 时间线：从温和通胀到货币死亡</h3>
+            <div class="vflow">
+                <div class="dot"></div>
+                <div class="node"><div class="node-title">1914–1921 温和通胀期</div><div class="node-desc">战争印钞 + 战后重建，马克兑美元从 4.2 缓贬到 ~65——还能忍。</div></div>
+                <div class="dot"></div>
+                <div class="node"><div class="node-title">1922 加速</div><div class="node-desc">赔款谈判破裂，市场对马克失去信心，汇率开始指数级下跌（年末 7,000 马克/$）。</div></div>
+                <div class="dot red"></div>
+                <div class="node"><div class="node-title">1923.1 法国占鲁尔 → 印钞机全开</div><div class="node-desc">停产+失业 → 政府印钞发补贴；汇率 1923.1 已到 17,792 马克/$。</div></div>
+                <div class="dot red"></div>
+                <div class="node"><div class="node-title">1923.7–10 失控</div><div class="node-desc">7 月 35 万、8 月 462 万、9 月 9,886 万、10 月 253 亿马克/$——每天通胀 ~20%+，工资日结两次。</div></div>
+                <div class="dot red"></div>
+                <div class="node"><div class="node-title">1923.11 货币死亡</div><div class="node-desc">1 美元 = 4.2 万亿马克；面包 2000 亿马克；存钱 = 清零。经济退回到以物易物。</div></div>
+                <div class="dot green"></div>
+                <div class="node"><div class="node-title">1923.11.15 地产抵押马克（新币）</div><div class="node-desc">1 新马克 = 1 万亿旧马克，严格盯黄金+税收担保。通胀一夜停止——<strong>只要政府愿意停，通胀可以瞬间停</strong>。</div></div>
+                <div class="dot green"></div>
+                <div class="node"><div class="node-title">1924–1929 短暂稳定</div><div class="node-desc">道威斯计划重组赔款 + 美国贷款流入 → 五年虚假繁荣（1929 全球大萧条又把它打回原形）。</div></div>
+            </div>
+
+            <h3 class="section-subtitle">📈 马克兑美元：指数级崩塌（1921–1923，真实数据）</h3>
+            <div class="chart-container" id="markChart"></div>
+            <div class="highlight-block red" style="font-size:13px;">对数轴：1921 年 1 美元 ≈ 65 马克；1923 年 11 月 ≈ 4.2 万亿。直线说明的不是"贬值"，是<strong>汇率在指数级加速</strong>——货币信心一旦崩塌，贬值速度自己加速，央行根本追不上。</div>
+
+            <h3 class="section-subtitle">⚙️ 机制：恶性通胀的死亡螺旋</h3>
+            <table>
+                <colgroup><col style="width:24%"><col style="width:30%"><col style="width:46%"></colgroup>
+                <thead><tr><th>环节</th><th>魏玛发生了什么</th><th>后果</th></tr></thead>
+                <tbody>
+                    <tr><td>财政缺口</td><td class="red">赔款 + 占鲁尔停产</td><td>税收枯竭，支出刚性 → 只能印钞</td></tr>
+                    <tr><td>汇率崩塌</td><td class="red">进口品暴涨</td><td>输入性通胀：物价涨幅直接跟着汇率走</td></tr>
+                    <tr><td>工资螺旋</td><td>工会要求日结</td><td>工资→物价互相追赶，通胀加速度</td></tr>
+                    <tr><td>货币信心死亡</td><td class="red">民众抛马克换实物/外币</td><td>货币流通速度爆炸 → 需求通胀叠加供给通胀</td></tr>
+                    <tr><td>结局</td><td>1923.11 崩溃</td><td>换发新币 + 盯黄金/税基，才止住</td></tr>
+                </tbody>
+            </table>
+            <div class="highlight-block"><strong>Dalio 的用法</strong>：魏玛 = 通胀性去杠杆的"极端情景"，用来画边界——印钞到货币信用崩塌。他拿它和 1929 美国（通缩极值）对照：<strong>去杠杆的两条路都有悬崖，中间那条"温和通胀稀释"才是政策目标</strong>。</div>
+
+            <h3 class="section-subtitle">🔍 美国会不会魏玛化</h3>
+            <div class="two-col">
+                <div class="highlight-block orange"><strong>会吗？基本不会——三条保命索</strong><br>① 美元是储备货币，印钞的贬值代价转嫁给全世界（日本做不到）；② 美国外债以本币计，违约风险低；③ 美联储独立 + 税基还在，随时能像 1923.11 一样"一夜刹车"。魏玛是战败+被占+赔款的极端政治崩溃，不是债务危机的常态。</div>
+                <div class="highlight-block red"><strong>但红线要记住</strong><br>美国若走到"财政主导失控 + 外国央行集体抛美债 + 美元信任崩塌"三合一（Dalio 说的储备货币周期后段），就从"温和通胀稀释"滑向"魏玛斜率"。这正是黄金仓位存在的原因——它是那条红线的保险。</div>
+            </div>
+
+            <div class="so-what"><span class="label">所以呢？</span>
+                ① 你的黄金押的是"<strong>温和通胀稀释</strong>"（美国版 1945–70 剧本），不是"魏玛崩盘"——预期收益和风险敞口都别按极端情景配；<br>
+                ② 魏玛红线信号：<strong class="mono">外国央行集体减持美债 + 美元指数趋势性走弱 + 财政赤字失控</strong>——三选二出现，才升级黄金权重；<br>
+                ③ 1923.11 的教训：<strong>通胀可以一夜停止</strong>——政策转向比你想的快，别用"反正会通胀"当重仓黄金的免死金牌。</div>
+        </div>
+
+        <div class="status-banner" style="justify-content:space-between;">
+            <div class="status-item">← 对照：<a href="history-1929.html" style="color:#fbbf24;">1929 通缩去杠杆（另一条路）</a></div>
+            <div class="status-item">下一篇：<a href="history-1945.html" style="color:#fbbf24;">1945–1970 战后黄金年代 →</a></div>
+        </div>
+    </div>
+
+    <script>
+        var markChart = echarts.init(document.getElementById('markChart'));
+        markChart.setOption({
+            tooltip: {
+                trigger: 'axis',
+                backgroundColor: 'rgba(38,38,38,0.95)',
+                borderColor: 'rgba(255,255,255,0.15)',
+                textStyle: { color: '#eaeaea', fontSize: 13 },
+                valueFormatter: function (v) {
+                    if (v >= 1e12) return v.toExponential(1) + ' 马克/$';
+                    if (v >= 1e6) return (v / 1e6).toFixed(1) + ' 百万';
+                    return v.toLocaleString() + ' 马克/$';
+                }
+            },
+            grid: { left: 66, right: 24, top: 24, bottom: 40 },
+            xAxis: {
+                type: 'category',
+                data: ['1921.1', '1921.7', '1922.1', '1922.7', '1923.1', '1923.3', '1923.5', '1923.7', '1923.8', '1923.9', '1923.10', '1923.11'],
+                axisLine: { lineStyle: { color: 'rgba(255,255,255,0.2)' } },
+                axisLabel: { color: '#9a9a9a', fontSize: 11 }
+            },
+            yAxis: {
+                type: 'log', name: '马克/美元（对数轴）', nameTextStyle: { color: '#9a9a9a', fontSize: 12 },
+                axisLine: { lineStyle: { color: 'rgba(255,255,255,0.15)' } },
+                axisLabel: { color: '#9a9a9a', fontSize: 11 },
+                splitLine: { lineStyle: { color: 'rgba(255,255,255,0.06)' } }
+            },
+            series: [{
+                name: '马克兑美元',
+                type: 'line', smooth: false, symbol: 'circle', symbolSize: 7,
+                lineStyle: { width: 3, color: '#f87171' },
+                itemStyle: { color: '#f87171', borderColor: '#161616', borderWidth: 2 },
+                areaStyle: { color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: 'rgba(248,113,113,0.3)' }, { offset: 1, color: 'rgba(248,113,113,0.02)' }] } },
+                markPoint: {
+                    data: [
+                        { coord: ['1921.1', 65], name: '1921 起点 65', value: '起点 65' },
+                        { coord: ['1923.11', 4.2e12], name: '1923.11 峰值 4.2 万亿', value: '4.2 万亿' }
+                    ],
+                    symbolSize: 52, label: { color: '#eaeaea', fontSize: 11, formatter: function (p) { return p.name.split(' ').join('\n'); } }
+                },
+                data: [65, 78, 192, 1003, 17972, 18812, 48000, 350000, 4620000, 98860000, 25300000000, 4200000000000]
+            }]
+        });
+        window.addEventListener('resize', function () { markChart.resize(); });
+    </script>
+</body>
+</html>
