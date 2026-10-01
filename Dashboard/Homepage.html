@@ -429,11 +429,11 @@
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('shanghaigold', this)">🏦 上海金 (T+D)</td><td class="mono"><strong>906.80 元/克</strong></td><td class="mono">—</td><td class="mono">—</td><td class="mono">跟随国际</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('dollarindex', this)">💵 美元指数</td><td class="mono"><strong>101.21</strong></td><td class="mono">—</td><td class="mono">99.37</td><td class="green mono">+1.9%</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('usdcny', this)">💱 USD/CNY</td><td class="mono"><strong>6.7050</strong></td><td class="mono">—</td><td class="mono">6.7197</td><td class="green mono">↓ 人民币升</td></tr>
-                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('lmecopper', this)">⚡ LME 铜</td><td class="mono orange"><strong>14405 USD</strong></td><td class="mono">—</td><td class="mono">—</td><td class="mono">—</td></tr>
+                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('lmecopper', this)">⚡ LME 铜</td><td class="mono orange"><strong>14405 USD</strong></td><td class="mono">—</td><td class="mono">14285</td><td class="green mono">+0.8%</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('brent', this)">🛢️ 布伦特原油</td><td class="mono orange"><strong>103.50 USD</strong> ⚠️</td><td class="mono">—</td><td class="mono">90.67</td><td class="green mono">+14.1%</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('lithium', this)">🔋 电池级碳酸锂</td><td class="mono"><strong>~15.6 万元/吨</strong></td><td class="mono">—</td><td class="mono">~14.3</td><td class="green mono">↑ 上涨</td></tr>
-                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('tips', this)">📉 美国10年实际利率</td><td class="mono red"><strong>2.29%</strong></td><td class="mono">—</td><td class="mono">2.40%</td><td class="green mono">↓ 回落</td></tr>
-                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('pbcg', this)">🏛️ 央行购金 (中国8月)</td><td class="mono green">+20.2吨</td><td class="mono">—</td><td class="mono">+20吨</td><td class="mono green">✅ 连续增持</td></tr>
+                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('tips', this)">📉 美国10年实际利率</td><td class="mono red"><strong>2.91%</strong></td><td class="mono">—</td><td class="mono">2.40%</td><td class="red mono">↑ 攀升</td></tr>
+                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('pbcg', this)">🏛️ 央行购金 (中国8月)</td><td class="mono green">+20.2吨</td><td class="mono">—</td><td class="mono">+19.9吨</td><td class="mono green">✅ 连续增持</td></tr>
                 </tbody>
             </table>
         </div>
@@ -673,18 +673,18 @@
                 unit: '%'
             },
             tips: {
-                title: '美国10年实际利率（TIPS）近12个月月末（%）',
-                source: '数据来源：FRED FII10；7/12真实(26-03至26-09)，25-10至26-02缺失',
+                title: '美国10年实际利率（TIPS）近12个月月度均值（%）',
+                source: '数据来源：美联储H.15官方月度数据(RIFLGFCY10_XII_N.M)；11/12真实，26-09月度均值尚未发布',
                 months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
-                values: [null, null, null, null, null, 1.91, 1.94, 2.04, 2.18, 2.35, 2.40, 2.29],
+                values: [1.76, 1.83, 1.90, 1.91, 1.82, 1.91, 1.94, 2.04, 2.18, 2.35, 2.40, null],
                 color: '#60a5fa',
                 unit: '%'
             },
             pbcg: {
                 title: '中国央行月度购金量 近12个月（吨）',
-                source: '数据来源：中国人民银行官方储备数据（盎司折算吨）；8/12真实，25-10/11、26-06为估算已置空，26-09尚未发布',
+                source: '数据来源：中国人民银行官方储备资产数据（万盎司折算吨，1盎司=31.1035克）；11/12真实，26-09尚未发布',
                 months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
-                values: [null, null, 0.93, 1.24, 0.93, 4.97, 8.09, 9.95, null, 20, 20.2, null],
+                values: [0.93, 0.93, 0.93, 1.24, 0.93, 4.97, 8.09, 9.95, 14.93, 19.90, 20.2, null],
                 color: '#fbbf24',
                 unit: '吨'
             },
@@ -724,17 +724,17 @@
             },
             lmecopper: {
                 title: 'LME铜 近12个月（USD/吨）',
-                source: '数据来源：25-10至26-02为Insee LME现货月度均价(USD/吨)，26-04至26-07及26-09为同花顺03CAD月末收盘价；26-03/26-08缺失',
+                source: '数据来源：25-10至26-02为Insee LME现货月度均价(USD/吨)，26-03为LME官方收盘12224，26-04至26-09为同花顺03CAD月末收盘(26-08为8/28因英国银行假日)；12/12全部真实',
                 months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
-                values: [10695.6, 10800.0, 11802.8, 13088.1, 12967.1, null, 13019, 13611.5, 13380, 13803, null, 14405],
+                values: [10695.6, 10800.0, 11802.8, 13088.1, 12967.1, 12224, 13019, 13611.5, 13380, 13803, 14285, 14405],
                 color: '#d97706',
                 unit: ' USD/吨'
             },
             brent: {
                 title: '布伦特原油 近12个月月末收盘（USD/桶）',
-                source: '数据来源：同花顺BRN0Y连续合约月末收盘价；6/12真实(26-04至26-09)，25-10至26-03缺失',
+                source: '数据来源：25-10/12/26-01为新闻报道月末期货收盘价，25-11/26-02/03为EIA现货月均价，26-04至26-09为同花顺BRN0Y连续合约月末收盘；12/12全部真实',
                 months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
-                values: [null, null, null, null, null, null, 114.09, 91.99, 72.92, 90.09, 90.67, 103.50],
+                values: [65.07, 63.80, 61.92, 70.69, 70.89, 103.13, 114.09, 91.99, 72.92, 90.09, 90.67, 103.50],
                 color: '#dc2626',
                 unit: ' USD/桶'
             },
@@ -782,9 +782,9 @@
             },
             dollarindex: {
                 title: '美元指数 近12个月月末收盘',
-                source: '数据来源：同花顺DX0Y连续合约月末收盘价；8/12真实，25-11/26-01缺失',
+                source: '数据来源：同花顺DX0Y连续合约月末收盘价；12/12全部真实',
                 months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
-                values: [99.80, null, 98.19, null, 97.62, 99.70, 98.05, 98.93, 100.94, 99.71, 99.37, 101.21],
+                values: [99.80, 99.43, 98.00, 97.03, 97.62, 99.70, 98.05, 98.93, 100.94, 99.71, 99.37, 101.21],
                 color: '#6366f1',
                 unit: ''
             },
