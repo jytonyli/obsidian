@@ -621,7 +621,10 @@
                     axisLabel: { color: '#9a9a9a', fontSize: 11 }
                 },
                 yAxis: {
-                    type: 'value', scale: true,
+                    type: 'value',
+                    scale: true,
+                    min: d.yMin !== undefined ? d.yMin : null,
+                    max: d.yMax !== undefined ? d.yMax : null,
                     axisLine: { lineStyle: { color: 'rgba(255,255,255,0.15)' } },
                     axisLabel: { color: '#9a9a9a', fontSize: 11, formatter: '{value}' + d.unit },
                     splitLine: { lineStyle: { color: 'rgba(255,255,255,0.06)' } }
@@ -691,7 +694,9 @@
                 months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
                 values: [4.00, 4.00, 3.75, 3.75, 3.75, 3.75, 3.75, 3.75, 3.75, 3.75, 3.75, 4.00],
                 color: '#60a5fa',
-                unit: '%'
+                unit: '%',
+                yMin: 3.5,
+                yMax: 4.25
             },
             cnsocialfin: {
                 title: '中国社融存量同比 近12个月（%）',
@@ -755,7 +760,9 @@
                 months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
                 values: [3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0],
                 color: '#14b8a6',
-                unit: '%'
+                unit: '%',
+                yMin: 2.8,
+                yMax: 3.2
             },
             cncpi: {
                 title: '中国CPI同比 近12个月（%）',
