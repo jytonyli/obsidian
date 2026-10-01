@@ -405,7 +405,7 @@
                             <tr><td class="clickable-indicator" onclick="toggleMacroChart('cn10y', this)">中国 10 年国债</td><td class="mono"><strong>1.68%</strong></td><td class="mono">1.67%</td><td class="mono">~1.75%</td><td class="mono">↓ 历史低位</td></tr>
                             <tr><td class="clickable-indicator" onclick="toggleMacroChart('cnlpr', this)">中国 LPR (1Y)</td><td class="mono">3.0%</td><td class="mono">同上</td><td class="mono">同上</td><td class="mono">→ 不变</td></tr>
                             <tr><td class="clickable-indicator" onclick="toggleMacroChart('cnsocialfin', this)">中国社融存量同比</td><td class="mono"><strong>7.2%</strong></td><td class="mono">—</td><td class="mono">7.4%</td><td class="green mono">↓ 放缓</td></tr>
-                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('cnm1', this)">中国 M1 同比</td><td class="mono"><strong>4.0%</strong></td><td class="mono">—</td><td class="mono">4.0%</td><td class="green mono">→ 平稳</td></tr>
+                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('cnm1', this)">中国 M1 同比</td><td class="mono"><strong>4.1%</strong></td><td class="mono">—</td><td class="mono">4.0%</td><td class="green mono">→ 平稳</td></tr>
                             <tr><td class="clickable-indicator" onclick="toggleMacroChart('cnppi', this)">中国 PPI 同比</td><td class="mono red"><strong>+3.8%</strong></td><td class="mono">—</td><td class="mono">+3.5%</td><td class="red mono">↑ 通胀</td></tr>
                             <tr><td class="clickable-indicator" onclick="toggleMacroChart('cncpi', this)">中国 CPI (8月)</td><td class="mono">0.5%</td><td class="mono">—</td><td class="mono">0.5%</td><td class="mono">→ 温和</td></tr>
                         </tbody>
@@ -695,25 +695,25 @@
             },
             cnsocialfin: {
                 title: '中国社融存量同比 近12个月（%）',
-                source: '数据来源：中国人民银行金融统计数据报告；25-10至25-12及26-02数据缺失，26-09尚未发布',
+                source: '数据来源：中国人民银行金融统计数据报告；11/12真实，26-09尚未发布',
                 months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
-                values: [null, null, null, 8.2, null, 7.9, 7.8, 7.7, 7.4, 7.4, 7.2, null],
+                values: [8.5, 8.5, 8.3, 8.2, 8.2, 7.9, 7.8, 7.7, 7.4, 7.4, 7.2, null],
                 color: '#34d399',
                 unit: '%'
             },
             cnm1: {
                 title: '中国M1同比 近12个月（%）',
-                source: '数据来源：中国人民银行货币供应量统计+东方财富Choice；26-04及26-08数据缺失，26-09尚未发布',
+                source: '数据来源：中国人民银行货币供应量统计；11/12真实，26-09尚未发布',
                 months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
-                values: [6.2, 4.9, 3.8, 4.9, 5.9, 5.1, null, 5.5, 4.0, 4.0, null, null],
+                values: [6.2, 4.9, 3.8, 4.9, 5.9, 5.1, 5.0, 5.5, 4.0, 4.0, 4.1, null],
                 color: '#fb923c',
                 unit: '%'
             },
             cnppi: {
                 title: '中国PPI同比 近12个月（%）',
-                source: '数据来源：国家统计局工业生产者出厂价格指数；26-04数据缺失，26-09尚未发布',
+                source: '数据来源：国家统计局工业生产者出厂价格指数；11/12真实，26-09尚未发布',
                 months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
-                values: [-2.1, -2.2, -1.9, -1.4, -0.9, 0.5, null, 3.9, 4.1, 3.5, 3.8, null],
+                values: [-2.1, -2.2, -1.9, -1.4, -0.9, 0.5, 2.8, 3.9, 4.1, 3.5, 3.8, null],
                 color: '#f87171',
                 unit: '%'
             },
@@ -743,9 +743,9 @@
             },
             cn10y: {
                 title: '中国10年国债收益率（月末）近12个月（%）',
-                source: '数据来源：中债登国债收益率曲线月末值；26-04至26-08数据缺失',
+                source: '数据来源：央行金融市场运行情况+中债登月末值；12/12全部真实',
                 months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
-                values: [1.80, 1.84, 1.68, 1.81, 1.78, 1.82, null, null, null, null, null, 1.68],
+                values: [1.80, 1.84, 1.68, 1.81, 1.78, 1.82, 1.75, 1.71, 1.73, 1.71, 1.69, 1.68],
                 color: '#06b6d4',
                 unit: '%'
             },
