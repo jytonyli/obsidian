@@ -426,12 +426,12 @@
                 </thead>
                 <tbody>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('gold', this)">🥇 伦敦金现</td><td class="mono yellow"><strong>4157.41 USD/oz</strong></td><td class="mono">4284.13</td><td class="mono">4437.39</td><td class="red mono">-6.3%</td></tr>
-                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('shanghaigold', this)">🏦 上海金 (T+D)</td><td class="mono"><strong>906.80 元/克</strong></td><td class="mono">—</td><td class="mono">—</td><td class="mono">跟随国际</td></tr>
+                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('shanghaigold', this)">🏦 上海金 (T+D)</td><td class="mono"><strong>906.80 元/克</strong></td><td class="mono">—</td><td class="mono">961.05</td><td class="red mono">-5.6%</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('dollarindex', this)">💵 美元指数</td><td class="mono"><strong>101.21</strong></td><td class="mono">—</td><td class="mono">99.37</td><td class="green mono">+1.9%</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('usdcny', this)">💱 USD/CNY</td><td class="mono"><strong>6.7050</strong></td><td class="mono">—</td><td class="mono">6.7197</td><td class="green mono">↓ 人民币升</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('lmecopper', this)">⚡ LME 铜</td><td class="mono orange"><strong>14405 USD</strong></td><td class="mono">—</td><td class="mono">14285</td><td class="green mono">+0.8%</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('brent', this)">🛢️ 布伦特原油</td><td class="mono orange"><strong>103.50 USD</strong> ⚠️</td><td class="mono">—</td><td class="mono">90.67</td><td class="green mono">+14.1%</td></tr>
-                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('lithium', this)">🔋 电池级碳酸锂</td><td class="mono"><strong>~15.6 万元/吨</strong></td><td class="mono">—</td><td class="mono">~14.3</td><td class="green mono">↑ 上涨</td></tr>
+                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('lithium', this)">🔋 电池级碳酸锂</td><td class="mono"><strong>11.98 万元/吨</strong></td><td class="mono">—</td><td class="mono">15.90</td><td class="red mono">↓ 下跌</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('tips', this)">📉 美国10年实际利率</td><td class="mono red"><strong>2.91%</strong></td><td class="mono">—</td><td class="mono">2.40%</td><td class="red mono">↑ 攀升</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('pbcg', this)">🏛️ 央行购金 (中国8月)</td><td class="mono green">+20.2吨</td><td class="mono">—</td><td class="mono">+19.9吨</td><td class="mono green">✅ 连续增持</td></tr>
                 </tbody>
@@ -740,9 +740,9 @@
             },
             lithium: {
                 title: '电池级碳酸锂 近12个月（万元/吨）',
-                source: '数据来源：SMM/上海钢联；25-10为月均价，26-07/08为月末现货区间中值，其余缺失',
+                source: '数据来源：SMM月均/生意社基准价/光大期货现货/同花顺LC00期货月末收盘；8/12真实，25-11/25-12/26-02/26-06缺失',
                 months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
-                values: [7.36, null, null, null, null, null, null, null, null, 14.26, 15.60, null],
+                values: [7.36, null, null, 15.60, null, 15.67, 17.45, 18.00, null, 14.26, 15.90, 11.98],
                 color: '#22d3ee',
                 unit: ' 万元/吨'
             },
@@ -774,9 +774,9 @@
             },
             shanghaigold: {
                 title: '上海金(T+D) 近12个月月末收盘（元/克）',
-                source: '数据来源：同花顺AU(T+D)月末收盘价；2/12真实(26-04/26-09)，其余缺失',
+                source: '数据来源：上海黄金交易所官方月报/日报+央行金融市场运行情况；10/12真实，25-11/26-07缺失',
                 months: ['25-10','25-11','25-12','26-01','26-02','26-03','26-04','26-05','26-06','26-07','26-08','26-09'],
-                values: [null, null, null, null, null, null, 1013.97, null, null, null, null, 906.80],
+                values: [921.02, null, 974.39, 1163.99, 1142.5, 1015.68, 1013.97, 984.0, 878.53, null, 961.05, 906.80],
                 color: '#fbbf24',
                 unit: ' 元/克'
             },
