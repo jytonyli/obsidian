@@ -1,1 +1,183 @@
-PLACEHOLDER_ZIJIN
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⛏️ 紫金矿业深度分析 | Tony's Investment Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="../data/kline_601899.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #262626; color: #eaeaea; font-size: 17px; line-height: 1.6; }
+        .nav { background: #232323; border-bottom: 1px solid #2c2c2c; padding: 20px 36px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+        .nav-brand { font-size: 24px; font-weight: 700; color: #fbbf24; }
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a { color: #9a9a9a; text-decoration: none; font-size: 17px; padding: 10px 18px; border-radius: 8px; transition: color 0.2s, background 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: #fbbf24; background: #2c2c2c; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 36px; }
+        .status-banner { background: #232323; border: 1px solid #3a3a3a; border-radius: 16px; padding: 24px 28px; margin-bottom: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+        .status-item { font-size: 16px; color: #9a9a9a; }
+        .status-item strong { color: #eaeaea; font-size: 17px; }
+        .card { background: #232323; border: 1px solid #2c2c2c; border-radius: 16px; padding: 32px; margin-bottom: 28px; }
+        .card-title { font-size: 22px; font-weight: 600; margin-bottom: 24px; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 24px; }
+        .stat-card { background: #2c2c2c; border-radius: 12px; padding: 24px; border-left: 4px solid #fbbf24; }
+        .stat-card.gold { border-left-color: #fbbf24; }
+        .stat-card.copper { border-left-color: #d97706; }
+        .stat-card.usd { border-left-color: #3b82f6; }
+        .stat-label { font-size: 15px; color: #9a9a9a; margin-bottom: 8px; }
+        .stat-value { font-size: 36px; font-weight: 700; font-family: 'SF Mono', 'Consolas', monospace; }
+        .stat-change { font-size: 15px; margin-top: 8px; }
+        .up { color: #10b981; }
+        .down { color: #ef4444; }
+        .neutral { color: #9a9a9a; }
+        .mono { font-family: 'SF Mono', 'Consolas', monospace; }
+        table { width: 100%; border-collapse: collapse; font-size: 16px; }
+        th { text-align: left; padding: 14px 16px; color: #9a9a9a; font-weight: 500; border-bottom: 2px solid #2c2c2c; font-size: 15px; }
+        td { padding: 14px 16px; border-bottom: 1px solid #2c2c2c; }
+        tr:hover { background: #2c2c2c; }
+        .highlight-block { padding: 16px 20px; border-radius: 10px; margin: 16px 0; font-size: 16px; line-height: 1.7; }
+        .highlight-block.green { background: rgba(16,185,129,0.08); border-left: 4px solid #10b981; }
+        .highlight-block.red { background: rgba(239,68,68,0.08); border-left: 4px solid #ef4444; }
+        .highlight-block.yellow { background: rgba(251,191,36,0.08); border-left: 4px solid #fbbf24; }
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 14px; font-weight: 500; }
+        .badge-green { background: rgba(16,185,129,0.15); color: #10b981; }
+        .badge-red { background: rgba(239,68,68,0.15); color: #ef4444; }
+        .badge-yellow { background: rgba(251,191,36,0.15); color: #fbbf24; }
+    </style>
+    <link rel="stylesheet" href="../responsive.css?v=4">
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-brand">🎛️ Tony's Investment Dashboard</div>
+        <div class="nav-links">
+            <a href="../Homepage.html">📊 每日数据</a>
+            <a href="holdings.html">💼 持仓详情</a>
+            <a href="news.html">📰 新闻周报</a>
+            <a href="calendar.html">📅 催化剂</a>
+            <a href="../notebook.html">📓 笔记本</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="status-banner">
+            <div class="status-item">📅 最后更新：<strong>2026-10-01</strong></div>
+            <div class="status-item">⛏️ 紫金矿业(601899.SH) 多因子驱动深度分析</div>
+            <div class="status-item">🎯 持仓150,000股 | 成本¥33.618 | 现价¥29.79</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">📊 紫金矿业持仓概览（2026-09-30更新）</div>
+            <div class="stat-grid">
+                <div class="stat-card gold">
+                    <div class="stat-label">A股现价</div>
+                    <div class="stat-value mono">¥29.79</div>
+                    <div class="stat-change up">+1.12% 今日</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">持仓盈亏</div>
+                    <div class="stat-value mono down">-11.4%</div>
+                    <div class="stat-change down">-¥574,200 浮动亏损</div>
+                </div>
+                <div class="stat-card gold">
+                    <div class="stat-label">🥇 伦敦金现</div>
+                    <div class="stat-value mono">$4,157</div>
+                    <div class="stat-change down">-6.3% 月变化</div>
+                </div>
+                <div class="stat-card copper">
+                    <div class="stat-label">⚡ LME铜</div>
+                    <div class="stat-value mono">$14,405</div>
+                    <div class="stat-change up">+0.8% 月变化</div>
+                </div>
+            </div>
+            <div class="highlight-block yellow">
+                <strong>📉 近期下跌原因：</strong>金价从9月初$4,437回落至$4,157（-6.3%），实际利率攀升至2.91%压制黄金估值。铜价相对坚挺$14,405。紫金股价从8月底¥33.67回落至¥29.79（-11.5%），跌幅大于金价，反映市场对黄金短期见顶的担忧。
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">📈 近一月股价走势</div>
+            <div id="priceChart" style="height:380px;"></div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">🧬 紫金矿业三因子拆解（黄金+铜+锂新能源）</div>
+            <p style="font-size:16px;color:#9a9a9a;margin-bottom:20px;">紫金是全球第五大黄金生产商、第二大铜生产商，同时布局锂矿。它的涨跌由三个完全不同的商品周期驱动。</p>
+            <div class="stat-grid">
+                <div class="stat-card gold">
+                    <div style="font-size:16px;color:#9a9a9a;">🥇 黄金业务</div>
+                    <div class="stat-value mono" style="font-size:28px;margin:12px 0;">~50%</div>
+                    <div style="font-size:15px;color:#9a9a9a;">全球第五大产金商<br><strong>核心驱动：实际利率 + 央行购金</strong><br>当前：金价$4,157，央行连续22个月购金</div>
+                </div>
+                <div class="stat-card copper">
+                    <div style="font-size:16px;color:#9a9a9a;">⚡ 铜业务</div>
+                    <div class="stat-value mono" style="font-size:28px;margin:12px 0;">~35%</div>
+                    <div style="font-size:15px;color:#9a9a9a;">全球第二大产铜商<br><strong>核心驱动：全球制造业 + 新能源需求</strong><br>当前：铜价$14,405，供给紧张</div>
+                </div>
+                <div class="stat-card usd">
+                    <div style="font-size:16px;color:#9a9a9a;">🔋 锂/新能源</div>
+                    <div class="stat-value mono" style="font-size:28px;margin:12px 0;">~15%</div>
+                    <div style="font-size:15px;color:#9a9a9a;">湖南紫金锂业+拉果错盐湖<br><strong>核心驱动：锂价 + 电动车需求</strong><br>当前：锂价12.28万/吨，低位</div>
+                </div>
+            </div>
+            <div class="highlight-block green">
+                <strong>💡 关键洞察：</strong>紫金本质是"<strong style="color:#fbbf24;">50%黄金ETF + 35%铜ETF + 15%锂期权</strong>"的组合。在滞胀环境下，黄金和铜都是Dalio推荐的大宗商品方向，紫金是最直接的受益标的。
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">🎯 Dalio框架下的紫金定位</div>
+            <table>
+                <thead>
+                    <tr><th>经济环境</th><th>紫金表现</th><th>Dalio建议</th><th>当前状态</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>📈 通胀性繁荣</td>
+                        <td>★★★★★ 极好（铜+黄金双涨）</td>
+                        <td>高配</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>📉 通胀性衰退（滞胀）</td>
+                        <td>★★★★☆ 好（黄金涨，铜震荡）</td>
+                        <td>维持/高配</td>
+                        <td><span class="badge badge-green">✅ 当前核心持仓</span></td>
+                    </tr>
+                    <tr>
+                        <td>📈 通缩性繁荣</td>
+                        <td>★★☆☆☆ 差（黄金跌，铜涨）</td>
+                        <td>低配</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>📉 通缩性衰退</td>
+                        <td>★★★☆☆ 一般（黄金涨，铜跌）</td>
+                        <td>维持黄金部分</td>
+                        <td>—</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="highlight-block green" style="margin-top:20px;">
+                <strong>💡 Dalio建议：</strong>紫金是组合里<strong>最符合Dalio大宗商品配置</strong>的持仓。当前金价回调是买入机会而非卖出信号——央行购金趋势未变，实际利率接近见顶。<strong style="color:#10b981;">建议维持甚至逢低加仓。</strong>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function() {
+            var data = window.KLINE_601899 || [];
+            var dates = data.map(function(d) { return d.date.slice(5); });
+            var closes = data.map(function(d) { return d.close; });
+            var cost = 33.618;
+            var chart = echarts.init(document.getElementById('priceChart'));
+            chart.setOption({
+                tooltip: { trigger: 'axis', backgroundColor: 'rgba(38,38,38,0.95)', borderColor: 'rgba(255,255,255,0.15)', textStyle: { color: '#eaeaea', fontSize: 13 }, formatter: function(params) { var idx = params[0].dataIndex; var d = data[idx]; return '<strong>' + d.date + '</strong><br/>收盘: <strong>' + d.close + '</strong>'; } },
+                grid: { left: 56, right: 24, top: 36, bottom: 40 },
+                xAxis: { type: 'category', data: dates, axisLine: { lineStyle: { color: 'rgba(255,255,255,0.2)' } }, axisLabel: { color: '#9a9a9a', fontSize: 11 } },
+                yAxis: { type: 'value', scale: true, axisLine: { lineStyle: { color: 'rgba(255,255,255,0.15)' } }, axisLabel: { color: '#9a9a9a', fontSize: 12, formatter: '¥{value}' }, splitLine: { lineStyle: { color: 'rgba(255,255,255,0.06)' } } },
+                series: [{ name: '收盘价', type: 'line', smooth: true, symbol: 'circle', symbolSize: 5, lineStyle: { width: 2.5, color: '#fbbf24' }, itemStyle: { color: '#fbbf24', borderColor: '#232323', borderWidth: 2 }, areaStyle: { color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: 'rgba(251,191,36,0.25)' }, { offset: 1, color: 'rgba(251,191,36,0.02)' }] } }, data: closes, markLine: { silent: true, symbol: 'none', lineStyle: { color: '#ef4444', type: 'dashed', width: 1.5 }, label: { color: '#ef4444', fontSize: 12, formatter: '成本 ¥' + cost }, data: [{ yAxis: cost }] } }]
+            });
+            window.addEventListener('resize', function() { chart.resize(); });
+        })();
+    </script>
+</body>
+</html>
