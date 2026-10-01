@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>新闻周报 - Tony's Investment Dashboard</title>
+    <title>月度回顾 - Tony's Investment Dashboard</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #1a1a1a; color: #eaeaea; line-height: 1.7; font-size: 17px; }
@@ -59,55 +59,133 @@
         <div class="nav-links">
             <a href="../Homepage.html">📊 每日数据</a>
             <a href="holdings.html">💼 持仓详情</a>
-            <a href="news.html" class="active">📰 新闻周报</a>
+            <a href="news.html" class="active">📰 月度回顾</a>
             <a href="calendar.html">📅 催化剂</a>
             <a href="../notebook.html">📓 笔记本</a>
         </div>
     </nav>
     <div class="container">
         <div class="status-banner">
-            <div class="status-item">📅 最后更新：<strong>2026-09-29</strong></div>
-            <div class="status-item">⏰ 预计下次更新：<strong>2026-09-28 20:23</strong>（每周日）</div>
-            <div class="status-item">📅 本周：2026.09.15 - 2026.09.21</div>
+            <div class="status-item">📅 最后更新：<strong>2026-10-01（月度深度更新）</strong></div>
+            <div class="status-item">⏰ 预计下次更新：<strong>2026-11-01 20:17</strong>（每月深度更新）</div>
+            <div class="status-item">📅 本月回顾：2026年9月</div>
         </div>
 
         <div class="card">
-            <div class="card-title">📅 本周概览</div>
+            <div class="card-title">📅 9月月度概览</div>
             <table>
-                <thead><tr><th>标的</th><th>本周涨跌</th><th>情绪</th><th>影响度</th><th>关键事件</th></tr></thead>
+                <thead><tr><th>标的</th><th>9月涨跌</th><th>情绪</th><th>影响度</th><th>关键事件</th></tr></thead>
                 <tbody>
                     <tr>
                         <td>🥇 紫金矿业 601899</td>
-                        <td class="red mono">-6.9%</td>
+                        <td class="red mono">-11.5%</td>
                         <td><span class="badge badge-red">🔴 负面</span></td>
-                        <td class="yellow">★★★★☆</td>
-                        <td>美联储加息25bp、有色金属板块回调、LME铜高位震荡</td>
+                        <td class="yellow">★★★★★</td>
+                        <td>美联储加息+10Y破5.3%+金价回调6.3%+矿业股估值压缩</td>
                     </tr>
                     <tr>
                         <td>🚗 吉利汽车 00175</td>
-                        <td class="red mono">-5.6%</td>
-                        <td><span class="badge badge-yellow">🟡 中性偏负</span></td>
-                        <td class="yellow">★★☆☆☆</td>
-                        <td>Q2业绩消化、行业销量承压、南向资金波动</td>
+                        <td class="red mono">-17.3%</td>
+                        <td><span class="badge badge-red">🔴 负面</span></td>
+                        <td class="yellow">★★★☆☆</td>
+                        <td>高利率压制可选消费+港股整体弱势+节前资金撤离</td>
                     </tr>
                     <tr>
                         <td>🥩 万洲国际 00288</td>
-                        <td class="red mono">-8.5%</td>
+                        <td class="red mono">-10.8%</td>
                         <td><span class="badge badge-red">🔴 负面</span></td>
-                        <td class="yellow">★★★☆☆</td>
-                        <td>Smithfield下调指引、9/11除息、大行下调目标价</td>
+                        <td class="yellow">★★☆☆☆</td>
+                        <td>Smithfield下调指引+除息+高股息防御属性但仍随大盘跌</td>
                     </tr>
                     <tr>
                         <td>📱 小米集团 01810</td>
-                        <td class="green mono">+4.47% ⚠️</td>
-                        <td><span class="badge badge-green">🟢 正面</span></td>
+                        <td class="red mono">-8.6%</td>
+                        <td><span class="badge badge-red">🔴 负面</span></td>
                         <td class="yellow">★★★★☆</td>
-                        <td>AI/半导体板块爆发、汽车交付数据改善、持续回购</td>
+                        <td>实际利率2.91%压制成长股估值+汽车交付平稳无超预期</td>
+                    </tr>
+                    <tr style="border-top:2px solid #444;">
+                        <td><strong>组合合计</strong></td>
+                        <td class="red mono"><strong>-11.2%</strong></td>
+                        <td><span class="badge badge-red">🔴 全面下跌</span></td>
+                        <td>—</td>
+                        <td>滞胀加剧环境下股权资产全面承压</td>
                     </tr>
                 </tbody>
             </table>
             <div class="highlight-block red" style="margin-top:20px;">
-                <strong>本周宏观主线：</strong>美联储9/16加息25bp至3.75-4.00%（2023年7月以来首次）→ 10年美债收益率升至4.95%逼近5% → 有色金属/黄金短期承压；中东局势缓和 → 布油从107跌至100.34 → 通胀压力边际缓解但仍在高位。
+                <strong>9月宏观主线（Dalio视角）：</strong>① <strong style="color:#f87171;">美国10Y国债从4.68%飙升至5.30%（+62bp，20年新高）</strong>，实际利率从2.40%升至2.91%（+51bp）——债券市场正在定价"财政不可持续+通胀顽固"的双重风险，这是Dalio长期债务周期后段的典型信号 ② <strong>布油突破100美元至103.50（+14.1%）</strong>，滞胀从"漂移"升级为"加剧" ③ <strong>金价回调6.3%至4157</strong>，短期受实际利率飙升压制，但央行购金（+20.2吨/月）和去美元化趋势未变 ④ <strong>美联储9月加息25bp至3.75-4.00%</strong>，2023年7月以来首次 ⑤ 中国PPI升至+3.8%（成本推动通胀），但CPI仅0.5%（需求弱），PPI-CPI剪刀差扩大至3.3pp。
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">🔍 9月新闻vs价格复盘（我的判断是否正确？）</div>
+            <table>
+                <thead><tr><th>事件</th><th>我的判断</th><th>实际结果</th><th>验证</th><th>教训</th></tr></thead>
+                <tbody>
+                    <tr>
+                        <td>美联储9月加息</td>
+                        <td>加息→短期金铜承压，长期滞胀逻辑验证</td>
+                        <td>加息25bp，紫金月跌11.5%，金价跌6.3%</td>
+                        <td><span class="badge badge-green">✅ 正确</span></td>
+                        <td>方向对但跌幅超预期——10Y飙升幅度超出模型</td>
+                    </tr>
+                    <tr>
+                        <td>布油走势</td>
+                        <td>中东缓和→油价回落至90-95</td>
+                        <td>油价反而突破100至103.5（OPEC+减产+地缘）</td>
+                        <td><span class="badge badge-red">❌ 错误</span></td>
+                        <td>低估了OPEC+减产决心和地缘风险溢价</td>
+                    </tr>
+                    <tr>
+                        <td>中国经济复苏</td>
+                        <td>弱复苏→铜需求有支撑</td>
+                        <td>PMI约50.1，社融放缓至7.2%，铜价高位震荡</td>
+                        <td><span class="badge badge-yellow">⚠️ 部分正确</span></td>
+                        <td>复苏比预期更弱，社融持续放缓是警示信号</td>
+                    </tr>
+                    <tr>
+                        <td>小米汽车交付</td>
+                        <td>交付改善→估值修复</td>
+                        <td>交付平稳，小米月跌8.6%</td>
+                        <td><span class="badge badge-red">❌ 错误</span></td>
+                        <td>高利率环境下成长股估值压缩，交付数据无法对冲</td>
+                    </tr>
+                    <tr>
+                        <td>10Y美债</td>
+                        <td>4.68%→可能升至5.0%</td>
+                        <td>飙升至5.30%（+62bp）</td>
+                        <td><span class="badge badge-red">❌ 严重低估</span></td>
+                        <td><strong style="color:#f87171;">最大误判：财政供给+通胀粘性+外国央行减持的三重压力被低估</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="highlight-block yellow" style="margin-top:16px;">
+                <strong>💡 9月最大教训：</strong>Dalio的"长期债务周期后段"判断是对的，但<strong style="color:#fbbf24;">传导速度比预期快得多</strong>。10Y美债一个月+62bp是20年罕见的速度，说明债券市场的"信任危机"可能正在加速。这意味着：① 黄金的短期回调可能是买入机会（央行购金未停）② 股权资产的估值压缩可能还没结束 ③ 中国国债（1.68%）与美债（5.30%）的利差是独特的对冲机会。
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">🎯 10月关注重点</div>
+            <div class="two-col">
+                <div>
+                    <h4 style="font-size:17px;margin-bottom:12px;color:#f87171;">🔴 高优先级</h4>
+                    <div style="font-size:16px;line-height:2;color:#9a9a9a;">
+                        <div>• 10/2 美国9月非农（10Y能否企稳的关键）</div>
+                        <div>• 10/14 美国9月CPI（通胀是否回落）</div>
+                        <div>• 10/28-29 美联储FOMC（是否再加息）</div>
+                        <div>• 10Y美债能否守住5.3%（破5.5%则系统性风险）</div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="font-size:17px;margin-bottom:12px;color:#fbbf24;">🟡 中优先级</h4>
+                    <div style="font-size:16px;line-height:2;color:#9a9a9a;">
+                        <div>• 10/9 中国9月CPI/PPI/社融（PPI是否持续）</div>
+                        <div>• 10/8 A股复市+国庆消费数据</div>
+                        <div>• 金价4157支撑位（破4000则重新评估）</div>
+                        <div>• 4只持仓Q3财报（10-11月陆续发布）</div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -117,7 +195,7 @@
                 <div class="stock-header">
                     <div class="stock-icon">🥇</div>
                     <div class="stock-name">紫金矿业 601899</div>
-                    <div class="stock-price red mono">¥31.30 (-6.9%)</div>
+                    <div class="stock-price red mono">¥29.79 (-11.5%)</div>
                 </div>
 
                 <div class="news-item">
@@ -170,7 +248,7 @@
                 <div class="stock-header">
                     <div class="stock-icon">🚗</div>
                     <div class="stock-name">吉利汽车 00175</div>
-                    <div class="stock-price red mono">HK$15.91 (-5.6%)</div>
+                    <div class="stock-price red mono">HK$14.55 (-17.3%)</div>
                 </div>
 
                 <div class="news-item">
@@ -225,7 +303,7 @@
                 <div class="stock-header">
                     <div class="stock-icon">🥩</div>
                     <div class="stock-name">万洲国际 00288</div>
-                    <div class="stock-price red mono">HK$6.66 (-8.5%)</div>
+                    <div class="stock-price red mono">HK$6.62 (-10.8%)</div>
                 </div>
 
                 <div class="news-item">
@@ -278,7 +356,7 @@
                 <div class="stock-header">
                     <div class="stock-icon">📱</div>
                     <div class="stock-name">小米集团 01810</div>
-                    <div class="stock-price green mono">HK$27.58 (+4.47% ⚠️)</div>
+                    <div class="stock-price red mono">HK$25.24 (-8.6%)</div>
                 </div>
 
                 <div class="news-item">
