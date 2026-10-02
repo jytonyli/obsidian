@@ -66,14 +66,15 @@
         .tooltip-cell { overflow: visible !important; }
         .tooltip { position: relative; display: inline-block; cursor: help; text-decoration: underline dotted; text-underline-offset: 3px; }
         .tooltip .tooltip-text { visibility: hidden; opacity: 0; transition: opacity 0.2s; position: absolute; top: 110%; left: 0; background: #2c2c2c; color: #eaeaea; padding: 14px 18px; border-radius: 10px; font-size: 13px; line-height: 1.8; width: 310px; z-index: 300; border: 1px solid #444; box-shadow: 0 6px 20px rgba(0,0,0,0.6); text-align: left; font-weight: normal; white-space: normal; }
-        .tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
+        .tooltip .tt-icon { color: #888; font-size: 14px; margin-left: 5px; cursor: help; display: inline-block; width: 18px; height: 18px; line-height: 18px; text-align: center; border-radius: 50%; transition: background 0.2s, color 0.2s; }
+        .tooltip .tt-icon:hover { background: rgba(251,191,36,0.2); color: #fbbf24; }
+        .tooltip .tt-icon:hover + .tooltip-text, .tooltip .tooltip-text:hover { visibility: visible; opacity: 1; }
         .tooltip-text .tt-title { font-weight: 700; color: #fbbf24; margin-bottom: 6px; font-size: 14px; }
         .tooltip-text .tt-row { display: flex; justify-content: space-between; }
         .tooltip-text .tt-hot { color: #f87171; }
         .tooltip-text .tt-normal { color: #34d399; }
         .tooltip-text .tt-cold { color: #fb923c; }
         .tooltip-text .tt-now { margin-top: 8px; padding-top: 8px; border-top: 1px solid #444; color: #eaeaea; }
-        .tt-icon { color: #666; font-size: 13px; margin-left: 4px; }
     </style>
     <link rel="stylesheet" href="responsive.css?v=4">
 </head>
