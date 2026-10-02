@@ -35,8 +35,6 @@
         .red { color: #f87171; }
         .yellow { color: #fbbf24; }
         .chart-container { height: 400px; margin: 20px 0; }
-        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
-        @media (max-width: 1200px) { .two-col { grid-template-columns: 1fr; } }
     </style>
     <link rel="stylesheet" href="../responsive.css?v=4">
 </head>
@@ -53,16 +51,16 @@
     </nav>
     <div class="container">
         <div class="status-banner">
-            <div class="status-item">📅 最后更新：<strong>2026-10-02 12:05（午间更新）</strong></div>
-            <div class="status-item">⏰ 预计下次更新：<strong>2026-10-02 16:05</strong></div>
-            <div class="status-item">🏖️ A股国庆休市（10/1-7）</div>
+            <div class="status-item">📅 最后更新：<strong>2026-10-02 16:05（收盘更新）</strong></div>
+            <div class="status-item">⏰ 预计下次更新：<strong>2026-10-03 12:05</strong>（午间休市后）</div>
+            <div class="status-item">🇨🇳 A股休市（国庆假期）</div>
         </div>
 
         <div class="hero-grid">
             <div class="hero-card">
                 <div class="hero-label">现价</div>
                 <div class="hero-value yellow">¥29.79</div>
-                <div style="font-size:13px;color:#7a7a7a;margin-top:6px;">9/30收盘（休市）</div>
+                <div style="font-size:13px;color:#9a9a9a;margin-top:6px;">休市（9/30收盘）</div>
             </div>
             <div class="hero-card">
                 <div class="hero-label">成本</div>
@@ -85,36 +83,33 @@
             <div id="klineChart" class="chart-container"></div>
         </div>
 
-        <div class="two-col">
-            <div class="card">
-                <div class="card-title">🥇 关联商品价格</div>
-                <table>
-                    <tr><td>伦敦金现</td><td class="mono yellow"><strong>$4,177.32/oz</strong></td><td class="red mono">-5.9%（月）</td></tr>
-                    <tr><td>LME铜</td><td class="mono"><strong>$14,289/吨</strong></td><td class="mono">→ 持平（月）</td></tr>
-                    <tr><td>美元指数</td><td class="mono"><strong>101.80</strong></td><td class="green mono">+2.4%（月）</td></tr>
-                    <tr><td>美国10Y实际利率</td><td class="mono red"><strong>2.91%</strong></td><td class="red mono">↑ 攀升</td></tr>
-                </table>
-                <div style="font-size:13px;color:#9a9a9a;margin-top:12px;">紫金业绩高度依赖金铜价格。实际利率攀升短期压制金价，但央行购金和去美元化支撑长期。</div>
-            </div>
-            <div class="card">
-                <div class="card-title">📊 关键数据</div>
-                <table>
-                    <tr><td>持股数量</td><td class="mono">150,000股</td></tr>
-                    <tr><td>总成本</td><td class="mono">¥5,042,700</td></tr>
-                    <tr><td>总市值</td><td class="mono">¥4,468,500</td></tr>
-                    <tr><td>浮动盈亏</td><td class="red mono">-¥574,200</td></tr>
-                    <tr><td>盈亏比例</td><td class="red mono">-11.4%</td></tr>
-                    <tr><td>当日盈亏</td><td class="mono">¥0（休市）</td></tr>
-                </table>
-            </div>
+        <div class="card">
+            <div class="card-title">🥇 关联商品价格</div>
+            <table>
+                <tr><td>伦敦金现</td><td class="mono yellow">$4,181.97/oz</td><td class="mono">现货交易中</td></tr>
+                <tr><td>LME铜</td><td class="mono">$14,289/吨</td><td class="mono">10/1收盘</td></tr>
+                <tr><td>布伦特原油</td><td class="mono orange">$103.00/桶 ⚠️</td><td class="mono">突破100</td></tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <div class="card-title">📊 关键数据</div>
+            <table>
+                <tr><td>持股数量</td><td class="mono">150,000股</td></tr>
+                <tr><td>总成本</td><td class="mono">¥5,042,700</td></tr>
+                <tr><td>总市值</td><td class="mono">¥4,468,500</td></tr>
+                <tr><td>浮动盈亏</td><td class="red mono">-¥574,200</td></tr>
+                <tr><td>盈亏比例</td><td class="red mono">-11.4%</td></tr>
+                <tr><td>当日盈亏</td><td class="mono">¥0（休市）</td></tr>
+            </table>
         </div>
 
         <div class="card">
             <div class="card-title">🏢 公司概况</div>
             <div style="font-size:16px;line-height:2;">
-                <p><strong>紫金矿业（601899.SH）</strong>是中国最大的矿业公司之一，主营黄金、铜、锌等矿产资源的勘探、开采和冶炼。在全球多个国家拥有矿山资产，是中国央行购金和去美元化趋势的直接受益者。</p>
-                <p style="margin-top:12px;"><strong>核心逻辑：</strong>金铜双主业 + 海外资源布局 + 产量持续增长。当前金价$4,177虽较9月高点回调，但长期受央行购金（中国连续23个月增持）和去美元化支撑。铜价$14,289受新能源需求和供给约束支撑。</p>
-                <p style="margin-top:12px;"><strong>风险：</strong>美国10Y实际利率攀升至2.91%，短期压制黄金吸引力；若美联储继续加息，金价可能进一步回调。</p>
+                <p><strong>紫金矿业（601899.SH）</strong>是中国最大的黄金和铜生产商之一，全球布局矿产资源。核心资产包括刚果（金）卡莫阿-卡库拉铜矿、塞尔维亚紫金铜业、国内紫金山金铜矿等。</p>
+                <p style="margin-top:12px;"><strong>核心逻辑：</strong>黄金+铜双轮驱动，受益于全球央行购金（去美元化）和新能源转型（铜需求增长）。低成本矿山+持续并购扩张。当前金价$4,182高位，铜价$14,289，公司盈利处于历史高位。</p>
+                <p style="margin-top:12px;"><strong>风险：</strong>当前股价¥29.79较成本¥33.618套牢-11.4%。美国实际利率攀升至2.91%压制黄金估值；铜价受全球经济衰退担忧影响；地缘政治风险（刚果金、塞尔维亚）。A股国庆休市至10/7。</p>
             </div>
         </div>
     </div>
