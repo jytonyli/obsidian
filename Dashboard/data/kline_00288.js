@@ -1,7 +1,6 @@
 // 万洲国际 00288.HK 日K线数据（近一个月）
 // 每日自动更新：追加当日数据，保留最近30个交易日
 window.KLINE_00288 = [
-  {date:"2026-08-31", open:7.815, high:7.86, low:7.405, close:7.415},
   {date:"2026-09-01", open:7.32, high:7.57, low:7.32, close:7.53},
   {date:"2026-09-02", open:7.465, high:7.545, low:7.345, close:7.46},
   {date:"2026-09-03", open:7.505, high:7.655, low:7.30, close:7.315},
@@ -26,5 +25,6 @@ window.KLINE_00288 = [
   {date:"2026-09-30", open:6.62, high:6.69, low:6.58, close:6.62},
   {date:"2026-10-02", open:6.485, high:6.67, low:6.48, close:6.63},
   {date:"2026-10-05", open:6.82, high:6.82, low:6.52, close:6.585},
-  {date:"2026-10-06", open:6.63, high:6.75, low:6.52, close:6.535}
+  {date:"2026-10-06", open:6.63, high:6.75, low:6.52, close:6.535},
+  {date:"2026-10-07", open:6.55, high:6.75, low:6.535, close:6.675}
 ];
