@@ -26,5 +26,6 @@ window.KLINE_00288 = [
   {date:"2026-10-02", open:6.485, high:6.67, low:6.48, close:6.63},
   {date:"2026-10-05", open:6.82, high:6.82, low:6.52, close:6.585},
   {date:"2026-10-06", open:6.63, high:6.75, low:6.52, close:6.535},
-  {date:"2026-10-07", open:6.55, high:6.75, low:6.535, close:6.675}
+  {date:"2026-10-07", open:6.55, high:6.75, low:6.535, close:6.675},
+  {date:"2026-10-08", open:6.595, high:6.615, low:6.475, close:6.51}
 ];
