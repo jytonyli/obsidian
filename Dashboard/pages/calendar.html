@@ -29,11 +29,12 @@
         .yellow { color: #fbbf24; }
         .orange { color: #fb923c; }
         .badge { display: inline-block; padding: 4px 12px; border-radius: 6px; font-size: 14px; font-weight: 600; }
-        .badge-green { background: rgba(52,211,153,0.15); color: #34d399; }
-        .badge-red { background: rgba(248,113,113,0.15); color: #f87171; }
-        .badge-yellow { background: rgba(251,191,36,0.15); color: #fbbf24; }
-        .badge-orange { background: rgba(251,146,60,0.15); color: #fb923c; }
-        .today { background: rgba(251,191,36,0.08); }
+        .badge-high { background: rgba(248,113,113,0.15); color: #f87171; }
+        .badge-medium { background: rgba(251,191,36,0.15); color: #fbbf24; }
+        .badge-low { background: rgba(52,211,153,0.15); color: #34d399; }
+        .today-row { background: rgba(251,191,36,0.08); }
+        .highlight-block { background: rgba(251,191,36,0.08); border-left: 4px solid #fbbf24; padding: 18px 22px; border-radius: 0 10px 10px 0; margin: 16px 0; font-size: 16px; line-height: 1.8; }
+        .highlight-block.red { background: rgba(248,113,113,0.08); border-left-color: #f87171; }
     </style>
     <link rel="stylesheet" href="../responsive.css?v=4">
 </head>
@@ -50,8 +51,8 @@
     </nav>
     <div class="container">
         <div class="status-banner">
-            <div class="status-item">📅 最后更新：<strong>2026-10-09 12:05（午间）</strong></div>
-            <div class="status-item">⏰ 预计下次更新：<strong>2026-10-09 16:05</strong>（今日收盘）</div>
+            <div class="status-item">📅 最后更新：<strong>2026-10-09 16:05（收盘）</strong></div>
+            <div class="status-item">⏰ 预计下次更新：<strong>2026-10-12 12:05</strong>（下周一午间）</div>
         </div>
 
         <div class="card">
@@ -59,17 +60,18 @@
             <table>
                 <thead><tr><th>日期</th><th>事件</th><th>影响标的</th><th>重要性</th><th>预期影响</th></tr></thead>
                 <tbody>
-                    <tr class="today"><td class="mono"><strong>10-09 周四</strong></td><td>A股/港股正常交易</td><td>全部持仓</td><td><span class="badge badge-yellow">常规</span></td><td class="mono">—</td></tr>
-                    <tr><td class="mono">10-10 周五</td><td>中国9月CPI/PPI数据发布</td><td>紫金/宏观</td><td><span class="badge badge-orange">高</span></td><td class="yellow">PPI预期+3.8%，CPI预期0.5%</td></tr>
-                    <tr><td class="mono">10-14 周二</td><td>美国9月CPI数据发布</td><td>黄金/美债</td><td><span class="badge badge-red">极高</span></td><td class="red">预期3.4%，若超预期将进一步推高美债收益率</td></tr>
-                    <tr><td class="mono">10-15 周三</td><td>美国9月PPI数据</td><td>宏观</td><td><span class="badge badge-yellow">中</span></td><td class="mono">—</td></tr>
-                    <tr><td class="mono">10-16 周四</td><td>美国9月零售销售</td><td>美股/消费</td><td><span class="badge badge-yellow">中</span></td><td class="mono">—</td></tr>
-                    <tr><td class="mono">10-20 周一</td><td>中国9月社融/M2数据（预计）</td><td>A股/港股</td><td><span class="badge badge-orange">高</span></td><td class="yellow">社融预期7.2%，关注信用扩张</td></tr>
-                    <tr><td class="mono">10-28 周二</td><td>美国9月核心PCE数据</td><td>黄金/美债</td><td><span class="badge badge-red">极高</span></td><td class="red">美联储最关注通胀指标，预期3.0%</td></tr>
-                    <tr><td class="mono">10-29 周三</td><td>美联储FOMC利率决议</td><td>全部资产</td><td><span class="badge badge-red">极高</span></td><td class="red">预期维持3.75-4.00%，关注鲍威尔讲话</td></tr>
-                    <tr><td class="mono">10-31 周五</td><td>中国10月PMI（预计）</td><td>A股/港股</td><td><span class="badge badge-orange">高</span></td><td class="mono">—</td></tr>
-                    <tr><td class="mono">11-03 周一</td><td>小米SU7交付数据（预计月度）</td><td>小米</td><td><span class="badge badge-orange">高</span></td><td class="yellow">关注汽车业务增长</td></tr>
-                    <tr><td class="mono">11-07 周五</td><td>美国10月非农就业</td><td>美股/美债</td><td><span class="badge badge-red">极高</span></td><td class="mono">—</td></tr>
+                    <tr class="today-row"><td class="mono"><strong>10-09 周五</strong></td><td>A股/港股收盘 · 小米+9.64%异动⚠️</td><td class="yellow">小米</td><td><span class="badge badge-high">高</span></td><td class="green">需关注公告/利好</td></tr>
+                    <tr><td class="mono">10-12 周一</td><td>中国9月CPI/PPI数据发布</td><td class="orange">全市场</td><td><span class="badge badge-high">高</span></td><td>PPI预期+3.8%，CPI预期0.5%</td></tr>
+                    <tr><td class="mono">10-14 周三</td><td>美国9月CPI数据发布</td><td class="orange">黄金/美债/美元</td><td><span class="badge badge-high">高</span></td><td>预期3.4%，影响美联储路径</td></tr>
+                    <tr><td class="mono">10-15 周四</td><td>美国9月PPI数据</td><td class="orange">全市场</td><td><span class="badge badge-medium">中</span></td><td>通胀压力指标</td></tr>
+                    <tr><td class="mono">10-15 周四</td><td>中国9月社融/M2数据（预计）</td><td class="orange">A股/港股</td><td><span class="badge badge-high">高</span></td><td>社融预期7.2%，信用扩张观察</td></tr>
+                    <tr><td class="mono">10-16 周五</td><td>美国9月零售销售</td><td class="orange">美股/消费股</td><td><span class="badge badge-medium">中</span></td><td>消费韧性观察</td></tr>
+                    <tr><td class="mono">10-20 周二</td><td>中国LPR报价（预计不变3.0%）</td><td class="green">A股/港股</td><td><span class="badge badge-low">低</span></td><td>连续16个月不变概率大</td></tr>
+                    <tr><td class="mono">10-22 周四</td><td>美国首次申领失业金人数</td><td class="orange">美股</td><td><span class="badge badge-medium">中</span></td><td>就业市场观察</td></tr>
+                    <tr><td class="mono">10-28 周三</td><td>美联储FOMC利率决议</td><td class="red">黄金/美债/全球</td><td><span class="badge badge-high">高</span></td><td>预期维持3.75-4.00%，关注措辞</td></tr>
+                    <tr><td class="mono">10-29 周四</td><td>美国Q3 GDP初值</td><td class="orange">美股/美元</td><td><span class="badge badge-high">高</span></td><td>增长数据影响滞胀判断</td></tr>
+                    <tr><td class="mono">10-30 周五</td><td>美国9月核心PCE（美联储首选通胀）</td><td class="red">黄金/美债</td><td><span class="badge badge-high">高</span></td><td>预期3.0%，高于2%目标</td></tr>
+                    <tr><td class="mono">10-31 周六</td><td>中国10月PMI（预计10/31或11/1）</td><td class="orange">A股/商品</td><td><span class="badge badge-medium">中</span></td><td>制造业景气度观察</td></tr>
                 </tbody>
             </table>
         </div>
@@ -77,23 +79,25 @@
         <div class="card">
             <div class="card-title">📊 持仓股近期事件</div>
             <table>
-                <thead><tr><th>日期</th><th>公司</th><th>事件</th><th>重要性</th></tr></thead>
+                <thead><tr><th>标的</th><th>近期事件</th><th>日期</th><th>影响</th></tr></thead>
                 <tbody>
-                    <tr><td class="mono">10月下旬</td><td>紫金矿业</td><td>Q3业绩预告（预计）</td><td><span class="badge badge-orange">高</span></td></tr>
-                    <tr><td class="mono">10月下旬</td><td>吉利汽车</td><td>9月销量数据</td><td><span class="badge badge-yellow">中</span></td></tr>
-                    <tr><td class="mono">11月初</td><td>小米集团</td><td>Q3财报（预计）</td><td><span class="badge badge-red">极高</span></td></tr>
-                    <tr><td class="mono">10月下旬</td><td>万洲国际</td><td>猪价走势跟踪</td><td><span class="badge badge-yellow">中</span></td></tr>
+                    <tr><td class="yellow">小米集团</td><td>今日+9.64%异动，需关注是否有重大公告/合作/交付数据</td><td class="mono">10-09</td><td class="green">短期利好，但需确认持续性</td></tr>
+                    <tr><td class="yellow">紫金矿业</td><td>金价回调至$4,141（月内-6.2%），实际利率飙升压制</td><td class="mono">10月</td><td class="red">短期承压，但央行购金支撑长期</td></tr>
+                    <tr><td>吉利汽车</td><td>新能源车销量数据（每月初发布）</td><td class="mono">11月初</td><td class="orange">关注新能源占比和出口</td></tr>
+                    <tr><td>万洲国际</td><td>猪价走势+三季报（预计10月底）</td><td class="mono">10月底</td><td class="orange">猪周期拐点观察</td></tr>
                 </tbody>
             </table>
         </div>
 
         <div class="card">
             <div class="card-title">⚠️ 风险提示</div>
-            <div style="font-size:16px;line-height:2;">
-                <p>1. <strong>美联储10月FOMC（10/29）</strong>：若释放鹰派信号，可能进一步推高美债收益率，压制黄金和成长股</p>
-                <p>2. <strong>美国CPI（10/14）和PCE（10/28）</strong>：通胀数据是当前市场最敏感变量</p>
-                <p>3. <strong>中东局势</strong>：布油已突破$100，若地缘冲突升级可能推高通胀预期</p>
-                <p>4. <strong>小米今日异动+7.19%</strong>：需关注是否有重大消息或短期炒作，避免追高</p>
+            <div class="highlight-block red">
+                <strong>当前核心风险：</strong><br>
+                1. 美国10Y国债收益率5.30%（20年新高），实际利率2.91%持续攀升，压制黄金和成长股估值<br>
+                2. 布伦特原油突破$100，通胀压力回升，美联储降息空间受限<br>
+                3. 小米今日+9.64%异动，需警惕短期炒作回调风险<br>
+                4. 中国PPI-CPI剪刀差3.3pp，企业利润受压<br>
+                5. 10/28美联储FOMC+10/30核心PCE，月底宏观数据密集
             </div>
         </div>
     </div>
