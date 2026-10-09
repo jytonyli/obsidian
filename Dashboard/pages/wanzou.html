@@ -9,7 +9,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #1a1a1a; color: #eaeaea; line-height: 1.7; font-size: 17px; }
-        .mono { font-family: 'SF Mono', 'Roboto Mono', Menlo, monospace; }
+        .mono { font-family: 'SF Mono', 'Roboto Mono', Menlo, monospace; font-variant-numeric: tabular-nums; white-space: nowrap; }
         .nav { background: #232323; border-bottom: 1px solid #2c2c2c; padding: 20px 36px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
         .nav-brand { font-size: 24px; font-weight: 700; color: #fbbf24; }
         .nav-links { display: flex; gap: 28px; }
@@ -21,20 +21,23 @@
         .status-item strong { color: #eaeaea; }
         .card { background: #232323; border: 1px solid #2c2c2c; border-radius: 16px; padding: 32px; margin-bottom: 28px; }
         .card-title { font-size: 22px; font-weight: 600; margin-bottom: 24px; }
-        .hero-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 28px; }
-        .hero-card { background: #232323; border: 1px solid #3a3a3a; border-radius: 16px; padding: 24px; text-align: center; }
-        .hero-label { font-size: 14px; color: #9a9a9a; margin-bottom: 10px; }
-        .hero-value { font-size: 32px; font-weight: 700; }
-        .hero-value.green { color: #34d399; }
-        .hero-value.red { color: #f87171; }
-        .hero-value.yellow { color: #fbbf24; }
-        table { width: 100%; border-collapse: collapse; font-size: 16px; }
-        th { text-align: left; padding: 12px 16px; color: #9a9a9a; font-weight: 500; border-bottom: 2px solid #2c2c2c; }
-        td { padding: 14px 16px; border-bottom: 1px solid #2c2c2c; }
+        .price-hero { text-align: center; padding: 20px 0; }
+        .price-hero .price { font-size: 56px; font-weight: 700; color: #fbbf24; }
+        .price-hero .change { font-size: 24px; margin-top: 8px; }
         .green { color: #34d399; }
         .red { color: #f87171; }
         .yellow { color: #fbbf24; }
         .chart-container { height: 400px; margin: 20px 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 16px; }
+        th { text-align: left; padding: 14px 16px; color: #9a9a9a; font-weight: 500; border-bottom: 2px solid #2c2c2c; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+        td { padding: 16px 18px; border-bottom: 1px solid #2c2c2c; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover { background: #2c2c2c; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+        @media (max-width: 1200px) { .two-col { grid-template-columns: 1fr; } }
+        .highlight-block { background: rgba(251,191,36,0.08); border-left: 4px solid #fbbf24; padding: 18px 22px; border-radius: 0 10px 10px 0; margin: 16px 0; font-size: 16px; line-height: 1.8; }
+        .highlight-block.red { background: rgba(248,113,113,0.08); border-left-color: #f87171; }
+        .highlight-block.green { background: rgba(52,211,153,0.08); border-left-color: #34d399; }
     </style>
     <link rel="stylesheet" href="../responsive.css?v=4">
 </head>
@@ -51,30 +54,16 @@
     </nav>
     <div class="container">
         <div class="status-banner">
-            <div class="status-item">📅 最后更新：<strong>2026-10-08 16:05（收盘）</strong></div>
-            <div class="status-item">⏰ 预计下次更新：<strong>2026-10-09 12:05</strong>（明日午间）</div>
-            <div class="status-item">🇭🇰 港股收盘价</div>
+            <div class="status-item">📅 最后更新：<strong>2026-10-09 12:05（午间）</strong></div>
+            <div class="status-item">⏰ 预计下次更新：<strong>2026-10-09 16:05</strong>（今日收盘）</div>
+            <div class="status-item">📊 港股午盘价</div>
         </div>
 
-        <div class="hero-grid">
-            <div class="hero-card">
-                <div class="hero-label">现价</div>
-                <div class="hero-value yellow">HK$6.51</div>
-                <div style="font-size:13px;color:#f87171;margin-top:6px;">-2.62%（收盘）</div>
-            </div>
-            <div class="hero-card">
-                <div class="hero-label">成本</div>
-                <div class="hero-value">HK$7.28</div>
-            </div>
-            <div class="hero-card">
-                <div class="hero-label">持仓盈亏</div>
-                <div class="hero-value red">-10.6%</div>
-                <div style="font-size:13px;color:#f87171;margin-top:6px;">-HK$61,600</div>
-            </div>
-            <div class="hero-card">
-                <div class="hero-label">市值</div>
-                <div class="hero-value">HK$52.1万</div>
-                <div style="font-size:13px;color:#7a7a7a;margin-top:6px;">80,000股</div>
+        <div class="card">
+            <div class="card-title">万洲国际 (00288.HK)</div>
+            <div class="price-hero">
+                <div class="price mono">HK$6.60</div>
+                <div class="change green mono">+HK$0.09 (+1.38%) 午间</div>
             </div>
         </div>
 
@@ -83,38 +72,65 @@
             <div id="klineChart" class="chart-container"></div>
         </div>
 
-        <div class="card">
-            <div class="card-title">📊 关键数据</div>
-            <table>
-                <tr><td>持股数量</td><td class="mono">80,000股</td></tr>
-                <tr><td>总成本</td><td class="mono">HK$582,400</td></tr>
-                <tr><td>总市值</td><td class="mono">HK$520,800</td></tr>
-                <tr><td>浮动盈亏</td><td class="red mono">-HK$61,600</td></tr>
-                <tr><td>盈亏比例</td><td class="red mono">-10.6%</td></tr>
-                <tr><td>当日盈亏</td><td class="red mono">-HK$14,000（-¥12,040）</td></tr>
-            </table>
+        <div class="two-col">
+            <div class="card">
+                <div class="card-title">💰 持仓数据</div>
+                <table>
+                    <tbody>
+                        <tr><td>持股数量</td><td class="mono">80,000 股</td></tr>
+                        <tr><td>成本价</td><td class="mono">HK$7.28</td></tr>
+                        <tr><td>当前价</td><td class="mono yellow">HK$6.60</td></tr>
+                        <tr><td>总市值</td><td class="mono">HK$528,000</td></tr>
+                        <tr><td>浮动盈亏</td><td class="red mono">-HK$54,400</td></tr>
+                        <tr><td>盈亏比例</td><td class="red mono">-9.3%</td></tr>
+                        <tr><td>当日盈亏</td><td class="green mono">+HK$7,200 (+¥6,192)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card">
+                <div class="card-title">🏭 公司概况</div>
+                <div style="font-size:16px;line-height:2;">
+                    <p><strong>主营业务：</strong>全球最大猪肉食品企业（双汇母公司），覆盖养殖、屠宰、肉制品</p>
+                    <p><strong>核心资产：</strong>Smithfield（美国）、双汇发展（中国）、Coyol（墨西哥）</p>
+                    <p><strong>市值：</strong>约HK$850亿（按总股本128亿股×HK$6.60估算）</p>
+                    <p><strong>股息率：</strong>约6-8%（高股息防御股）</p>
+                    <p><strong>关键变量：</strong>猪周期、中美贸易、肉制品需求、汇率</p>
+                </div>
+            </div>
         </div>
 
         <div class="card">
-            <div class="card-title">🏢 公司概况</div>
-            <div style="font-size:16px;line-height:2;">
-                <p><strong>万洲国际（00288.HK）</strong>是全球最大的猪肉食品企业，旗下拥有双汇（中国）和Smithfield（美国）。业务覆盖生猪养殖、屠宰和肉制品加工。</p>
-                <p style="margin-top:12px;"><strong>核心逻辑：</strong>防御性消费股 + 高股息 + 中美双市场布局。猪周期底部回升，肉制品业务稳定。在经济不确定性中具有防御价值。</p>
-                <p style="margin-top:12px;"><strong>风险：</strong>非洲猪瘟等疫病风险；中美贸易摩擦影响；猪价波动影响盈利。当前股价HK$6.51，较成本HK$7.28套牢-10.6%。</p>
+            <div class="card-title">📊 投资逻辑与风险</div>
+            <div class="highlight-block green">
+                <strong>✅ 看多逻辑：</strong><br>
+                1. 高股息防御股（股息率6-8%），在滞胀/不确定环境下有配置价值<br>
+                2. 全球猪肉产业链龙头，业务多元化（中美墨三地布局）<br>
+                3. 猪周期底部回升预期，肉制品业务稳定现金流<br>
+                4. 估值低（PE约8x），安全边际较高
+            </div>
+            <div class="highlight-block red" style="margin-top:16px;">
+                <strong>⚠️ 风险因素：</strong><br>
+                1. 猪周期波动大，盈利周期性强<br>
+                2. 中美贸易关系不确定性影响业务<br>
+                3. 非洲猪瘟等疫病风险<br>
+                4. 当前浮亏-9.3%，需关注猪价走势
             </div>
         </div>
     </div>
     <script>
-        var klineChart = echarts.init(document.getElementById('klineChart'));
         var klineData = window.KLINE_00288 || [];
-        var dates = klineData.map(function(d) { return d.date; });
-        var values = klineData.map(function(d) { return [d.open, d.close, d.low, d.high]; });
+        var klineChart = echarts.init(document.getElementById('klineChart'));
         klineChart.setOption({
             tooltip: { trigger: 'axis', backgroundColor: '#2c2c2c', borderColor: '#3a3a3a', textStyle: { color: '#eaeaea' } },
-            grid: { left: 60, right: 30, top: 30, bottom: 40 },
-            xAxis: { type: 'category', data: dates, axisLine: { lineStyle: { color: '#3a3a3a' } }, axisLabel: { color: '#9a9a9a', fontSize: 11 } },
-            yAxis: { scale: true, axisLine: { lineStyle: { color: '#3a3a3a' } }, axisLabel: { color: '#9a9a9a' }, splitLine: { lineStyle: { color: 'rgba(255,255,255,0.06)' } } },
-            series: [{ type: 'candlestick', data: values, itemStyle: { color: '#34d399', color0: '#f87171', borderColor: '#34d399', borderColor0: '#f87171' } }]
+            grid: { left: 60, right: 30, top: 30, bottom: 50 },
+            xAxis: { type: 'category', data: klineData.map(function(d){return d.date;}), axisLine: { lineStyle: { color: 'rgba(255,255,255,0.2)' } }, axisLabel: { color: '#9a9a9a', fontSize: 11, rotate: 45 } },
+            yAxis: { type: 'value', scale: true, axisLine: { lineStyle: { color: 'rgba(255,255,255,0.15)' } }, axisLabel: { color: '#9a9a9a', fontSize: 12 }, splitLine: { lineStyle: { color: 'rgba(255,255,255,0.06)' } } },
+            dataZoom: [{ type: 'inside' }, { type: 'slider', height: 20, bottom: 10, textStyle: { color: '#9a9a9a' } }],
+            series: [{
+                type: 'candlestick',
+                data: klineData.map(function(d){return [d.open, d.close, d.low, d.high];}),
+                itemStyle: { color: '#34d399', color0: '#f87171', borderColor: '#34d399', borderColor0: '#f87171' }
+            }]
         });
         window.addEventListener('resize', function() { klineChart.resize(); });
     </script>
