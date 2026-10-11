@@ -14,7 +14,7 @@
         .nav-links { display: flex; gap: 28px; }
         .nav-links a { color: #9a9a9a; text-decoration: none; font-size: 17px; padding: 10px 18px; border-radius: 8px; transition: color 0.2s, background 0.2s; }
         .nav-links a:hover, .nav-links a.active { color: #fbbf24; background: #2c2c2c; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 36px; }
+        .container { max-width: 1300px; margin: 0 auto; padding: 36px; }
         .status-banner { background: #232323; border: 1px solid #3a3a3a; border-radius: 16px; padding: 24px 28px; margin-bottom: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
         .status-left { display: flex; flex-direction: column; gap: 6px; }
         .status-item { font-size: 16px; color: #9a9a9a; }
@@ -250,9 +250,9 @@
             activeChart = echarts.init(chartTr.querySelector('.inline-macro-chart'));
             activeChart.setOption({
                 tooltip: { trigger: 'axis', backgroundColor: 'rgba(38,38,38,0.95)', borderColor: 'rgba(255,255,255,0.15)', textStyle: { color: '#eaeaea', fontSize: 13 }, formatter: function(params) { var v = params[0].value; return params[0].name + '：' + (v === null ? '暂无数据' : v + d.unit); } },
-                grid: { left: 50, right: 20, top: 20, bottom: 30 },
+                grid: { left: 42, right: 16, top: 20, bottom: 30 },
                 xAxis: { type: 'category', data: d.months, axisLine: { lineStyle: { color: 'rgba(255,255,255,0.2)' } }, axisLabel: { color: '#9a9a9a', fontSize: 11 } },
-                yAxis: { type: 'value', scale: true, min: d.yMin !== undefined ? d.yMin : null, max: d.yMax !== undefined ? d.yMax : null, axisLine: { lineStyle: { color: 'rgba(255,255,255,0.15)' } }, axisLabel: { color: '#9a9a9a', fontSize: 11, formatter: '{value}' + d.unit }, splitLine: { lineStyle: { color: 'rgba(255,255,255,0.06)' } } },
+                yAxis: { type: 'value', scale: true, min: d.yMin !== undefined ? d.yMin : null, max: d.yMax !== undefined ? d.yMax : null, axisLine: { lineStyle: { color: 'rgba(255,255,255,0.15)' } }, axisLabel: { color: '#9a9a9a', fontSize: 11, formatter: '{value}' }, splitLine: { lineStyle: { color: 'rgba(255,255,255,0.06)' } } },
                 series: [{ type: 'line', smooth: true, symbol: 'circle', symbolSize: 6, lineStyle: { width: 2.5, color: d.color }, itemStyle: { color: d.color, borderColor: '#1e1e1e', borderWidth: 2 }, areaStyle: { color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: d.color + '40' }, { offset: 1, color: d.color + '05' }] } }, data: d.values }]
             }, true);
         }
