@@ -73,8 +73,17 @@
         </div>
 
         <div class="card">
-            <div class="card-title">📊 持仓占比</div>
-            <div id="allocChart" class="chart-container"></div>
+            <div class="card-title">📊 持仓占比 & 盈亏分布</div>
+            <div class="two-col">
+                <div>
+                    <div style="font-size:13px;color:#9a9a9a;margin-bottom:8px;">结构占比（按市值）</div>
+                    <div id="allocChart" class="chart-container"></div>
+                </div>
+                <div>
+                    <div style="font-size:13px;color:#9a9a9a;margin-bottom:8px;">浮动盈亏（人民币万元，港股按 ¥0.86 折算）</div>
+                    <div id="pnlChart" class="chart-container"></div>
+                </div>
+            </div>
         </div>
 
         <div class="card">
@@ -140,6 +149,27 @@
             }]
         });
         window.addEventListener('resize', function() { allocChart.resize(); });
+        var pnlChart = echarts.init(document.getElementById('pnlChart'));
+        pnlChart.setOption({
+            tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, backgroundColor: '#2c2c2c', borderColor: '#3a3a3a', textStyle: { color: '#eaeaea' }, formatter: function(params) {
+                var d = params[0].data;
+                return d.name + '<br>浮动盈亏：<span style="color:#f87171;">' + d.amount + '万元</span><br>盈亏比例：' + d.pct;
+            } },
+            grid: { left: 80, right: 70, top: 20, bottom: 30 },
+            xAxis: { type: 'value', name: '万元', nameTextStyle: { color: '#9a9a9a' }, axisLabel: { color: '#9a9a9a' }, splitLine: { lineStyle: { color: 'rgba(255,255,255,0.06)' } } },
+            yAxis: { type: 'category', data: ['小米集团', '紫金矿业', '吉利汽车', '万洲国际'], axisLine: { lineStyle: { color: 'rgba(255,255,255,0.2)' } }, axisLabel: { color: '#eaeaea', fontSize: 13 } },
+            series: [{
+                type: 'bar', barWidth: '55%',
+                data: [
+                    { name: '小米集团', value: -66.3, amount: -66.3, pct: '-44.8%', itemStyle: { color: '#f87171' } },
+                    { name: '紫金矿业', value: -48.3, amount: -48.3, pct: '-9.6%', itemStyle: { color: '#f87171' } },
+                    { name: '吉利汽车', value: -7.8, amount: -7.8, pct: '-7.7%', itemStyle: { color: '#f87171' } },
+                    { name: '万洲国际', value: -4.5, amount: -4.5, pct: '-9.0%', itemStyle: { color: '#f87171' } }
+                ],
+                label: { show: true, position: 'right', color: '#f87171', fontSize: 13, formatter: function(p) { return p.data.amount + '万 (' + p.data.pct + ')'; } }
+            }]
+        });
+        window.addEventListener('resize', function() { pnlChart.resize(); });
     </script>
 </body>
 </html>
