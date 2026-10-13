@@ -29,4 +29,5 @@ window.KLINE_00175 = [
   {date:"2026-10-08", open:14.86, high:15.01, low:14.55, close:14.61},
   {date:"2026-10-09", open:14.82, high:15.13, low:14.60, close:15.13},
   {date:"2026-10-12", open:15.45, high:16.06, low:15.05, close:15.11}
+  {date:"2026-10-13", open:15.02, high:15.40, low:14.88, close:15.20}
 ];
