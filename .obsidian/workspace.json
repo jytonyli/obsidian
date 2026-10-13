@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "ef0e40135f4ecdea",
+        "id": "42c3012882eb644a",
         "type": "tabs",
         "children": [
           {
-            "id": "d3668b4a06006eb6",
+            "id": "df0e344c590878a3",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 🎯 投资原则.md",
-                "mode": "preview",
+                "file": "📋 决策准则与复盘.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01 🎯 投资原则"
+              "title": "📋 决策准则与复盘"
             }
           }
         ]
@@ -185,29 +185,31 @@
       "bases:Create new base": false
     }
   },
-  "active": "d3668b4a06006eb6",
+  "active": "df0e344c590878a3",
   "lastOpenFiles": [
-    "_add_notebook_link.py",
-    "Dashboard/_shots/notebook_desktop_p3of3.jpg",
-    "Dashboard/_shots/notebook_desktop_p2of3.jpg",
-    "Dashboard/_shots/notebook_desktop_p1of3.jpg",
-    "Dashboard/_shots/notebook_desktop.jpg",
-    "Dashboard/_shots/notebook_mobile_p5of5.jpg",
-    "Dashboard/_shots/notebook_mobile_p4of5.jpg",
-    "Dashboard/_shots/notebook_mobile_p3of5.jpg",
-    "Dashboard/_shots/notebook_mobile_p2of5.jpg",
-    "Dashboard/_shots/notebook_mobile_p1of5.jpg",
-    "Dashboard/_shots/notebook_mobile.jpg",
-    "Dashboard/_shots",
-    "Dashboard/notebook.html",
-    "Dashboard/pages/xiaomi.html",
-    "Dashboard/pages/wanzou.html",
-    "Dashboard/pages/geely.html",
-    "Dashboard/pages/zijin.html",
-    "Dashboard/pages/calendar.html",
-    "Dashboard/pages/news.html",
-    "Dashboard/pages/holdings.html",
-    "Dashboard/Homepage.html",
+    "Dashboard/pages/_shots/calendar_mobile.jpg",
+    "Dashboard/data/test.txt",
+    "Dashboard/data/kline_601899.js",
+    "Dashboard/data/kline_01810.js",
+    "Dashboard/data/kline_00288.js",
+    "Dashboard/data/kline_00175.js",
+    "Dashboard/data",
+    "💡 每日想法.md",
+    "Dashboard/pages/_shots/long-term-cycle_desktop.jpg",
+    "Dashboard/pages/_shots/zijin_desktop_p2of2.jpg",
+    "Dashboard/pages/_shots/zijin_desktop_p1of2.jpg",
+    "Dashboard/pages/_shots/zijin_desktop.jpg",
+    "Dashboard/pages/_shots/history-volcker_desktop.jpg",
+    "Dashboard/pages/_shots/xiaomi_desktop.jpg",
+    "Dashboard/pages/_shots/history-2008_desktop.jpg",
+    "Dashboard/pages/_shots/wanzou_desktop_p2of2.jpg",
+    "Dashboard/pages/_shots/wanzou_desktop_p1of2.jpg",
+    "Dashboard/pages/_shots/wanzou_desktop.jpg",
+    "📋 决策准则与复盘.md",
+    "Dashboard/pages/long-term-cycle.html",
+    "Dashboard/pages/short-term-cycle.html",
+    "Dashboard/pages/productivity.html",
+    "Dashboard/pages/economy-machine.html",
     "02 ⚙️ 经济机器怎么运转.md",
     "03 📈 生产率长期增长.md",
     "01 🎯 投资原则.md",
@@ -216,7 +218,6 @@
     "05 ⏳ 长期债务周期.md",
     "⚙️ 经济机器怎么运转.md",
     "04 🔄 短期债务周期.md",
-    "💡 每日想法.md",
     "🎯 投资原则.md",
     "🔄 短期债务周期.md",
     "📈 生产率长期增长.md",
@@ -232,7 +233,6 @@
     "03_资产类别与市场/黄金/📉 黄金-实际利率联动.md",
     "03_资产类别与市场/黄金/🏦 央行购金行为.md",
     "03_资产类别与市场/黄金/⛏️ 黄金矿业股.md",
-    "02_国家与地区/🇺🇸 美国.md",
     "Untitled.canvas"
   ]
 }
