@@ -207,6 +207,6 @@ window.KLINE_00288 = [
     "open": 6.66,
     "high": 6.775,
     "low": 6.635,
-    "close": 6.99
+    "close": 6.69
   }
 ];
