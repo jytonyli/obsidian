@@ -207,6 +207,6 @@ window.KLINE_00175 = [
     "open": 15.08,
     "high": 15.19,
     "low": 14.83,
-    "close": 15.13
+    "close": 15.0
   }
 ]
