@@ -94,7 +94,7 @@
             <div class="status-left">
                 <div class="status-item">📅 最后更新：<strong>2026-10-30 16:10（收盘）</strong></div>
                 <div class="status-item">⏰ 预计下次更新：<strong>2026-11-02 12:05</strong>（下个工作日午间）</div>
-                <div class="status-item">📊 上次周更新：<strong>2026-10-23 16:30</strong></div>
+                <div class="status-item">📊 上次周更新：<strong>2026-10-30 16:30</strong></div>
             </div>
             <div class="update-buttons">
                 <button class="btn btn-primary" onclick="copyToClipboard('更新本日数据')">⚡ 更新本日数据</button>
@@ -132,12 +132,12 @@
                         <colgroup><col style="width:26%"><col style="width:29%"><col style="width:16%"><col style="width:15%"><col style="width:14%"></colgroup>
                         <thead><tr><th>指标</th><th>当前值</th><th>上周</th><th>上月</th><th>当日涨幅</th></tr></thead>
                         <tbody>
-                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('shindex', this)">🇨🇳 上证指数</td><td class="mono"><strong>3599.02</strong></td><td class="mono">3813.79</td><td class="mono">~3986</td><td class="red mono">-1.44%</td></tr>
-                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('csi500', this)">🇨🇳 中证 500</td><td class="mono"><strong>6266.19</strong></td><td class="mono">7251.01</td><td class="mono">~7600</td><td class="red mono">-2.91%</td></tr>
-                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('hsi', this)">🇭🇰 恒生指数</td><td class="mono"><strong>23294.42</strong></td><td class="mono">24211.35</td><td class="mono">~25460</td><td class="green mono">+1.46%</td></tr>
-                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('hstech', this)">🇭🇰 恒生科技</td><td class="mono"><strong>3754.90</strong></td><td class="mono">4197.84</td><td class="mono">~4400</td><td class="green mono">+0.29%</td></tr>
-                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('spx', this)">🇺🇸 S&P 500</td><td class="mono"><strong>7720.39</strong></td><td class="mono">7811.54</td><td class="mono">7686.14</td><td class="red mono">-0.30%</td></tr>
-                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('ixic', this)">🇺🇸 纳斯达克</td><td class="mono"><strong>26184.72</strong></td><td class="mono">27366.17</td><td class="mono">26370.89</td><td class="red mono">-1.38%</td></tr>
+                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('shindex', this)">🇨🇳 上证指数</td><td class="mono"><strong>3599.02</strong></td><td class="mono">3690.48</td><td class="mono">~3986</td><td class="red mono">-1.44%</td></tr>
+                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('csi500', this)">🇨🇳 中证 500</td><td class="mono"><strong>6266.19</strong></td><td class="mono">6814.44</td><td class="mono">~7600</td><td class="red mono">-2.91%</td></tr>
+                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('hsi', this)">🇭🇰 恒生指数</td><td class="mono"><strong>23294.42</strong></td><td class="mono">23093.37</td><td class="mono">~25460</td><td class="green mono">+1.46%</td></tr>
+                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('hstech', this)">🇭🇰 恒生科技</td><td class="mono"><strong>3754.90</strong></td><td class="mono">3871.66</td><td class="mono">~4400</td><td class="green mono">+0.29%</td></tr>
+                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('spx', this)">🇺🇸 S&P 500</td><td class="mono"><strong>7720.39</strong></td><td class="mono">7663.43</td><td class="mono">7686.14</td><td class="red mono">-0.30%</td></tr>
+                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('ixic', this)">🇺🇸 纳斯达克</td><td class="mono"><strong>26184.72</strong></td><td class="mono">26008.86</td><td class="mono">26370.89</td><td class="red mono">-1.38%</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -168,11 +168,11 @@
                 <colgroup><col style="width:26%"><col style="width:29%"><col style="width:16%"><col style="width:15%"><col style="width:14%"></colgroup>
                 <thead><tr><th>指标</th><th>当前值</th><th>上周</th><th>上月</th><th>月变化</th></tr></thead>
                 <tbody>
-                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('gold', this)">🥇 伦敦金现</td><td class="mono yellow"><strong>3977.91 USD/oz</strong></td><td class="mono">4194.15</td><td class="mono">4437.39</td><td class="red mono">-10.4%</td></tr>
-                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('dollarindex', this)">💵 美元指数</td><td class="mono"><strong>101.76</strong></td><td class="mono">102.02</td><td class="mono">99.37</td><td class="green mono">+2.4%</td></tr>
-                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('usdcny', this)">💱 USD/CNY</td><td class="mono"><strong>6.6558</strong></td><td class="mono">—</td><td class="mono">6.7197</td><td class="green mono">↓ 人民币升</td></tr>
-                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('lmecopper', this)">⚡ LME 铜</td><td class="mono orange"><strong>14294.00 USD</strong> ⚠️</td><td class="mono">—</td><td class="mono">14285</td><td class="green mono">+0.1%</td></tr>
-                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('brent', this)">🛢️ 布伦特原油</td><td class="mono orange"><strong>113.05 USD</strong> ⚠️</td><td class="mono">104.54</td><td class="mono">90.67</td><td class="green mono">+24.7%</td></tr>
+                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('gold', this)">🥇 伦敦金现</td><td class="mono yellow"><strong>3977.91 USD/oz</strong></td><td class="mono">4010.13</td><td class="mono">4437.39</td><td class="red mono">-10.4%</td></tr>
+                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('dollarindex', this)">💵 美元指数</td><td class="mono"><strong>101.76</strong></td><td class="mono">101.72</td><td class="mono">99.37</td><td class="green mono">+2.4%</td></tr>
+                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('usdcny', this)">💱 USD/CNY</td><td class="mono"><strong>6.6558</strong></td><td class="mono">6.7180</td><td class="mono">6.7197</td><td class="green mono">↓ 人民币升</td></tr>
+                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('lmecopper', this)">⚡ LME 铜</td><td class="mono orange"><strong>14294.00 USD</strong> ⚠️</td><td class="mono">14098.00</td><td class="mono">14285</td><td class="green mono">+0.1%</td></tr>
+                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('brent', this)">🛢️ 布伦特原油</td><td class="mono orange"><strong>113.05 USD</strong> ⚠️</td><td class="mono">112.92</td><td class="mono">90.67</td><td class="green mono">+24.7%</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('lithium', this)">🔋 电池级碳酸锂</td><td class="mono"><strong>9.67 万元/吨</strong></td><td class="mono">—</td><td class="mono">15.85</td><td class="red mono">-39.0%</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('tips', this)">📉 美国10年实际利率</td><td class="mono red"><strong>2.80%</strong></td><td class="mono">—</td><td class="mono">2.64%</td><td class="red mono">↑ 攀升</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('pbcg', this)">🏛️ 央行购金 (中国9月)</td><td class="mono green">+23.02吨</td><td class="mono">—</td><td class="mono">+20.2吨</td><td class="mono green">✅ 连续23个月增持</td></tr>
