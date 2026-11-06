@@ -94,7 +94,7 @@
             <div class="status-left">
                 <div class="status-item">📅 最后更新：<strong>2026-11-06 16:12（收盘）</strong></div>
                 <div class="status-item">⏰ 预计下次更新：<strong>2026-11-09 12:05</strong>（周一午间）</div>
-                <div class="status-item">📊 上次周更新：<strong>2026-10-30 16:30</strong></div>
+                <div class="status-item">📊 上次周更新：<strong>2026-11-06 16:30</strong></div>
             </div>
             <div class="update-buttons">
                 <button class="btn btn-primary" onclick="copyToClipboard('更新本日数据')">⚡ 更新本日数据</button>
@@ -132,10 +132,10 @@
                         <colgroup><col style="width:26%"><col style="width:29%"><col style="width:16%"><col style="width:15%"><col style="width:14%"></colgroup>
                         <thead><tr><th>指标</th><th>当前值</th><th>上周</th><th>上月</th><th>当日涨幅</th></tr></thead>
                         <tbody>
-                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('shindex', this)">🇨🇳 上证指数</td><td class="mono"><strong>3649.18</strong></td><td class="mono">3638.03</td><td class="mono">3842.19</td><td class="red mono">-1.10%</td></tr>
-                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('csi500', this)">🇨🇳 中证 500</td><td class="mono"><strong>6597.35</strong></td><td class="mono">6420.23</td><td class="mono">7435.16</td><td class="red mono">-2.13%</td></tr>
-                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('hsi', this)">🇭🇰 恒生指数</td><td class="mono"><strong>24484.63</strong></td><td class="mono">23377.95</td><td class="mono">24613.27</td><td class="red mono">-1.26%</td></tr>
-                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('hstech', this)">🇭🇰 恒生科技</td><td class="mono"><strong>4073.28</strong></td><td class="mono">3838.02</td><td class="mono">4253.89</td><td class="red mono">-1.95%</td></tr>
+                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('shindex', this)">🇨🇳 上证指数</td><td class="mono"><strong>3649.18</strong></td><td class="mono">3599.02</td><td class="mono">3842.19</td><td class="red mono">-1.10%</td></tr>
+                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('csi500', this)">🇨🇳 中证 500</td><td class="mono"><strong>6597.35</strong></td><td class="mono">6266.19</td><td class="mono">7435.16</td><td class="red mono">-2.13%</td></tr>
+                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('hsi', this)">🇭🇰 恒生指数</td><td class="mono"><strong>24484.63</strong></td><td class="mono">23294.42</td><td class="mono">24613.27</td><td class="red mono">-1.26%</td></tr>
+                            <tr><td class="clickable-indicator" onclick="toggleMacroChart('hstech', this)">🇭🇰 恒生科技</td><td class="mono"><strong>4073.28</strong></td><td class="mono">3754.90</td><td class="mono">4253.89</td><td class="red mono">-1.95%</td></tr>
                             <tr><td class="clickable-indicator" onclick="toggleMacroChart('spx', this)">🇺🇸 S&P 500</td><td class="mono orange"><strong>7353.73</strong> ⚠️</td><td class="mono">7580.07</td><td class="mono">7651.54</td><td class="red mono">-4.36%</td></tr>
                             <tr><td class="clickable-indicator" onclick="toggleMacroChart('ixic', this)">🇺🇸 纳斯达克</td><td class="mono orange"><strong>24315.00</strong> ⚠️</td><td class="mono">25437.00</td><td class="mono">26861.06</td><td class="red mono">-5.52%</td></tr>
                         </tbody>
@@ -168,11 +168,11 @@
                 <colgroup><col style="width:26%"><col style="width:29%"><col style="width:16%"><col style="width:15%"><col style="width:14%"></colgroup>
                 <thead><tr><th>指标</th><th>当前值</th><th>上周</th><th>上月</th><th>月变化</th></tr></thead>
                 <tbody>
-                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('gold', this)">🥇 伦敦金现</td><td class="mono yellow"><strong>4055.96 USD/oz</strong></td><td class="mono">3897.99</td><td class="mono">4157.41</td><td class="red mono">-2.4%</td></tr>
+                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('gold', this)">🥇 伦敦金现</td><td class="mono yellow"><strong>4055.96 USD/oz</strong></td><td class="mono">3875.19</td><td class="mono">4157.41</td><td class="red mono">-2.4%</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('dollarindex', this)">💵 美元指数</td><td class="mono"><strong>101.490</strong></td><td class="mono">101.93</td><td class="mono">101.21</td><td class="green mono">+0.3%</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('usdcny', this)">💱 USD/CNY</td><td class="mono"><strong>6.6699</strong></td><td class="mono">6.6458</td><td class="mono">6.7050</td><td class="green mono">↓ 人民币升</td></tr>
-                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('lmecopper', this)">⚡ LME 铜</td><td class="mono orange"><strong>13655 USD</strong> ⚠️</td><td class="mono">14241.14</td><td class="mono">14405</td><td class="red mono">-5.2%</td></tr>
-                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('brent', this)">🛢️ 布伦特原油</td><td class="mono orange"><strong>99.36 USD</strong> ⚠️</td><td class="mono">109.655</td><td class="mono">103.50</td><td class="red mono">-4.0%</td></tr>
+                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('lmecopper', this)">⚡ LME 铜</td><td class="mono orange"><strong>13655 USD</strong> ⚠️</td><td class="mono">14292.00</td><td class="mono">14405</td><td class="red mono">-5.2%</td></tr>
+                    <tr><td class="clickable-indicator" onclick="toggleMacroChart('brent', this)">🛢️ 布伦特原油</td><td class="mono orange"><strong>99.36 USD</strong> ⚠️</td><td class="mono">113.40</td><td class="mono">103.50</td><td class="red mono">-4.0%</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('lithium', this)">🔋 电池级碳酸锂</td><td class="mono orange"><strong>9.25 万元/吨</strong> ⚠️</td><td class="mono">—</td><td class="mono">12.28</td><td class="red mono">-24.7%</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('tips', this)">📉 美国10年实际利率</td><td class="mono red"><strong>2.63%</strong></td><td class="mono">—</td><td class="mono">2.64%</td><td class="mono">→ 持平(-0.4%)</td></tr>
                     <tr><td class="clickable-indicator" onclick="toggleMacroChart('pbcg', this)">🏛️ 央行购金 (中国9月)</td><td class="mono green">+23.02吨</td><td class="mono">—</td><td class="mono">+20.2吨</td><td class="mono green">✅ 连续23个月增持</td></tr>
@@ -193,11 +193,11 @@
                     <div class="force-item"><span>10Y国债</span><span class="orange mono">5.00%（10月冲高5.30%后回落30bp）</span></div>
                     <div class="force-item"><span>实际利率(TIPS)</span><span class="orange mono">2.63%（10-29 FRED，高位回落，仍压制黄金）</span></div>
                     <div class="highlight-block" style="margin-top:12px;background:rgba(248,113,113,0.12);border-left:3px solid #f87171;">
-                        <strong>📉 9月关键变化：</strong>10Y美债从4.68%飙升至5.30%（+62bp），实际利率从2.40%升至2.91%，布油突破100美元。<strong style="color:#f87171;">债券市场正在定价"财政不可持续+通胀顽固"的双重风险</strong>，这是Dalio所说的"长期债务周期后段"的典型特征。黄金因实际利率飙升短期回调6.3%，但央行购金（+23.02吨/月，连续23个月）和去美元化趋势未变。
+                        <strong>📉 本周关键变化：</strong>10Y美债 4.98%（上周 5.00%，高位微降但仍在 5% 附近），实际利率（TIPS）2.63% 继续高于潜在增速；黄金本周自 $3,875.19 反弹至 $4,055.96（<strong>+4.6%</strong>）后周五回落 -0.72%；布油自 10-30 的 $113.40 一路跌至 $99.36（<strong>-12.4%</strong>），铜 -4.5% 至 $13,655。11-05 标普 -4.36%⚠️、纳指 -5.52%⚠️：Hammack 称"通胀自3月以来走错方向、货币政策需转向限制性立场"，叠加 OpenAI 高管言论重燃 AI 资本开支回报质疑，<strong style="color:#f87171;">市场对12月加息定价已升至 68.7%</strong>。股、债、金同时被高实际利率压制——这是 Dalio "长期债务周期后段 + 流动性收缩" 的典型组合。
                     </div>
                     <div class="highlight-block" style="margin-top:12px;background:rgba(96,165,250,0.12);border-left:3px solid #60a5fa;">
-                        <strong>💡 利好：</strong>黄金（长期）· 大宗商品（油/铜）· 短债/现金 · 通胀保值债券(TIPS)<br>
-                        <strong style="color:#f87171;">⚠️ 利空：</strong>长债（5.3%还可能更高）· 高估值成长股（实际利率压制）· 消费股（油价挤压购买力）
+                        <strong>💡 利好：</strong>短债/现金 · TIPS（实际利率 2.63%）· 黄金（长期：央行购金连续 23 个月）<br>
+                        <strong style="color:#f87171;">⚠️ 利空：</strong>高估值成长股（AI 资本开支回报受质疑）· 长债（4.98% 仍高）· 大宗商品（需求担忧，布油周 -12.4%）· 美股 AI 权重股
                     </div>
                 </div>
             </div>
@@ -207,18 +207,18 @@
                     <div class="highlight-block yellow"><strong>Dalio判断：成本推动型再通胀（PPI升+CPI弱）</strong></div>
                     <div class="force-item"><span>大周期阶段</span><span class="orange">债务重组期（地产去杠杆下半场）</span></div>
                     <div class="force-item"><span>增长意外</span><span class="yellow">弱复苏（社融放缓至7.1%、M1仅3.2%）</span></div>
-                    <div class="force-item"><span>通胀意外</span><span class="orange">PPI+5.0%↑ 但CPI仅0.9%</span></span></div>
+                    <div class="force-item"><span>通胀意外</span><span class="orange">PPI+5.0%↑ 但CPI仅0.9%</span></div>
                     <div class="force-item"><span>货币可信度</span><span class="green">稳定（连续购金23个月+）</span></div>
                     <div class="force-item"><span>当前象限</span><span class="yellow">通缩底部→成本推动再通胀</span></div>
                     <div class="force-item"><span>政策利率</span><span class="mono">LPR 3.0%（宽松，连续17个月不变）</span></div>
                     <div class="force-item"><span>10Y国债</span><span class="green mono">1.63%（历史新低，月内-5bp）</span></div>
                     <div class="force-item"><span>PPI/CPI剪刀差</span><span class="orange mono">+4.1pp（企业利润受压）</span></div>
                     <div class="highlight-block" style="margin-top:12px;background:rgba(251,191,36,0.12);border-left:3px solid #fbbf24;">
-                        <strong>📉 10月关键变化：</strong>PPI维持+5.0%（油价+芯片涨价成本传导），CPI仅+0.9%（终端需求仍弱），<strong style="color:#fbbf24;">PPI-CPI剪刀差4.1pp</strong>——上游涨价下游无法转嫁，企业利润持续受压。社融7.2→7.1%、<strong style="color:#f87171;">M1从4.1%降至3.2%</strong>（企业资金活化明显走弱）；中10Y降至1.63%历史新低；人民币升值至6.6558（出口强+美元回落）。
+                        <strong>📉 本周关键变化：</strong>上证 3599→3649（+1.4%）、中证500 6266→6597（<strong>+5.3%</strong>）、恒指 23294→24485（+5.1%）、恒科 3755→4073（+4.1%）——<strong style="color:#fbbf24;">全球风险资产杀估值的一周，中国资产逆势走强</strong>。但这是估值修复+资金再配置，不是基本面反转：社融 7.1%、M1 3.2% 仍偏冷，PPI +5.0% / CPI +0.9%（剪刀差 4.1pp）未改善，中10Y 1.63% 历史低位，人民币 6.6699。行情由分母（利率与风险偏好）驱动，分子（盈利）尚未验证。
                     </div>
                     <div class="highlight-block" style="margin-top:12px;background:rgba(96,165,250,0.12);border-left:3px solid #60a5fa;">
-                        <strong>💡 利好：</strong>黄金（央行购金+去美元化）· 铜（若需求复苏确认）· 高股息国企（利率低位）· 短债/现金<br>
-                        <strong style="color:#f87171;">⚠️ 利空：</strong>地产链 · 中下游制造业（PPI-CPI剪刀差挤压利润）· 出口依赖型（汇率升值）· 高杠杆民企
+                        <strong>💡 利好：</strong>港股科技（估值修复+资金回流）· 高股息国企（利率低位）· 短债/现金 · 铜（若需求确认）<br>
+                        <strong style="color:#f87171;">⚠️ 利空：</strong>地产链 · 中下游制造业（PPI-CPI 剪刀差挤压利润）· 出口依赖型（人民币升值）· 高杠杆民企
                     </div>
                 </div>
             </div>
