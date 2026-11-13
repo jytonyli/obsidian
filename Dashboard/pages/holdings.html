@@ -52,8 +52,8 @@
     </nav>
     <div class="container">
         <div class="status-banner">
-            <div class="status-item">📅 最后更新：<strong>2026-11-13 16:20（收盘）</strong></div>
-            <div class="status-item">⏰ 预计下次更新：<strong>2026-11-16 12:05</strong>（午间）</div>
+            <div class="status-item">📅 最后更新：<strong>2026-11-13 16:30（周度）</strong></div>
+            <div class="status-item">⏰ 预计下次更新：<strong>2026-11-20 16:30</strong>（周报）</div>
             <div class="status-item">📊 数据：A股收盘 / 港股收盘</div>
         </div>
 
@@ -98,7 +98,7 @@
                 </tbody>
             </table>
             <div class="highlight-block red" style="margin-top:16px;">
-                <strong>⚠️ 风险提示：</strong>当前组合按因子分类：黄金因子（紫金）占64.0%，港股占36.0%，债券和现金为0%。紫金矿业单一标的占总市值64.0%，集中度极高。Dalio框架建议分散至黄金ETF、短债、现金等。小米-35.4%深度套牢，需评估是否止损或加仓摊薄。
+                <strong>⚠️ 风险提示：</strong>当前组合按因子分类：黄金因子（紫金）占64.1%，港股占35.9%，债券和现金为0%。紫金矿业单一标的占总市值64.1%，集中度极高。Dalio框架建议分散至黄金ETF、短债、现金等。小米-36.2%深度套牢，需评估是否止损或加仓摊薄。
             </div>
         </div>
 
@@ -141,10 +141,10 @@
                 type: 'pie', radius: ['40%', '70%'], center: ['50%', '45%'],
                 label: { color: '#eaeaea', fontSize: 14 },
                 data: [
-                    { value: 64.6, name: '紫金矿业', itemStyle: { color: '#fbbf24' } },
-                    { value: 13.3, name: '吉利汽车', itemStyle: { color: '#3b82f6' } },
-                    { value: 6.9, name: '万洲国际', itemStyle: { color: '#f97316' } },
-                    { value: 15.1, name: '小米集团', itemStyle: { color: '#fb923c' } }
+                    { value: 64.1, name: '紫金矿业', itemStyle: { color: '#fbbf24' } },
+                    { value: 13.1, name: '吉利汽车', itemStyle: { color: '#3b82f6' } },
+                    { value: 7.5, name: '万洲国际', itemStyle: { color: '#f97316' } },
+                    { value: 15.3, name: '小米集团', itemStyle: { color: '#fb923c' } }
                 ]
             }]
         });
@@ -161,10 +161,10 @@
             series: [{
                 type: 'bar', barWidth: '55%',
                 data: [
-                    { name: '小米集团', value: -48.74, amount: -48.74, pct: '-32.9%', itemStyle: { color: '#f87171' } },
-                    { name: '紫金矿业', value: -80.07, amount: -80.07, pct: '-15.9%', itemStyle: { color: '#f87171' } },
-                    { name: '吉利汽车', value: -13.87, amount: -13.87, pct: '-13.7%', itemStyle: { color: '#f87171' } },
-                    { name: '万洲国际', value: -4.68, amount: -4.68, pct: '-9.3%', itemStyle: { color: '#f87171' } }
+                    { name: '小米集团', value: -62.37, amount: -62.37, pct: '-36.2%', itemStyle: { color: '#f87171' } },
+                    { name: '紫金矿业', value: -108.57, amount: -108.57, pct: '-21.5%', itemStyle: { color: '#f87171' } },
+                    { name: '吉利汽车', value: -20.67, amount: -20.67, pct: '-20.4%', itemStyle: { color: '#f87171' } },
+                    { name: '万洲国际', value: -3.47, amount: -3.47, pct: '-6.9%', itemStyle: { color: '#f87171' } }
                 ],
                 label: { show: true, position: 'right', color: '#f87171', fontSize: 13, formatter: function(p) { return p.data.amount + '万 (' + p.data.pct + ')'; } }
             }]
